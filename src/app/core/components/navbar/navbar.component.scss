@@ -1,0 +1,54 @@
+*
+{
+  font-weight: var(--medium);
+}
+
+.nav-link, .nav-item button, .modal-title
+{
+  font-size: 1.6rem;
+}
+
+img
+{
+  display: block;
+  margin: 0px auto;
+  width: 45px;
+  height: 45px;
+}
+
+li
+{
+  margin-right: 15px;
+}
+
+.modal-title
+{
+  font-size: 1.8rem;
+}
+
+.modal-body select, label
+{
+  font-size: 1.4rem;
+}
+
+.form-control
+{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.modal-content p
+{
+  text-align:center;
+  font-size: 1.4rem;
+}
+
+.alert
+{
+  font-size: 1.4rem;
+}
+
+.btn
+{
+  font-size: 1.6rem;
+}

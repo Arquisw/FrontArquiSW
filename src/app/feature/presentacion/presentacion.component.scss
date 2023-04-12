@@ -1,0 +1,155 @@
+.header-content
+{
+  background-image: url('/assets/images/Fondo.png');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.information
+{
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.information h1
+{
+  color: var(--just-white);
+  font-size: 5rem;
+
+}
+
+.information p
+{
+  color: var(--just-white);
+  font-size: 1.8rem;
+}
+
+.objectives
+{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.objectives h5
+{
+  font-size: 1.8rem;
+}
+
+.objectives p
+{
+  font-size: 1.4rem;
+}
+
+.card-body
+{
+  vertical-align: middle;
+}
+
+.card:hover
+{
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  transform: scale(1);
+}
+
+.modal-body
+{
+  font-size: 1.4rem;
+}
+
+.modal-title
+
+{
+  font-size: 1.8rem;
+}
+
+.methodological
+{
+  margin: 30px 8px 30px 9px;
+}
+
+.methodological .h4
+{
+  margin-bottom: 15px;
+  font-size: 2rem;
+  font-weight: var(--bold);
+}
+
+thead .table-title__methodology
+{
+  font-size: 1.2rem;
+}
+
+thead th
+{
+  font-size: 1.4rem;
+}
+
+tbody th
+{
+  font-size: 1.4rem;
+}
+
+tbody td
+{
+  font-size: 1.2rem;
+}
+
+.table-title__methodology
+{
+  vertical-align: middle;
+}
+
+.table-title
+{
+  vertical-align: middle;
+  text-align: center;
+}
+
+.table-body
+{
+  vertical-align: middle;
+}
+
+.table-content
+{
+  background-color: grey;
+}
+
+.workPlan
+{
+  margin: 30px 8px 30px 9px;
+}
+
+.workPlan .h4
+{
+  margin-bottom: 15px;
+  font-size: 2rem;
+  font-weight: var(--bold);
+}
+
+.sources
+{
+  margin: 30px 15px 30px 15px;
+}
+
+.sources h5
+{
+  font-size: 1.8rem;
+}
+
+.sources p
+{
+  font-size: 1.4rem;
+}
+
+footer
+{
+  background: linear-gradient(#026f35, #0dc061);
+  font-size: 1.4rem;
+}

@@ -1,0 +1,58 @@
+.header-content
+{
+  background-image: url('/assets/images/Fondo.png');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.information
+{
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.information h1
+{
+  color: var(--just-white);
+  font-size: 5rem;
+
+}
+
+.information p
+{
+  color: var(--just-white);
+  font-size: 1.8rem;
+}
+
+.mainContent .h4
+{
+  font-size: 2.4rem;
+}
+
+.mainContent p
+{
+  font-size: 1.8rem;
+}
+
+.img-fluid
+{
+    float: left;
+}
+
+.responsibles
+{
+  margin: 10px 20px 10px 20px;
+}
+
+
+footer
+{
+  background: linear-gradient(#026f35, #0dc061);
+  font-size: 1.4rem;
+}

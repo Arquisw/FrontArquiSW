@@ -1,0 +1,86 @@
+.header-content
+{
+  background-image: url('/assets/images/Fondo.png');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.information
+{
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.information h1
+{
+  color: var(--just-white);
+  font-size: 5rem;
+
+}
+
+.information p
+{
+  color: var(--just-white);
+  font-size: 1.8rem;
+}
+
+.objectives
+{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.objectives h5
+{
+  font-size: 1.8rem;
+}
+
+.objectives p
+{
+  font-size: 1.4rem;
+}
+
+.card
+{
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.card-body
+{
+  vertical-align: middle;
+}
+
+.card:hover
+{
+  box-shadow: 5px 6px 6px 2px #e9ecef;
+  transform: scale(1);
+}
+
+.modal-body
+{
+  font-size: 1.4rem;
+}
+
+.modal-title
+
+{
+  font-size: 1.8rem;
+}
+
+footer
+{
+  background: linear-gradient(#026f35, #0dc061);
+  font-size: 1.4rem;
+}
+
+.text-center
+{
+  background-color: success
+}
