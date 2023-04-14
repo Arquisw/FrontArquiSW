@@ -7,6 +7,16 @@ import { MenuItem } from '@core/modelo/menu-item';
   styleUrls: ['navbar.component.scss'],
 })
 export class NavbarComponent {
-
   @Input() items: MenuItem[];
+
+  constructor() { }
+
+  open(): void {
+  }
+
+  onLogin(): void {
+  }
+
+  onClickRegister(): void {
+  }
 }
