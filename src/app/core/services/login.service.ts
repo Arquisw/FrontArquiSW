@@ -11,11 +11,11 @@ export class GestionUsuarioService {
   constructor(private http: HttpService) { }
 
   validarLogin(user: Usuario) {
-    window.sessionStorage.setItem("userdetails",JSON.stringify(user));
-    return this.http.doGet(environment.endpoint+"/login");
+    window.sessionStorage.setItem('userdetails',JSON.stringify(user));
+    return this.http.doGet(environment.endpoint+'/login');
   }
 
-  registrarUsuario(user:Usuario){
-    return this.http.doPost(environment.endpoint+"/usuarios",user);
+  registrarUsuario(user: Usuario) {
+    return this.http.doPost(environment.endpoint+'/usuarios',user);
   }
 }

@@ -12,8 +12,21 @@
           <a class="nav-link active" aria-current="page" [routerLink]="item.url"
             routerLinkActive="active">{{item.nombre}}</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" *ngIf="!inicioSesion">
           <button type="button" class="btn btn-success" (click)="open()">Iniciar Sesión</button>
+        </li>
+        <li class="nav-item" *ngIf="inicioSesion">
+          <div class="dropdown dropdown-reverse">
+            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" (click)="menuUsuario()">
+              Nombre usuario
+            </button>
+            <div class="opciones" *ngIf="estaAbierto" >
+              <a class="dropdown-item" href="#">Mi perfil</a>
+              <a class="dropdown-item" href="#">Mi asociación</a>
+              <a class="dropdown-item" href="#">Panel de adiministrador</a>
+              <a class="dropdown-item" href="#">¿Deseas contratar un servicio?</a>
+            </div>
+          </div>
         </li>
       </ul>
     </div>

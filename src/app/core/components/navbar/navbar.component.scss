@@ -52,3 +52,38 @@ li
 {
   font-size: 1.6rem;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.opciones {
+  position: absolute;
+  background-color: #f9f9f9;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.dropdown.dropdown-reverse .opciones {
+  right: auto !important;
+  left: 0 !important;
+}
+
+.dropdown.dropdown-reverse .opciones {
+  right: 0 !important;
+  left: auto !important;
+}
+
+
+
+
+
+a {
+  padding: 10px;
+  cursor: pointer;
+
+}
+

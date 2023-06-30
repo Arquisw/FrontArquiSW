@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import Modal from "bootstrap/js/dist/modal"
+import Modal from 'bootstrap/js/dist/modal';
 
 @Component({
   selector: 'app-acercanosotros',
@@ -13,11 +13,12 @@ export class AcercanosotrosComponent {
 
   open(): void
   {
-    this.loginModal = new Modal(document.getElementById('loginModal')!, {
-      keyboard: false
-    })
-    this.loginModal?.show();
+    if(document.getElementById('loginModal') !== null) {
+      this.loginModal = new Modal(document.getElementById('loginModal'), {
+        keyboard: false
+      });
+      this.loginModal?.show();
+    }
+
   }
-
-
 }
