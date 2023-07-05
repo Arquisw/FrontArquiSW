@@ -18,4 +18,8 @@ export class GestionUsuarioService {
   registrarUsuario(user: Usuario) {
     return this.http.doPost(environment.endpoint+'/usuarios',user);
   }
+
+  consultarUsuario(id: number) {
+    return this.http.doGet(environment.endpoint+'/usuarios/' + id);
+  }
 }

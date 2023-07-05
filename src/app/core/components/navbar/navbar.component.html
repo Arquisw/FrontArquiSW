@@ -21,10 +21,12 @@
               Nombre usuario
             </button>
             <div class="opciones" *ngIf="estaAbierto" >
-              <a class="dropdown-item" href="#">Mi perfil</a>
-              <a class="dropdown-item" href="#">Mi asociación</a>
-              <a class="dropdown-item" href="#">Panel de adiministrador</a>
-              <a class="dropdown-item" href="#">¿Deseas contratar un servicio?</a>
+              <a class="dropdown-item" routerLink="/registroAsociacion">Mi perfil</a>
+              <a class="dropdown-item" >Mi asociación</a>
+              <a class="dropdown-item" >Panel de administrador</a>
+              <a class="dropdown-item" (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
+              <a class="dropdown-item"  >Configuración</a>
+              <a class="dropdown-item"  >Cerrar Sesion</a>
             </div>
           </div>
         </li>
@@ -124,6 +126,49 @@
           ¿Ya tienes una cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"
             data-bs-dismiss="modal">Inicia Sesion</a>
         </p>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="registroAsociacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar asociación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <form [formGroup]="registroAsociacionForm">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="nombreAsociacion"
+            placeholder="nombre" formControlName="nombreAsociacion" required>
+          <label for="floatingInput">Nombre de la asociación</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="nit"
+            placeholder="apellidos" formControlName="nit" required>
+          <label for="floatingInput">NIT</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="correo"
+            placeholder="correo@ejemplo.com" formControlName="numeroContacto" required>
+          <label for="floatingInput">Numero contacto</label>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3 btn-register"
+                (click)="onClickRegister()">Registrar</button> <br> <br>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="registroError" class="alert alert-danger" role="alert">
+          {{mensajeError}}
+        </div>
+        <div *ngIf="registroExitoso" class="alert alert-success" role="alert">
+          {{mensajeRegistro}}
+        </div>
       </form>
       </div>
     </div>

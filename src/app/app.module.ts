@@ -17,7 +17,7 @@ import { PresentacionComponent } from './feature/presentacion/presentacion.compo
     InicioComponent,
     FundamentacionComponent,
     AcercanosotrosComponent,
-    PresentacionComponent
+    PresentacionComponent,
   ],
   imports: [
     BrowserModule,
