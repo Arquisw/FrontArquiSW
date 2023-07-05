@@ -27,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
         httpHeaders = httpHeaders.append('Authorization', authorization); 
       }
     }
-
+    this.user=null;
     sessionStorage.removeItem('userdetails');
     const xsrf = sessionStorage.getItem('XSRF-TOKEN');
     if(xsrf) {
