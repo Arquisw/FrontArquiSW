@@ -124,15 +124,13 @@ export class NavbarComponent implements OnInit {
 
   filtrarMenu(): void {
     this.usuario.roles.filter(rol => {
-      if(rol === 'ROLE_ADMINISTRADOR') {
+      if (rol.nombre === 'ROLE_ADMINISTRADOR') {
         this.administrador = true;
       }
-
-      if(rol === 'ROLE_ASOCIACION') {
+      if (rol.nombre === 'ROLE_ASOCIACION') {
         this.tieneAsociacion = true;
       }
-    })
-      
+    });
   }
 
 }

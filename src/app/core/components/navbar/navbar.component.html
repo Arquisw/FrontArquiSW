@@ -22,8 +22,12 @@
             </button>
             <div class="opciones" *ngIf="estaAbierto" >
               <a class="dropdown-item" routerLink="/registroAsociacion">Mi perfil</a>
-              <a class="dropdown-item" *ngif="tieneAsociacion">Mi asociación</a>
-              <a class="dropdown-item" *ngif="administrador">Panel de administrador</a>
+              <ng-container *ngIf="tieneAsociacion"> 
+                <a class="dropdown-item" >Mi asociación</a>
+              </ng-container>
+              <ng-container *ngIf="administrador"> 
+                <a class="dropdown-item" *ngif="administrador">Panel de administrador</a>
+              </ng-container>
               <a class="dropdown-item"  (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
               <a class="dropdown-item"  >Configuración</a>
               <a class="dropdown-item"  >Cerrar Sesion</a>

@@ -27,7 +27,41 @@ describe('NavbarComponent', () => {
   });
 
   it('validar el metodo menu abierto', () => {
-    component.menuUsuario()
+    component.menuUsuario();
     expect(component.estaAbierto).toBeTruthy();
+  });
+
+  it('debería establecer "administrador" en verdadero si el usuario tiene el rol de "ROLE_ADMINISTRADOR"', () => {
+    component.usuario = {
+      roles: [
+        { nombre: 'ROLE_ADMINISTRADOR' }
+      ]
+    };
+
+    component.filtrarMenu();
+    expect(component.administrador).toBeTruthy();
+  });
+
+  it('debería establecer "tieneAsociacion" en verdadero si el usuario tiene el rol de "ROLE_ASOCIACION"', () => {
+    component.usuario = {
+      roles: [
+        { nombre: 'ROLE_ASOCIACION' }
+      ]
+    };
+
+    component.filtrarMenu();
+    expect(component.tieneAsociacion).toBeTruthy();
+  });
+
+  it('no debería modificar "administrador" ni "tieneAsociacion" si el usuario no tiene los roles correspondientes', () => {
+    component.usuario = {
+      roles: [
+        { nombre: 'ROLE_OTRO' }
+      ]
+    };
+
+    component.filtrarMenu();
+    expect(component.administrador).toBeFalsy();
+    expect(component.tieneAsociacion).toBeFalsy();
   });
 });
