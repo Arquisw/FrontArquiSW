@@ -1,5 +1,4 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { NavbarComponent } from './navbar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpService } from '@core/services/http.service';
@@ -28,8 +27,7 @@ describe('NavbarComponent', () => {
   });
 
   it('validar el metodo menu abierto', () => {
-    component.menuUsuario();
-
+    component.menuUsuario()
     expect(component.estaAbierto).toBeTruthy();
   });
 });

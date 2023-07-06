@@ -19,13 +19,16 @@ export class NavbarComponent implements OnInit {
   registroExitoso= false;
   inicioSesion = false;
   estaAbierto = false;
+  administrador = false;
+  tieneAsociacion = false;
   mensajeError= '';
+
   usuarioId;
   usuario;
   mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
   loginForm: FormGroup;
   registroForm: FormGroup;
-  registroAsociacionForm:FormGroup;
+  registroAsociacionForm: FormGroup;
 
   constructor(private servicioGestionusuario: GestionUsuarioService)  { }
 
@@ -61,10 +64,7 @@ export class NavbarComponent implements OnInit {
       keyboard: false
     });
     this.registroAsociacion?.show();
-
   }
-
-
 
   onLogin(): void {
     this.loginError=false;
@@ -72,12 +72,11 @@ export class NavbarComponent implements OnInit {
     const usuario: Usuario= new Usuario(0,'','',this.loginForm.get('correoLogin').value,this.loginForm.get('claveLogin').value);
     this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
       this.usuarioId = response;
-      this.inicioSesion = true;
-      this.loginModal?.hide();
       this.consultarusuario();
+      this.loginModal?.hide();
+      this.inicioSesion = true;
     },
     (error) => {
-      console.log(error);
       const estado = error.status;
       if (estado === 401){
         this.mensajeError= 'Correo o contraseña incorrectos';
@@ -108,19 +107,32 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-menuUsuario(): void {
+  menuUsuario(): void {
     this.estaAbierto = !this.estaAbierto;
   }
 
-consultarusuario(): void {
-  this.servicioGestionusuario.consultarUsuario(this.usuarioId.valor).subscribe((response) => {
-    this.usuario = response;
-    this.inicioSesion = false;
-  },
-  (error) => {
-    console.log(error);
-  });
-  
-}
+  consultarusuario(): void {
+    this.servicioGestionusuario.consultarUsuario(this.usuarioId.valor).subscribe((response) => {
+      this.usuario = response;
+      this.filtrarMenu();
+    },
+    (error) => {
+      this.mensajeError=error.message;
+      this.inicioSesion = false;
+    });
+  }
+
+  filtrarMenu(): void {
+    this.usuario.roles.filter(rol => {
+      if(rol === 'ROLE_ADMINISTRADOR') {
+        this.administrador = true;
+      }
+
+      if(rol === 'ROLE_ASOCIACION') {
+        this.tieneAsociacion = true;
+      }
+    })
+      
+  }
 
 }

@@ -18,13 +18,13 @@
         <li class="nav-item" *ngIf="inicioSesion">
           <div class="dropdown dropdown-reverse">
             <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" (click)="menuUsuario()">
-              Nombre usuario
+              {{usuario?.nombre}}
             </button>
             <div class="opciones" *ngIf="estaAbierto" >
               <a class="dropdown-item" routerLink="/registroAsociacion">Mi perfil</a>
-              <a class="dropdown-item" >Mi asociación</a>
-              <a class="dropdown-item" >Panel de administrador</a>
-              <a class="dropdown-item" (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
+              <a class="dropdown-item" *ngif="tieneAsociacion">Mi asociación</a>
+              <a class="dropdown-item" *ngif="administrador">Panel de administrador</a>
+              <a class="dropdown-item"  (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
               <a class="dropdown-item"  >Configuración</a>
               <a class="dropdown-item"  >Cerrar Sesion</a>
             </div>
@@ -142,17 +142,17 @@
         <form [formGroup]="registroAsociacionForm">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="nombreAsociacion"
-            placeholder="nombre" formControlName="nombreAsociacion" required>
+            placeholder="Nombre asociación" formControlName="nombreAsociacion" required>
           <label for="floatingInput">Nombre de la asociación</label>
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="nit"
-            placeholder="apellidos" formControlName="nit" required>
+            placeholder="NIT" formControlName="nit" required>
           <label for="floatingInput">NIT</label>
         </div>
         <div class="form-floating mb-3">
-          <input type="email" class="form-control" id="correo"
-            placeholder="correo@ejemplo.com" formControlName="numeroContacto" required>
+          <input type="number" class="form-control" id="numeroContacto"
+            placeholder="Núnmero contacto" formControlName="numeroContacto" required>
           <label for="floatingInput">Numero contacto</label>
         </div>
         <div class="container-fluid h-100">
