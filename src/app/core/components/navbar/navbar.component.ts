@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MenuItem } from '@core/modelo/menu-item';
 import { Usuario } from '@core/modelo/usuario.modelo';
+import { AsociacionService } from '@core/services/asociacion.service';
 import { GestionUsuarioService } from '@core/services/login.service';
 import Modal from 'bootstrap/js/dist/modal';
 
@@ -26,11 +27,15 @@ export class NavbarComponent implements OnInit {
   usuarioId;
   usuario;
   mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
+  mensajeAsociacion= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
   loginForm: FormGroup;
   registroForm: FormGroup;
   registroAsociacionForm: FormGroup;
 
-  constructor(private servicioGestionusuario: GestionUsuarioService)  { }
+
+  constructor(private formBuilder: FormBuilder,
+              private servicioGestionusuario: GestionUsuarioService,
+              private asociasociacionService: AsociacionService)  { }
 
   ngOnInit(): void {
     this.loginForm = new FormGroup({
@@ -45,10 +50,10 @@ export class NavbarComponent implements OnInit {
       confirmarClaveRegistro: new FormControl('')
     });
 
-    this.registroAsociacionForm = new FormGroup({
-      nombreAsociacion: new FormControl(''),
-      nit: new FormControl(''),
-      numeroContacto: new FormControl(''),
+    this.registroAsociacionForm = this.formBuilder.group({
+      nombreAsociacion: [null, Validators.required],
+      nit: [null, Validators.required],
+      numeroContacto: [null, Validators.required]
     });
   }
 
@@ -133,4 +138,21 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  registroAsocion(): void {
+    const asociacion = {
+      nombre: this.registroAsociacionForm.get('nombreAsociacion').value,
+      nit: this.registroAsociacionForm.get('nit').value,
+      numeroContacto: this.registroAsociacionForm.get('numeroContacto').value
+    };
+    this.asociasociacionService.registrarAsociacion(asociacion, this.usuarioId.valor).subscribe((response) => {
+      console.log('Data:', response);
+      this.registroAsociacionForm.reset();
+      this.registroExitoso= true;
+    },
+    (error) => {
+      this.registroError= true;
+      this.mensajeError =error?.error?.mensaje;
+    });
+
+  }
 }

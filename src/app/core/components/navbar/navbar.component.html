@@ -28,7 +28,7 @@
               <ng-container *ngIf="administrador"> 
                 <a class="dropdown-item" *ngif="administrador">Panel de administrador</a>
               </ng-container>
-              <a class="dropdown-item"  (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
+              <a class="dropdown-item"  *ngIf="!tieneAsociacion" (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
               <a class="dropdown-item"  >Configuración</a>
               <a class="dropdown-item"  >Cerrar Sesion</a>
             </div>
@@ -146,24 +146,27 @@
         <form [formGroup]="registroAsociacionForm">
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="nombreAsociacion"
-            placeholder="Nombre asociación" formControlName="nombreAsociacion" required>
+            placeholder="Nombre asociación" formControlName="nombreAsociacion" />
           <label for="floatingInput">Nombre de la asociación</label>
+          <small class="text-danger" [hidden]="registroAsociacionForm.get('nombreAsociacion').valid">Nombre de la asociación requerido</small>
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="nit"
-            placeholder="NIT" formControlName="nit" required>
+            placeholder="NIT" formControlName="nit" />
           <label for="floatingInput">NIT</label>
+          <small class="text-danger" [hidden]="registroAsociacionForm.get('nit').valid"> NIT requerido</small>
         </div>
         <div class="form-floating mb-3">
-          <input type="number" class="form-control" id="numeroContacto"
-            placeholder="Núnmero contacto" formControlName="numeroContacto" required>
+          <input class="form-control custom-input" placement="bottom" type="number" 
+            placeholder="Núnmero contacto" formControlName="numeroContacto">
           <label for="floatingInput">Numero contacto</label>
+          <small class="text-danger" [hidden]="registroAsociacionForm.get('numeroContacto').valid">Número del contacto requerido</small>
         </div>
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
             <div class="col text-center">
               <button type="submit" class="btn btn-success mt-3 btn-register"
-                (click)="onClickRegister()">Registrar</button> <br> <br>
+                (click)="registroAsocion()">Registrar</button> <br> <br>
             </div>
           </div>
         </div>
@@ -171,7 +174,7 @@
           {{mensajeError}}
         </div>
         <div *ngIf="registroExitoso" class="alert alert-success" role="alert">
-          {{mensajeRegistro}}
+          {{mensajeAsociacion}}
         </div>
       </form>
       </div>
