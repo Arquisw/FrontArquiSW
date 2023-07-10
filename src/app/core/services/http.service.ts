@@ -22,10 +22,21 @@ export class HttpService {
     return this.http.get<T>(serviceUrl, ropts);
   }
 
+  public doGetById<T>(serviceUrl: string, id: number, opts?: Options): Observable<T> {
+    const ropts = this.createOptions(opts);
+    return this.http.get<T>(serviceUrl + id, ropts);
+  }
+
   public doPost<T, R>(serviceUrl: string, body: T, opts?: Options): Observable<R> {
     const ropts = this.createOptions(opts);
 
     return this.http.post<R>(serviceUrl, body, ropts);
+  }
+
+  public doPut<T, R>(serviceUrl: string, body: T, opts?: Options): Observable<R> {
+    const ropts = this.createOptions(opts);
+
+    return this.http.put<R>(serviceUrl, body, ropts);
   }
 
   public doDelete<R>(serviceUrl: string, opts?: Options): Observable<R> {

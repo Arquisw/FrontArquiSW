@@ -1,4 +1,3 @@
-
 export class Usuario{
 
   public id: number;
@@ -15,5 +14,4 @@ export class Usuario{
     this.apellidos = apellidos || '';
     this.clave = clave || '';
   }
-
 }

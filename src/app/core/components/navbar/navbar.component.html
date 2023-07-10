@@ -17,15 +17,15 @@
         </li>
         <li class="nav-item" *ngIf="inicioSesion">
           <div class="dropdown dropdown-reverse">
-            <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" (click)="menuUsuario()">
+            <a class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" (click)="menuUsuario()">
               {{usuario?.nombre}}
-            </button>
+            </a>
             <div class="opciones" *ngIf="estaAbierto" >
               <a class="dropdown-item" routerLink="/registroAsociacion">Mi perfil</a>
-              <ng-container *ngIf="tieneAsociacion"> 
+              <ng-container *ngIf="tieneAsociacion">
                 <a class="dropdown-item" >Mi asociación</a>
               </ng-container>
-              <ng-container *ngIf="administrador"> 
+              <ng-container *ngIf="administrador">
                 <a class="dropdown-item" *ngif="administrador">Panel de administrador</a>
               </ng-container>
               <a class="dropdown-item"  *ngIf="!tieneAsociacion" (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
