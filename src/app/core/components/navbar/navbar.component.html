@@ -8,7 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-        <li class="nav-item" *ngFor="let item of items">
+        <li class="nav-item" *ngFor="let item of principalItems">
           <a class="nav-link active" aria-current="page" [routerLink]="item.url"
             routerLinkActive="active">{{item.nombre}}</a>
         </li>
@@ -21,16 +21,17 @@
               {{usuario?.nombre}}
             </a>
             <div class="opciones" *ngIf="estaAbierto" >
-              <a class="dropdown-item" routerLink="/registroAsociacion">Mi perfil</a>
+              <a class="dropdown-item" routerLink="/registroAsociacion">Mi Perfil</a>
               <ng-container *ngIf="tieneAsociacion">
-                <a class="dropdown-item" >Mi asociación</a>
+                <a class="dropdown-item" >Mi Asociación</a>
               </ng-container>
               <ng-container *ngIf="administrador">
-                <a class="dropdown-item" *ngif="administrador">Panel de administrador</a>
+                <a class="dropdown-item" *ngif="administrador">Panel de Administrador</a>
               </ng-container>
-              <a class="dropdown-item"  *ngIf="!tieneAsociacion" (click)="openModalAsociacion()" >Registrar empresa ó asociacón</a>
-              <a class="dropdown-item"  >Configuración</a>
-              <a class="dropdown-item"  >Cerrar Sesion</a>
+              <a class="dropdown-item" *ngIf="!tieneAsociacion" (click)="openModalAsociacion()">Registrar Empresa ó Asociacón</a>
+              <a class="dropdown-item" [routerLink]="['/configuracion', id]">{{configuracionMenu.nombre}}</a>
+
+              <a class="dropdown-item">Cerrar Sesión</a>
             </div>
           </div>
         </li>
@@ -157,7 +158,7 @@
           <small class="text-danger" [hidden]="registroAsociacionForm.get('nit').valid"> NIT requerido</small>
         </div>
         <div class="form-floating mb-3">
-          <input class="form-control custom-input" placement="bottom" type="number" 
+          <input class="form-control custom-input" placement="bottom" type="number"
             placeholder="Núnmero contacto" formControlName="numeroContacto">
           <label for="floatingInput">Numero contacto</label>
           <small class="text-danger" [hidden]="registroAsociacionForm.get('numeroContacto').valid">Número del contacto requerido</small>

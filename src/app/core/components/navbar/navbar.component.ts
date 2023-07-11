@@ -13,6 +13,9 @@ import Modal from 'bootstrap/js/dist/modal';
 })
 export class NavbarComponent implements OnInit {
   @Input() items: MenuItem[];
+
+  configuracionMenu: MenuItem;
+  principalItems: MenuItem[];
   loginModal: Modal| undefined;
   registroAsociacion: Modal| undefined;
   loginError = false;
@@ -23,7 +26,7 @@ export class NavbarComponent implements OnInit {
   administrador = false;
   tieneAsociacion = false;
   mensajeError= '';
-
+  id: number = 0;
   usuarioId;
   usuario;
   mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
@@ -32,12 +35,17 @@ export class NavbarComponent implements OnInit {
   registroForm: FormGroup;
   registroAsociacionForm: FormGroup;
 
-
   constructor(private formBuilder: FormBuilder,
               private servicioGestionusuario: GestionUsuarioService,
               private asociasociacionService: AsociacionService)  { }
 
+
   ngOnInit(): void {
+    this.principalItems = this.items.filter(item => item.nombre !== 'Configuración');
+    this.configuracionMenu = this.items.find(item => item.nombre === 'Configuración');
+
+
+
     this.loginForm = new FormGroup({
       correoLogin: new FormControl(''),
       claveLogin: new FormControl('')
@@ -78,6 +86,7 @@ export class NavbarComponent implements OnInit {
     this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
       this.usuarioId = response;
       this.consultarusuario();
+      this.id = this.usuarioId.valor
       this.loginModal?.hide();
       this.inicioSesion = true;
     },
@@ -153,6 +162,5 @@ export class NavbarComponent implements OnInit {
       this.registroError= true;
       this.mensajeError =error?.error?.mensaje;
     });
-
   }
 }

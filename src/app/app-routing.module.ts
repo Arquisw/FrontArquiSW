@@ -15,6 +15,8 @@ const routes: Routes = [
   { path: 'fundamentacion', component: FundamentacionComponent, canActivate: [SecurityGuard]  },
   { path: 'acercaNosotros', component: AcercanosotrosComponent, canActivate: [SecurityGuard]  },
   { path: 'presentacion', component: PresentacionComponent, canActivate: [SecurityGuard]  },
+  { path: 'configuracion/:id', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
+  { path: '**', redirectTo: '/inicio' }
 
 ];
 

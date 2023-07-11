@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-configuracion',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./configuracion.component.scss']
 })
 export class ConfiguracionComponent implements OnInit {
+  usuarioId: number = 0;
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
   }
-
 }
