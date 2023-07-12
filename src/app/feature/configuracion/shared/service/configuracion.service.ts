@@ -7,9 +7,8 @@ import { Persona } from '../model/persona.model';
 import { Asociacion } from '../model/asociacion.model';
 import { AsociacionResumen } from '../model/asociacion-resumen';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class ConfiguracionService {
   private readonly USUARIOS_ENDPOINT = '/usuarios';
   private readonly ASOCIACIONES_ENDPOINT = '/asociaciones';

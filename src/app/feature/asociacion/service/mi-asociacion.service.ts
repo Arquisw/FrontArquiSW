@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class MiAsociacionService {
 
   constructor(private http: HttpService) { }

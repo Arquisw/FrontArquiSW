@@ -1,7 +1,7 @@
 .header-content
 {
 background-image: url('/assets/images/Fondo.png');
-  height: 100vh;
+  height: 90vh;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -25,6 +25,10 @@ background-image: url('/assets/images/Fondo.png');
 .nit
 {
     color: var(--just-white);
+}
+.col-md-6
+{
+  padding: 10px;
 }
 
 footer
