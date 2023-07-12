@@ -17,7 +17,6 @@ const routes: Routes = [
   { path: 'presentacion', component: PresentacionComponent },
   { path: 'configuracion/:id', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
-
 ];
 
 @NgModule({
