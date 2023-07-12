@@ -11,10 +11,10 @@ import { PresentacionComponent } from './feature/presentacion/presentacion.compo
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: 'inicio', component: InicioComponent, canActivate: [SecurityGuard]  },
-  { path: 'fundamentacion', component: FundamentacionComponent, canActivate: [SecurityGuard]  },
-  { path: 'acercaNosotros', component: AcercanosotrosComponent, canActivate: [SecurityGuard]  },
-  { path: 'presentacion', component: PresentacionComponent, canActivate: [SecurityGuard]  },
+  { path: 'inicio', component: InicioComponent   },
+  { path: 'fundamentacion', component: FundamentacionComponent },
+  { path: 'acercaNosotros', component: AcercanosotrosComponent },
+  { path: 'presentacion', component: PresentacionComponent },
   { path: 'configuracion/:id', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
 
