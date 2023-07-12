@@ -41,8 +41,8 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.principalItems = this.items.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' ));
-    this.configuracionMenu = this.items.find(item => item.nombre === 'Configuración');
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' ));
+    this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
 
     this.loginForm = new FormGroup({
       correoLogin: new FormControl(''),

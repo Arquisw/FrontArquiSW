@@ -3,6 +3,7 @@ import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
+
 export class MiAsociacionService {
 
   constructor(private http: HttpService) { }

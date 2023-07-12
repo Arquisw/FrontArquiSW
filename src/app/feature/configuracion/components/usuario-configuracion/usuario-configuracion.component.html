@@ -6,21 +6,21 @@
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" class="form-control" id="nombre"
-              placeholder="nombre" formControlName="nombreActualizacion" required [value]="personaResumen.nombre">
+              placeholder="nombre" formControlName="nombreActualizacion" required [value]="personaResumen?.nombre">
             <label for="floatingInput">Nombres</label>
           </div>
         </div>
         <div class="col-md-6">
           <div class="form-floating">
             <input type="text" class="form-control" id="apellidos"
-              placeholder="apellidos" formControlName="apellidosActualizacion" required [value]="personaResumen.apellidos">
+              placeholder="apellidos" formControlName="apellidosActualizacion" required [value]="personaResumen?.apellidos">
             <label for="floatingInput">Apellidos</label>
           </div>
         </div>
       </div>
       <div class="form-floating mb-3">
         <input type="email" class="form-control" id="correo"
-          placeholder="correo@ejemplo.com" formControlName="correoActualizacion" required [value]="personaResumen.correo">
+          placeholder="correo@ejemplo.com" formControlName="correoActualizacion" required [value]="personaResumen?.correo">
         <label for="floatingInput">Correo Electrónico</label>
       </div>
       <div class="container-fluid h-100">
