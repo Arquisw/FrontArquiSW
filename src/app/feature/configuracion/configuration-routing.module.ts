@@ -9,11 +9,11 @@ const routes: Routes = [{
   component: ConfiguracionComponent,
   children: [
     {
-      path: 'usuario',
+      path: 'usuario/:id',
       component: UsuarioConfiguracionComponent
     },
     {
-      path: 'asociacion',
+      path: 'asociacion/:id',
       component: AsociacionConfiguracionComponent
     }
   ]

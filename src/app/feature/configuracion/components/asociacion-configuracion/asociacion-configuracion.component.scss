@@ -1,0 +1,24 @@
+.update-form {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.update-form h1 {
+  color: var(--black);
+  font-size: 3rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.btn
+{
+  font-size: 1.6rem;
+}
+
+.update-person {
+  border-bottom: 1px solid var(--grey);
+}
+
+.update-password, .delete-account {
+  padding-top: 6px;
+}
