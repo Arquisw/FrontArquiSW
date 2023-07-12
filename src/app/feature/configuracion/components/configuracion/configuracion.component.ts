@@ -14,4 +14,6 @@ export class ConfiguracionComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
   }
+
+  
 }
