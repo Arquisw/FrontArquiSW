@@ -40,7 +40,7 @@
     </form>
   </div>
   <div class="update-password">
-    <form [formGroup]="actualizacionForm">
+    <form [formGroup]="actualizacionClaveForm">
       <div class="form-floating mb-3">
         <input type="password" class="form-control" id="claveAntigua"
            formControlName="claveAntiguaActualizacion" required>
@@ -60,7 +60,7 @@
         <div class="row w-100 align-items-center">
           <div class="col text-center">
             <button type="submit" class="btn btn-success mt-3 btn-register"
-              (click)="onClickUpdate()">Actualizar Contraseña</button> <br> <br>
+              (click)="onClickUpdatePassword()">Actualizar Contraseña</button> <br> <br>
           </div>
         </div>
       </div>

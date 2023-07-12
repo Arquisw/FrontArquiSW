@@ -6,12 +6,14 @@ import { HttpService } from '@core/services/http.service';
 import { Persona } from '../model/persona.model';
 import { Asociacion } from '../model/asociacion.model';
 import { AsociacionResumen } from '../model/asociacion-resumen';
+import { Clave } from '../model/clave.model';
 
 @Injectable()
 
 export class ConfiguracionService {
-  private readonly USUARIOS_ENDPOINT = '/usuarios';
-  private readonly ASOCIACIONES_ENDPOINT = '/asociaciones';
+  private readonly USUARIOS_ENDPOINT: String = "/usuarios";
+  private readonly USUARIOS_CLAVE_ENDPOINT: String = "/clave";
+  private readonly ASOCIACIONES_ENDPOINT: String = "/asociaciones";
 
   constructor(private httpService: HttpService) { }
 
@@ -25,9 +27,9 @@ export class ConfiguracionService {
     return this.httpService.doPut<Persona, number>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}/${id}`, persona);
   }
 
-  public actualizarClavePorId(persona: Persona, id: number): Observable<number>
+  public actualizarClavePorId(clave: Clave, id: number): Observable<number>
   {
-    return this.httpService.doPut<Persona, number>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}/${id}`, persona);
+    return this.httpService.doPut<Clave, number>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}/${this.USUARIOS_CLAVE_ENDPOINT}/${id}`, clave);
   }
 
   public eliminarUsuarioPorId(id: number): Observable<void> {

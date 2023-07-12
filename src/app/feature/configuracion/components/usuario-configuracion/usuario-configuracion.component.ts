@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 import { PersonaResumen } from '../../shared/model/persona-resumen.model';
 import { AsociacionResumen } from '../../shared/model/asociacion-resumen';
+import { Persona } from '../../shared/model/persona.model';
+import { Clave } from '../../shared/model/clave.model';
 
 @Component({
   selector: 'app-usuario-configuracion',
@@ -12,6 +14,7 @@ import { AsociacionResumen } from '../../shared/model/asociacion-resumen';
 })
 export class UsuarioConfiguracionComponent implements OnInit {
   actualizacionForm: FormGroup;
+  actualizacionClaveForm: FormGroup;
   personaResumen: PersonaResumen;
   asociacionResumen: AsociacionResumen;
   actualizacionError= false;
@@ -24,31 +27,63 @@ export class UsuarioConfiguracionComponent implements OnInit {
 
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-    this.consultarUsuario();
+
+    this.consultarUsuario()
+
+    this.actualizacionForm = new FormGroup({
+      nombreActualizacion: new FormControl(''),
+      apellidosActualizacion: new FormControl(''),
+      correoActualizacion: new FormControl(''),
+    });
+
+    this.actualizacionClaveForm = new FormGroup({
+      claveAntiguaActualizacion: new FormControl(''),
+      claveNuevaActualizacion: new FormControl(''),
+      confirmarClaveActualizacion: new FormControl(''),
+    });
   }
 
   onClickUpdate(): void {
-    /*this.registroError= false;
-    const usuario: Usuario= new Usuario(0,this.registroForm.get('nombreRegistro')?.value,this.registroForm.get('apellidosRegistro')?.value,this.registroForm.get('correoRegistro')?.value,this.registroForm.get('claveRegistro')?.value);
-    if(this.registroForm.get('claveRegistro')?.value===this.registroForm.get('confirmarClaveRegistro')?.value){
-      this.servicioGestionusuario.registrarUsuario(usuario).subscribe((response) => {
-        console.log('Data:', response);
-        this.registroExitoso= true;
-      },
-      (error) => {
-        this.registroError= true;
-        this.mensajeError =error?.error?.mensaje;
-      });
-    }
-    else{
-      this.registroError= true;
-      this.mensajeError= 'Las contraseñas no son iguales';
-    }*/
+    this.actualizacionError= false;
+
+    const persona: Persona = new Persona(this.actualizacionForm.get('nombreActualizacion')?.value,this.actualizacionForm.get('apellidosActualizacion')?.value,this.actualizacionForm.get('correoActualizacion')?.value);
+
+    this.configuracionService.actualizarUsuarioPorId(persona, this.usuarioId).subscribe((response) => {
+      console.log('Data:', response);
+      this.actualizacionExitosa= true;
+    },
+    (error) => {
+      this.actualizacionError = true;
+      this.mensajeError = error?.error?.mensaje;
+    })
+  }
+
+  onClickUpdatePassword(): void {
+    this.actualizacionError= false;
+
+    const clave: Clave = new Clave(this.actualizacionClaveForm.get('claveAntiguaActualizacion')?.value,this.actualizacionClaveForm.get('claveNuevaActualizacion')?.value);
+
+    this.configuracionService.actualizarClavePorId(clave, this.usuarioId).subscribe((response) => {
+      console.log('Data:', response);
+      this.actualizacionExitosa= true;
+    },
+    (error) => {
+      this.actualizacionError = true;
+      this.mensajeError = error?.error?.mensaje;
+    })
   }
 
   onClickDelete(): void {
-
+    this.configuracionService.eliminarUsuarioPorId(this.usuarioId).subscribe((response) => {
+      console.log('Data:', response);
+      this.actualizacionExitosa= true;
+    },
+    (error) => {
+      this.actualizacionError = true;
+      this.mensajeError = error?.error?.mensaje;
+    })
   }
+
 
   consultarUsuario(): void {
     this.configuracionService.consultarUsuarioPorId(this.usuarioId).subscribe((response) => {
