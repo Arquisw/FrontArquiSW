@@ -21,10 +21,8 @@
               {{usuario?.nombre}}
             </a>
             <div class="opciones" *ngIf="estaAbierto" >
-              <a class="dropdown-item" routerLink="/registroAsociacion">Mi Perfil</a>
-              <ng-container *ngIf="tieneAsociacion">
-                <a class="dropdown-item" >Mi Asociación</a>
-              </ng-container>
+              <a class="dropdown-item" routerLink="">Mi Perfil</a>
+              <a class="dropdown-item" *ngIf="tieneAsociacion" [routerLink]="['/miAsociacion', id]" >Mi Empresao ó Asociación</a>
               <ng-container *ngIf="administrador">
                 <a class="dropdown-item" *ngif="administrador">Panel de Administrador</a>
               </ng-container>
@@ -167,7 +165,7 @@
           <div class="row w-100 align-items-center">
             <div class="col text-center">
               <button type="submit" class="btn btn-success mt-3 btn-register"
-                (click)="registroAsocion()">Registrar</button> <br> <br>
+                (click)="registrarAsociacion()">Registrar</button> <br> <br>
             </div>
           </div>
         </div>
