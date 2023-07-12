@@ -41,10 +41,8 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.principalItems = this.items.filter(item => item.nombre !== 'Configuración');
+    this.principalItems = this.items.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' ));
     this.configuracionMenu = this.items.find(item => item.nombre === 'Configuración');
-
-
 
     this.loginForm = new FormGroup({
       correoLogin: new FormControl(''),
@@ -86,7 +84,7 @@ export class NavbarComponent implements OnInit {
     this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
       this.usuarioId = response;
       this.consultarusuario();
-      this.id = this.usuarioId.valor
+      this.id = this.usuarioId.valor;
       this.loginModal?.hide();
       this.inicioSesion = true;
     },
@@ -147,14 +145,13 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  registroAsocion(): void {
+  registrarAsociacion(): void {
     const asociacion = {
       nombre: this.registroAsociacionForm.get('nombreAsociacion').value,
       nit: this.registroAsociacionForm.get('nit').value,
       numeroContacto: this.registroAsociacionForm.get('numeroContacto').value
     };
-    this.asociasociacionService.registrarAsociacion(asociacion, this.usuarioId.valor).subscribe((response) => {
-      console.log('Data:', response);
+    this.asociasociacionService.registrarAsociacion(asociacion, this.usuarioId.valor).subscribe(() => {
       this.registroAsociacionForm.reset();
       this.registroExitoso= true;
     },

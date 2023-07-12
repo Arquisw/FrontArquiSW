@@ -9,7 +9,7 @@ export class AsociacionService {
 
   constructor(private http: HttpService) { }
 
-  registrarAsociacion(asocicion, id:number) {
+  registrarAsociacion(asocicion, id: number) {
     return this.http.doPost(environment.endpoint +'/asociaciones/'+ id, asocicion);
   }
 }
