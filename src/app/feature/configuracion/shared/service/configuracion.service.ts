@@ -11,8 +11,8 @@ import { AsociacionResumen } from '../model/asociacion-resumen';
   providedIn: 'root'
 })
 export class ConfiguracionService {
-  private readonly USUARIOS_ENDPOINT: String = "/usuarios";
-  private readonly ASOCIACIONES_ENDPOINT: String = "/asociaciones";
+  private readonly USUARIOS_ENDPOINT = '/usuarios';
+  private readonly ASOCIACIONES_ENDPOINT = '/asociaciones';
 
   constructor(private httpService: HttpService) { }
 

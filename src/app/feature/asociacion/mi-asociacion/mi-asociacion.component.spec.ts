@@ -11,8 +11,7 @@ describe('MiAsociacionComponent', () => {
     await TestBed.configureTestingModule({
       providers: [HttpService],
       declarations: [ MiAsociacionComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MiAsociacionComponent);
     component = fixture.componentInstance;

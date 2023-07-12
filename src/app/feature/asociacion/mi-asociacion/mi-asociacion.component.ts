@@ -13,7 +13,7 @@ export class MiAsociacionComponent implements OnInit {
   asociacion;
 
   constructor(private miAsociacionService: MiAsociacionService,
-            private route: ActivatedRoute) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);

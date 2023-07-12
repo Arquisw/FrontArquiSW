@@ -18,13 +18,13 @@ export class UsuarioConfiguracionComponent implements OnInit {
   actualizacionExitosa= false;
   mensajeError= '';
   mensajeActualizacion= '';
-  usuarioId: number = 0;
+  usuarioId = 0;
 
   constructor(private route: ActivatedRoute, private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-    this.consultarUsuario()
+    this.consultarUsuario();
   }
 
   onClickUpdate(): void {

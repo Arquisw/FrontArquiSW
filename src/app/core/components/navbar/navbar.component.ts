@@ -26,7 +26,7 @@ export class NavbarComponent implements OnInit {
   administrador = false;
   tieneAsociacion = false;
   mensajeError= '';
-  id: number = 0;
+  id = 0;
   usuarioId;
   usuario;
   mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';

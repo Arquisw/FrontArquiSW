@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./configuracion.component.scss']
 })
 export class ConfiguracionComponent implements OnInit {
-  usuarioId: number = 0;
+  usuarioId = 0;
 
   constructor(private route: ActivatedRoute) {}
 

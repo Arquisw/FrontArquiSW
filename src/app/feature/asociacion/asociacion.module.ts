@@ -3,7 +3,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { MiAsociacionComponent } from './mi-asociacion/mi-asociacion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ConfiguracionService } from '../configuracion/shared/service/configuracion.service';
+import { MiAsociacionService } from './service/mi-asociacion.service';
 
 
 
@@ -16,6 +16,6 @@ import { ConfiguracionService } from '../configuracion/shared/service/configurac
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [ConfiguracionService, DatePipe]
+  providers: [MiAsociacionService, DatePipe]
 })
 export class AsociacionModule { }

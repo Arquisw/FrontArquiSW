@@ -1,5 +1,5 @@
-import { List } from "cypress/types/lodash";
-import { Rol } from "./rol.model";
+import { List } from 'cypress/types/lodash';
+import { Rol } from './rol.model';
 
 export class PersonaResumen {
   public id: number;
@@ -13,6 +13,6 @@ export class PersonaResumen {
     this.nombre = nombre || '';
     this.correo = correo || '';
     this.apellidos = apellidos || '';
-    this.roles = roles || new Array();
+    this.roles = roles || [];
   }
 }
