@@ -8,9 +8,6 @@ import { InicioComponent } from './feature/inicio/inicio.component';
 import { PresentacionComponent } from './feature/presentacion/presentacion.component';
 import { MiAsociacionComponent } from './feature/asociacion/mi-asociacion/mi-asociacion.component';
 
-
-
-
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent  },
