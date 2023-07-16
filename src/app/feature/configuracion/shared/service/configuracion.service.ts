@@ -29,7 +29,7 @@ export class ConfiguracionService {
 
   public actualizarClavePorId(clave: Clave, id: number): Observable<number>
   {
-    return this.httpService.doPut<Clave, number>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}/${this.USUARIOS_CLAVE_ENDPOINT}/${id}`, clave);
+    return this.httpService.doPut<Clave, number>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.USUARIOS_CLAVE_ENDPOINT}/${id}`, clave);
   }
 
   public eliminarUsuarioPorId(id: number): Observable<void> {
