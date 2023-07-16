@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HTTP_ERRORES_CODIGO } from './http-codigo-error';
+import { Notifications } from '@shared/directivas/notifications/notifications';
 
 @Injectable()
 export class ManejadorError implements ErrorHandler {
@@ -9,6 +10,12 @@ export class ManejadorError implements ErrorHandler {
   handleError(error: string | Error): void {
     const mensajeError = this.mensajePorDefecto(error);
     this.imprimirErrorConsola(mensajeError);
+    this.mostrarError(mensajeError);
+  }
+
+  private mostrarError(mensaje) {
+    const notifications = new Notifications();
+    notifications.getNotification(mensaje, 'error');
   }
 
   private mensajePorDefecto(error) {
