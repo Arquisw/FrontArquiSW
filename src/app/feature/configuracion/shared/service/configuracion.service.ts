@@ -11,9 +11,9 @@ import { Clave } from '../model/clave.model';
 @Injectable()
 
 export class ConfiguracionService {
-  private readonly USUARIOS_ENDPOINT: String = "/usuarios";
-  private readonly USUARIOS_CLAVE_ENDPOINT: String = "/clave";
-  private readonly ASOCIACIONES_ENDPOINT: String = "/asociaciones";
+  private readonly USUARIOS_ENDPOINT: string = '/usuarios';
+  private readonly USUARIOS_CLAVE_ENDPOINT: string = '/clave';
+  private readonly ASOCIACIONES_ENDPOINT: string = '/asociaciones';
 
   constructor(private httpService: HttpService) { }
 
