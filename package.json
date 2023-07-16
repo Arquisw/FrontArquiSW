@@ -36,7 +36,7 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.10",
     "@angular-eslint/builder": "14.4.0",
-    "@angular-eslint/eslint-plugin": "14.4.0",
+    "@angular-eslint/eslint-plugin": "^14.4.0",
     "@angular-eslint/eslint-plugin-template": "14.4.0",
     "@angular-eslint/schematics": "14.4.0",
     "@angular-eslint/template-parser": "14.4.0",
@@ -56,7 +56,7 @@
     "@typescript-eslint/parser": "^5.36.2",
     "cypress": "^10.3.0",
     "eslint": "^8.23.0",
-    "eslint-plugin-rule-angular-arquitecture": "file:utilidades/eslint-plugin-rule-angular-arquitecture/",
+    "eslint-plugin-rule-angular-arquitecture": "file:utilidades/eslint-plugin-rule-angular-arquitecture",
     "jasmine-core": "~4.1.1",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "^6.3.20",
