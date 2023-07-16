@@ -17,7 +17,7 @@
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
-      "plugins": ["rule-angular-arquitecture", "@angular-eslint/eslint-plugin"],
+      "plugins": ["rule-angular-arquitecture"],
       "rules": {
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": "error",
