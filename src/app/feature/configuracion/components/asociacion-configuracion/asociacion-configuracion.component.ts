@@ -44,7 +44,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
     (error) => {
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
-    })
+    });
   }
 
   onClickDelete(): void {
@@ -55,7 +55,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
     (error) => {
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
-    })
+    });
   }
 
   consultarAsociacion(): void {

@@ -28,7 +28,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
 
-    this.consultarUsuario()
+    this.consultarUsuario();
 
     this.actualizacionForm = new FormGroup({
       nombreActualizacion: new FormControl(''),
@@ -56,7 +56,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
     (error) => {
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
-    })
+    });
   }
 
   onClickUpdatePassword(): void {
@@ -71,7 +71,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
     (error) => {
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
-    })
+    });
   }
 
   onClickDelete(): void {
@@ -84,7 +84,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
     (error) => {
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
-    })
+    });
   }
 
   consultarUsuario(): void {
