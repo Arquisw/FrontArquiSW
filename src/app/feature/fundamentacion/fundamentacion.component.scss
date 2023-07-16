@@ -58,17 +58,34 @@
 .card
 {
   transition: all 0.2s ease;
+  background-color: var(--background-color);
+  border-color: var(--just-white);
   cursor: pointer;
+}
+
+.card-body
+{
+  vertical-align: middle;
+  color: var(--just-white);
 }
 
 .card:hover
 {
-  box-shadow: 5px 6px 6px 2px #e9ecef;
+  box-shadow: 5px 6px 6px 2px #222222;
   transform: scale(1);
 }
 
-footer
-{
-  background: linear-gradient(#026f35, #0dc061);
-  font-size: 1.4rem;
+.modal-body{
+  background-color: var(--background-color);
+  color: var(--just-white);
 }
+
+.modal-header {
+  background-color: var(--background-color);
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+

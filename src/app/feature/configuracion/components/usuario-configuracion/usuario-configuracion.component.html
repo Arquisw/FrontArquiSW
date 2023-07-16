@@ -42,14 +42,14 @@
   <div class="update-password">
     <form [formGroup]="actualizacionClaveForm">
       <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="claveAntigua"
+        <input type="password" class="form-control" id="claveAntigua" placeholder="Contraseña Anterior"
            formControlName="claveAntiguaActualizacion" required>
         <label for="floatingInput">Contraseña Anterior</label>
       </div>
       <div class="form-floating mb-3">
-        <input type="password" class="form-control" id="claveNueva"
+        <input type="password" class="form-control" id="claveNueva" placeholder="Contraseña Nueva"
            formControlName="claveNuevaActualizacion" required>
-        <label for="floatingInput">Contraseña Nueva</label>
+           <label for="floatingPassword">Contraseña Nueva</label>
       </div>
       <div class="form-floating mb-3">
         <input type="password" class="form-control"

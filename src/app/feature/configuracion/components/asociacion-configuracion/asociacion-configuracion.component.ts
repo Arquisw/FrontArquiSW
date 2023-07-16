@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AsociacionResumen } from '../../shared/model/asociacion-resumen';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
+import { Asociacion } from '../../shared/model/asociacion.model';
 
 @Component({
   selector: 'app-asociacion-configuracion',
@@ -23,29 +24,38 @@ export class AsociacionConfiguracionComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     this.consultarAsociacion();
+
+    this.actualizacionForm = new FormGroup({
+      nombreActualizacion: new FormControl(''),
+      nitActualizacion: new FormControl(''),
+      numeroContactoActualizacion: new FormControl(''),
+    });
   }
 
   onClickUpdate(): void {
-    /*this.registroError= false;
-    const usuario: Usuario= new Usuario(0,this.registroForm.get('nombreRegistro')?.value,this.registroForm.get('apellidosRegistro')?.value,this.registroForm.get('correoRegistro')?.value,this.registroForm.get('claveRegistro')?.value);
-    if(this.registroForm.get('claveRegistro')?.value===this.registroForm.get('confirmarClaveRegistro')?.value){
-      this.servicioGestionusuario.registrarUsuario(usuario).subscribe((response) => {
-        console.log('Data:', response);
-        this.registroExitoso= true;
-      },
-      (error) => {
-        this.registroError= true;
-        this.mensajeError =error?.error?.mensaje;
-      });
-    }
-    else{
-      this.registroError= true;
-      this.mensajeError= 'Las contraseñas no son iguales';
-    }*/
+    this.actualizacionError= false;
+
+    const asociacion: Asociacion = new Asociacion(this.actualizacionForm.get('nombreActualizacion')?.value,this.actualizacionForm.get('nitActualizacion')?.value,this.actualizacionForm.get('numeroContactoActualizacion')?.value);
+
+    this.configuracionService.actualizarAsociacionPorId(asociacion, this.usuarioId).subscribe((response) => {
+      console.log('Data:', response);
+      this.actualizacionExitosa= true;
+    },
+    (error) => {
+      this.actualizacionError = true;
+      this.mensajeError = error?.error?.mensaje;
+    })
   }
 
   onClickDelete(): void {
-
+    this.configuracionService.eliminarAsociacionPorId(this.asociacionResumen.id).subscribe((response) => {
+      console.log('Data:', response);
+      this.actualizacionExitosa= true;
+    },
+    (error) => {
+      this.actualizacionError = true;
+      this.mensajeError = error?.error?.mensaje;
+    })
   }
 
   consultarAsociacion(): void {

@@ -5,9 +5,13 @@
 }
 
 .update-form h1 {
-  color: var(--black);
+  color: var(--just-white);
   font-size: 3rem;
   border-bottom: 1px solid var(--grey);
+}
+
+.update-form h3 {
+  color: var(--just-white);
 }
 
 .btn
@@ -21,4 +25,43 @@
 
 .update-password, .delete-account {
   padding-top: 6px;
+}
+
+.form-control:not(:placeholder-shown) {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+.form-control:placeholder-shown {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+.form-control {
+  font-size: 1.4rem;
+}
+
+.form-floating label {
+  font-size: 1.4rem;
+}
+
+.btn {
+  font-size: 1.6rem;
+}
+
+.update-form h1 {
+  font-size: 3.5rem;
+}
+
+input {
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+label {
+  color: var(--just-white);
 }
