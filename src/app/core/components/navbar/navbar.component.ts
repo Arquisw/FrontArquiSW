@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MenuItem } from '@core/modelo/menu-item';
 import { Usuario } from '@core/modelo/usuario.modelo';
 import { AsociacionService } from '@core/services/asociacion.service';
@@ -37,7 +38,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private servicioGestionusuario: GestionUsuarioService,
-              private asociasociacionService: AsociacionService)  { }
+              private asociasociacionService: AsociacionService,
+              private router: Router)  { }
 
 
   ngOnInit(): void {
@@ -159,5 +161,11 @@ export class NavbarComponent implements OnInit {
       this.registroError= true;
       this.mensajeError =error?.error?.mensaje;
     });
+  }
+
+  openLogOut(): void {
+    this.inicioSesion = false;
+    this.router.navigate(['/inicio']);
+    window.sessionStorage.removeItem('Authorization');
   }
 }

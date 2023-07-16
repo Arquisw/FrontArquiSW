@@ -29,7 +29,7 @@
               <a class="dropdown-item" *ngIf="!tieneAsociacion" (click)="openModalAsociacion()">Registrar Empresa ó Asociacón</a>
               <a class="dropdown-item" [routerLink]="['/configuracion', id]">{{configuracionMenu.nombre}}</a>
 
-              <a class="dropdown-item">Cerrar Sesión</a>
+              <a class="dropdown-item" (click)="openLogOut()">Cerrar Sesión</a>
             </div>
           </div>
         </li>

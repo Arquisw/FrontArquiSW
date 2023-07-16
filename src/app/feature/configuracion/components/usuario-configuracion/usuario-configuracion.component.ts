@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 import { PersonaResumen } from '../../shared/model/persona-resumen.model';
 import { AsociacionResumen } from '../../shared/model/asociacion-resumen';
@@ -23,7 +23,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
   mensajeActualizacion= '';
   usuarioId = 0;
 
-  constructor(private route: ActivatedRoute, private configuracionService: ConfiguracionService) {}
+  constructor(private route: ActivatedRoute, private configuracionService: ConfiguracionService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
@@ -51,6 +51,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
     this.configuracionService.actualizarUsuarioPorId(persona, this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
       this.actualizacionExitosa= true;
+      this.router.navigate(['/usuario/', this.usuarioId]);
     },
     (error) => {
       this.actualizacionError = true;
@@ -77,13 +78,14 @@ export class UsuarioConfiguracionComponent implements OnInit {
     this.configuracionService.eliminarUsuarioPorId(this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
       this.actualizacionExitosa= true;
+      window.sessionStorage.removeItem('Authorization');
+      this.router.navigate(['/inicio']);
     },
     (error) => {
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
     })
   }
-
 
   consultarUsuario(): void {
     this.configuracionService.consultarUsuarioPorId(this.usuarioId).subscribe((response) => {
