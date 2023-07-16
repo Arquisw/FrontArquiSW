@@ -8,7 +8,7 @@
     "build:stats": "ng build --configuration production --stats-json",
     "analyze": "webpack-bundle-analyzer dist/app-base/stats.json",
     "test": "ng test --code-coverage",
-    "test:mutation": "stryker run && node utilidades/mutation/generate-mutation-sonar-report.js",
+    "test:mutation": "stryker run",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:run": "ng run app-base:cypress-run --config-file ./cypress.e2e.config.ts --browser chrome",
