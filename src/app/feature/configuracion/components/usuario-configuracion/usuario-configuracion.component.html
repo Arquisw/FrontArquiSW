@@ -34,9 +34,6 @@
       <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
         {{mensajeError}}
       </div>
-      <div *ngIf="actualizacionExitosa" class="alert alert-success" role="alert">
-        {{mensajeActualizacion}}
-      </div>
     </form>
   </div>
   <div class="update-password">
@@ -64,11 +61,8 @@
           </div>
         </div>
       </div>
-      <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
+      <div *ngIf="actualizacionClaveError" class="alert alert-danger" role="alert">
         {{mensajeError}}
-      </div>
-      <div *ngIf="actualizacionExitosa" class="alert alert-success" role="alert">
-        {{mensajeActualizacion}}
       </div>
     </form>
   </div>
@@ -79,6 +73,9 @@
         <button type="submit" class="btn btn-success mt-3 btn-register"
           (click)="onClickDelete()">Eliminar</button> <br> <br>
       </div>
+    </div>
+    <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">
+      {{mensajeError}}
     </div>
   </div>
 </section>

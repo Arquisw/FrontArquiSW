@@ -127,7 +127,7 @@ export class NavbarComponent implements OnInit {
     }
     else{
       this.registroError= true;
-      this.mensajeError= 'Las contraseñas no son iguales';
+      this.mensajeError= 'Las contraseñas no coinciden';
     }
   }
 

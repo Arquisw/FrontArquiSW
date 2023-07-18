@@ -39,8 +39,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
 
     this.configuracionService.actualizarAsociacionPorId(asociacion, this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
-      this.actualizacionExitosa= true;
-      this.router.navigate(['/configuracion/', this.usuarioId]);
+      window.location.reload();
     },
     (error) => {
       this.actualizacionError = true;
