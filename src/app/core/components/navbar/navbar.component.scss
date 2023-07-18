@@ -8,6 +8,14 @@
   font-size: 1.6rem;
 }
 
+.nav-link {
+  color: var(--just-white)
+}
+
+.navbar .nav-link.active {
+  color: var(--uco-green);
+}
+
 img
 {
   display: block;

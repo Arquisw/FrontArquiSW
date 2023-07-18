@@ -43,6 +43,16 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
+
+    if(this.inicioSesion) {
+      const token = window.sessionStorage.getItem('Authorization');
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      this.id = tokenPayload.id;
+      this.consultarusuario();
+    }
+
+
     this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' ));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
 
@@ -85,10 +95,10 @@ export class NavbarComponent implements OnInit {
     const usuario: Usuario= new Usuario(0,'','',this.loginForm.get('correoLogin').value,this.loginForm.get('claveLogin').value);
     this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
       this.usuarioId = response;
-      this.consultarusuario();
       this.id = this.usuarioId.valor;
+      this.consultarusuario();
       this.loginModal?.hide();
-      this.inicioSesion = true;
+      this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
     },
     (error) => {
       const estado = error.status;
@@ -126,7 +136,7 @@ export class NavbarComponent implements OnInit {
   }
 
   consultarusuario(): void {
-    this.servicioGestionusuario.consultarUsuario(this.usuarioId.valor).subscribe((response) => {
+    this.servicioGestionusuario.consultarUsuario(this.id).subscribe((response) => {
       this.usuario = response;
       this.filtrarMenu();
     },
