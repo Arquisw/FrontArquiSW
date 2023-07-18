@@ -101,13 +101,8 @@ export class NavbarComponent implements OnInit {
       this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
     },
     (error) => {
-      const estado = error.status;
-      if (estado === 401){
-        this.mensajeError= 'Correo o contraseña incorrectos';
-      }
-      else{
-        this.mensajeError=error.message;
-      }
+      this.mensajeError= error.error;
+      this.loginError=true;
       this.loginError=true;
     });
   }
