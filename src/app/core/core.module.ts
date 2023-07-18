@@ -10,11 +10,12 @@ import { HttpService } from './services/http.service';
 import { ManejadorError } from './interceptor/manejador-error';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './components/footer/footer.component';
 import { AsociacionModule } from '../feature/asociacion/asociacion.module';
 
 
 @NgModule({
-  declarations: [NavbarComponent],
+  declarations: [NavbarComponent, FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -23,7 +24,7 @@ import { AsociacionModule } from '../feature/asociacion/asociacion.module';
     AsociacionModule
     
   ],
-  exports: [NavbarComponent],
+  exports: [NavbarComponent, FooterComponent],
   providers: [
     HttpService,
     SecurityGuard,

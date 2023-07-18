@@ -16,7 +16,7 @@ background-image: url('/assets/images/Fondo.png');
   height: 80vh;
 }
 
-.information h1 
+.information h1
 {
   color: var(--just-white);
   font-size: 5rem;
@@ -31,8 +31,7 @@ background-image: url('/assets/images/Fondo.png');
   padding: 10px;
 }
 
-footer
+p
 {
-  background: linear-gradient(#026f35, #0dc061);
-  font-size: 1.4rem;
+  color: var(--just-white);font-size: 1.6rem;
 }

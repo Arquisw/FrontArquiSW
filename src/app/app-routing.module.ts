@@ -9,9 +9,6 @@ import { PresentacionComponent } from './feature/presentacion/presentacion.compo
 import { MiAsociacionComponent } from './feature/asociacion/mi-asociacion/mi-asociacion.component';
 import { MiPerfilComponent } from './feature/perfil/mi-perfil/mi-perfil.component';
 
-
-
-
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: 'inicio', component: InicioComponent  },
@@ -25,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

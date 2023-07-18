@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MenuItem } from '@core/modelo/menu-item';
 import { Usuario } from '@core/modelo/usuario.modelo';
 import { AsociacionService } from '@core/services/asociacion.service';
@@ -37,11 +38,22 @@ export class NavbarComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private servicioGestionusuario: GestionUsuarioService,
-              private asociasociacionService: AsociacionService)  { }
+              private asociasociacionService: AsociacionService,
+              private router: Router)  { }
 
 
   ngOnInit(): void {
-    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación'  && item.nombre !== 'Mi Perfil' ));
+    this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
+
+    if(this.inicioSesion) {
+      const token = window.sessionStorage.getItem('Authorization');
+      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+      this.id = tokenPayload.id;
+      this.consultarusuario();
+    }
+
+
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' ));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
 
     this.loginForm = new FormGroup({
@@ -85,19 +97,14 @@ export class NavbarComponent implements OnInit {
     const usuario: Usuario= new Usuario(0,'','',this.loginForm.get('correoLogin').value,this.loginForm.get('claveLogin').value);
     this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
       this.usuarioId = response;
-      this.consultarusuario();
       this.id = this.usuarioId.valor;
+      this.consultarusuario();
       this.loginModal?.hide();
-      this.inicioSesion = true;
+      this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
     },
     (error) => {
-      const estado = error.status;
-      if (estado === 401){
-        this.mensajeError= 'Correo o contraseña incorrectos';
-      }
-      else{
-        this.mensajeError=error.message;
-      }
+      this.mensajeError= error.error;
+      this.loginError=true;
       this.loginError=true;
     });
   }
@@ -117,7 +124,7 @@ export class NavbarComponent implements OnInit {
     }
     else{
       this.registroError= true;
-      this.mensajeError= 'Las contraseñas no son iguales';
+      this.mensajeError= 'Las contraseñas no coinciden';
     }
   }
 
@@ -126,7 +133,7 @@ export class NavbarComponent implements OnInit {
   }
 
   consultarusuario(): void {
-    this.servicioGestionusuario.consultarUsuario(this.usuarioId.valor).subscribe((response) => {
+    this.servicioGestionusuario.consultarUsuario(this.id).subscribe((response) => {
       this.usuario = response;
       this.filtrarMenu();
     },
@@ -161,5 +168,11 @@ export class NavbarComponent implements OnInit {
       this.registroError= true;
       this.mensajeError =error?.error?.mensaje;
     });
+  }
+
+  openLogOut(): void {
+    this.inicioSesion = false;
+    this.router.navigate(['/inicio']);
+    window.sessionStorage.removeItem('Authorization');
   }
 }

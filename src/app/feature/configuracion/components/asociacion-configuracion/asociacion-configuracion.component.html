@@ -12,15 +12,15 @@
         </div>
         <div class="col-md-4">
           <div class="form-floating">
-            <input type="text" class="form-control" id="apellidos"
-              placeholder="apellidos" formControlName="nitActualizacion" required [value]="asociacionResumen?.nit">
+            <input type="text" class="form-control" id="nit"
+              placeholder="NIT" formControlName="nitActualizacion" required [value]="asociacionResumen?.nit">
             <label for="floatingInput">NIT</label>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-floating">
-            <input type="text" class="form-control" id="apellidos"
-              placeholder="apellidos" formControlName="numeroContacto" required [value]="asociacionResumen?.numeroContacto">
+            <input type="text" class="form-control" id="numeroContacto"
+              placeholder="apellidos" formControlName="numeroContactoActualizacion" required [value]="asociacionResumen?.numeroContacto">
             <label for="floatingInput">Número de Contacto</label>
           </div>
         </div>
@@ -48,6 +48,9 @@
         <button type="submit" class="btn btn-success mt-3 btn-register"
           (click)="onClickDelete()">Eliminar</button> <br> <br>
       </div>
+    </div>
+    <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
+      {{mensajeError}}
     </div>
   </div>
 </section>

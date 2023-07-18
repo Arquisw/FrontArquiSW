@@ -7,25 +7,20 @@
   <section class="nav-container">
     <div class="container-fluid nav">
       <div class="row">
-          <div class="col-sm-auto  bg-light sticky-top">
-              <div class="d-flex flex-sm-column">
-                  <a routerLink="./usuario/{{usuarioId}}" class="p-3 link-dark text-decoration-none" data-bs-placement="right" id ="miCuenta">
-                      Mi Cuenta
-                  </a>
-                  <a routerLink="./asociacion/{{usuarioId}}" class="p-3 link-dark text-decoration-none" data-bs-placement="right" id ="miAsociacion">
-                      Mi Empresa o Asociación
-                  </a>
-              </div>
+        <div class="left-navbar col-sm-auto sticky-top">
+          <div class="d-flex flex-sm-column">
+            <a routerLink="./usuario/{{usuarioId}}" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miCuenta" routerLinkActive="active-link">
+              Mi Cuenta
+            </a>
+            <a routerLink="./asociacion/{{usuarioId}}" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miAsociacion" routerLinkActive="active-link">
+              Mi Empresa o Asociación
+            </a>
           </div>
-          <div class="col-sm  vw-100">
-              <router-outlet></router-outlet>
-          </div>
+        </div>
+        <div class="col-sm  vw-100">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </section>
 </main>
-<footer class="text-center text-white">
-  <div class="text-center p-3">
-      <p >© 2021 Copyright: ArquiSW</p>
-  </div>
-</footer>

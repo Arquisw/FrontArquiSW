@@ -21,11 +21,19 @@
 {
   color: var(--just-white);
   font-size: 5rem;
-
 }
 
-footer
-{
-  background: linear-gradient(#026f35, #0dc061);
-  font-size: 1.4rem;
+.nav-link {
+  color: var(--just-white)
 }
+
+.left-navbar a.active-link {
+  color: var(--uco-green-light);
+}
+
+.left-navbar {
+  background-color: var(--background-darker-color);
+}
+
+
+
