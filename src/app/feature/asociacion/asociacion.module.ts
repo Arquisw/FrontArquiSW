@@ -9,7 +9,8 @@ import { MiAsociacionService } from './service/mi-asociacion.service';
 
 @NgModule({
   declarations: [
-    MiAsociacionComponent
+    MiAsociacionComponent,
+    
   ],
   imports: [
     CommonModule,

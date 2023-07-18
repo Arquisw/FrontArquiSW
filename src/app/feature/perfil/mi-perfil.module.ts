@@ -3,19 +3,18 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MiPerfilService } from './service/mi-perfil.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ModalCargarPdfComponent } from '../modales/modal-cargar-pdf/modal-cargar-pdf.component';
-
-
+import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    MiPerfilComponent,
-    ModalCargarPdfComponent
+    MiPerfilComponent
+    
   ],
   imports: [
     CommonModule,
-    HttpClientModule
+    HttpClientModule,
+    SharedModule
   ],
   providers: [MiPerfilService, DatePipe]
 })

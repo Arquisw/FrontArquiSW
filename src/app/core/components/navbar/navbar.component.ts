@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
     }
 
 
-    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' ));
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' ));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
 
     this.loginForm = new FormGroup({

@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { AsociacionModule } from '../feature/asociacion/asociacion.module';
+import { MiPerfilModule } from '../feature/perfil/mi-perfil.module';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { AsociacionModule } from '../feature/asociacion/asociacion.module';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AsociacionModule
+    AsociacionModule,
+    MiPerfilModule
     
   ],
   exports: [NavbarComponent, FooterComponent],

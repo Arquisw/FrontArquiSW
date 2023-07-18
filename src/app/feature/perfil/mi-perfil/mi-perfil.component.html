@@ -1,7 +1,7 @@
 <header class="header-content">
     <section class="information">
-      <h1>{{usuario?.nombre}} {{usuario?.apellidos}}</h1>
-      <h2>{{usuario?.correo}}</h2>
+      <h1>{{usuarioP?.nombre}} {{usuarioP?.apellidos}}</h1>
+      <h2>{{usuarioP?.correo}}</h2>
 
     </section>
   </header>
@@ -10,15 +10,12 @@
       <div class="container-fluid nav">
         <button type="submit" class="btn btn-success mt-3"
         data-bs-toggle="modal" data-bs-target="#hoja" data-bs-dismiss="modal">Guardar ó Actualizar hoja de vida</button> 
-        <app-modal-cargar-pdf #modalCargarPdf></app-modal-cargar-pdf>
+        <app-modal-cargar-pdf #modalCargarPdf
+        [titulo]="titulo"></app-modal-cargar-pdf>
       </div>
       <br>
     </section>
   </main>
-  <footer class="text-center text-white">
-    <div class="text-center p-3">
-        <p >© 2021 Copyright: ArquiSW</p>
-    </div>
-  </footer>
+
 
 

@@ -22,14 +22,11 @@
             <div class="opciones" *ngIf="estaAbierto" >
               <a class="dropdown-item" [routerLink]="['/miPerfil', id]">Mi Perfil</a>
               <a class="dropdown-item" *ngIf="tieneAsociacion" [routerLink]="['/miAsociacion', id]" >Mi Empresao ó Asociación</a>
-              <a class="dropdown-item" routerLink="">Mi Perfil</a>
-              <a class="dropdown-item" *ngIf="tieneAsociacion" [routerLink]="['/miAsociacion', id]" >Mi Empresa ó Asociación</a>
               <ng-container *ngIf="administrador">
                 <a class="dropdown-item" *ngif="administrador">Panel de Administrador</a>
               </ng-container>
               <a class="dropdown-item" *ngIf="!tieneAsociacion" (click)="openModalAsociacion()">Registrar Empresa ó Asociacón</a>
               <a class="dropdown-item" [routerLink]="['/configuracion', id]">{{configuracionMenu.nombre}}</a>
-
               <a class="dropdown-item" (click)="openLogOut()">Cerrar Sesión</a>
             </div>
           </div>
@@ -38,7 +35,10 @@
     </div>
   </div>
 </nav>
-<app-mi-asociacion [id]="id"></app-mi-asociacion>
+<app-mi-asociacion #miAsociacion 
+[id]="id"></app-mi-asociacion>
+<app-mi-perfil #miPerfil
+[usuario]="usuario"></app-mi-perfil>
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
