@@ -7,6 +7,7 @@ import { FundamentacionComponent } from './feature/fundamentacion/fundamentacion
 import { InicioComponent } from './feature/inicio/inicio.component';
 import { PresentacionComponent } from './feature/presentacion/presentacion.component';
 import { MiAsociacionComponent } from './feature/asociacion/mi-asociacion/mi-asociacion.component';
+import { MiPerfilComponent } from './feature/perfil/mi-perfil/mi-perfil.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'acercaNosotros', component: AcercanosotrosComponent  },
   { path: 'presentacion', component: PresentacionComponent  },
   { path: 'miAsociacion/:id', component: MiAsociacionComponent, canActivate: [SecurityGuard] },
+  { path: 'miPerfil/:id', component: MiPerfilComponent, canActivate: [SecurityGuard] },
   { path: 'configuracion/:id', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
 ];

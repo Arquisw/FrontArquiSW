@@ -20,15 +20,23 @@ background-image: url('/assets/images/Fondo.png');
 {
   color: var(--just-white);
   font-size: 5rem;
+  
 }
 
-.nit
+h2
 {
   color: var(--just-white);
 }
-.col-md-6
+
+.btn 
 {
   padding: 10px;
+  font-size: 15px;
+}
+
+.container-fluid {
+  justify-content: center;
+
 }
 
 footer

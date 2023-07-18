@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MiAsociacionService } from '../service/mi-asociacion.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,7 +8,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./mi-asociacion.component.scss']
 })
 export class MiAsociacionComponent implements OnInit {
-  usuarioId = 0;
+
+  @Input() id;
   mensajeError= '';
   asociacion;
 
@@ -16,14 +17,14 @@ export class MiAsociacionComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    console.log(this.id);
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
     this.consultaAsociacion();
   }
 
   consultaAsociacion(): void {
-    this.miAsociacionService.consultarAsociacion(this.usuarioId).subscribe((response) => {
+    this.miAsociacionService.consultarAsociacion(this.id).subscribe((response) => {
       this.asociacion = response;
-      console.log(response);
     },
     (error) => {
       this.mensajeError=error.message;

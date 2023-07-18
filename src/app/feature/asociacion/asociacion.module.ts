@@ -14,7 +14,7 @@ import { MiAsociacionService } from './service/mi-asociacion.service';
   imports: [
     CommonModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [MiAsociacionService, DatePipe]
 })

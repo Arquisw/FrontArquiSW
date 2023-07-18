@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' ));
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación'  && item.nombre !== 'Mi Perfil' ));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
 
     this.loginForm = new FormGroup({
@@ -61,6 +61,8 @@ export class NavbarComponent implements OnInit {
       nit: [null, Validators.required],
       numeroContacto: [null, Validators.required]
     });
+    console.log(this.id);
+    console.log(this.usuarioId)
   }
 
   open(): void {
@@ -135,7 +137,7 @@ export class NavbarComponent implements OnInit {
   }
 
   filtrarMenu(): void {
-    this.usuario.roles.filter(rol => {
+    this.usuario.roles.forEach(rol => {
       if (rol.nombre === 'ROLE_ADMINISTRADOR') {
         this.administrador = true;
       }
