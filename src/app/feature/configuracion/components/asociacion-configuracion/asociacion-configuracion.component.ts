@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AsociacionResumen } from '../../shared/model/asociacion-resumen';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 import { Asociacion } from '../../shared/model/asociacion.model';
@@ -19,7 +19,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
   mensajeActualizacion= '';
   usuarioId = 0;
 
-  constructor(private route: ActivatedRoute, private configuracionService: ConfiguracionService) {}
+  constructor(private route: ActivatedRoute, private configuracionService: ConfiguracionService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
@@ -40,6 +40,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
     this.configuracionService.actualizarAsociacionPorId(asociacion, this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
       this.actualizacionExitosa= true;
+      this.router.navigate(['/configuracion/', this.usuarioId]);
     },
     (error) => {
       this.actualizacionError = true;
@@ -51,6 +52,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
     this.configuracionService.eliminarAsociacionPorId(this.asociacionResumen.id).subscribe((response) => {
       console.log('Data:', response);
       this.actualizacionExitosa= true;
+      this.router.navigate(['/configuracion/', this.usuarioId]);
     },
     (error) => {
       this.actualizacionError = true;

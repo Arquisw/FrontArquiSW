@@ -51,7 +51,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
     this.configuracionService.actualizarUsuarioPorId(persona, this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
       this.actualizacionExitosa= true;
-      this.router.navigate(['/usuario/', this.usuarioId]);
+      window.location.reload();
     },
     (error) => {
       this.actualizacionError = true;
