@@ -23,6 +23,17 @@
   font-size: 5rem;
 }
 
+.nav-link {
+  color: var(--just-white)
+}
+
+.left-navbar a.active-link {
+  color: var(--uco-green-light);
+}
+
 .left-navbar {
   background-color: var(--background-darker-color);
 }
+
+
+

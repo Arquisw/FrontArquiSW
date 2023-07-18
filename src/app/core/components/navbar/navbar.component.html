@@ -9,8 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <li class="nav-item" *ngFor="let item of principalItems">
-          <a class="nav-link active" aria-current="page" [routerLink]="item.url"
-            routerLinkActive="active">{{item.nombre}}</a>
+          <a class="nav-link" [routerLink]="item.url" routerLinkActive="active">{{item.nombre}}</a>
         </li>
         <li class="nav-item" *ngIf="!inicioSesion">
           <button type="button" class="btn btn-success" (click)="open()">Iniciar Sesión</button>
@@ -22,7 +21,7 @@
             </a>
             <div class="opciones" *ngIf="estaAbierto" >
               <a class="dropdown-item" routerLink="">Mi Perfil</a>
-              <a class="dropdown-item" *ngIf="tieneAsociacion" [routerLink]="['/miAsociacion', id]" >Mi Empresao ó Asociación</a>
+              <a class="dropdown-item" *ngIf="tieneAsociacion" [routerLink]="['/miAsociacion', id]" >Mi Empresa ó Asociación</a>
               <ng-container *ngIf="administrador">
                 <a class="dropdown-item" *ngif="administrador">Panel de Administrador</a>
               </ng-container>
