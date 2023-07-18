@@ -17,8 +17,9 @@ export class UsuarioConfiguracionComponent implements OnInit {
   actualizacionClaveForm: FormGroup;
   personaResumen: PersonaResumen;
   asociacionResumen: AsociacionResumen;
-  actualizacionError= false;
-  actualizacionExitosa= false;
+  actualizacionError = false;
+  actualizacionClaveError = false;
+  eliminacionError= false;
   mensajeError= '';
   mensajeActualizacion= '';
   usuarioId = 0;
@@ -50,7 +51,6 @@ export class UsuarioConfiguracionComponent implements OnInit {
 
     this.configuracionService.actualizarUsuarioPorId(persona, this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
-      this.actualizacionExitosa= true;
       window.location.reload();
     },
     (error) => {
@@ -64,25 +64,29 @@ export class UsuarioConfiguracionComponent implements OnInit {
 
     const clave: Clave = new Clave(this.actualizacionClaveForm.get('claveAntiguaActualizacion')?.value,this.actualizacionClaveForm.get('claveNuevaActualizacion')?.value);
 
-    this.configuracionService.actualizarClavePorId(clave, this.usuarioId).subscribe((response) => {
-      console.log('Data:', response);
-      this.actualizacionExitosa= true;
-    },
-    (error) => {
-      this.actualizacionError = true;
-      this.mensajeError = error?.error?.mensaje;
-    });
+    if(this.actualizacionClaveForm.get('claveNuevaActualizacion')?.value===this.actualizacionClaveForm.get('confirmarClaveActualizacion')?.value) {
+      this.configuracionService.actualizarClavePorId(clave, this.usuarioId).subscribe((response) => {
+        console.log('Data:', response);
+        window.location.reload();
+      },
+      (error) => {
+        this.actualizacionClaveError = true;
+        this.mensajeError = error?.error?.mensaje;
+      });
+    } else {
+      this.actualizacionClaveError = true;
+      this.mensajeError= 'Las contraseñas no coinciden';
+    }
   }
 
   onClickDelete(): void {
     this.configuracionService.eliminarUsuarioPorId(this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
-      this.actualizacionExitosa= true;
       window.sessionStorage.removeItem('Authorization');
       this.router.navigate(['/inicio']);
     },
     (error) => {
-      this.actualizacionError = true;
+      this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
