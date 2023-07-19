@@ -2,12 +2,12 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="#"><img src="../../../../assets/images/logo-arquisw.png"
         alt="Imagen del Logo de ArquiSW"></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+    </button> 
+    <div class="d-flex justify-content-center collapse navbar-collapse" >
+      <ul class="nav ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
         <li class="nav-item" *ngFor="let item of principalItems">
           <a class="nav-link" [routerLink]="item.url" routerLinkActive="active">{{item.nombre}}</a>
         </li>
@@ -19,13 +19,13 @@
             <a class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" (click)="menuUsuario()">
               {{usuario?.nombre}}
             </a>
-            <div class="opciones" *ngIf="estaAbierto" >
-              <a class="dropdown-item" [routerLink]="['/miPerfil', id]">Mi Perfil</a>
-              <a class="dropdown-item" *ngIf="tieneAsociacion" [routerLink]="['/miAsociacion', id]" >Mi Empresao ó Asociación</a>
+            <div class="opciones" *ngIf="estaAbierto">
+              <a class="dropdown-item" (click)="abrirPerfil()">Mi Perfil</a>
+              <a class="dropdown-item" *ngIf="tieneAsociacion" (click)="abrirAsociacion()">Mi Empresa ó Asociación</a>
               <ng-container *ngIf="administrador">
-                <a class="dropdown-item" *ngif="administrador">Panel de Administrador</a>
+                <a class="dropdown-item" *ngIf="administrador">Panel de Administrador</a>
               </ng-container>
-              <a class="dropdown-item" *ngIf="!tieneAsociacion" (click)="openModalAsociacion()">Registrar Empresa ó Asociacón</a>
+              <a class="dropdown-item" *ngIf="!tieneAsociacion" (click)="openModalAsociacion()">Registrar Empresa ó Asociación</a>
               <a class="dropdown-item" [routerLink]="['/configuracion', id]">{{configuracionMenu.nombre}}</a>
               <a class="dropdown-item" (click)="openLogOut()">Cerrar Sesión</a>
             </div>
@@ -35,10 +35,6 @@
     </div>
   </div>
 </nav>
-<app-mi-asociacion #miAsociacion 
-[id]="id"></app-mi-asociacion>
-<app-mi-perfil #miPerfil
-[usuario]="usuario"></app-mi-perfil>
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">

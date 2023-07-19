@@ -16,6 +16,7 @@ import { SharedModule } from '@shared/shared.module';
     HttpClientModule,
     SharedModule
   ],
+  exports:[MiPerfilComponent],
   providers: [MiPerfilService, DatePipe]
 })
 export class MiPerfilModule { }

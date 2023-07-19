@@ -1,21 +1,21 @@
 <header class="header-content">
-    <section class="information">
-      <h1>{{usuarioP?.nombre}} {{usuarioP?.apellidos}}</h1>
-      <h2>{{usuarioP?.correo}}</h2>
+  <section class="information">
+    <h1>{{usuario?.nombre}} {{usuario?.apellidos}}</h1>
+    <h2>{{usuario?.correo}}</h2>
+  </section>
+</header>
+<main>
+  <section class="nav-container">
+    <div class="container-fluid nav">
+      <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#cargarArchivo"
+        data-bs-dismiss="modal">Guardar ó Actualizar hoja de vida</button>
+      <app-modal-cargar-pdf #modalCargarPdf [titulo]="titulo"></app-modal-cargar-pdf>
+    </div>
+    <br>
+  </section>
+</main>
 
-    </section>
-  </header>
-  <main>
-    <section class="nav-container">
-      <div class="container-fluid nav">
-        <button type="submit" class="btn btn-success mt-3"
-        data-bs-toggle="modal" data-bs-target="#hoja" data-bs-dismiss="modal">Guardar ó Actualizar hoja de vida</button> 
-        <app-modal-cargar-pdf #modalCargarPdf
-        [titulo]="titulo"></app-modal-cargar-pdf>
-      </div>
-      <br>
-    </section>
-  </main>
+  
 
 
 

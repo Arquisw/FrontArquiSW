@@ -7,7 +7,7 @@
     "build": "ng build --configuration production",
     "build:stats": "ng build --configuration production --stats-json",
     "analyze": "webpack-bundle-analyzer dist/app-base/stats.json",
-    "test": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
+    "test": "ng test --watch=false --code-coverage",
     "test:mutation": "stryker run && node utilidades/mutation/generate-mutation-sonar-report.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -59,7 +59,7 @@
     "eslint-plugin-rule-angular-arquitecture": "file:utilidades/eslint-plugin-rule-angular-arquitecture",
     "jasmine-core": "~4.1.1",
     "jasmine-spec-reporter": "~7.0.0",
-    "karma": "^6.3.20",
+    "karma": "^6.4.2",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "^2.1.0",
     "karma-edge-launcher": "^0.4.2",
@@ -74,6 +74,7 @@
     "ts-loader": "latest",
     "ts-node": "~ 10.8.0",
     "typescript": "^4.9.5",
-    "webpack-bundle-analyzer": "^4.5.0"
+    "webpack-bundle-analyzer": "^4.5.0",
+    "webpack-cli": "^5.1.4"
   }
 }

@@ -17,6 +17,7 @@ import { MiAsociacionService } from './service/mi-asociacion.service';
     HttpClientModule,
     ReactiveFormsModule,
   ],
+  exports: [MiAsociacionComponent],
   providers: [MiAsociacionService, DatePipe]
 })
 export class AsociacionModule { }

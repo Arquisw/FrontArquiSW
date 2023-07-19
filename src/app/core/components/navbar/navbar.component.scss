@@ -151,3 +151,16 @@ input {
 label {
   color: var(--just-white);
 }
+
+/* Estilos para centrar las acciones del menú desplegable en dispositivos móviles */
+@media (max-width: 767px) {
+  .navbar-nav .dropdown-menu {
+    text-align: center;
+  }
+
+  .navbar-nav .dropdown-menu .dropdown-item {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}

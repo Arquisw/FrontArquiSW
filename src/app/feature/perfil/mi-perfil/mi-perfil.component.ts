@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+
 import { MiPerfilService } from '../service/mi-perfil.service';
 
 @Component({
@@ -8,25 +8,27 @@ import { MiPerfilService } from '../service/mi-perfil.service';
   styleUrls: ['./mi-perfil.component.scss']
 })
 export class MiPerfilComponent implements OnInit {
-  @Input() usuario;
+
   usuarioId = 0;
-  usuarioP;
+  usuario;
   mensajeError= '';
   titulo = 'Guardar ó Actualizar Hoja de vida';
 
-  constructor(private route: ActivatedRoute,
-              private miPerfilSevice: MiPerfilService) { }
+  constructor(private miPerfilSevice: MiPerfilService) { }
 
   ngOnInit(): void {
-    console.log(this.usuario);
-    this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-    this.consultaUsuario();
+    const params = history.state;
+
+    this.usuarioId = params.id;
+    this.usuario = params.usuario;
+    if(params.id !== null) {
+      this.consultaUsuario();
+    }
   }
 
   consultaUsuario(): void {
     this.miPerfilSevice.consultarPersona(this.usuarioId).subscribe((response) => {
-      this.usuarioP = response;
-      //console.log(response);
+      this.usuario = response;
     },
     (error) => {
       this.mensajeError=error.message;
