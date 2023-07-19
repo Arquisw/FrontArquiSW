@@ -9,12 +9,13 @@ import { MiAsociacionService } from './service/mi-asociacion.service';
 
 @NgModule({
   declarations: [
-    MiAsociacionComponent
+    MiAsociacionComponent,
+    
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [MiAsociacionService, DatePipe]
 })

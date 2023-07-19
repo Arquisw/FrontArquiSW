@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { SecurityGuard } from './guard/security.guard';
@@ -11,6 +11,9 @@ import { ManejadorError } from './interceptor/manejador-error';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
+import { AsociacionModule } from '../feature/asociacion/asociacion.module';
+import { MiPerfilModule } from '../feature/perfil/mi-perfil.module';
+
 
 @NgModule({
   declarations: [NavbarComponent, FooterComponent],
@@ -18,7 +21,10 @@ import { FooterComponent } from './components/footer/footer.component';
     CommonModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AsociacionModule,
+    MiPerfilModule
+    
   ],
   exports: [NavbarComponent, FooterComponent],
   providers: [
@@ -27,6 +33,7 @@ import { FooterComponent } from './components/footer/footer.component';
     { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: ErrorHandler, useClass: ManejadorError }
-  ]
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CoreModule { }

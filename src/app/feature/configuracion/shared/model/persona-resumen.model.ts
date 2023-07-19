@@ -1,4 +1,3 @@
-import { List } from 'cypress/types/lodash';
 import { Rol } from './rol.model';
 
 export class PersonaResumen {
@@ -6,9 +5,9 @@ export class PersonaResumen {
   public nombre: string;
   public apellidos: string;
   public correo: string;
-  public roles: List<Rol>;
+  public roles: Rol[];
 
-  constructor(id?: number, nombre?: string,  apellidos?: string,correo?: string, roles?: List<Rol>) {
+  constructor(id?: number, nombre?: string,  apellidos?: string,correo?: string, roles?: Rol[]) {
     this.id = id || 0;
     this.nombre = nombre || '';
     this.correo = correo || '';
