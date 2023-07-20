@@ -15,8 +15,8 @@ const routes: Routes = [
   { path: 'fundamentacion', component: FundamentacionComponent },
   { path: 'acercaNosotros', component: AcercanosotrosComponent  },
   { path: 'presentacion', component: PresentacionComponent  },
-  { path: 'miAsociacion/:id', component: MiAsociacionComponent, canActivate: [SecurityGuard] },
-  { path: 'miPerfil/:id', component: MiPerfilComponent, canActivate: [SecurityGuard] },
+  { path: 'asociacion', component: MiAsociacionComponent, canActivate: [SecurityGuard] },
+  { path: 'perfil', component: MiPerfilComponent, canActivate: [SecurityGuard] },
   { path: 'configuracion/:id', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
 ];

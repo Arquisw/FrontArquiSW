@@ -1,14 +1,13 @@
-.header-content
-{
-background-image: url('/assets/images/Fondo.png');
-  height: 90vh;
+.header-content {
+  background-image: url('/assets/images/Fondo.png');
+  height: 80vh;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
-.information
-{
+
+.information {
   padding: 15px;
   display: flex;
   justify-content: center;
@@ -16,22 +15,54 @@ background-image: url('/assets/images/Fondo.png');
   height: 80vh;
 }
 
-.information h1
-{
+.information h1 {
   color: var(--just-white);
   font-size: 5rem;
 }
 
-.nit
-{
+.nit {
   color: var(--just-white);
 }
-.col-md-6
-{
+
+.col-md-6 {
   padding: 10px;
 }
 
-p
-{
-  color: var(--just-white);font-size: 1.6rem;
+p {
+  color: var(--just-white);
+  font-size: 1.6rem;
 }
+
+/* Media query para dispositivos móviles */
+@media (max-width: 768px) {
+  .header-content {
+    height: 60vh;
+  }
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .header-content {
+    background-size: contain;
+    background-position: center top;
+  }
+}
+
+  .information h1 {
+    font-size: 3.5rem;
+  }
+
+  .nit {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+  }
+}
+
+
+
+
+
+
+
+

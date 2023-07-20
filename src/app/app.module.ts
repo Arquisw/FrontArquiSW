@@ -13,7 +13,6 @@ import { MiPerfilModule } from './feature/perfil/mi-perfil.module';
 import { AsociacionModule } from './feature/asociacion/asociacion.module';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

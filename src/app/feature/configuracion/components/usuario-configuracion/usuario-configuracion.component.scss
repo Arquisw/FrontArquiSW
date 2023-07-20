@@ -30,15 +30,15 @@
 .form-control:not(:placeholder-shown) {
   padding-top: 3rem;
   padding-bottom: 1.5rem;
-  background-color: var(--background-color);
-  color: var(--just-white);
+  background-color: var(--background-clear-color);
+  color: var(--black);
 }
 
 .form-control:placeholder-shown {
   padding-top: 3rem;
   padding-bottom: 1.5rem;
-  background-color: var(--background-color);
-  color: var(--just-white);
+  background-color: var(--background-clear-color);
+  color: var(--black);
 }
 
 .form-control {
@@ -54,10 +54,11 @@
 }
 
 input {
-  background-color: var(--background-color);
-  color: var(--just-white);
+  background-color: var(--background-clear-color);
+  color: var(--black);
+  border-color: var(--black);
 }
 
 label {
-  color: var(--just-white);
+  color: var(--black);
 }

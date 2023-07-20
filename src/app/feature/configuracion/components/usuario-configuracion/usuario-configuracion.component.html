@@ -70,8 +70,7 @@
     <h3>¿Deseas eliminar la cuenta?</h3>
     <div class="row w-100 align-items-center">
       <div class="col text-center">
-        <button type="submit" class="btn btn-success mt-3 btn-register"
-          (click)="onClickDelete()">Eliminar</button> <br> <br>
+        <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">Eliminar</button> <br> <br>
       </div>
     </div>
     <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">

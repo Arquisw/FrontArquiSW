@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { MenuItem } from '@core/modelo/menu-item';
 import { Usuario } from '@core/modelo/usuario.modelo';
 import { AsociacionService } from '@core/services/asociacion.service';
@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
   estaAbierto = false;
   administrador = false;
   tieneAsociacion = false;
+  opcionSeleccionada = false;
   mensajeError= '';
   id = 0;
   usuarioId;
@@ -39,7 +40,8 @@ export class NavbarComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private servicioGestionusuario: GestionUsuarioService,
               private asociasociacionService: AsociacionService,
-              private router: Router)  { }
+              private router: Router,
+              private elementRef: ElementRef)  { }
 
 
   ngOnInit(): void {
@@ -49,7 +51,7 @@ export class NavbarComponent implements OnInit {
       const token = window.sessionStorage.getItem('Authorization');
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
       this.id = tokenPayload.id;
-      this.consultarusuario();
+      this.inicioSesion = false;
     }
 
 
@@ -73,8 +75,36 @@ export class NavbarComponent implements OnInit {
       nit: [null, Validators.required],
       numeroContacto: [null, Validators.required]
     });
-    console.log(this.id);
-    console.log(this.usuarioId)
+  }
+
+  @HostListener('document:click', ['$event'])
+  cerrarMenu(event: MouseEvent) {
+    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+    if (!clickedInside) {
+      this.estaAbierto = false;
+    }
+  }
+
+
+  abrirPerfil(): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: null,
+        usuario: this.usuario,
+      }
+    };
+    this.estaAbierto = false;
+    this.router.navigate(['/perfil'], navigationExtras);
+  }
+
+  abrirAsociacion(): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: this.id,
+      }
+    };
+    this.estaAbierto = false;
+    this.router.navigate(['/asociacion'], navigationExtras);
   }
 
   open(): void {

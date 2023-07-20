@@ -82,7 +82,6 @@ export class UsuarioConfiguracionComponent implements OnInit {
   onClickDelete(): void {
     this.configuracionService.eliminarUsuarioPorId(this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
-      window.sessionStorage.removeItem('Authorization');
       this.router.navigate(['/inicio']);
     },
     (error) => {
