@@ -13,8 +13,10 @@ import { Asociacion } from '../../shared/model/asociacion.model';
 export class AsociacionConfiguracionComponent implements OnInit {
   actualizacionForm: FormGroup;
   asociacionResumen: AsociacionResumen;
-  actualizacionError= false;
-  actualizacionExitosa= false;
+  actualizacionError = false;
+  actualizacionExitosa = false;
+  eliminacionExitosa = false;
+  eliminacionError = false;
   mensajeError= '';
   mensajeActualizacion= '';
   usuarioId = 0;
@@ -50,11 +52,11 @@ export class AsociacionConfiguracionComponent implements OnInit {
   onClickDelete(): void {
     this.configuracionService.eliminarAsociacionPorId(this.asociacionResumen.id).subscribe((response) => {
       console.log('Data:', response);
-      this.actualizacionExitosa= true;
+      this.eliminacionExitosa= true;
       this.router.navigate(['/configuracion/', this.usuarioId]);
     },
     (error) => {
-      this.actualizacionError = true;
+      this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
