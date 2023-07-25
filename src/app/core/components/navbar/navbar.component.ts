@@ -43,6 +43,14 @@ export class NavbarComponent implements OnInit {
               private router: Router,
               private elementRef: ElementRef)  { }
 
+  @HostListener('document:click', ['$event'])
+  cerrarMenu(event: MouseEvent) {
+    const clickedInside = this.elementRef.nativeElement.contains(event.target);
+    if (!clickedInside) {
+      this.estaAbierto = false;
+    }
+  }
+
 
   ngOnInit(): void {
     this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
@@ -76,15 +84,6 @@ export class NavbarComponent implements OnInit {
       numeroContacto: [null, Validators.required]
     });
   }
-
-  @HostListener('document:click', ['$event'])
-  cerrarMenu(event: MouseEvent) {
-    const clickedInside = this.elementRef.nativeElement.contains(event.target);
-    if (!clickedInside) {
-      this.estaAbierto = false;
-    }
-  }
-
 
   abrirPerfil(): void {
     const navigationExtras: NavigationExtras = {

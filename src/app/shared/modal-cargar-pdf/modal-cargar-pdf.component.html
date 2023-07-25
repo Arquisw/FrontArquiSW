@@ -6,11 +6,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form >
-        <div class="form-floating mb-3">
-          <input type="file" class="form-control" id="cargar">
-        </div>
-      </form>
+        <input type="file" class="form-control" id="cargarInput" #cargarInput  accept="application/pdf">
+        <button type="submit" class="btn btn-success mt-3" (click)="uploadFile()" >Guardar</button>
       </div>
     </div>
   </div>

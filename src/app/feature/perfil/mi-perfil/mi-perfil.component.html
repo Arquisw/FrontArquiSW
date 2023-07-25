@@ -9,7 +9,10 @@
     <div class="container-fluid nav">
       <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#cargarArchivo"
         data-bs-dismiss="modal">Guardar ó Actualizar hoja de vida</button>
-      <app-modal-cargar-pdf #modalCargarPdf [titulo]="titulo"></app-modal-cargar-pdf>
+      <app-modal-cargar-pdf #modalCargarPdf 
+      [titulo]="titulo"
+      [usuario]="usuario"
+      (enviarValor)="recibirHojaDeVida($event)"></app-modal-cargar-pdf>
     </div>
     <br>
   </section>
