@@ -1,0 +1,81 @@
+<header class="header-content">
+  <section class="information">
+    <h1>Recuperar Clave</h1>
+  </section>
+</header>
+<main>
+  <Section class="retrieve-password-form" *ngIf="!codigoEnviado">
+    <h1>Iniciar proceso de recuperación de la cuenta</h1>
+    <div class="retrieve-password">
+      <form [formGroup]="iniciarRecuperacionClaveForm">
+        <div class="form-floating mb-3">
+          <input type="email" class="form-control" id="correo"
+            placeholder="correo@ejemplo.com" formControlName="correo" required>
+          <label for="floatingInput">Correo Electrónico</label>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3"
+                (click)="onClickIniciarRecuperacionClave()">Enviar Codigo</button> <br> <br>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="iniciarRecuperacionClaveError" class="alert alert-danger" role="alert">
+          {{mensajeError}}
+        </div>
+      </form>
+    </div>
+  </Section>
+  <Section class="retrieve-password-form" *ngIf="codigoEnviado && !codigoValido">
+    <h1>Validar código</h1>
+    <div class="retrieve-password">
+      <form [formGroup]="validarCodigoParaRecuperarClaveForm">
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="codigo"
+            placeholder="aaa0a0" formControlName="codigo" required>
+          <label for="floatingInput">Codigo</label>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3"
+                (click)="onClickValidarCodigoParaRecuperarClave()">Validar Codigo</button> <br> <br>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="validarCodigoParaRecuperarClaveError" class="alert alert-danger" role="alert">
+          {{mensajeError}}
+        </div>
+      </form>
+    </div>
+  </Section>
+  <Section class="retrieve-password-form" *ngIf="codigoValido">
+    <h1>Crear una nueva contraseña</h1>
+    <div class="retrieve-password">
+      <form [formGroup]="recuperarClaveForm">
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="contraseña"
+            placeholder="Contraseña" formControlName="contraseña" required>
+          <label for="floatingInput">Contraseña</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input type="password" class="form-control" id="confirmarContraseña"
+            placeholder="Confirmar Contraseña" formControlName="confirmarContraseña" required>
+          <label for="floatingInput">Confirmar Contraseña</label>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3"
+                (click)="onClickRecuperarClave()">Actualizar Contraseña</button> <br> <br>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="recuperarClaveError" class="alert alert-danger" role="alert">
+          {{mensajeError}}
+        </div>
+      </form>
+    </div>
+  </Section>
+</main>

@@ -13,6 +13,7 @@ import { MiPerfilModule } from './feature/perfil/mi-perfil.module';
 import { AsociacionModule } from './feature/asociacion/asociacion.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat'; // Ajusta esta línea
+import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.module';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AngularFireModule } from '@angular/fire/compat'; // Ajusta esta línea
     CoreModule,
     MiPerfilModule,
     AsociacionModule,
-    ConfiguracionModule
+    ConfiguracionModule,
+    RecuperarClaveModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

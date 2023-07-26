@@ -16,6 +16,7 @@ export class NavbarComponent implements OnInit {
   @Input() items: MenuItem[];
 
   configuracionMenu: MenuItem;
+  recuperarClaveMenu: MenuItem;
   principalItems: MenuItem[];
   loginModal: Modal| undefined;
   registroAsociacion: Modal| undefined;
@@ -62,9 +63,9 @@ export class NavbarComponent implements OnInit {
       this.inicioSesion = false;
     }
 
-
-    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' ));
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave'));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
+    this.recuperarClaveMenu = this.items?.find(item => item.nombre === 'Recuperar Clave');
 
     this.loginForm = new FormGroup({
       correoLogin: new FormControl(''),
@@ -118,6 +119,10 @@ export class NavbarComponent implements OnInit {
       keyboard: false
     });
     this.registroAsociacion?.show();
+  }
+
+  onRecuperarClave(): void {
+    this.loginModal?.hide();
   }
 
   onLogin(): void {
