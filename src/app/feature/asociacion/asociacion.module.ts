@@ -5,12 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MiAsociacionService } from './service/mi-asociacion.service';
 
-
-
 @NgModule({
   declarations: [
     MiAsociacionComponent,
-    
   ],
   imports: [
     CommonModule,

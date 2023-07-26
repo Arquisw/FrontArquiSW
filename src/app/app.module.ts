@@ -11,7 +11,9 @@ import { PresentacionComponent } from './feature/presentacion/presentacion.compo
 import { ConfiguracionModule } from './feature/configuracion/configuracion.module';
 import { MiPerfilModule } from './feature/perfil/mi-perfil.module';
 import { AsociacionModule } from './feature/asociacion/asociacion.module';
-
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire/compat'; // Ajusta esta línea
+import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.module';
 
 @NgModule({
   declarations: [
@@ -20,15 +22,16 @@ import { AsociacionModule } from './feature/asociacion/asociacion.module';
     FundamentacionComponent,
     AcercanosotrosComponent,
     PresentacionComponent,
-
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase), // Ajusta esta línea
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     MiPerfilModule,
     AsociacionModule,
-    ConfiguracionModule
+    ConfiguracionModule,
+    RecuperarClaveModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

@@ -5,7 +5,7 @@
     <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button> 
+    </button>
     <div class="d-flex justify-content-center collapse navbar-collapse" >
       <ul class="nav ms-auto mb-2 mb-lg-0" id="navbarSupportedContent">
         <li class="nav-item" *ngFor="let item of principalItems">
@@ -68,7 +68,7 @@
         <p>
           ¿No tienes una cuenta? <a href="#" data-bs-toggle="modal" data-bs-target="#signin"
             data-bs-dismiss="modal">Regístrate gratis</a> <br>
-          <a href="#">¿Olvidaste tu contraseña?</a>
+          <a [routerLink]="recuperarClaveMenu.url" (click)="onRecuperarClave()">¿Olvidaste tu contraseña?</a>
         </p>
       </form>
       </div>

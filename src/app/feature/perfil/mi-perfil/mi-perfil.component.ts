@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { MiPerfilService } from '../service/mi-perfil.service';
 
 @Component({
@@ -13,6 +12,7 @@ export class MiPerfilComponent implements OnInit {
   usuario;
   mensajeError= '';
   titulo = 'Guardar ó Actualizar Hoja de vida';
+  urlArchivo;
 
   constructor(private miPerfilSevice: MiPerfilService) { }
 
@@ -24,6 +24,7 @@ export class MiPerfilComponent implements OnInit {
     if(params.id !== null) {
       this.consultaUsuario();
     }
+    console.log(this.usuarioId);
   }
 
   consultaUsuario(): void {
@@ -33,6 +34,22 @@ export class MiPerfilComponent implements OnInit {
     (error) => {
       this.mensajeError=error.message;
     });
+  }
+
+  recibirHojaDeVida(valor: any): void {
+    this.urlArchivo = valor;
+    this.guardarHojaDeVida();
+  }
+
+  guardarHojaDeVida(): void {
+    const hojaDeVida = {
+      ruta: this.urlArchivo
+    };
+
+    this.miPerfilSevice.guardarHojaDeVida(this.usuario.id,hojaDeVida ).subscribe(() => {},
+      (error) => {
+        this.mensajeError =error?.error?.mensaje;
+      });
   }
 
 }

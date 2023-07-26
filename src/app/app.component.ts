@@ -13,11 +13,10 @@ export class AppComponent {
     { url: '/inicio', nombre: 'Inicio' },
     { url: '/fundamentacion', nombre: 'Fundamentacion' },
     { url: '/presentacion', nombre: 'Presentacion' },
-    { url: '/acercaNosotros', nombre: 'Acerca de Nosotros' },
+    { url: '/acerca-de-nosotros', nombre: 'Acerca de Nosotros' },
     { url: '/asociacion', nombre: 'Mi asociación' },
     { url: '/perfil', nombre: 'Mi Perfil' },
     { url: '/configuracion', nombre: 'Configuración' },
+    { url: '/recuperar-clave', nombre: 'Recuperar Clave' },
   ];
-
-
 }
