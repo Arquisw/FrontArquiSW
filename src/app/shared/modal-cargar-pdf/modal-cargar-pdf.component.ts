@@ -15,10 +15,19 @@ export class ModalCargarPdfComponent {
   @Input() usuario;
   @Output() enviarValor  = new EventEmitter();
   @ViewChild('cargarInput') cargarInput: ElementRef;
+  selectedFileName: string = 'Seleccionar archivo';
   urlArchivo;
 
 
   constructor(private storage: AngularFireStorage) { }
+
+
+
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+    this.selectedFileName = file ? file.name : 'Seleccionar archivo';
+  }
 
 
   uploadFile() {
@@ -34,28 +43,15 @@ export class ModalCargarPdfComponent {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.urlArchivo = url;
-            this.enviarHojaDeVida();
-            this.closeModal();       
+            this.enviarURL();    
           });
         })
       ).subscribe();
     }
   }
 
-  enviarHojaDeVida() {
+  enviarURL() {
     this.enviarValor.emit(this.urlArchivo); 
-  }
-
-  closeModal() {
-    const modalElement = document.getElementById('cargarArchivo');
-    if (modalElement) {
-      modalElement.classList.remove('show');
-    }
-
-    const modalBackdrop = document.querySelector('.modal-backdrop');
-    if (modalBackdrop) {
-      modalBackdrop.remove();
-    }
   }
 }
 

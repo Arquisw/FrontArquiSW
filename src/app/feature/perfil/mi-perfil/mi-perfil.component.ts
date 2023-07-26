@@ -24,7 +24,6 @@ export class MiPerfilComponent implements OnInit {
     if(params.id !== null) {
       this.consultaUsuario();
     }
-    console.log(this.usuarioId);
   }
 
   consultaUsuario(): void {
@@ -46,7 +45,7 @@ export class MiPerfilComponent implements OnInit {
       ruta: this.urlArchivo
     };
 
-    this.miPerfilSevice.guardarHojaDeVida(this.usuario.id,hojaDeVida ).subscribe(() => {},
+    this.miPerfilSevice.guardarHojaDeVida(this.usuario.id,hojaDeVida ).subscribe(() => {console.log('funciono')},
       (error) => {
         this.mensajeError =error?.error?.mensaje;
       });
