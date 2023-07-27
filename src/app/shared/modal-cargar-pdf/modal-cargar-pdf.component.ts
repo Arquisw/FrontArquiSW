@@ -15,23 +15,21 @@ export class ModalCargarPdfComponent {
   @ViewChild('cargarInput') cargarInput: ElementRef;
   selectedFileName = 'Seleccionar archivo';
   urlArchivo;
+  archivo: File;
   
   constructor(private storage: AngularFireStorage) { }
 
   onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    this.selectedFileName = file ? file.name : 'Seleccionar archivo';
+    this.archivo = event.target.files[0];
+    this.selectedFileName = this.archivo ?  this.archivo.name : 'Seleccionar archivo';
   }
 
 
   uploadFile() {
-    const inputElement: HTMLInputElement = this.cargarInput.nativeElement;
-    const file: File = inputElement.files[0];
-
-    if (file) {
-      const filePath = 'ruta/hojaDeVida/${this.usuario.apellidos}${this.usuario.nombre}/${file.name}';
+    if (this.archivo) {
+      const filePath = 'ruta/hojaDeVida/'+this.usuario.apellidos+this.usuario.nombre+'/'+this.archivo.name;
       const fileRef = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, file);
+      const task = this.storage.upload(filePath, this.archivo);
 
       task.snapshotChanges().pipe(
         finalize(() => {

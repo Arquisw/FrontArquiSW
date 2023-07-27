@@ -57,15 +57,18 @@ table {
   background-color:var(--uco-green);
   color: white; 
   border: 1px solid white;
+ 
 }
 
-/* Estilos para las celdas del encabezado (thead) */
+.tabla {
+  padding: 10px;
+}
+
 th {
   padding: 10px;
   text-align: center;
 }
 
-/* Estilos para las celdas del cuerpo (tbody) */
 td {
   padding: 10px;
   text-align: center;
@@ -73,7 +76,6 @@ td {
 }
 
 
-/* Estilos para los botones dentro de las celdas */
 .ver {
   background-color: var(--background-color);
   border: 1px solid white;
@@ -82,7 +84,7 @@ td {
   cursor: pointer;
 }
 
-/* Estilos para los botones al pasar el mouse por encima */
+
 button:hover {
   background-color: white;
   color: green;

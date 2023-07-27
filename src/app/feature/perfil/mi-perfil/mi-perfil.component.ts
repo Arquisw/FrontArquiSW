@@ -48,6 +48,7 @@ export class MiPerfilComponent implements OnInit {
   recibirUrlHojaDeVida(valor: any): void {
     this.urlArchivo = valor;
     this.guardarHojaDeVida();
+    this.ObtenerListaArchivos();
   }
 
   guardarHojaDeVida(): void {
