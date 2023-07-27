@@ -19,4 +19,9 @@ export class MiPerfilService {
   consultarHojaDeVida(id: number) {
     return this.http.doGet(environment.endpoint +'/usuarios/hojadevida/'+ id);
   }
+
+  
+  actualizarHojaDeVida(id: number, hojaDeVida) {
+    return this.http.doPut(environment.endpoint +'/usuarios/hojadevida/'+ id, hojaDeVida);
+  }
 }

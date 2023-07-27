@@ -47,7 +47,10 @@ export class MiPerfilComponent implements OnInit {
 
   recibirUrlHojaDeVida(valor: any): void {
     this.urlArchivo = valor;
-    this.guardarHojaDeVida();
+    if(this.files.length === 0) {
+      this.guardarHojaDeVida();
+    }
+   this.actualizarHojaDeVida();
     this.ObtenerListaArchivos();
   }
 
@@ -72,6 +75,16 @@ export class MiPerfilComponent implements OnInit {
     });
   }
 
+  actualizarHojaDeVida(): void {
+    const hojaDeVida = {
+      ruta: this.urlArchivo
+    };
+    this.miPerfilSevice.actualizarHojaDeVida(this.usuarioId,hojaDeVida ).subscribe(() => {},
+      (error) => {
+        this.mensajeError =error?.error?.mensaje;
+      });
+  }
+
   ObtenerListaArchivos() {
     this.storageService.listaDeArchivos(this.usuario).subscribe((files) => {
       this.files = files;
@@ -83,7 +96,6 @@ export class MiPerfilComponent implements OnInit {
   }
 
   downloadFile(): void {
-    console.log(this.urlDescarga);
     this.storageService.obtenerArchivoUrl(this.urlDescarga).subscribe((file) => {
       this.DetalleDocumento = file;
       const link = document.createElement('a');

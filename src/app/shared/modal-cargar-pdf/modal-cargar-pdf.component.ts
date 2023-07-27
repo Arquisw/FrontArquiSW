@@ -27,7 +27,7 @@ export class ModalCargarPdfComponent {
 
   uploadFile() {
     if (this.archivo) {
-      const filePath = 'ruta/hojaDeVida/'+this.usuario.apellidos+this.usuario.nombre+'/'+this.archivo.name;
+      const filePath = 'hojaDeVida/'+ this.usuario.apellidos + this.usuario.nombre + '/' +'Hoja de vida ' + this.usuario.nombre + '.pdf';
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.archivo);
 
