@@ -17,7 +17,8 @@ export class MiPerfilComponent implements OnInit {
   hojaDeVida;
   urlDescarga;
   miPerfil = true;
-  files: any[] = [];
+  seCargoHojaDevida= false;
+  files = [];
   DetalleDocumento;
 
   constructor(private miPerfilSevice: MiPerfilService,
@@ -32,7 +33,6 @@ export class MiPerfilComponent implements OnInit {
       this.consultaUsuario();
     }
     this.ObtenerListaArchivos();
-    this.consultaHojaDeVida();
   }
 
   consultaUsuario(): void {
@@ -64,6 +64,7 @@ export class MiPerfilComponent implements OnInit {
     this.miPerfilSevice.consultarHojaDeVida(this.usuarioId).subscribe((response) => {
       this.hojaDeVida = response; 
       this.urlDescarga = this.hojaDeVida.ruta;
+      this.seCargoHojaDevida = true;
     },
     (error) => {
       this.mensajeError=error.message;
@@ -73,6 +74,10 @@ export class MiPerfilComponent implements OnInit {
   ObtenerListaArchivos() {
     this.storageService.listaDeArchivos(this.usuario).subscribe((files) => {
       this.files = files;
+      if(files.length > 0) {
+        this.seCargoHojaDevida = true;
+        this.consultaHojaDeVida();
+      }
     });
   }
 
