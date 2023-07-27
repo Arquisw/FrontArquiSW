@@ -4,6 +4,7 @@ import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
 import { MiPerfilService } from './service/mi-perfil.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '@shared/shared.module';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     CommonModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    PdfViewerModule
   ],
   exports:[MiPerfilComponent],
   providers: [MiPerfilService, DatePipe]

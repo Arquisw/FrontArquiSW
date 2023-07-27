@@ -1,43 +1,71 @@
 
-.modal-body{
+.modal-body {
     font-size: 1.4rem;
     background-color: var(--background-color);
-    color: var(--just-white);
-
-    justify-content: center; /* Centramos horizontalmente */
+    color: var(--just-white); 
+    justify-content: center;
     align-items: center
     
   }
-  
-  .modal-header {
+
+  .modal-header, .modal-footer , .modal-body  {
     background-color: var(--background-color);
-    display: flex; /* Utilizamos flexbox */
-    justify-content: center; /* Centramos horizontalmente */
+    display: flex; 
+    justify-content: center; 
     align-items: center;
+    
+  }
+
+  .btn  {
+    height: 30px;
+    width: 100px;
+  }
+
+  .input {
+    background-color: var(--background-color);
   }
   
   .modal-title {
     font-size: 1.8rem;
     color: var(--just-white);
-    align-items: center;
   }
   
   .modal-body select, label
   {
     font-size: 1.4rem;
-  }
-  
-  .form-control
-  {
-    padding-top: 5px;
-    padding-bottom: 5px;
+    align-items: center;
   }
   
   .modal-content p
   {
-    text-align:center;
+    text-align: center;
     font-size: 1.4rem;
   }
+
+  .custom-file {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .custom-file-label {
+    background-color:var(--uco-green);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Esconder el input original */
+  input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+ 
   
   
   

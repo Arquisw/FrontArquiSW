@@ -9,8 +9,7 @@ describe('RecuperarClaveComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RecuperarClaveComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RecuperarClaveComponent);
     component = fixture.componentInstance;
