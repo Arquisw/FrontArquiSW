@@ -3,8 +3,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 
 
-
-
 @Component({
   selector: 'app-modal-cargar-pdf',
   templateUrl: './modal-cargar-pdf.component.html',
@@ -15,14 +13,10 @@ export class ModalCargarPdfComponent {
   @Input() usuario;
   @Output() enviarValor  = new EventEmitter();
   @ViewChild('cargarInput') cargarInput: ElementRef;
-  selectedFileName: string = 'Seleccionar archivo';
+  selectedFileName = 'Seleccionar archivo';
   urlArchivo;
-
-
+  
   constructor(private storage: AngularFireStorage) { }
-
-
-
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -35,7 +29,7 @@ export class ModalCargarPdfComponent {
     const file: File = inputElement.files[0];
 
     if (file) {
-      const filePath = 'ruta/hojaDeVida/'+ this.usuario.apellidos + this.usuario.nombre +'/' + file.name;
+      const filePath = 'ruta/hojaDeVida/${this.usuario.apellidos}${this.usuario.nombre}/${file.name}';
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, file);
 

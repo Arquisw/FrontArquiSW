@@ -6,16 +6,32 @@
 </header>
 <main>
   <section class="nav-container">
-    <div class="container-fluid nav">
+    <div class="container-fluid nav" *ngIf="miPerfil">
       <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#cargarArchivo"
         data-bs-dismiss="modal">Guardar ó Actualizar hoja de vida</button>
       <app-modal-cargar-pdf #modalCargarPdf 
       [titulo]="titulo"
       [usuario]="usuario"
-      (enviarValor)="recibirHojaDeVida($event)"></app-modal-cargar-pdf>
+      (enviarValor)="recibirUrlHojaDeVida($event)"></app-modal-cargar-pdf>
     </div>
     <br>
   </section>
+  <table>
+    <thead>
+      <tr>
+        <th>Hoja de Vida</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of files">
+        <td>{{file.nombre}}</td>
+        <td>
+          <button class="ver" (click)="downloadFile()">Ver documento</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </main>
 
   

@@ -24,7 +24,7 @@ import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.
     PresentacionComponent,
   ],
   imports: [
-    AngularFireModule.initializeApp(environment.firebase), // Ajusta esta línea
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserModule,
     AppRoutingModule,
     CoreModule,

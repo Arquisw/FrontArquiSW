@@ -15,4 +15,8 @@ export class MiPerfilService {
   guardarHojaDeVida(id: number, hojaDeVida) {
     return this.http.doPost(environment.endpoint +'/usuarios/hojadevida/'+ id, hojaDeVida);
   }
+
+  consultarHojaDeVida(id: number) {
+    return this.http.doGet(environment.endpoint +'/usuarios/hojadevida/'+ id);
+  }
 }

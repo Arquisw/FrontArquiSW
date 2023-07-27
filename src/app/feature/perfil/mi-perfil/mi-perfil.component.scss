@@ -51,6 +51,42 @@ h2 {
     font-size: 1.2rem;
   }
 }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color:var(--uco-green);
+  color: white; 
+  border: 1px solid white;
+}
+
+/* Estilos para las celdas del encabezado (thead) */
+th {
+  padding: 10px;
+  text-align: center;
+}
+
+/* Estilos para las celdas del cuerpo (tbody) */
+td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid white;
+}
+
+
+/* Estilos para los botones dentro de las celdas */
+.ver {
+  background-color: var(--background-color);
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Estilos para los botones al pasar el mouse por encima */
+button:hover {
+  background-color: white;
+  color: green;
+}
 
 /* Media query para tabletas */
 @media (min-width: 577px) and (max-width: 1024px) {
