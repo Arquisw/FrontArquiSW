@@ -50,7 +50,7 @@ export class MiPerfilComponent implements OnInit {
     if(this.files.length === 0) {
       this.guardarHojaDeVida();
     }
-   this.actualizarHojaDeVida();
+    this.actualizarHojaDeVida();
     this.ObtenerListaArchivos();
   }
 
@@ -66,7 +66,7 @@ export class MiPerfilComponent implements OnInit {
 
   consultaHojaDeVida(): void {
     this.miPerfilSevice.consultarHojaDeVida(this.usuarioId).subscribe((response) => {
-      this.hojaDeVida = response; 
+      this.hojaDeVida = response;
       this.urlDescarga = this.hojaDeVida.ruta;
       this.seCargoHojaDevida = true;
     },
