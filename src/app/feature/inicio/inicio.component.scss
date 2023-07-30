@@ -80,3 +80,9 @@
   font-size: 1.8rem;
   color: var(--just-white);
 }
+
+@media(max-width: 767px) {
+  .custom-card {
+    margin-bottom: 8px;
+  }
+}
