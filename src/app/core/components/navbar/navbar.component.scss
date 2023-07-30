@@ -3,6 +3,28 @@
   font-weight: var(--medium);
 }
 
+nav {
+  background-color: var(--background-color);
+}
+
+img
+{
+  display: block;
+  margin: 0px auto;
+  width: 45px;
+  height: 45px;
+}
+
+ul {
+  display: flex;
+  align-items: center;
+}
+
+li
+{
+  margin-right: 10px;
+}
+
 .nav-link, .nav-item button, .modal-title
 {
   font-size: 1.6rem;
@@ -14,19 +36,6 @@
 
 .navbar .nav-link.active {
   color: var(--uco-green);
-}
-
-img
-{
-  display: block;
-  margin: 0px auto;
-  width: 45px;
-  height: 45px;
-}
-
-li
-{
-  margin-right: 15px;
 }
 
 .modal-title
@@ -80,7 +89,6 @@ li
   position: relative;
   display: inline-block;
 }
-
 
 .opciones {
   position: absolute;
@@ -153,15 +161,18 @@ label {
   color: var(--black);
 }
 
-/* Estilos para centrar las acciones del menú desplegable en dispositivos móviles */
-@media (max-width: 767px) {
-  .navbar-nav .dropdown-menu {
-    text-align: center;
+@media(max-width: 991px) {
+  .sidebar {
+    background-color: var(--background-sidebar-color);
+    backdrop-filter: blur(10px);
   }
 
-  .navbar-nav .dropdown-menu .dropdown-item {
-    display: block;
-    width: 100%;
-    text-align: center;
+  ul {
+    display: flex;
+    align-items: end;
+  }
+
+  ul li .btn {
+    margin-right: 8px;
   }
 }

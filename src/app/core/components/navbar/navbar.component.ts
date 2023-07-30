@@ -37,6 +37,7 @@ export class NavbarComponent implements OnInit {
   loginForm: FormGroup;
   registroForm: FormGroup;
   registroAsociacionForm: FormGroup;
+  wdw = window;
 
   constructor(private formBuilder: FormBuilder,
               private servicioGestionusuario: GestionUsuarioService,
@@ -52,7 +53,6 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
     this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
 
@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
       const token = window.sessionStorage.getItem('Authorization');
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
       this.id = tokenPayload.id;
-      this.inicioSesion = false;
+      this.consultarusuario();
     }
 
     this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave'));
@@ -71,6 +71,7 @@ export class NavbarComponent implements OnInit {
       correoLogin: new FormControl(''),
       claveLogin: new FormControl('')
     });
+
     this.registroForm = new FormGroup({
       nombreRegistro: new FormControl(''),
       apellidosRegistro: new FormControl(''),
@@ -93,6 +94,7 @@ export class NavbarComponent implements OnInit {
         usuario: this.usuario,
       }
     };
+
     this.estaAbierto = false;
     this.router.navigate(['/perfil'], navigationExtras);
   }
@@ -103,6 +105,7 @@ export class NavbarComponent implements OnInit {
         id: this.id,
       }
     };
+
     this.estaAbierto = false;
     this.router.navigate(['/asociacion'], navigationExtras);
   }
@@ -111,6 +114,7 @@ export class NavbarComponent implements OnInit {
     this.loginModal = new Modal(document.getElementById('loginModal') ?? false, {
       keyboard: false
     });
+
     this.loginModal?.show();
   }
 
@@ -118,6 +122,7 @@ export class NavbarComponent implements OnInit {
     this.registroAsociacion = new Modal(document.getElementById('registroAsociacion') ?? false, {
       keyboard: false
     });
+
     this.registroAsociacion?.show();
   }
 
