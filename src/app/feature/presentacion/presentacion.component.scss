@@ -168,3 +168,9 @@ tr .table-content
 {
   font-size: 1.4rem;
 }
+
+@media(max-width: 767px) {
+  .custom-card {
+    margin-bottom: 8px;
+  }
+}
