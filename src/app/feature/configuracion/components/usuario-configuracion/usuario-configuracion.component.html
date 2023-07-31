@@ -1,76 +1,88 @@
 <section class="update-form">
   <h1>Mi Cuenta</h1>
-  <div class="container">
-    <div class="row w-100 align-items-center">
-      <div class="col-md-6 update-person card card-container h-100">
-        <form [formGroup]="actualizacionForm" class="card-body">
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="nombre"
-              placeholder="nombre" formControlName="nombreActualizacion" required [value]="personaResumen?.nombre">
-            <label for="floatingInput">Nombres</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="apellidos"
-              placeholder="apellidos" formControlName="apellidosActualizacion" required [value]="personaResumen?.apellidos">
-            <label for="floatingInput">Apellidos</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="correo"
-              placeholder="correo@ejemplo.com" formControlName="correoActualizacion" required [value]="personaResumen?.correo">
-            <label for="floatingInput">Correo Electrónico</label>
-          </div>
-          <div class="container-fluid h-100">
-            <div class="row w-100 align-items-center">
-              <div class="col text-center">
-                <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdate()">Actualizar</button>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="update-person card card-container">
+          <form [formGroup]="actualizacionForm" class="card-body">
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="nombre"
+                placeholder="nombre" formControlName="nombreActualizacion" required [value]="personaResumen?.nombre">
+              <label for="floatingInput">Nombres</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="apellidos"
+                placeholder="apellidos" formControlName="apellidosActualizacion" required [value]="personaResumen?.apellidos">
+              <label for="floatingInput">Apellidos</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control" id="correo"
+                placeholder="correo@ejemplo.com" formControlName="correoActualizacion" required [value]="personaResumen?.correo">
+              <label for="floatingInput">Correo Electrónico</label>
+            </div>
+            <div class="container-fluid h-100">
+              <div class="row w-100 align-items-center">
+                <div class="col text-center">
+                  <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdate()">Actualizar</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
-            {{mensajeError}}
-          </div>
-        </form>
+            <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
+              {{mensajeError}}
+            </div>
+          </form>
+        </div>
       </div>
-      <div class="col-md-6 update-password card card-container h-100">
-        <form [formGroup]="actualizacionClaveForm" class="card-body">
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="claveAntigua" placeholder="Contraseña Anterior"
-               formControlName="claveAntiguaActualizacion" required>
-            <label for="floatingInput">Contraseña Anterior</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control" id="claveNueva" placeholder="Contraseña Nueva"
-               formControlName="claveNuevaActualizacion" required>
-               <label for="floatingPassword">Contraseña Nueva</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control"
-              id="confirmarClave" placeholder="confirmar contraseña" formControlName="confirmarClaveActualizacion" required>
-            <label for="floatingPassword">Confirmar Contraseña</label>
-          </div>
-          <div class="container-fluid h-100">
-            <div class="row w-100 align-items-center">
-              <div class="col text-center">
-                <button type="submit" class="btn btn-success mt-3 btn-register" (click)="onClickUpdatePassword()">Actualizar Contraseña</button>
+      <div class="col-md-6">
+        <div class="update-password card card-container">
+          <form [formGroup]="actualizacionClaveForm" class="card-body">
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="claveAntigua" placeholder="Contraseña Anterior"
+                 formControlName="claveAntiguaActualizacion" required>
+              <label for="floatingInput">Contraseña Anterior</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control" id="claveNueva" placeholder="Contraseña Nueva"
+                 formControlName="claveNuevaActualizacion" required>
+                 <label for="floatingPassword">Contraseña Nueva</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="password" class="form-control"
+                id="confirmarClave" placeholder="confirmar contraseña" formControlName="confirmarClaveActualizacion" required>
+              <label for="floatingPassword">Confirmar Contraseña</label>
+            </div>
+            <div class="container-fluid h-100">
+              <div class="row w-100 align-items-center">
+                <div class="col text-center">
+                  <button type="submit" class="btn btn-success mt-3 btn-register" (click)="onClickUpdatePassword()">Actualizar Contraseña</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div *ngIf="actualizacionClaveError" class="alert alert-danger" role="alert">
-            {{mensajeError}}
-          </div>
-        </form>
+            <div *ngIf="actualizacionClaveError" class="alert alert-danger" role="alert">
+              {{mensajeError}}
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-  <div class="delete-account container-fluid h-100">
-    <h3>¿Deseas eliminar la cuenta?</h3>
-    <div class="row w-100 align-items-center">
-      <div class="col text-center">
-        <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">Eliminar</button> <br> <br>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="delete-account container-fluid card card-container">
+          <div class="card-body">
+            <h3 class="card-title">¿Deseas eliminar la cuenta?</h3>
+            <div class="row w-100 align-items-center">
+              <div class="col text-center">
+                <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">Eliminar</button> <br> <br>
+              </div>
+            </div>
+            <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">
+              {{mensajeError}}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">
-      {{mensajeError}}
     </div>
   </div>
 </section>
