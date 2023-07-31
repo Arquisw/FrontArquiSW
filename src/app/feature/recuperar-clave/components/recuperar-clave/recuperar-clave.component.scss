@@ -23,6 +23,26 @@
   font-size: 5rem;
 }
 
+.card-container {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card
+{
+  transition: all 0.2s ease;
+  background-color: var(--background-color);
+  border-color: var(--just-white);
+}
+
+.card-body
+{
+  vertical-align: middle;
+  color: var(--just-white);
+}
+
 .retrieve-password-form {
   padding: 15px;
   display: flex;
@@ -31,7 +51,7 @@
 
 .retrieve-password-form h1 {
   color: var(--just-white);
-  font-size: 3rem;
+  font-size: 2.2rem;
   border-bottom: 1px solid var(--grey);
 }
 
@@ -42,10 +62,6 @@
 .btn
 {
   font-size: 1.6rem;
-}
-
-.retrieve-password {
-  border-bottom: 1px solid var(--grey);
 }
 
 .retrieve-password{

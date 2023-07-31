@@ -4,9 +4,9 @@
   </section>
 </header>
 <main>
-  <Section class="retrieve-password-form" *ngIf="!codigoEnviado">
+  <Section class="retrieve-password-form card card-container" *ngIf="!codigoEnviado">
     <h1>Iniciar proceso de recuperación de la cuenta</h1>
-    <div class="retrieve-password">
+    <div class="retrieve-password card-body">
       <form [formGroup]="iniciarRecuperacionClaveForm">
         <div class="form-floating mb-3">
           <input type="email" class="form-control" id="correo"
@@ -27,10 +27,13 @@
       </form>
     </div>
   </Section>
-  <Section class="retrieve-password-form" *ngIf="codigoEnviado && !codigoValido">
+  <Section class="retrieve-password-form card card-container" *ngIf="codigoEnviado && !codigoValido">
     <h1>Validar código</h1>
-    <div class="retrieve-password">
+    <div class="retrieve-password card-body">
       <form [formGroup]="validarCodigoParaRecuperarClaveForm">
+        <div class="alert alert-success" role="alert">
+          {{mensajeCodigoEnviado}}
+        </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="codigo"
             placeholder="aaa0a0" formControlName="codigo" required>
@@ -50,10 +53,13 @@
       </form>
     </div>
   </Section>
-  <Section class="retrieve-password-form" *ngIf="codigoValido">
+  <Section class="retrieve-password-form card card-container" *ngIf="codigoValido">
     <h1>Crear una nueva contraseña</h1>
-    <div class="retrieve-password">
+    <div class="retrieve-password card-body">
       <form [formGroup]="recuperarClaveForm">
+        <div class="alert alert-success" role="alert">
+          {{mensajeCodigoValido}}
+        </div>
         <div class="form-floating mb-3">
           <input type="password" class="form-control" id="contraseña"
             placeholder="Contraseña" formControlName="contraseña" required>

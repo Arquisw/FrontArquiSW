@@ -19,6 +19,8 @@ export class RecuperarClaveComponent  implements OnInit {
   recuperarClaveError = false;
   codigoEnviado = false;
   codigoValido = false;
+  mensajeCodigoEnviado = '';
+  mensajeCodigoValido = '';
   correo = '';
   mensajeError= '';
 
@@ -47,6 +49,7 @@ export class RecuperarClaveComponent  implements OnInit {
     this.recuperarClaveService.iniciarRecuperacionDeLaClave(this.correo).subscribe((response) => {
       console.log('Data:', response);
       this.codigoEnviado = true;
+      this.mensajeCodigoEnviado = 'Se ha enviado un codigo al correo: ' + this.correo;
     },
     (error) => {
       this.iniciarRecuperacionClaveError = true;
@@ -61,6 +64,7 @@ export class RecuperarClaveComponent  implements OnInit {
     this.recuperarClaveService.validarCodigoParaRecuperarClave(codigo, this.correo).subscribe((response) => {
       console.log('Data:', response);
       this.codigoValido = response.valor;
+      this.mensajeCodigoValido = '¡Codigo valido! Ahora asigna una nueva contraseña.';
     },
     (error) => {
       this.validarCodigoParaRecuperarClaveError = true;
