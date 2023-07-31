@@ -8,8 +8,8 @@
   <section class="nav-container">
     <div class="container-fluid nav" *ngIf="miPerfil">
       <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#cargarArchivo"
-        data-bs-dismiss="modal">Guardar ó Actualizar hoja de vida</button>
-      <app-modal-cargar-pdf #modalCargarPdf 
+        data-bs-dismiss="modal">Guardar ó Actualizar Hoja de Vida</button>
+      <app-modal-cargar-pdf #modalCargarPdf
       [titulo]="titulo"
       [usuario]="usuario"
       (enviarValor)="recibirUrlHojaDeVida($event)"></app-modal-cargar-pdf>
@@ -28,7 +28,7 @@
       <tr *ngFor="let file of files">
         <td>{{file.nombre}}</td>
         <td>
-          <button class="ver" (click)="downloadFile()">Ver documento</button>
+          <button class="btn btn-success" (click)="downloadFile()">Ver Documento</button>
         </td>
       </tr>
     </tbody>
@@ -36,7 +36,7 @@
 </div>
 </main>
 
-  
+
 
 
 

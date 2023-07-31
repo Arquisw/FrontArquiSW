@@ -1,56 +1,57 @@
 <section class="update-form">
   <h1>Mi Empresa o Asociación</h1>
-  <div class="update-person">
-    <form [formGroup]="actualizacionForm">
-      <div class="row mb-3">
-        <div class="col-md-4">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="nombre"
-              placeholder="nombre" formControlName="nombreActualizacion" required required [value]="asociacionResumen?.nombre">
-            <label for="floatingInput">Nombre</label>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="update-asociation card card-container">
+          <form [formGroup]="actualizacionForm" class="card-body">
+            <div class="form-floating">
+              <input type="text" class="form-control" id="nombre"
+                placeholder="nombre" formControlName="nombreActualizacion" required required [value]="asociacionResumen?.nombre">
+              <label for="floatingInput">Nombre</label>
+            </div>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="nit"
+                placeholder="NIT" formControlName="nitActualizacion" required [value]="asociacionResumen?.nit">
+              <label for="floatingInput">NIT</label>
+            </div>
+            <div class="form-floating">
+              <input type="text" class="form-control" id="numeroContacto"
+                placeholder="apellidos" formControlName="numeroContactoActualizacion" required [value]="asociacionResumen?.numeroContacto">
+              <label for="floatingInput">Número de Contacto</label>
+            </div>
+            <div class="container-fluid h-100">
+              <div class="row w-100 align-items-center">
+                <div class="col text-center">
+                  <button type="submit" class="btn btn-success mt-3 btn-register"
+                    (click)="onClickUpdate()">Actualizar</button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
+              {{mensajeError}}
+            </div>
+            <div *ngIf="actualizacionExitosa" class="alert alert-success" role="alert">
+              {{mensajeActualizacion}}
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="delete-account container-fluid card card-container">
+          <div class="card-body">
+            <h3 class="card-title">¿Deseas eliminar la empresa o asociación?</h3>
+            <div class="row w-100 align-items-center">
+              <div class="col text-center">
+                <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">Eliminar</button>
+              </div>
+            </div>
+            <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">
+              {{mensajeError}}
+            </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="nit"
-              placeholder="NIT" formControlName="nitActualizacion" required [value]="asociacionResumen?.nit">
-            <label for="floatingInput">NIT</label>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="form-floating">
-            <input type="text" class="form-control" id="numeroContacto"
-              placeholder="apellidos" formControlName="numeroContactoActualizacion" required [value]="asociacionResumen?.numeroContacto">
-            <label for="floatingInput">Número de Contacto</label>
-          </div>
-        </div>
       </div>
-      <div class="container-fluid h-100">
-        <div class="row w-100 align-items-center">
-          <div class="col text-center">
-            <button type="submit" class="btn btn-success mt-3 btn-register"
-              (click)="onClickUpdate()">Actualizar</button> <br> <br>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
-        {{mensajeError}}
-      </div>
-      <div *ngIf="actualizacionExitosa" class="alert alert-success" role="alert">
-        {{mensajeActualizacion}}
-      </div>
-    </form>
-  </div>
-  <div class="delete-account container-fluid h-100">
-    <h3>¿Deseas eliminar la empresa o asociación?</h3>
-    <div class="row w-100 align-items-center">
-      <div class="col text-center">
-        <button type="submit" class="btn btn-success mt-3 btn-register"
-          (click)="onClickDelete()">Eliminar</button> <br> <br>
-      </div>
-    </div>
-    <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">
-      {{mensajeError}}
     </div>
   </div>
 </section>

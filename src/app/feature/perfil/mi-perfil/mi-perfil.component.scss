@@ -51,13 +51,14 @@ h2 {
     font-size: 1.2rem;
   }
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
-  background-color:var(--uco-green);
-  color: white; 
-  border: 1px solid white;
- 
+  background-color:var(--background-color);
+  color: var(--just-white);
+  border: 1px solid var(--just-white);
+
 }
 
 .tabla {
@@ -72,22 +73,22 @@ th {
 td {
   padding: 10px;
   text-align: center;
-  border: 1px solid white;
+  border: 1px solid var(--just-white);
 }
 
 
 .ver {
   background-color: var(--background-color);
-  border: 1px solid white;
-  color: white;
+  border: 1px solid var(--just-white);
+  color: var(--just-white);
   padding: 5px 10px;
   cursor: pointer;
 }
 
 
 button:hover {
-  background-color: white;
-  color: green;
+  background-color: var(--just-white);
+  color: var(--uco-green);
 }
 
 /* Media query para tabletas */
