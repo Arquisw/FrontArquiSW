@@ -14,6 +14,7 @@ export class AppComponent {
     { url: '/fundamentacion', nombre: 'Fundamentacion' },
     { url: '/presentacion', nombre: 'Presentacion' },
     { url: '/acerca-de-nosotros', nombre: 'Acerca de Nosotros' },
+    { url: '/proyectos', nombre: 'Proyectos' },
     { url: '/asociacion', nombre: 'Mi asociación' },
     { url: '/perfil', nombre: 'Mi Perfil' },
     { url: '/configuracion', nombre: 'Configuración' },
