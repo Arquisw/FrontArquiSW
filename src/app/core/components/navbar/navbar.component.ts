@@ -18,6 +18,8 @@ export class NavbarComponent implements OnInit {
   configuracionMenu: MenuItem;
   recuperarClaveMenu: MenuItem;
   principalItems: MenuItem[];
+  standarItems: MenuItem[];
+  itemsPreLogin: MenuItem[];
   loginModal: Modal| undefined;
   registroAsociacion: Modal| undefined;
   loginError = false;
@@ -54,18 +56,20 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave'));
+    this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
+    this.recuperarClaveMenu = this.items?.find(item => item.nombre === 'Recuperar Clave');
     this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
 
     if(this.inicioSesion) {
+      this.standarItems = this.principalItems;
       const token = window.sessionStorage.getItem('Authorization');
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
       this.id = tokenPayload.id;
       this.consultarusuario();
+    } else {
+      this.standarItems = this.principalItems.filter((item) => item.nombre !== 'Proyectos');
     }
-
-    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave'));
-    this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
-    this.recuperarClaveMenu = this.items?.find(item => item.nombre === 'Recuperar Clave');
 
     this.loginForm = new FormGroup({
       correoLogin: new FormControl(''),
@@ -139,6 +143,7 @@ export class NavbarComponent implements OnInit {
       this.id = this.usuarioId.valor;
       this.consultarusuario();
       this.loginModal?.hide();
+      this.standarItems = this.principalItems;
       this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
     },
     (error) => {
@@ -210,6 +215,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openLogOut(): void {
+    this.standarItems = this.principalItems.filter((item) => item.nombre !== 'Proyectos');
     this.inicioSesion = false;
     this.router.navigate(['/inicio']);
     window.sessionStorage.removeItem('Authorization');
