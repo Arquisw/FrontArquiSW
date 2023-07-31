@@ -1,20 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MiAsociacionService } from './mi-asociacion.service';
+import { AsociacionService } from './asociacion.service';
 import { HttpService } from '@core/services/http.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-describe('MiAsociacionService', () => {
-  let service: MiAsociacionService;
+describe('AsociacionService', () => {
+  let service: AsociacionService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [MiAsociacionService, HttpService],
-   
+      providers: [AsociacionService, HttpService],
+
     });
-    service = TestBed.inject(MiAsociacionService);
+    service = TestBed.inject(AsociacionService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 

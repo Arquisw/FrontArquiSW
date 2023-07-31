@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { MiAsociacionComponent } from './mi-asociacion/mi-asociacion.component';
+import { AsociacionComponent } from './components/asociacion/asociacion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MiAsociacionService } from './service/mi-asociacion.service';
+import { AsociacionService } from './shared/service/asociacion.service';
 
 @NgModule({
   declarations: [
-    MiAsociacionComponent,
+    AsociacionComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],
-  exports: [MiAsociacionComponent],
-  providers: [MiAsociacionService, DatePipe]
+  exports: [AsociacionComponent],
+  providers: [AsociacionService, DatePipe]
 })
 export class AsociacionModule { }

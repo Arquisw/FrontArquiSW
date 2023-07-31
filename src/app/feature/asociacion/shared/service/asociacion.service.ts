@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 
-export class MiAsociacionService {
+export class AsociacionService {
 
   constructor(private http: HttpService) { }
 

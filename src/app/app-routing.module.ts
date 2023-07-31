@@ -6,8 +6,8 @@ import { AcercanosotrosComponent } from './feature/acercanosotros/acercanosotros
 import { FundamentacionComponent } from './feature/fundamentacion/fundamentacion.component';
 import { InicioComponent } from './feature/inicio/inicio.component';
 import { PresentacionComponent } from './feature/presentacion/presentacion.component';
-import { MiAsociacionComponent } from './feature/asociacion/mi-asociacion/mi-asociacion.component';
-import { MiPerfilComponent } from './feature/perfil/mi-perfil/mi-perfil.component';
+import { AsociacionComponent } from './feature/asociacion/components/asociacion/asociacion.component';
+import { PerfilComponent } from './feature/perfil/components/perfil/perfil.component';
 import { RecuperarClaveComponent } from './feature/recuperar-clave/components/recuperar-clave/recuperar-clave.component';
 
 const routes: Routes = [
@@ -17,8 +17,8 @@ const routes: Routes = [
   { path: 'acerca-de-nosotros', component: AcercanosotrosComponent  },
   { path: 'presentacion', component: PresentacionComponent  },
   { path: 'recuperar-clave', component: RecuperarClaveComponent },
-  { path: 'asociacion', component: MiAsociacionComponent, canActivate: [SecurityGuard] },
-  { path: 'perfil', component: MiPerfilComponent, canActivate: [SecurityGuard] },
+  { path: 'asociacion', component: AsociacionComponent, canActivate: [SecurityGuard] },
+  { path: 'perfil', component: PerfilComponent, canActivate: [SecurityGuard] },
   { path: 'configuracion/:id', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
 ];

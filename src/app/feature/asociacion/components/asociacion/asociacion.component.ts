@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { MiAsociacionService } from '../service/mi-asociacion.service';
+import { AsociacionService } from '../../shared/service/asociacion.service';
 
 @Component({
-  selector: 'app-mi-asociacion',
-  templateUrl: './mi-asociacion.component.html',
-  styleUrls: ['./mi-asociacion.component.scss']
+  selector: 'app-asociacion',
+  templateUrl: './asociacion.component.html',
+  styleUrls: ['./asociacion.component.scss']
 })
-export class MiAsociacionComponent implements OnInit {
+export class AsociacionComponent implements OnInit {
 
   id;
   mensajeError= '';
   asociacion;
 
-  constructor(private miAsociacionService: MiAsociacionService) { }
+  constructor(private miAsociacionService: AsociacionService) { }
 
   ngOnInit(): void {
     const params = history.state;
