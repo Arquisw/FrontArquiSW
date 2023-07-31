@@ -1,38 +1,39 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MiPerfilComponent } from './mi-perfil.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
+import { AsociacionComponent } from './asociacion.component';
 import { HttpService } from '@core/services/http.service';
-import { MiPerfilService } from '../service/mi-perfil.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AsociacionService } from '../../shared/service/asociacion.service';
+import { ActivatedRoute } from '@angular/router';
+
 
 class ActivatedRouteStub {
   snapshot = {
     paramMap: {
       get: (param: string) => {
         if (param === 'id') {
-          return '123'; 
+          return '123';
         }
       }
     }
   };
 }
 
-describe('MiPerfilComponent', () => {
-  let component: MiPerfilComponent;
-  let fixture: ComponentFixture<MiPerfilComponent>;
+describe('AsociacionComponent', () => {
+  let component: AsociacionComponent;
+  let fixture: ComponentFixture<AsociacionComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({      
+    await TestBed.configureTestingModule({
       imports: [HttpClientModule],
       providers: [
         HttpService,
-        MiPerfilService,
+        AsociacionService,
         { provide: ActivatedRoute, useClass: ActivatedRouteStub }],
-      declarations: [ MiPerfilComponent ]
+      declarations: [ AsociacionComponent ]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MiPerfilComponent);
+    fixture = TestBed.createComponent(AsociacionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

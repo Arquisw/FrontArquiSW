@@ -9,7 +9,7 @@ import { FundamentacionComponent } from './feature/fundamentacion/fundamentacion
 import { AcercanosotrosComponent } from './feature/acercanosotros/acercanosotros.component';
 import { PresentacionComponent } from './feature/presentacion/presentacion.component';
 import { ConfiguracionModule } from './feature/configuracion/configuracion.module';
-import { MiPerfilModule } from './feature/perfil/mi-perfil.module';
+import { PerfilModule } from './feature/perfil/perfil.module';
 import { AsociacionModule } from './feature/asociacion/asociacion.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat'; // Ajusta esta línea
@@ -28,7 +28,7 @@ import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    MiPerfilModule,
+    PerfilModule,
     AsociacionModule,
     ConfiguracionModule,
     RecuperarClaveModule

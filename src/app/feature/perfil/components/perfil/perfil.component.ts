@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { MiPerfilService } from '../service/mi-perfil.service';
+import { PerfilService } from '../../shared/service/perfil.service';
 import { StorageService } from '@shared/storage-service/storage.service';
 
 @Component({
-  selector: 'app-mi-perfil',
-  templateUrl: './mi-perfil.component.html',
-  styleUrls: ['./mi-perfil.component.scss']
+  selector: 'app-perfil',
+  templateUrl: './perfil.component.html',
+  styleUrls: ['./perfil.component.scss']
 })
-export class MiPerfilComponent implements OnInit {
+export class PerfilComponent implements OnInit {
 
   usuarioId = 0;
   usuario;
@@ -21,7 +21,7 @@ export class MiPerfilComponent implements OnInit {
   files = [];
   DetalleDocumento;
 
-  constructor(private miPerfilSevice: MiPerfilService,
+  constructor(private miPerfilSevice: PerfilService,
               private storageService: StorageService) { }
 
   ngOnInit(): void {

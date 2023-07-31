@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { MiPerfilComponent } from './mi-perfil/mi-perfil.component';
-import { MiPerfilService } from './service/mi-perfil.service';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilService } from './shared/service/perfil.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '@shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    MiPerfilComponent
-
+    PerfilComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     SharedModule
   ],
-  exports:[MiPerfilComponent],
-  providers: [MiPerfilService, DatePipe]
+  exports:[PerfilComponent],
+  providers: [PerfilService, DatePipe]
 })
-export class MiPerfilModule { }
+export class PerfilModule { }

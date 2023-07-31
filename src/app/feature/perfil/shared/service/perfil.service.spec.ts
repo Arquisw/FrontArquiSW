@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MiPerfilService } from './mi-perfil.service';
+import { PerfilService } from './perfil.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpService } from '@core/services/http.service';
 
-describe('MiPerfilService', () => {
-  let service: MiPerfilService;
+describe('PerfilService', () => {
+  let service: PerfilService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MiPerfilService, HttpService],
+      providers: [PerfilService, HttpService],
       imports: [HttpClientTestingModule],
     });
-    service = TestBed.inject(MiPerfilService);
+    service = TestBed.inject(PerfilService);
   });
 
   it('should be created', () => {

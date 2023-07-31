@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 
 @Injectable()
 
-export class MiPerfilService {
+export class PerfilService {
 
   constructor(private http: HttpService) { }
 
@@ -20,7 +20,7 @@ export class MiPerfilService {
     return this.http.doGet(environment.endpoint +'/usuarios/hojadevida/'+ id);
   }
 
-  
+
   actualizarHojaDeVida(id: number, hojaDeVida) {
     return this.http.doPut(environment.endpoint +'/usuarios/hojadevida/'+ id, hojaDeVida);
   }

@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { AsociacionModule } from '../feature/asociacion/asociacion.module';
-import { MiPerfilModule } from '../feature/perfil/mi-perfil.module';
+import { PerfilModule } from '../feature/perfil/perfil.module';
 
 
 @NgModule({
@@ -23,8 +23,8 @@ import { MiPerfilModule } from '../feature/perfil/mi-perfil.module';
     HttpClientModule,
     ReactiveFormsModule,
     AsociacionModule,
-    MiPerfilModule
-    
+    PerfilModule
+
   ],
   exports: [NavbarComponent, FooterComponent],
   providers: [
