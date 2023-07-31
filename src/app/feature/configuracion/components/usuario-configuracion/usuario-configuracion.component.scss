@@ -12,6 +12,8 @@
 
 .update-form h3 {
   color: var(--just-white);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--grey);
 }
 
 .btn
@@ -19,12 +21,26 @@
   font-size: 1.6rem;
 }
 
-.update-person, .update-password {
-  border-bottom: 1px solid var(--grey);
+.delete-account {
+  padding-top: 6px;
 }
 
-.update-password, .delete-account {
-  padding-top: 6px;
+.card-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card
+{
+  transition: all 0.2s ease;
+  background-color: var(--background-color);
+  border-color: var(--just-white);
+}
+
+.card-body
+{
+  vertical-align: middle;
+  color: var(--just-white);
 }
 
 .form-control:not(:placeholder-shown) {
@@ -61,4 +77,8 @@ input {
 
 label {
   color: var(--black);
+}
+
+.alert {
+  padding-top: 5px;
 }

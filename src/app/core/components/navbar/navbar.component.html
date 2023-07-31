@@ -149,19 +149,16 @@
           <input type="text" class="form-control" id="nombreAsociacion"
             placeholder="Nombre asociación" formControlName="nombreAsociacion" />
           <label for="floatingInput">Nombre de la asociación</label>
-          <small class="text-danger" [hidden]="registroAsociacionForm.get('nombreAsociacion').valid">Nombre de la asociación requerido</small>
         </div>
         <div class="form-floating mb-3">
           <input type="text" class="form-control" id="nit"
             placeholder="NIT" formControlName="nit" />
           <label for="floatingInput">NIT</label>
-          <small class="text-danger" [hidden]="registroAsociacionForm.get('nit').valid"> NIT requerido</small>
         </div>
         <div class="form-floating mb-3">
           <input class="form-control custom-input" placement="bottom" type="number"
             placeholder="Núnmero contacto" formControlName="numeroContacto">
           <label for="floatingInput">Numero contacto</label>
-          <small class="text-danger" [hidden]="registroAsociacionForm.get('numeroContacto').valid">Número del contacto requerido</small>
         </div>
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
