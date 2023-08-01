@@ -20,7 +20,7 @@
           <li class="nav-item" *ngIf="inicioSesion">
             <div class="dropdown dropdown-reverse">
               <a class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" (click)="menuUsuario()">
-                {{usuario?.nombre}}
+                {{persona?.nombre}}
               </a>
               <div class="opciones" *ngIf="estaAbierto">
                 <a class="dropdown-item" (click)="abrirPerfil()">Mi Perfil</a>
@@ -29,7 +29,7 @@
                   <a class="dropdown-item" *ngIf="administrador">Panel de Administrador</a>
                 </ng-container>
                 <a class="dropdown-item" *ngIf="!tieneAsociacion" (click)="openModalAsociacion()">Registrar Empresa ó Asociación</a>
-                <a class="dropdown-item" [routerLink]="['/configuracion', id]">{{configuracionMenu.nombre}}</a>
+                <a class="dropdown-item" [routerLink]="['/configuracion']">{{configuracionMenu.nombre}}</a>
                 <a class="dropdown-item" (click)="openLogOut()">Cerrar Sesión</a>
               </div>
             </div>

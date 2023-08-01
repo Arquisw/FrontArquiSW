@@ -91,7 +91,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
   }
 
   consultarUsuario(): void {
-    this.configuracionService.consultarUsuarioPorId(this.usuarioId).subscribe((response) => {
+    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
       this.personaResumen = response;
     },
     (error) => {

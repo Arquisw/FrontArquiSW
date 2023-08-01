@@ -27,6 +27,11 @@ export class HttpService {
     return this.http.get<T>(serviceUrl + id, ropts);
   }
 
+  public doGetByEmail<T>(serviceUrl: string, correo: string, opts?: Options): Observable<T> {
+    const ropts = this.createOptions(opts);
+    return this.http.get<T>(serviceUrl + correo, ropts);
+  }
+
   public doPostWithOutBody<T>(serviceUrl: string, correo: string, opts?: Options): Observable<T> {
     const ropts = this.createOptions(opts);
 

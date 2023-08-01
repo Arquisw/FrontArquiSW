@@ -7,19 +7,26 @@ import { Persona } from '../model/persona.model';
 import { Asociacion } from '../model/asociacion.model';
 import { AsociacionResumen } from '../model/asociacion-resumen';
 import { Clave } from '../model/clave.model';
+import { UsuarioResumen } from '../model/usuario-resumen.model';
 
 @Injectable()
 
 export class ConfiguracionService {
   private readonly USUARIOS_ENDPOINT: string = '/usuarios';
+  private readonly USUARIO_ENDPOINT: string = '/usuario';
   private readonly USUARIOS_CLAVE_ENDPOINT: string = '/clave';
   private readonly ASOCIACIONES_ENDPOINT: string = '/asociaciones';
 
   constructor(private httpService: HttpService) { }
 
-  public consultarUsuarioPorId(id: number): Observable<PersonaResumen>
+  public consultarPersonaPorId(id: number): Observable<PersonaResumen>
   {
     return this.httpService.doGetById<PersonaResumen>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}/`, id);
+  }
+
+  public consultarUsuarioPorCorreo(correo: string): Observable<UsuarioResumen>
+  {
+    return this.httpService.doGetByEmail<UsuarioResumen>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.USUARIO_ENDPOINT}/`, correo);
   }
 
   public actualizarUsuarioPorId(persona: Persona, id: number): Observable<number>

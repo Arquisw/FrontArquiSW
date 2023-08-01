@@ -30,9 +30,11 @@ export class NavbarComponent implements OnInit {
   administrador = false;
   tieneAsociacion = false;
   opcionSeleccionada = false;
+  correo = '';
   mensajeError= '';
   id = 0;
   usuarioId;
+  persona;
   usuario;
   mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
   mensajeAsociacion= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
@@ -66,7 +68,7 @@ export class NavbarComponent implements OnInit {
       const token = window.sessionStorage.getItem('Authorization');
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
       this.id = tokenPayload.id;
-      this.consultarusuario();
+      this.consultarPersona();
     } else {
       this.standarItems = this.principalItems.filter((item) => item.nombre !== 'Proyectos');
     }
@@ -95,7 +97,7 @@ export class NavbarComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       state: {
         id: null,
-        usuario: this.usuario,
+        usuario: this.persona,
       }
     };
 
@@ -141,7 +143,7 @@ export class NavbarComponent implements OnInit {
     this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
       this.usuarioId = response;
       this.id = this.usuarioId.valor;
-      this.consultarusuario();
+      this.consultarPersona();
       this.loginModal?.hide();
       this.standarItems = this.principalItems;
       this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
@@ -176,8 +178,20 @@ export class NavbarComponent implements OnInit {
     this.estaAbierto = !this.estaAbierto;
   }
 
-  consultarusuario(): void {
-    this.servicioGestionusuario.consultarUsuario(this.id).subscribe((response) => {
+  consultarPersona(): void {
+    this.servicioGestionusuario.consultarPersona(this.id).subscribe((response) => {
+      this.persona = response;
+      this.correo = this.persona.correo;
+      this.consultarUsuario();
+    },
+    (error) => {
+      this.mensajeError=error.message;
+      this.inicioSesion = false;
+    });
+  }
+
+  consultarUsuario(): void {
+    this.servicioGestionusuario.consultarUsuario(this.correo).subscribe((response) => {
       this.usuario = response;
       this.filtrarMenu();
     },
