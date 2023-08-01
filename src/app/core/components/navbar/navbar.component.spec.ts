@@ -33,7 +33,7 @@ describe('NavbarComponent', () => {
   });
 
   it('debería establecer "administrador" en verdadero si el usuario tiene el rol de "ROLE_ADMINISTRADOR"', () => {
-    component.usuario = {
+    component.persona = {
       roles: [
         { nombre: 'ROLE_ADMINISTRADOR' }
       ]
@@ -44,7 +44,7 @@ describe('NavbarComponent', () => {
   });
 
   it('debería establecer "tieneAsociacion" en verdadero si el usuario tiene el rol de "ROLE_ASOCIACION"', () => {
-    component.usuario = {
+    component.persona = {
       roles: [
         { nombre: 'ROLE_ASOCIACION' }
       ]
@@ -55,7 +55,7 @@ describe('NavbarComponent', () => {
   });
 
   it('no debería modificar "administrador" ni "tieneAsociacion" si el usuario no tiene los roles correspondientes', () => {
-    component.usuario = {
+    component.persona = {
       roles: [
         { nombre: 'ROLE_OTRO' }
       ]

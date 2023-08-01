@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { PersonaResumen } from '../../shared/model/persona-resumen.model';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
+import { UsuarioResumen } from '../../shared/model/usuario-resumen.model';
 
 @Component({
   selector: 'app-configuracion',
@@ -10,21 +10,35 @@ import { ConfiguracionService } from '../../shared/service/configuracion.service
 })
 export class ConfiguracionComponent implements OnInit {
   usuarioId = 0;
+  correo = '';
   personaResumen: PersonaResumen;
+  usuarioResumen: UsuarioResumen;
   tieneAsociacion = false;
 
-  constructor(private route: ActivatedRoute, private configuracionService: ConfiguracionService) {}
+  constructor(private configuracionService: ConfiguracionService) {}
 
   ngOnInit(): void {
-    this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    const token = window.sessionStorage.getItem('Authorization');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    this.usuarioId = tokenPayload.id;
 
-    this.consultarUsuario();
+    console.log('ID: ' + this.usuarioId);
+
+    this.consultarPersona();
+  }
+
+  consultarPersona(): void {
+    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
+      this.personaResumen = response;
+      this.correo = this.personaResumen.correo;
+      this.consultarUsuario();
+    });
   }
 
   consultarUsuario(): void {
-    this.configuracionService.consultarUsuarioPorId(this.usuarioId).subscribe((response) => {
-      this.personaResumen = response;
-      this.filtrarMenu(response.roles);
+    this.configuracionService.consultarUsuarioPorCorreo(this.correo).subscribe((response) => {
+      this.usuarioResumen = response;
+      this.filtrarMenu(this.usuarioResumen.roles);
     });
   }
 

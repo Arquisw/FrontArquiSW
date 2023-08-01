@@ -19,7 +19,11 @@ export class GestionUsuarioService {
     return this.http.doPost(environment.endpoint+'/usuarios',user);
   }
 
-  consultarUsuario(id: number) {
+  consultarPersona(id: number) {
     return this.http.doGet(environment.endpoint+'/usuarios/' + id);
+  }
+
+  consultarUsuario(correo: string) {
+    return this.http.doGet(environment.endpoint+'/usuarios/usuario/' + correo);
   }
 }
