@@ -89,7 +89,6 @@ export class PerfilComponent implements OnInit {
     this.storageService.listaDeArchivos(this.usuario).subscribe((files) => {
       this.files = files;
       if(files.length > 0) {
-        this.seCargoHojaDevida = true;
         this.consultaHojaDeVida();
       }
     });
