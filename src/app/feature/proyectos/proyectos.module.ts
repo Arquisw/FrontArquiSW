@@ -7,8 +7,8 @@ import { ProyectosRoutingModule } from './proyectos-routing.module';
 import { ProyectosService } from './shared/service/proyectos.service';
 import { ConsultarProyectosComponent } from './components/consultar-proyectos/consultar-proyectos.component';
 import { ConsultarMisProyectosComponent } from './components/consultar-mis-proyectos/consultar-mis-proyectos.component';
-import { ConsultarProyectosSeleccionadoComponent } from './components/consultar-proyectos-seleccionado/consultar-proyectos-seleccionado.component';
-import { ConsultarProyectosPostuladoComponent } from './components/consultar-proyectos-postulado/consultar-proyectos-postulado.component';
+import { ConsultarProyectoSeleccionadoComponent } from './components/consultar-proyecto-seleccionado/consultar-proyecto-seleccionado.component';
+import { ConsultarProyectoPostuladoComponent } from './components/consultar-proyecto-postulado/consultar-proyecto-postulado.component';
 import { SharedModule } from '@shared/shared.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -17,8 +17,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     ProyectosComponent,
     ConsultarProyectosComponent,
     ConsultarMisProyectosComponent,
-    ConsultarProyectosSeleccionadoComponent,
-    ConsultarProyectosPostuladoComponent
+    ConsultarProyectoSeleccionadoComponent,
+    ConsultarProyectoPostuladoComponent
   ],
   imports: [
     CommonModule,
