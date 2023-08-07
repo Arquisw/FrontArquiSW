@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ConsultarProyectosSeleccionadoComponent } from './consultar-proyectos-seleccionado.component';
+import { ConsultarProyectoSeleccionadoComponent } from './consultar-proyecto-seleccionado.component';
 
 describe('ConsultarMisProyectosComponent', () => {
-  let component: ConsultarProyectosSeleccionadoComponent;
-  let fixture: ComponentFixture<ConsultarProyectosSeleccionadoComponent>;
+  let component: ConsultarProyectoSeleccionadoComponent;
+  let fixture: ComponentFixture<ConsultarProyectoSeleccionadoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ConsultarProyectosSeleccionadoComponent]
+      declarations: [ConsultarProyectoSeleccionadoComponent]
     })
       .compileComponents();
 
-    fixture = TestBed.createComponent(ConsultarProyectosSeleccionadoComponent);
+    fixture = TestBed.createComponent(ConsultarProyectoSeleccionadoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

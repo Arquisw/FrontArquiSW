@@ -1,18 +1,48 @@
-.projects {
+.postulated-projects {
   padding: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.projects h1 {
+.title h1 {
   color: var(--just-white);
   font-size: 3rem;
   border-bottom: 1px solid var(--grey);
 }
 
-.btn {
+.card-container {
+  max-width: 700px;
+  width: 100%;
+}
+
+.card h4 {
+  color: var(--just-white);
+  font-size: 1.8rem;
+  border-bottom: 1px solid var(--grey);
+  transition: all 0.2s ease;
+  background-color: var(--background-color);
+  border-color: var(--just-white);
+}
+
+.card-body h5 {
+  color: var(--just-white);
+  font-size: 1.6rem;
+}
+
+.card-body p, p {
+  color: var(--just-white);
+}
+
+.btn
+{
   font-size: 1.6rem;
   background-color: var(--uco-green);
+}
+
+.btn-watch-project {
+  margin-right: 5px;
 }
 
 .card-container {
@@ -37,10 +67,6 @@
   color: var(--black);
 }
 
-.btn-watch-project {
-  margin-right: 5px;
-}
-
 .form-control:not(:placeholder-shown) {
   padding-top: 3rem;
   padding-bottom: 1.5rem;
@@ -63,8 +89,8 @@
   font-size: 1.4rem;
 }
 
-.search-input {
-  max-width: 400px;
+.dropdown-menu {
+  background-color: var(--background-clear-color);
 }
 
 input {
@@ -81,11 +107,12 @@ label {
   padding-top: 10px;
 }
 
-.modal-title {
+.modal-title
+{
   font-size: 1.8rem;
 }
 
-.modal-body {
+.modal-body{
   font-size: 1.4rem;
   background-color: var(--background-color);
   color: var(--just-white);
@@ -100,7 +127,7 @@ label {
   color: var(--just-white);
 }
 
-.modal-body select, label, .roles-btn {
+.modal-body select, label, .tipos-consultoria-btn{
   font-size: 1.4rem;
 }
 
@@ -108,25 +135,33 @@ label {
   background-color: var(--background-color);
 }
 
-thead th {
+.table-responsive {
+  margin: 10px;
+}
+
+thead th
+{
   font-size: 1.4rem;
   color: var(--just-white);
   background-color: var(--background-color);
 }
 
-tbody th {
+tbody th
+{
   font-size: 1.4rem;
   color: var(--just-white);
   background-color: var(--background-color);
 }
 
-tbody td {
+tbody td
+{
   font-size: 1.4rem;
   color: var(--just-white);
   background-color: var(--background-color);
 }
 
-.table-title {
+.table-title
+{
   vertical-align: middle;
 }
 
@@ -138,6 +173,12 @@ tbody td {
 
 .table-body p {
   font-size: 1.4rem;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .roles-btn, .card-roles {

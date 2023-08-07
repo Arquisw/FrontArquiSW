@@ -1,0 +1,40 @@
+<section class="title">
+  <h1>Mi Proyecto Actual</h1>
+</section>
+<section class="postulated-projects">
+  <p *ngIf="!estaSeleccionado">No has sido seleccionado en ningun proyecto actualmente...</p>
+  <div class="card-container" *ngIf="estaSeleccionado">
+    <div class="card">
+      <h4 class="card-header">{{proyectoResumen.nombre}}</h4>
+      <div class="table-responsive">
+        <table class="table align-middle table-bordered">
+          <thead>
+            <tr>
+              <th class="table-title" scope="col">Estado</th>
+              <th class="table-title" scope="col">Tipos de Consultoría</th>
+              <th class="table-title" scope="col">Roles que Desempeño</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-body align-middle">{{proyectoResumen.estado.nombre}}</td>
+              <td class="table-body align-middle">
+                <p *ngFor="let estado of proyectoResumen.tiposConsultoria">{{estado.nombre}}</p>
+              </td>
+              <td class="table-body align-middle">
+                <p *ngFor="let rol of rolesSeleccionados">{{rol}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Descripción</h5>
+        <p class="card-text">{{proyectoResumen.descripcion}}</p>
+        <div class="buttons-container">
+          <button [routerLink]="['/proyecto/', necesidadResumen.id]" class="btn btn-watch-project btn-success">Ver Proyecto</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
