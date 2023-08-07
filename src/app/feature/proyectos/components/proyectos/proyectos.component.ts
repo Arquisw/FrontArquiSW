@@ -46,7 +46,6 @@ export class ProyectosComponent implements OnInit {
     });
   }
 
-
   consultarUsuario(): void {
     this.configuracionService.consultarUsuarioPorCorreo(this.correo).subscribe((response) => {
       this.usuarioResumen = response;

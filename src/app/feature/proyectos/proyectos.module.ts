@@ -10,6 +10,7 @@ import { ConsultarMisProyectosComponent } from './components/consultar-mis-proye
 import { ConsultarProyectosSeleccionadoComponent } from './components/consultar-proyectos-seleccionado/consultar-proyectos-seleccionado.component';
 import { ConsultarProyectosPostuladoComponent } from './components/consultar-proyectos-postulado/consultar-proyectos-postulado.component';
 import { SharedModule } from '@shared/shared.module';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from '@shared/shared.module';
     ProyectosRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    Ng2SearchPipeModule,
     SharedModule
   ],
   providers: [ProyectosService]

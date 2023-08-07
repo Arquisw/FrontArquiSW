@@ -118,6 +118,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
   onIngenieriaDeRequisitosSelected(): void {
     const tipoDeConsultoria = 'Ingenieria de Requisitos';
+    
     if (this.tiposConsultoriaSeleccionados.includes(tipoDeConsultoria)) {
       const index = this.tiposConsultoriaSeleccionados.indexOf(tipoDeConsultoria);
 
@@ -125,7 +126,6 @@ export class ConsultarMisProyectosComponent implements OnInit {
     } else {
       this.tiposConsultoriaSeleccionados.push(tipoDeConsultoria);
     }
-
   }
 
   onSQASelected(): void {

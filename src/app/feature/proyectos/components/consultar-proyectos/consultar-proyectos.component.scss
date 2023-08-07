@@ -1,0 +1,145 @@
+.projects {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects h1 {
+  color: var(--just-white);
+  font-size: 3rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.btn, .roles-btn {
+  font-size: 1.6rem;
+}
+
+.card-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card
+{
+  transition: all 0.2s ease;
+  background-color: var(--background-color);
+  border-color: var(--just-white);
+}
+
+.card-body
+{
+  vertical-align: middle;
+  color: var(--just-white);
+}
+
+.card-text {
+  color: var(--black);
+}
+
+.btn-watch-project {
+  margin-right: 5px;
+}
+
+.form-control:not(:placeholder-shown) {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control:placeholder-shown {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control, li, .card-text {
+  font-size: 1.4rem;
+}
+
+.form-floating label {
+  font-size: 1.4rem;
+}
+
+.search-input {
+  max-width: 400px;
+}
+
+input {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+  border-color: var(--black);
+}
+
+label {
+  color: var(--black);
+}
+
+.alert {
+  padding-top: 10px;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+}
+
+.modal-body {
+  font-size: 1.4rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+.modal-header {
+  background-color: var(--background-color);
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+
+.modal-body select, label, .roles-btn {
+  font-size: 1.4rem;
+}
+
+.modal-footer {
+  background-color: var(--background-color);
+}
+
+thead th {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody th {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody td {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+.table-title {
+  vertical-align: middle;
+}
+
+.table-body {
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.table-body p {
+  font-size: 1.4rem;
+}
+
+.roles-btn, .card-roles {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
