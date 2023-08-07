@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpService } from '@core/services/http.service';
 import { Persona } from '../model/persona.model';
 import { Asociacion } from '../model/asociacion.model';
-import { AsociacionResumen } from '../model/asociacion-resumen';
+import { AsociacionResumen } from '../model/asociacion-resumen.model';
 import { Clave } from '../model/clave.model';
 import { UsuarioResumen } from '../model/usuario-resumen.model';
 

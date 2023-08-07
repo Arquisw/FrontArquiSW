@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AsociacionResumen } from '../../shared/model/asociacion-resumen';
+import { AsociacionResumen } from '../../shared/model/asociacion-resumen.model';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 import { Asociacion } from '../../shared/model/asociacion.model';
 
@@ -53,7 +53,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
     this.configuracionService.eliminarAsociacionPorId(this.asociacionResumen.id).subscribe((response) => {
       console.log('Data:', response);
       this.eliminacionExitosa= true;
-      this.router.navigate(['/configuracion/', this.usuarioId]);
+      this.router.navigate(['/configuracion/']);
     },
     (error) => {
       this.eliminacionError = true;
