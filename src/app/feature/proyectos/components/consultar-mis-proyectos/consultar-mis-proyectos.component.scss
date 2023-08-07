@@ -1,0 +1,185 @@
+.my-projects {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.my-projects h1 {
+  color: var(--just-white);
+  font-size: 3rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.save-need {
+  max-width: 600px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn
+{
+  font-size: 1.6rem;
+}
+
+.btn-watch-project, .btn-update {
+  margin-right: 5px;
+}
+
+.card-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card
+{
+  transition: all 0.2s ease;
+  background-color: var(--background-color);
+  border-color: var(--just-white);
+}
+
+.card-body
+{
+  vertical-align: middle;
+  color: var(--just-white);
+}
+
+.card-text {
+  color: var(--black);
+}
+
+.form-control:not(:placeholder-shown) {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control:placeholder-shown {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control, li, .card-text {
+  font-size: 1.4rem;
+}
+
+.form-floating label {
+  font-size: 1.4rem;
+}
+
+.tipos-consultoria-btn, .card-tipos-consultoria {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.dropdown-menu {
+  background-color: var(--background-clear-color);
+}
+
+input {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+  border-color: var(--black);
+}
+
+label {
+  color: var(--black);
+}
+
+.alert {
+  padding-top: 10px;
+}
+
+.modal-title
+{
+  font-size: 1.8rem;
+}
+
+.modal-body{
+  font-size: 1.4rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+.modal-header {
+  background-color: var(--background-color);
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+
+.modal-body select, label, .tipos-consultoria-btn{
+  font-size: 1.4rem;
+}
+
+.description-project {
+  height: 100px;
+}
+
+.custom-file {
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.custom-file-label {
+  background-color: var(--uco-green);
+  color: var(--just-white);
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.modal-footer {
+  background-color: var(--background-color);
+}
+
+input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+thead th
+{
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody th
+{
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody td
+{
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+.table-title
+{
+  vertical-align: middle;
+}
+
+.table-body {
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.table-body p {
+  font-size: 1.4rem;
+}
+

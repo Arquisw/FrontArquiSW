@@ -16,7 +16,7 @@ export class ModalCargarPdfComponent {
   selectedFileName = 'Seleccionar archivo';
   urlArchivo;
   archivo: File;
-  
+
   constructor(private storage: AngularFireStorage) { }
 
   onFileSelected(event: any) {
@@ -27,7 +27,7 @@ export class ModalCargarPdfComponent {
 
   uploadFile() {
     if (this.archivo) {
-      const filePath = 'hojaDeVida/'+ this.usuario.apellidos + this.usuario.nombre + '/' +'Hoja de vida ' + this.usuario.nombre + '.pdf';
+      const filePath = 'hojaDeVida/' + this.usuario.apellidos + this.usuario.nombre + '/' +'Hoja de vida ' + this.usuario.nombre + '.pdf';
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.archivo);
 
@@ -35,7 +35,7 @@ export class ModalCargarPdfComponent {
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.urlArchivo = url;
-            this.enviarURL();    
+            this.enviarURL();
           });
         })
       ).subscribe();
@@ -43,13 +43,13 @@ export class ModalCargarPdfComponent {
   }
 
   enviarURL() {
-    this.enviarValor.emit(this.urlArchivo); 
+    this.enviarValor.emit(this.urlArchivo);
   }
 }
 
 
 
- 
+
 
 
 

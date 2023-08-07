@@ -14,7 +14,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { AsociacionModule } from '../feature/asociacion/asociacion.module';
 import { PerfilModule } from '../feature/perfil/perfil.module';
 
-
 @NgModule({
   declarations: [NavbarComponent, FooterComponent],
   imports: [
@@ -24,7 +23,6 @@ import { PerfilModule } from '../feature/perfil/perfil.module';
     ReactiveFormsModule,
     AsociacionModule,
     PerfilModule
-
   ],
   exports: [NavbarComponent, FooterComponent],
   providers: [

@@ -9,7 +9,7 @@ import { ConsultarProyectosComponent } from './components/consultar-proyectos/co
 import { ConsultarMisProyectosComponent } from './components/consultar-mis-proyectos/consultar-mis-proyectos.component';
 import { ConsultarProyectosSeleccionadoComponent } from './components/consultar-proyectos-seleccionado/consultar-proyectos-seleccionado.component';
 import { ConsultarProyectosPostuladoComponent } from './components/consultar-proyectos-postulado/consultar-proyectos-postulado.component';
-import { ProyectoComponent } from './components/proyecto/proyecto.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -17,14 +17,14 @@ import { ProyectoComponent } from './components/proyecto/proyecto.component';
     ConsultarProyectosComponent,
     ConsultarMisProyectosComponent,
     ConsultarProyectosSeleccionadoComponent,
-    ConsultarProyectosPostuladoComponent,
-    ProyectoComponent
+    ConsultarProyectosPostuladoComponent
   ],
   imports: [
     CommonModule,
     ProyectosRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [ProyectosService]
 })

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PerfilService } from '../../shared/service/perfil.service';
-import { StorageService } from '@shared/storage-service/storage.service';
+import { StorageService } from '@shared/service/storage-service/storage.service';
 
 @Component({
   selector: 'app-perfil',
@@ -32,7 +32,7 @@ export class PerfilComponent implements OnInit {
       this.usuarioId = params.id;
       this.consultaUsuario();
     }
-    this.ObtenerListaArchivos();
+    this.obtenerListaArchivos();
   }
 
   consultaUsuario(): void {
@@ -51,7 +51,7 @@ export class PerfilComponent implements OnInit {
       this.guardarHojaDeVida();
     }
     this.actualizarHojaDeVida();
-    this.ObtenerListaArchivos();
+    this.obtenerListaArchivos();
   }
 
   guardarHojaDeVida(): void {
@@ -85,7 +85,7 @@ export class PerfilComponent implements OnInit {
       });
   }
 
-  ObtenerListaArchivos() {
+  obtenerListaArchivos() {
     this.storageService.listaDeArchivos(this.usuario).subscribe((files) => {
       this.files = files;
       if(files.length > 0) {
