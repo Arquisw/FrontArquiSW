@@ -16,6 +16,7 @@ import { AngularFireModule } from '@angular/fire/compat'; // Ajusta esta línea
 import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.module';
 import { ProyectosModule } from './feature/proyectos/proyectos.module';
 import { ProyectoModule } from './feature/proyecto/proyecto.module';
+import { PanelAdministradorModule } from './feature/panel-administrador/panel-administrador.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ProyectoModule } from './feature/proyecto/proyecto.module';
     ConfiguracionModule,
     ProyectosModule,
     ProyectoModule,
-    RecuperarClaveModule
+    RecuperarClaveModule,
+    PanelAdministradorModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
