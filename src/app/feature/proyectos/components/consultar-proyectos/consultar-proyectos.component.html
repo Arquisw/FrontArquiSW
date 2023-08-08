@@ -1,0 +1,94 @@
+<section class="projects">
+  <h1>Proyectos</h1>
+  <div class="search-input">
+      <div class="form-floating mb-3">
+          <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filterTerm">
+          <label for="floatingInput">Buscar...</label>
+      </div>
+  </div>
+  <div class="table-responsive">
+    <table class="table align-middle table-striped">
+      <thead>
+        <tr>
+          <th class="table-title" scope="col">Nombre</th>
+          <th class="table-title" scope="col">Descripción</th>
+          <th class="table-title" scope="col">Tipos de Consultoria</th>
+          <th class="table-title" scope="col">Estado del Proyecto</th>
+          <th class="table-title" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let necesidad of necesidades | filter: filterTerm">
+          <td class="table-body align-middle">{{necesidad.proyecto.nombre}}</td>
+          <td class="table-body align-middle">
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+              data-bs-dismiss="modal">Ver Descripción</button>
+            <app-modal-descripcion [descripcion]="necesidad.proyecto.descripcion"></app-modal-descripcion>
+          </td>
+          <td class="table-body align-middle">
+            <p *ngFor="let tipoConsultoria of necesidad.proyecto.tiposConsultoria">{{tipoConsultoria.nombre}}</p>
+          </td>
+          <td class="table-body align-middle">{{necesidad.proyecto.estado.nombre}}</td>
+          <td class="table-body align-middle">
+            <button [routerLink]="['/proyecto/', necesidad.id]" class="btn btn-watch-project btn-success mt-3">Ver
+              Proyecto</button>
+            <button *ngIf="mostrarBotonPostulacion" class="btn btn-success mt-3" (click)="openPostularse(necesidad.proyecto.id)">Postularse</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<div class="modal fade" id="postuleProject" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Postularse al Proyecto</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="dropdown">
+          <button class="btn roles-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            ¿A cúal o cuales roles quieres postular?
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" (click)="onDirectorDeProyectoSelected()">Director del Proyecto</li>
+            <li class="dropdown-item" (click)="onParteInteresadaSelected()">Parte Interesada</li>
+            <li class="dropdown-item" (click)="onEquipoDeDesarrolloSelected()">Equipo de Desarrollo</li>
+            <li class="dropdown-item" (click)="onIngenieriaSelected()">Ingenieria</li>
+            <li class="dropdown-item" (click)="onArquitecturaSelected()">Arquitectura</li>
+            <li class="dropdown-item" (click)="onAnalistaSelected()">Analista</li>
+            <li class="dropdown-item" (click)="onLiderDelEquipoSelected()">Lider Del Equipo</li>
+            <li class="dropdown-item" (click)="onPatrocinadorSelected()">Patrocinador</li>
+          </ul>
+        </div>
+        <div class="card card-container card-roles">
+          <div class="card-body">
+            <div class="card-text" *ngFor="let rolSeleccionado of rolesSeleccionados">
+              {{rolSeleccionado}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickPostule()">Postularse</button>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <div *ngIf="postulacionError" class="alert alert-danger" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

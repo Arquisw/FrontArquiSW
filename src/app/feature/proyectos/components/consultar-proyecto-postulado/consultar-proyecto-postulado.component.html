@@ -1,0 +1,94 @@
+<section class="title">
+  <h1>Proyecto Postulado Actualmente</h1>
+</section>
+<section class="postulated-projects">
+  <p *ngIf="!estaPostulado">No has postulado a ningun proyecto actualmente...</p>
+  <div class="card-container" *ngIf="estaPostulado">
+    <div class="card">
+      <h4 class="card-header">{{proyectoResumen.nombre}}</h4>
+      <div class="table-responsive">
+        <table class="table align-middle table-bordered">
+          <thead>
+            <tr>
+              <th class="table-title" scope="col">Estado</th>
+              <th class="table-title" scope="col">Tipos de Consultoría</th>
+              <th class="table-title" scope="col">Roles Postulados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-body align-middle">{{proyectoResumen.estado.nombre}}</td>
+              <td class="table-body align-middle">
+                <p *ngFor="let estado of proyectoResumen.tiposConsultoria">{{estado.nombre}}</p>
+              </td>
+              <td class="table-body align-middle">
+                <p *ngFor="let rol of rolesSeleccionados">{{rol}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Descripción</h5>
+        <p class="card-text">{{proyectoResumen.descripcion}}</p>
+        <div class="buttons-container">
+          <button [routerLink]="['/proyecto/', necesidadResumen.id]" class="btn btn-watch-project btn-success">Ver Proyecto</button>
+          <button class="btn btn-success" (click)="openActualizarPostulacionModal()">Actualizar Postulación</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="updatePostulation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Postularse al Proyecto</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="dropdown">
+          <button class="btn roles-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            ¿A cúal o cuales roles quieres postular?
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" (click)="onDirectorDeProyectoSelected()">Director del Proyecto</li>
+            <li class="dropdown-item" (click)="onParteInteresadaSelected()">Parte Interesada</li>
+            <li class="dropdown-item" (click)="onEquipoDeDesarrolloSelected()">Equipo de Desarrollo</li>
+            <li class="dropdown-item" (click)="onIngenieriaSelected()">Ingenieria</li>
+            <li class="dropdown-item" (click)="onArquitecturaSelected()">Arquitectura</li>
+            <li class="dropdown-item" (click)="onAnalistaSelected()">Analista</li>
+            <li class="dropdown-item" (click)="onLiderDelEquipoSelected()">Lider Del Equipo</li>
+            <li class="dropdown-item" (click)="onPatrocinadorSelected()">Patrocinador</li>
+          </ul>
+        </div>
+        <div class="card card-container card-roles">
+          <div class="card-body">
+            <div class="card-text" *ngFor="let rolSeleccionado of rolesSeleccionados">
+              {{rolSeleccionado}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdatePostulation()">Postularse</button>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <div *ngIf="postulacionError" class="alert alert-danger" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

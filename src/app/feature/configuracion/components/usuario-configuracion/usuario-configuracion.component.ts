@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 import { PersonaResumen } from '../../shared/model/persona-resumen.model';
-import { AsociacionResumen } from '../../shared/model/asociacion-resumen';
+import { AsociacionResumen } from '../../shared/model/asociacion-resumen.model';
 import { Persona } from '../../shared/model/persona.model';
 import { Clave } from '../../shared/model/clave.model';
 

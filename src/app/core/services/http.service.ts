@@ -38,6 +38,12 @@ export class HttpService {
     return this.http.post<T>(serviceUrl + correo, ropts);
   }
 
+  public doRequestMapping<T>(serviceUrl: string, id: number, opts?: Options): Observable<T> {
+    const ropts = this.createOptions(opts);
+
+    return this.http.post<T>(serviceUrl + id, ropts);
+  }
+
   public doPost<T, R>(serviceUrl: string, body: T, opts?: Options): Observable<R> {
     const ropts = this.createOptions(opts);
 

@@ -1,0 +1,193 @@
+<section class="my-projects">
+  <h1>Mis Proyectos</h1>
+  <div class="save-need card card-container">
+    <div class="card-body d-flex flex-column align-items-center">
+      <p class="text-center">¿Deseas contratar un servicio de Consultoria?</p>
+      <button type="button" class="btn btn-success" (click)="open()">Registrar una Necesidad</button>
+    </div>
+  </div>
+  <div class="table-responsive" *ngIf="tieneNecesidades">
+    <table class="table align-middle table-striped">
+      <thead>
+        <tr>
+          <th class="table-title" scope="col">Nombre</th>
+          <th class="table-title" scope="col">Descripción</th>
+          <th class="table-title" scope="col">Tipos de Consultoria</th>
+          <th class="table-title" scope="col">Estado de la Necesidad</th>
+          <th class="table-title" scope="col">Estado del Proyecto</th>
+          <th class="table-title" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let necesidad of necesidades">
+          <td class="table-body align-middle">{{necesidad.proyecto.nombre}}</td>
+          <td class="table-body align-middle">
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+              data-bs-dismiss="modal">Ver Descripción</button>
+            <app-modal-descripcion [descripcion]="necesidad.proyecto.descripcion"></app-modal-descripcion>
+          </td>
+          <td class="table-body align-middle">
+            <p *ngFor="let tipoConsultoria of necesidad.proyecto.tiposConsultoria">{{tipoConsultoria.nombre}}</p>
+          </td>
+          <td class="table-body align-middle">{{necesidad.estado.nombre}}</td>
+          <td class="table-body align-middle">{{necesidad.proyecto.estado.nombre}}</td>
+          <td class="table-body align-middle">
+            <button [routerLink]="['/proyecto/', necesidad.id]" class="btn btn-watch-project btn-success mt-3">Ver
+              Proyecto</button>
+            <button class="btn btn-update btn-success mt-3" (click)="openActualizar(necesidad.id)">Actualizar</button>
+            <button class="btn btn-success mt-3" (click)="onEliminar(necesidad.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col text-center">
+    <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">
+      {{mensajeError}}
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="saveNeed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar una Necesidad</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <h4>Detalles de la Necesidad</h4>
+              <div class="custom-file">
+                <label for="cargarInput" class="custom-file-label">{{selectedFileName}}</label>
+                <input type="file" id="cargarInput" accept="application/pdf" (change)="onFileSelected($event)">
+              </div>
+            </div>
+          </div>
+        </div>
+        <form [formGroup]="guardarNecesidadForm">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nombreProyecto" placeholder="nombre"
+              formControlName="nombreProyecto" required>
+            <label for="floatingInput">Nombre del Proyecto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea type="text" class="description-project form-control" id="descripcionProyecto"
+              placeholder="descripcion" formControlName="descripcionProyecto" required></textarea>
+            <label for="floatingInput">Descripción del Proyecto</label>
+          </div>
+        </form>
+        <div class="dropdown">
+          <button class="btn tipos-consultoria-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Tipos de Consultoría
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" (click)="onIngenieriaDeRequisitosSelected()">Ingenieria de Requisitos</li>
+            <li class="dropdown-item" (click)="onSQASelected()">SQA</li>
+            <li class="dropdown-item" (click)="onSQCSelected()">SQC</li>
+          </ul>
+        </div>
+        <div class="card card-container card-tipos-consultoria">
+          <div class="card-body">
+            <div class="card-text" *ngFor="let tipoConsultoriaSeleccionado of tiposConsultoriaSeleccionados">
+              {{tipoConsultoriaSeleccionado}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickSaveNeed()">Guardar Necesidad</button>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <div *ngIf="guardadoError" class="alert alert-danger" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="updateNeed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Registrar una Necesidad</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <h4>Detalles de la Necesidad</h4>
+              <div class="custom-file">
+                <label for="cargarInput" class="custom-file-label">{{selectedFileName}}</label>
+                <input type="file" id="cargarInput" accept="application/pdf" (change)="onFileSelectedToUpdate($event)">
+              </div>
+            </div>
+          </div>
+        </div>
+        <form [formGroup]="actualizarNecesidadForm">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nombreProyectoActualizar" placeholder="nombre"
+              formControlName="nombreProyectoActualizar" required [value]="necesidad?.proyecto?.nombre">
+            <label for="floatingInput">Nombre del Proyecto</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea type="text" class="description-project form-control" id="descripcionProyectoActualizar"
+              placeholder="descripcion" formControlName="descripcionProyectoActualizar" required
+              [value]="necesidad?.proyecto?.descripcion"></textarea>
+            <label for="floatingInput">Descripción del Proyecto</label>
+          </div>
+        </form>
+        <div class="dropdown">
+          <button class="btn tipos-consultoria-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Tipos de Consultoría
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" (click)="onIngenieriaDeRequisitosSelected()">Ingenieria de Requisitos</li>
+            <li class="dropdown-item" (click)="onSQASelected()">SQA</li>
+            <li class="dropdown-item" (click)="onSQCSelected()">SQC</li>
+          </ul>
+        </div>
+        <div class="card card-container card-tipos-consultoria">
+          <div class="card-body">
+            <div class="card-text" *ngFor="let tipoConsultoriaSeleccionado of tiposConsultoriaSeleccionados">
+              {{tipoConsultoriaSeleccionado}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdateNeed()">Actualizar
+                Necesidad</button>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
