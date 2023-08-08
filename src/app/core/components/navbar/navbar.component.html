@@ -26,7 +26,7 @@
                 <a class="dropdown-item" (click)="abrirPerfil()">Mi Perfil</a>
                 <a class="dropdown-item" *ngIf="tieneAsociacion" (click)="abrirAsociacion()">Mi Empresa ó Asociación</a>
                 <ng-container *ngIf="administrador">
-                  <a class="dropdown-item" *ngIf="administrador">Panel de Administrador</a>
+                  <a class="dropdown-item" *ngIf="administrador" [routerLink]="['/panel-administrador']">Panel de Administrador</a>
                 </ng-container>
                 <a class="dropdown-item" *ngIf="!tieneAsociacion" (click)="openModalAsociacion()">Registrar Empresa ó Asociación</a>
                 <a class="dropdown-item" [routerLink]="['/configuracion']">{{configuracionMenu.nombre}}</a>

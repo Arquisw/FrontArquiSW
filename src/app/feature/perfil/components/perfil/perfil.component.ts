@@ -67,7 +67,7 @@ export class PerfilComponent implements OnInit {
   consultaHojaDeVida(): void {
     this.miPerfilSevice.consultarHojaDeVida(this.usuarioId).subscribe((response) => {
       this.hojaDeVida = response;
-      this.urlDescarga = this.hojaDeVida.ruta;
+      this.urlDescarga = this.hojaDeVida?.ruta;
       this.seCargoHojaDevida = true;
     },
     (error) => {
@@ -79,7 +79,7 @@ export class PerfilComponent implements OnInit {
     const hojaDeVida = {
       ruta: this.urlArchivo
     };
-    this.miPerfilSevice.actualizarHojaDeVida(this.usuarioId,hojaDeVida ).subscribe(() => {},
+    this.miPerfilSevice.actualizarHojaDeVida(this.usuarioId, hojaDeVida ).subscribe(() => {},
       (error) => {
         this.mensajeError =error?.error?.mensaje;
       });
