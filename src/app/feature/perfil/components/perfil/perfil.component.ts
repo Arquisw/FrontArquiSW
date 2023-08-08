@@ -27,18 +27,21 @@ export class PerfilComponent implements OnInit {
   ngOnInit(): void {
     const params = history.state;
     this.usuario = params.usuario;
-    this.usuarioId = this.usuario.id;
+    this.usuarioId = this.usuario?.id;
     if(params.id !== null) {
       this.usuarioId = params.id;
       this.consultaUsuario();
     }
-    this.obtenerListaArchivos();
+    if(this.usuario !== null) {
+      this.obtenerListaArchivos();
+    }
   }
 
   consultaUsuario(): void {
     this.miPerfil = false;
     this.miPerfilSevice.consultarPersona(this.usuarioId).subscribe((response) => {
       this.usuario = response;
+      this.obtenerListaArchivos();
     },
     (error) => {
       this.mensajeError=error.message;
@@ -58,7 +61,7 @@ export class PerfilComponent implements OnInit {
     const hojaDeVida = {
       ruta: this.urlArchivo
     };
-    this.miPerfilSevice.guardarHojaDeVida(this.usuarioId,hojaDeVida ).subscribe(() => {},
+    this.miPerfilSevice.guardarHojaDeVida(this.usuarioId, hojaDeVida ).subscribe(() => {},
       (error) => {
         this.mensajeError =error?.error?.mensaje;
       });

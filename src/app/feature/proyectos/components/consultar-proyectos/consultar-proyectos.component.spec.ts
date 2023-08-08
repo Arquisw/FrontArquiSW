@@ -9,8 +9,7 @@ describe('ConsultarProyectosComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ConsultarProyectosComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ConsultarProyectosComponent);
     component = fixture.componentInstance;
