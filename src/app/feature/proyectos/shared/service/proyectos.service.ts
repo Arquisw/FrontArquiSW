@@ -11,9 +11,7 @@ import { Postulacion } from '../model/postulacion.model';
 import { PostulacionResumen } from '../model/postulacion-resumen.model';
 import { SeleccionResumen } from '../model/seleccion-resumen.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ProyectosService {
   private readonly NECESIDADES_ENDPOINT: string = '/necesidades';
   private readonly ASOCIACION_ENDPOINT: string = '/asociacion';
@@ -29,7 +27,6 @@ export class ProyectosService {
   private readonly SELECCIONES_ENDPOINT: string = '/selecciones';
   private readonly SELECCION_ENDPOINT: string = '/seleccion';
   private readonly USUARIO_ENDPOINT: string = '/usuario';
-
 
   constructor(private httpService: HttpService) { }
 

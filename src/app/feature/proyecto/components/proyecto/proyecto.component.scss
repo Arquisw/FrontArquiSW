@@ -1,3 +1,48 @@
-h1 {
-  color: white;
+.header-content
+{
+  background-image: url('/assets/images/Fondo.png');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.information
+{
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+  max-width: 60%;
+}
+
+.information h1
+{
+  color: var(--just-white);
+  font-size: 5rem;
+}
+
+.information p
+{
+  color: var(--just-white);
+  font-size: 1.8rem;
+}
+
+.services-section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--grey);
+}
+
+.btn
+{
+  font-size: 1.6rem;
+  background-color: var(--uco-green);
+  margin-bottom: 10px;
+}
+
+.btn-idr, .btn-sqa {
+  margin-right: 10px;
 }
