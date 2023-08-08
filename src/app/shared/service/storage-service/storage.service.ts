@@ -10,9 +10,8 @@ export class StorageService {
 
   constructor(private storage: AngularFireStorage) { }
 
-
   listaDeArchivos(usuario): Observable<any[]> {
-    return this.storage.ref('ruta/hojaDeVida/'+ usuario.apellidos + usuario.nombre +'/').listAll().pipe(
+    return this.storage.ref('hojaDeVida/'+ usuario?.apellidos + usuario?.nombre +'/').listAll().pipe(
       map((result) => {
         const files = result.items.map((item) => {
           return {

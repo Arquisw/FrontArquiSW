@@ -58,7 +58,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave'));
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave' &&  item.nombre !== 'panel-administrador'));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
     this.recuperarClaveMenu = this.items?.find(item => item.nombre === 'Recuperar Clave');
     this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;

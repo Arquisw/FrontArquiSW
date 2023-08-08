@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'proyecto/:id', component: ProyectoComponent, canActivate: [SecurityGuard] },
   { path: 'configuracion', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: 'proyectos', loadChildren: () => import('./feature/proyectos/proyectos.module').then(mod => mod.ProyectosModule), canActivate: [SecurityGuard] },
+  { path: 'panel-administrador', loadChildren: () => import('./feature/panel-administrador/panel-administrador.module').then(mod => mod.PanelAdministradorModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
 ];
 

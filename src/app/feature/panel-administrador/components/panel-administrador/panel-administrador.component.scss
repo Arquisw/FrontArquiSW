@@ -1,0 +1,36 @@
+.header-content
+{
+  background-image: url('../../../../../assets/images/Fondo.png');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.information
+{
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.information h1
+{
+  color: var(--just-white);
+  font-size: 5rem;
+}
+
+.nav-link {
+  color: var(--just-white)
+}
+
+.left-navbar a.active-link {
+  color: var(--uco-green-light);
+}
+
+.left-navbar {
+  background-color: var(--background-darker-color);
+}

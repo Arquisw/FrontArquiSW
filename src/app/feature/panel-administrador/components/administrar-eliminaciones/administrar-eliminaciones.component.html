@@ -1,0 +1,26 @@
+<section>
+    <div class="tabla">
+        <h1>Usuarios</h1>
+        <table>
+          <thead>
+            <tr>
+              <th class="table-header">Nombre</th>
+              <th class="table-header">Correo Electronico</th>
+              <th class="table-header">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let usuario of usuariosEliminar">
+            <td>{{usuario?.nombre}}</td>
+            <td>{{usuario?.correo}}</td>
+            <td>
+                <button class="btn btn-success" (click)="abrirPerfil(usuario?.id)">Ver Perfil</button>
+                <button class="btn btn-success" >Eliminar</button>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+</section>
+
+

@@ -1,0 +1,23 @@
+<header class="header-content">
+    <section class="information">
+      <h1>Panel de Administrador</h1>
+    </section>
+  </header>
+  <main>
+    <section class="nav-container">
+      <div class="container-fluid nav">
+        <div class="row">
+          <div class="left-navbar col-sm-auto sticky-top">
+            <div class="d-flex flex-sm-column">
+               <a routerLink="./eliminaciones" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miCuenta" routerLinkActive="active-link">
+                Administrar Eliminaciones
+              </a>
+            </div>
+          </div>
+          <div class="col-sm  vw-100">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main> 
