@@ -9,8 +9,7 @@ describe('RequisitoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ RequisitoComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(RequisitoComponent);
     component = fixture.componentInstance;

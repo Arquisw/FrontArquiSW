@@ -109,6 +109,7 @@ export class NavbarComponent implements OnInit {
     const navigationExtras: NavigationExtras = {
       state: {
         id: this.id,
+        asociacion: true,
       }
     };
 

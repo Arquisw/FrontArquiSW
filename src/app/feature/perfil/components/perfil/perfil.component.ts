@@ -52,8 +52,9 @@ export class PerfilComponent implements OnInit {
     this.urlArchivo = valor;
     if(this.files.length === 0) {
       this.guardarHojaDeVida();
+    } else {
+      this.actualizarHojaDeVida();
     }
-    this.actualizarHojaDeVida();
     this.obtenerListaArchivos();
   }
 

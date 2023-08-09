@@ -104,7 +104,7 @@ export class ProyectoComponent implements OnInit {
   }
 
   obtenerListaArchivos() {
-    this.storageService.listaDeArchivos(this.necesidadResumen).subscribe((files) => {
+    this.storageService.listaDeArchivosNecesidad(this.necesidadResumen).subscribe((files) => {
       this.files = files;
     });
   }

@@ -12,7 +12,15 @@ export class AdministradorService {
     return this.http.doGet(environment.endpoint +'/usuarios/administrador');
   }
 
+  consultarPeticionesAsociacionAEliminar() {
+    return this.http.doGet(environment.endpoint +'/asociaciones/administrador');
+  }
+
   consultarPersonaParaEliminar(id: number) {
     return this.http.doGet(environment.endpoint +'/usuarios/'+ id);
+  }
+
+  consultarAsociacionParaEliminar(id: number) {
+    return this.http.doGet(environment.endpoint +'/asociaciones/asociacion/'+ id);
   }
 }
