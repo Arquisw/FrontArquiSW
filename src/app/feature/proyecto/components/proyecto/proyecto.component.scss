@@ -30,7 +30,7 @@
   font-size: 1.8rem;
 }
 
-.services-section {
+.services-section, .team-section {
   margin-top: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid var(--grey);
@@ -45,4 +45,59 @@
 
 .btn-idr, .btn-sqa {
   margin-right: 10px;
+}
+
+.table-responsive {
+  max-width: 767px;
+  width: 100%;
+  justify-content: center;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.team-section p {
+  font-size: 1.4rem;
+  color: var(--just-white);
+}
+
+.team-section h2, .docs-section h2 {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+
+thead th {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody th {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody td {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+.table-responsive {
+  padding-top: 5px;
+}
+
+.table-title {
+  vertical-align: middle;
+}
+
+.table-body {
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.table-body p {
+  font-size: 1.4rem;
 }

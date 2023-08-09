@@ -19,7 +19,7 @@ export class PerfilComponent implements OnInit {
   miPerfil = true;
   seCargoHojaDevida= false;
   files = [];
-  DetalleDocumento;
+  detalleDocumento;
 
   constructor(private miPerfilSevice: PerfilService,
               private storageService: StorageService) { }
@@ -99,7 +99,7 @@ export class PerfilComponent implements OnInit {
 
   downloadFile(): void {
     this.storageService.obtenerArchivoUrl(this.urlDescarga).subscribe((file) => {
-      this.DetalleDocumento = file;
+      this.detalleDocumento = file;
       const link = document.createElement('a');
       link.href = this.urlDescarga;
       link.target = '_blank';

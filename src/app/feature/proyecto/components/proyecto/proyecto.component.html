@@ -1,20 +1,61 @@
 <header class="header-content">
   <section class="information">
-    <h1>Nombre del Proyecto</h1>
-    <p><strong>Estado: </strong> Estado del Proyecto</p>
-    <p>Descripción del Proyecto</p>
+    <h1>{{necesidadResumen.proyecto.nombre}}</h1>
+    <p><strong>Estado: </strong>{{necesidadResumen.proyecto.estado.nombre}}</p>
+    <p>{{necesidadResumen.proyecto.descripcion}}</p>
   </section>
 </header>
 <main>
   <section class="services-section container text-center">
-    <button class="btn btn-idr btn-success mt-3">Ingeniería de Requisitos</button>
-    <button class="btn btn-sqa btn-success mt-3">SQA</button>
-    <button class="btn btn-sqc btn-success mt-3">SQC</button>
+    <button [disabled]="!tieneServicioIngenieriaDeRequisitos" class="btn btn-idr btn-success mt-3" (click)="abrirIngenieriaDeRequisitos()">Ingeniería de Requisitos</button>
+    <button [disabled]="!tieneServicioSQA" class="btn btn-sqa btn-success mt-3">SQA</button>
+    <button [disabled]="!tieneServicioSQC" class="btn btn-sqc btn-success mt-3">SQC</button>
   </section>
-  <section class="team-section">
-
+  <section class="team-section container">
+    <h2>Miembros del Equipo</h2>
+    <p *ngIf="!tieneUsuariosSeleccionados">No hay usuarios seleccionados en el proyecto actualmente...</p>
+    <div *ngIf="tieneUsuariosSeleccionados" class="table-responsive">
+      <table class="table align-middle table-striped">
+        <thead>
+          <tr>
+            <th class="table-title" scope="col">Nombre Completo</th>
+            <th class="table-title" scope="col">Rol(es) dentro del proyecto</th>
+            <th class="table-title" scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let seleccion of seleccionesResumen">
+            <td class="table-body align-middle">{{consultarNombreDeUsuarioPorId(seleccion.usuarioID)}}</td>
+            <td class="table-body align-middle">
+              <p *ngFor="let rol of seleccion.roles">{{rol}}</p>
+            </td>
+            <td class="table-body align-middle">
+              <button class="btn btn-watch-project btn-success mt-3">Ver Perfil</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
-  <section class="docs-section">
-
+  <section class="docs-section container">
+    <h2>Documentos</h2>
+    <div class="table-responsive">
+      <table class="table align-middle table-striped">
+        <thead>
+          <tr>
+            <th>Nombre del Archivo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of files">
+            <td class="table-body align-middle">{{file.nombre}}</td>
+            <td class="table-body align-middle">
+              <button class="btn btn-success" (click)="downloadFile()">Ver Documento</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 </main>
