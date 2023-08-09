@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { SecurityGuard } from '@core/guard/security.guard';
-
 import { AcercanosotrosComponent } from './feature/acercanosotros/acercanosotros.component';
 import { FundamentacionComponent } from './feature/fundamentacion/fundamentacion.component';
 import { InicioComponent } from './feature/inicio/inicio.component';
@@ -23,6 +22,7 @@ const routes: Routes = [
   { path: 'proyecto/:id', component: ProyectoComponent, canActivate: [SecurityGuard] },
   { path: 'configuracion', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: 'proyectos', loadChildren: () => import('./feature/proyectos/proyectos.module').then(mod => mod.ProyectosModule), canActivate: [SecurityGuard] },
+  { path: 'ingenieria-de-requisitos', loadChildren: () => import('./feature/ingenieria-de-requisitos/ingenieria-de-requisitos.module').then(mod => mod.IngenieriaDeRequisitosModule), canActivate: [SecurityGuard] },
   { path: 'panel-administrador', loadChildren: () => import('./feature/panel-administrador/panel-administrador.module').then(mod => mod.PanelAdministradorModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
 ];

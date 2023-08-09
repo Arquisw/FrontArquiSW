@@ -17,6 +17,7 @@ import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.
 import { ProyectosModule } from './feature/proyectos/proyectos.module';
 import { ProyectoModule } from './feature/proyecto/proyecto.module';
 import { PanelAdministradorModule } from './feature/panel-administrador/panel-administrador.module';
+import { IngenieriaDeRequisitosModule } from './feature/ingenieria-de-requisitos/ingenieria-de-requisitos.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PanelAdministradorModule } from './feature/panel-administrador/panel-ad
     ProyectosModule,
     ProyectoModule,
     RecuperarClaveModule,
-    PanelAdministradorModule
+    PanelAdministradorModule,
+    IngenieriaDeRequisitosModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],
