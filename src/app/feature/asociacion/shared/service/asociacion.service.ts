@@ -8,7 +8,11 @@ export class AsociacionService {
 
   constructor(private http: HttpService) { }
 
-  consultarAsociacion(id: number) {
+  consultarAsociacionPorUsuario(id: number) {
     return this.http.doGet(environment.endpoint +'/asociaciones/'+ id);
+  }
+
+  consultarAsociacion(id: number) {
+    return this.http.doGet(environment.endpoint +'/asociaciones/asociacion/'+ id);
   }
 }
