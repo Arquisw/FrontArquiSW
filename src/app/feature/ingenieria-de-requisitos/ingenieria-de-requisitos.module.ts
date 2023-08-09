@@ -6,10 +6,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
 import { IngenieriaDeRequisitosRoutingModule } from './ingenieria-de-requisitos-routing.module';
 import { IngenieriaDeRequisitosService } from './shared/service/ingenieria-de-requisitos.service';
+import { FaseComponent } from './components/fase/fase.component';
+import { EtapaComponent } from './components/etapa/etapa.component';
+import { VersionComponent } from './components/version/version.component';
+import { RequisitoComponent } from './components/requisito/requisito.component';
 
 @NgModule({
   declarations: [
-    IngenieriaDeRequisitosComponent
+    IngenieriaDeRequisitosComponent,
+    FaseComponent,
+    EtapaComponent,
+    VersionComponent,
+    RequisitoComponent
   ],
   imports: [
     CommonModule,
