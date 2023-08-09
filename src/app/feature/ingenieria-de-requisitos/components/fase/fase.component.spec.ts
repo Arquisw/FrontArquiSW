@@ -9,8 +9,7 @@ describe('FaseComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ FaseComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FaseComponent);
     component = fixture.componentInstance;

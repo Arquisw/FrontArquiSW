@@ -9,8 +9,7 @@ describe('EtapaComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ EtapaComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EtapaComponent);
     component = fixture.componentInstance;
