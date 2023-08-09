@@ -20,6 +20,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   guardarNecesidadForm: FormGroup;
   actualizarNecesidadForm: FormGroup;
   usuarioId = 0;
+  proyectoId= 0;
   tiposConsultoriaSeleccionados: string[] = [];
   guardadoError = false;
   mensajeError = '';
@@ -73,7 +74,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
   uploadFile() {
     if (this.archivo) {
-      const filePath = 'necesidad/' + this.nombreProyecto + '/' + this.usuarioId + '.pdf';
+      const filePath = 'necesidad/' + this.guardarNecesidadForm.get('nombreProyecto')?.value + '/' + this.proyectoId + '.pdf';
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.archivo);
 
@@ -102,9 +103,10 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
       const proyecto = new Proyecto(this.guardarNecesidadForm.get('nombreProyecto')?.value, this.guardarNecesidadForm.get('descripcionProyecto')?.value, tiposConsultoria);
       const necesidad = new Necesidad(this.urlArchivo, proyecto);
-
-      this.proyectosService.guardar(necesidad, this.usuarioId).subscribe((response) => {
+   
+      this.proyectosService.guardar(necesidad, this.asociacionId).subscribe((response) => {
         console.log('Data:', response);
+        this.proyectoId = response.valor;
         this.loginModal?.hide();
         window.location.reload();
       }, (error) => {
