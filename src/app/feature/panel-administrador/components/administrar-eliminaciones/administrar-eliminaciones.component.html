@@ -18,7 +18,9 @@
               <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#descripcionModal"
               data-bs-dismiss="modal"
               (click)="eliminarPersona(usuario?.id, usuario?.nombre)">Eliminar</button>
-              <app-modal-descripcion [descripcion]="mensaje"></app-modal-descripcion>
+              <app-modal-descripcion 
+              [titulo]="'Mensaje Eliminación'"
+              [descripcion]="mensaje"></app-modal-descripcion>
             </td>
             </tr>
           </tbody>
@@ -42,7 +44,9 @@
               <button class="btn btn-success" (click)="abrirPerfilAsociacion(asociacion?.id)">Ver Asociacion</button>
               <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#descripcionModal"
               data-bs-dismiss="modal" (click)="eliminarAsociacion(asociacion?.id, asociacion?.nombre)" >Eliminar</button>
-              <app-modal-descripcion [descripcion]="mensaje"></app-modal-descripcion>
+              <app-modal-descripcion 
+              [titulo]="'Mensaje Eliminación'"
+              [descripcion]="mensaje"></app-modal-descripcion>
             </td>
             </tr>
           </tbody>
@@ -64,7 +68,12 @@
             <td>{{proyecto?.proyecto.estado.nombre}}</td>
             <td>
               <button class="btn btn-success" (click)="abrirPerfilAsociacion(proyecto?.id)">Ver Proyecto</button>
-              <button class="btn btn-success" >Eliminar</button>
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+              data-bs-dismiss="modal"
+              >Eliminar</button>
+              <app-modal-descripcion 
+              [titulo]="'Mensaje Eliminación'"
+              [descripcion]="mensaje"></app-modal-descripcion>
             </td>
             </tr>
           </tbody>
