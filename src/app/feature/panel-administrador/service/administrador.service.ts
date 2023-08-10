@@ -16,11 +16,27 @@ export class AdministradorService {
     return this.http.doGet(environment.endpoint +'/asociaciones/administrador');
   }
 
+  consultarPeticionesNecesidadAEliminar() {
+    return this.http.doGet(environment.endpoint +'/necesidades/administrador');
+  }
+
   consultarPersonaParaEliminar(id: number) {
     return this.http.doGet(environment.endpoint +'/usuarios/'+ id);
   }
 
   consultarAsociacionParaEliminar(id: number) {
     return this.http.doGet(environment.endpoint +'/asociaciones/asociacion/'+ id);
+  }
+
+  consultarNecesidadParaEliminar(id: number) {
+    return this.http.doGet(environment.endpoint +'/necesidades/'+ id);
+  }
+
+  eliminarAsociacion(id: number) {
+    return this.http.doDelete(environment.endpoint +'/asociaciones/administrador/'+ id);
+  }
+
+  eliminarPersona(id: number) {
+    return this.http.doDelete(environment.endpoint +'/usuarios/administrador/'+ id);
   }
 }

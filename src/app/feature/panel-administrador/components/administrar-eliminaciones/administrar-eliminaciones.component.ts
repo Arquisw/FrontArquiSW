@@ -10,19 +10,23 @@ import { AdministradorService } from '../../service/administrador.service';
 export class AdministrarEliminacionesComponent implements OnInit{
   usuariosEliminar: any[] = [];
   asociacionesEliminar: any[] = [];
+  necesidadEliminar: any[] = [];
   mensajeError= '';
   hayUsuariosAEliminar = false;
   hayAsociacionesAEliminar = false;
+  hayNecesidadAEliminar = false;
+  mensaje= '';
 
   constructor(private router: Router,
               private admistradorService: AdministradorService)  { }
   ngOnInit(): void {
-    this.consultaUsuarioAEliminar();
-    this.consultaAsociacionesAEliminar();
+    this.consultaPeticionesUsuarioAEliminar();
+    this.consultaPeticionesAsociacionesAEliminar();
+    this.consultaPeticionesNecesidadAEliminar();
   }
 
 
-  consultaUsuarioAEliminar(): void {
+  consultaPeticionesUsuarioAEliminar(): void {
     let petecionEliminar;
     this.admistradorService.consultarPeticionesUsuariosEliminar().subscribe((response) => {
       petecionEliminar = response;
@@ -38,7 +42,7 @@ export class AdministrarEliminacionesComponent implements OnInit{
     });
   }
 
-  consultaAsociacionesAEliminar(): void {
+  consultaPeticionesAsociacionesAEliminar(): void {
     let petecionAsociacionEliminar;
     this.admistradorService.consultarPeticionesAsociacionAEliminar().subscribe((response) => {
       petecionAsociacionEliminar = response;
@@ -50,6 +54,24 @@ export class AdministrarEliminacionesComponent implements OnInit{
       }
     },
     (error) => {
+      this.hayAsociacionesAEliminar = false;
+      this.mensajeError=error.message;
+    });
+  }
+
+  consultaPeticionesNecesidadAEliminar(): void {
+    let petecionNecesidadEliminar;
+    this.admistradorService.consultarPeticionesNecesidadAEliminar().subscribe((response) => {
+      petecionNecesidadEliminar = response;
+      if(petecionNecesidadEliminar.length > 0) {
+        this.hayNecesidadAEliminar = true;
+      }
+      for (const peticion of petecionNecesidadEliminar) {
+        this.consultaNecesidadAEliminar(peticion?.necesidad);
+      }
+    },
+    (error) => {
+      this.hayAsociacionesAEliminar = false;
       this.mensajeError=error.message;
     });
   }
@@ -59,6 +81,7 @@ export class AdministrarEliminacionesComponent implements OnInit{
       this.usuariosEliminar.push(response);
     },
     (error) => {
+      this.hayUsuariosAEliminar= false;
       this.mensajeError=error.message;
     });
   }
@@ -66,6 +89,36 @@ export class AdministrarEliminacionesComponent implements OnInit{
   consultaAsociacionAEliminar(id: number): void {
     this.admistradorService.consultarAsociacionParaEliminar(id).subscribe((response) => {
       this.asociacionesEliminar.push(response);
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+  }
+
+  consultaNecesidadAEliminar(id: number): void {
+    this.admistradorService.consultarNecesidadParaEliminar(id).subscribe((response) => {
+      this.necesidadEliminar.push(response);
+    },
+    (error) => {
+      this.hayNecesidadAEliminar = false;
+      this.mensajeError=error.message;
+    });
+  }
+
+  eliminarAsociacion(id: number, nombreAsociacion: string): void {
+    this.admistradorService.eliminarAsociacion(id).subscribe(() => {
+      this.mensaje = 'Se elimino la asociacion ' + nombreAsociacion  + ' con exito';
+      this.consultaPeticionesAsociacionesAEliminar();
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+  }
+
+  eliminarPersona(id: number, nombreUsuario: string): void {
+    this.admistradorService.eliminarPersona(id).subscribe(() => {
+      this.mensaje = 'Se elimino el usuario ' + nombreUsuario + ' con exito';
+      this.consultaPeticionesAsociacionesAEliminar();
     },
     (error) => {
       this.mensajeError=error.message;

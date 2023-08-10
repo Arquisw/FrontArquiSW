@@ -15,13 +15,16 @@
             <td>{{usuario?.correo}}</td>
             <td>
               <button class="btn btn-success" (click)="abrirPerfil(usuario?.id)">Ver Perfil</button>
-              <button class="btn btn-success" >Eliminar</button>
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+              data-bs-dismiss="modal"
+              (click)="eliminarPersona(usuario?.id, usuario?.nombre)">Eliminar</button>
+              <app-modal-descripcion [descripcion]="mensaje"></app-modal-descripcion>
             </td>
             </tr>
           </tbody>
         </table>
-      </div>
-      <div class="tabla">
+      </div> 
+      <div class="tabla" *ngIf="hayAsociacionesAEliminar">
         <h1>Empresas o Asociaciones</h1>
         <table>
           <thead>
@@ -37,6 +40,30 @@
             <td>{{asociacion?.nit}}</td>
             <td>
               <button class="btn btn-success" (click)="abrirPerfilAsociacion(asociacion?.id)">Ver Asociacion</button>
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+              data-bs-dismiss="modal" (click)="eliminarAsociacion(asociacion?.id, asociacion?.nombre)" >Eliminar</button>
+              <app-modal-descripcion [descripcion]="mensaje"></app-modal-descripcion>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tabla" *ngIf="hayNecesidadAEliminar">
+        <h1>Proyectos</h1>
+        <table>
+          <thead>
+            <tr>
+              <th class="table-header">Nombre</th>
+              <th class="table-header">Estado</th>
+              <th class="table-header">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let proyecto of necesidadEliminar">
+            <td>{{proyecto?.proyecto.nombre}}</td>
+            <td>{{proyecto?.proyecto.estado.nombre}}</td>
+            <td>
+              <button class="btn btn-success" (click)="abrirPerfilAsociacion(proyecto?.id)">Ver Proyecto</button>
               <button class="btn btn-success" >Eliminar</button>
             </td>
             </tr>
@@ -44,5 +71,19 @@
         </table>
       </div>
 </section>
+<ng-template #mensajeModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Mensaje</h4>
+    <button type="button" class="close" aria-label="Cerrar" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ mensaje }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+  </div>
+</ng-template>
 
 
