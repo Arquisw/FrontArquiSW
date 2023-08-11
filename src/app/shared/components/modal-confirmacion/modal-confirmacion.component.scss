@@ -1,0 +1,24 @@
+.modal-body{
+    font-size: 1.4rem;
+    background-color: var(--background-color);
+    color: var(--just-white);
+  }
+  
+  .modal-header {
+    background-color: var(--background-color);
+  }
+  
+  .modal-title {
+    font-size: 1.8rem;
+    color: var(--just-white);
+  }
+
+  .modal-footer {
+    background-color: var(--background-color);
+    justify-content: center;
+  }
+
+  button {
+    width: 50px;
+    font-size: 15px;
+  }
