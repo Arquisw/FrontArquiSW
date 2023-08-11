@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
 import { AdministradorService } from '../../service/administrador.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-administrar-eliminaciones',
@@ -15,16 +15,27 @@ export class AdministrarEliminacionesComponent implements OnInit{
   hayUsuariosAEliminar = false;
   hayAsociacionesAEliminar = false;
   hayNecesidadAEliminar = false;
-  mensaje= '';
+  mensajeEliminarProyecto= '¿Estás seguro de desea eliminar el proyecto?';
+  mensajeEliminarAsociacion;
+  mensajeEliminarUsuario= '¿Estás seguro de desea eliminar el usuario?';
+
+
+
 
   constructor(private router: Router,
-              private admistradorService: AdministradorService)  { }
+    private admistradorService: AdministradorService)  { }
+    
   ngOnInit(): void {
     this.consultaPeticionesUsuarioAEliminar();
     this.consultaPeticionesAsociacionesAEliminar();
     this.consultaPeticionesNecesidadAEliminar();
   }
 
+  eliminar(mensaje){
+    console.log(mensaje)
+    this.mensajeEliminarAsociacion = 'Hola hpta';
+    console.log(this.mensajeEliminarAsociacion)
+  }
 
   consultaPeticionesUsuarioAEliminar(): void {
     let petecionEliminar;
@@ -40,6 +51,35 @@ export class AdministrarEliminacionesComponent implements OnInit{
     (error) => {
       this.mensajeError=error.message;
     });
+  }
+
+  consultarPersonasAEliminar(id: number): void {
+    this.admistradorService.consultarPersonaParaEliminar(id).subscribe((response) => {
+      this.usuariosEliminar.push(response);
+    },
+    (error) => {
+      this.hayUsuariosAEliminar= false;
+      this.mensajeError=error.message;
+    });
+  }
+
+  eliminarPersona(id: number): void {
+    this.admistradorService.eliminarPersona(id).subscribe(() => {
+      this.consultaPeticionesUsuarioAEliminar();
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+  }
+
+  abrirPerfil(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id,
+        usuario: null,
+      }
+    };
+    this.router.navigate(['/perfil'], navigationExtras);
   }
 
   consultaPeticionesAsociacionesAEliminar(): void {
@@ -59,6 +99,35 @@ export class AdministrarEliminacionesComponent implements OnInit{
     });
   }
 
+  consultaAsociacionAEliminar(id: number): void {
+    this.admistradorService.consultarAsociacionParaEliminar(id).subscribe((response) => {
+      this.asociacionesEliminar.push(response);
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+  }
+
+  eliminarAsociacion(id: number): void {
+    this.admistradorService.eliminarAsociacion(id).subscribe(() => {
+      this.consultaPeticionesAsociacionesAEliminar();
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+
+  }
+  
+  abrirPerfilAsociacion(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id,
+        asociacion: false,
+      }
+    };
+    this.router.navigate(['/asociacion'], navigationExtras);
+  }
+
   consultaPeticionesNecesidadAEliminar(): void {
     let petecionNecesidadEliminar;
     this.admistradorService.consultarPeticionesNecesidadAEliminar().subscribe((response) => {
@@ -76,25 +145,6 @@ export class AdministrarEliminacionesComponent implements OnInit{
     });
   }
 
-  consultarPersonasAEliminar(id: number): void {
-    this.admistradorService.consultarPersonaParaEliminar(id).subscribe((response) => {
-      this.usuariosEliminar.push(response);
-    },
-    (error) => {
-      this.hayUsuariosAEliminar= false;
-      this.mensajeError=error.message;
-    });
-  }
-
-  consultaAsociacionAEliminar(id: number): void {
-    this.admistradorService.consultarAsociacionParaEliminar(id).subscribe((response) => {
-      this.asociacionesEliminar.push(response);
-    },
-    (error) => {
-      this.mensajeError=error.message;
-    });
-  }
-
   consultaNecesidadAEliminar(id: number): void {
     this.admistradorService.consultarNecesidadParaEliminar(id).subscribe((response) => {
       this.necesidadEliminar.push(response);
@@ -105,20 +155,9 @@ export class AdministrarEliminacionesComponent implements OnInit{
     });
   }
 
-  eliminarAsociacion(id: number, nombreAsociacion: string): void {
+  eliminarProyecto(id: number): void {
     this.admistradorService.eliminarAsociacion(id).subscribe(() => {
-      this.mensaje = 'Se elimino la asociacion ' + nombreAsociacion  + ' con exito';
-      this.consultaPeticionesAsociacionesAEliminar();
-    },
-    (error) => {
-      this.mensajeError=error.message;
-    });
-  }
-
-  eliminarPersona(id: number, nombreUsuario: string): void {
-    this.admistradorService.eliminarPersona(id).subscribe(() => {
-      this.mensaje = 'Se elimino el usuario ' + nombreUsuario + ' con exito';
-      this.consultaPeticionesAsociacionesAEliminar();
+      this.consultaPeticionesNecesidadAEliminar();
     },
     (error) => {
       this.mensajeError=error.message;
@@ -126,24 +165,6 @@ export class AdministrarEliminacionesComponent implements OnInit{
   }
 
 
-  abrirPerfil(id): void {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        id: id,
-        usuario: null,
-      }
-    };
-    this.router.navigate(['/perfil'], navigationExtras);
-  }
 
-  abrirPerfilAsociacion(id): void {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        id: id,
-        asociacion: false,
-      }
-    };
-    this.router.navigate(['/asociacion'], navigationExtras);
-  }
 
 }
