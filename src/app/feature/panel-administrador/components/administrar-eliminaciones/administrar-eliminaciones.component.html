@@ -1,48 +1,99 @@
-<section>
-    <div class="tabla" *ngIf="hayUsuariosAEliminar">
-        <h1>Usuarios</h1>
-        <table>
-          <thead>
-            <tr>
-              <th class="table-header">Nombre</th>
-              <th class="table-header">Correo Electronico</th>
-              <th class="table-header">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let usuario of usuariosEliminar">
-            <td>{{usuario?.nombre}}</td>
-            <td>{{usuario?.correo}}</td>
-            <td>
-              <button class="btn btn-success" (click)="abrirPerfil(usuario?.id)">Ver Perfil</button>
-              <button class="btn btn-success" >Eliminar</button>
-            </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="tabla">
-        <h1>Empresas o Asociaciones</h1>
-        <table>
-          <thead>
-            <tr>
-              <th class="table-header">Nombre</th>
-              <th class="table-header">Nit</th>
-              <th class="table-header">Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let asociacion of asociacionesEliminar">
-            <td>{{asociacion?.nombre}}</td>
-            <td>{{asociacion?.nit}}</td>
-            <td>
-              <button class="btn btn-success" (click)="abrirPerfilAsociacion(asociacion?.id)">Ver Asociacion</button>
-              <button class="btn btn-success" >Eliminar</button>
-            </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-</section>
+
+<div class="tabla" *ngIf="hayUsuariosAEliminar">
+  <h1>Usuarios</h1>
+  <table>
+    <thead>
+      <tr>
+        <th class="table-header">Nombre</th>
+        <th class="table-header">Correo Electronico</th>
+        <th class="table-header">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let usuario of usuariosEliminar">
+        <td>{{usuario?.nombre}}</td>
+        <td>{{usuario?.correo}}</td>
+        <td>
+          <button class="btn btn-success" (click)="abrirPerfil(usuario?.id)">Ver Perfil</button>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Eliminar
+            <!-- <app-modal-confirmacion
+            [titulo]="'Eliminar'"
+            [descripcion]="mensajeEliminarUsuario"
+            (confirmacion)="eliminarPersona(usuario?.id)"> 
+            </app-modal-confirmacion> -->
+          </button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
+<div class="tabla" *ngIf="hayAsociacionesAEliminar">
+  <h1>Asociacion</h1>
+  <table>
+    <thead>
+      <tr>
+        <th class="table-header">Nombre</th>
+        <th class="table-header">NIT</th>
+        <th class="table-header">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let asociacion of asociacionesEliminar">
+        <td>{{asociacion?.nombre}}</td>
+        <td>{{asociacion?.nit}}</td>
+        <td>
+          <button class="btn btn-success" (click)="abrirPerfilAsociacion(asociacion?.id)">Ver Perfil</button>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarAsociacionModalId" >Eliminar
+            <app-modal-confirmacion
+            [modalId]="'eliminarAsociacionModalId'" 
+            [titulo]="'Eliminar'"
+            [descripcion]="'¿Estás seguro de desea eliminar la Asociacion?'"
+            (confirmacion)="eliminarAsociacion(asociacion?.id)"> 
+          </app-modal-confirmacion>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> 
+<div class="tabla" *ngIf="hayNecesidadAEliminar">
+  <h1>Proyectos</h1>
+  <table>
+    <thead>
+      <tr>
+        <th class="table-header">Nombre</th>
+        <th class="table-header">Estado</th>
+        <th class="table-header">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let proyecto of necesidadEliminar">
+        <td>{{proyecto?.proyecto.nombre}}</td>
+        <td>{{proyecto?.proyecto.estado.nombre}}</td>
+        <td>
+          <button class="btn btn-success" >Ver Proyecto</button>
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProyectoModalId">Eliminar
+            <app-modal-confirmacion
+            [modalId]="'eliminarProyectoModalId'" 
+            [titulo]="'Eliminar'"
+            [descripcion]="'¿Estás seguro de desea eliminar el proyecto?'"
+            (confirmacion)="eliminarAsociacion(proyecto?.proyecto.estado.id)"> 
+          </app-modal-confirmacion>
+          </button>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-modal-confirmacion 
+[titulo]="'Eliminar'"
+[descripcion]="mensajeModal"
+(confirmacion)="eliminarPeticion()"> 
+</app-modal-confirmacion>
+
+
 
 

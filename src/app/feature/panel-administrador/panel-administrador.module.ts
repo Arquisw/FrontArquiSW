@@ -9,10 +9,11 @@ import { AdministradorService } from './service/administrador.service';
 
 
 
+
 @NgModule({
   declarations: [
     PanelAdministradorComponent,
-    AdministrarEliminacionesComponent
+    AdministrarEliminacionesComponent,
   ],
   imports: [
     CommonModule,
