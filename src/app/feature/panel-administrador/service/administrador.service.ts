@@ -39,4 +39,8 @@ export class AdministradorService {
   eliminarPersona(id: number) {
     return this.http.doDelete(environment.endpoint +'/usuarios/administrador/'+ id);
   }
+
+  eliminarProyecto(id: number) {
+    return this.http.doDelete(environment.endpoint +'/necesidades/administrador/'+ id);
+  }
 }

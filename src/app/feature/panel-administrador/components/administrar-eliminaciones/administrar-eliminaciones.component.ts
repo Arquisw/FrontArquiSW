@@ -11,17 +11,13 @@ export class AdministrarEliminacionesComponent implements OnInit{
   usuariosEliminar: any[] = [];
   asociacionesEliminar: any[] = [];
   necesidadEliminar: any[] = [];
-  mensajeError= '';
   hayUsuariosAEliminar = false;
   hayAsociacionesAEliminar = false;
   hayNecesidadAEliminar = false;
   mensajeEliminarProyecto= '¿Estás seguro de desea eliminar el proyecto?';
   mensajeEliminarAsociacion = '¿Estás seguro de desea eliminar la Asociacion?';
   mensajeEliminarUsuario= '¿Estás seguro de desea eliminar el usuario?';
-  mensajeModal = '';
-  idEliminar;
-
-
+  mensajeError= '';
 
 
   constructor(private router: Router,
@@ -33,37 +29,9 @@ export class AdministrarEliminacionesComponent implements OnInit{
     this.consultaPeticionesNecesidadAEliminar();
   }
 
-  eliminar(mensaje: string, id:number){
-    if(mensaje === this.mensajeEliminarAsociacion)
-    {
-      this.mensajeModal = this.mensajeEliminarAsociacion;
-      this.idEliminar = id;
-    } else if(mensaje === this.mensajeEliminarUsuario)
-    {
-      this.mensajeModal = this.mensajeEliminarUsuario;
-      this.idEliminar = id;
-    } else if(mensaje === this.mensajeEliminarProyecto)
-    {
-      this.mensajeModal = this.mensajeEliminarProyecto;
-      this.idEliminar = id;
-    }
-  }
-
-  eliminarPeticion():void {
-    if(this.mensajeModal === this.mensajeEliminarAsociacion)
-    {
-      console.log('Se elimina la asociacion' + this.idEliminar)
-      //this.eliminarAsociacion(this.idEliminar);
-    }else if(this.mensajeModal === this.mensajeEliminarUsuario)
-    {
-      console.log('Se elimina el usuario' + this.idEliminar)
-    } else if(this.mensajeModal === this.mensajeEliminarProyecto)
-    {
-      console.log('Se elimina el proyecyo' + this.idEliminar)
-    }
-  }
 
   consultaPeticionesUsuarioAEliminar(): void {
+    this.usuariosEliminar= [];
     let petecionEliminar;
     this.admistradorService.consultarPeticionesUsuariosEliminar().subscribe((response) => {
       petecionEliminar = response;
@@ -109,18 +77,20 @@ export class AdministrarEliminacionesComponent implements OnInit{
   }
 
   consultaPeticionesAsociacionesAEliminar(): void {
+    this.asociacionesEliminar = [];
     let petecionAsociacionEliminar;
     this.admistradorService.consultarPeticionesAsociacionAEliminar().subscribe((response) => {
       petecionAsociacionEliminar = response;
       if(petecionAsociacionEliminar.length > 0) {
         this.hayAsociacionesAEliminar = true;
+      } else {
+        this.hayAsociacionesAEliminar = false;
       }
       for (const peticion of petecionAsociacionEliminar) {
         this.consultaAsociacionAEliminar(peticion?.asociacion);
       }
     },
     (error) => {
-      this.hayAsociacionesAEliminar = false;
       this.mensajeError=error.message;
     });
   }
@@ -141,7 +111,6 @@ export class AdministrarEliminacionesComponent implements OnInit{
     (error) => {
       this.mensajeError=error.message;
     });
-
   }
   
   abrirPerfilAsociacion(id): void {
@@ -155,6 +124,7 @@ export class AdministrarEliminacionesComponent implements OnInit{
   }
 
   consultaPeticionesNecesidadAEliminar(): void {
+    this.necesidadEliminar =[];
     let petecionNecesidadEliminar;
     this.admistradorService.consultarPeticionesNecesidadAEliminar().subscribe((response) => {
       petecionNecesidadEliminar = response;
@@ -176,21 +146,17 @@ export class AdministrarEliminacionesComponent implements OnInit{
       this.necesidadEliminar.push(response);
     },
     (error) => {
-      this.hayNecesidadAEliminar = false;
       this.mensajeError=error.message;
     });
   }
 
   eliminarProyecto(id: number): void {
-    this.admistradorService.eliminarAsociacion(id).subscribe(() => {
+    this.admistradorService.eliminarProyecto(id).subscribe(() => {
       this.consultaPeticionesNecesidadAEliminar();
     },
     (error) => {
       this.mensajeError=error.message;
     });
   }
-
-
-
 
 }
