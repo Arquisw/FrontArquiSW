@@ -16,8 +16,10 @@ export class AdministrarEliminacionesComponent implements OnInit{
   hayAsociacionesAEliminar = false;
   hayNecesidadAEliminar = false;
   mensajeEliminarProyecto= '¿Estás seguro de desea eliminar el proyecto?';
-  mensajeEliminarAsociacion;
+  mensajeEliminarAsociacion = '¿Estás seguro de desea eliminar la Asociacion?';
   mensajeEliminarUsuario= '¿Estás seguro de desea eliminar el usuario?';
+  mensajeModal = '';
+  idEliminar;
 
 
 
@@ -31,10 +33,34 @@ export class AdministrarEliminacionesComponent implements OnInit{
     this.consultaPeticionesNecesidadAEliminar();
   }
 
-  eliminar(mensaje){
-    console.log(mensaje)
-    this.mensajeEliminarAsociacion = 'Hola hpta';
-    console.log(this.mensajeEliminarAsociacion)
+  eliminar(mensaje: string, id:number){
+    if(mensaje === this.mensajeEliminarAsociacion)
+    {
+      this.mensajeModal = this.mensajeEliminarAsociacion;
+      this.idEliminar = id;
+    } else if(mensaje === this.mensajeEliminarUsuario)
+    {
+      this.mensajeModal = this.mensajeEliminarUsuario;
+      this.idEliminar = id;
+    } else if(mensaje === this.mensajeEliminarProyecto)
+    {
+      this.mensajeModal = this.mensajeEliminarProyecto;
+      this.idEliminar = id;
+    }
+  }
+
+  eliminarPeticion():void {
+    if(this.mensajeModal === this.mensajeEliminarAsociacion)
+    {
+      console.log('Se elimina la asociacion' + this.idEliminar)
+      //this.eliminarAsociacion(this.idEliminar);
+    }else if(this.mensajeModal === this.mensajeEliminarUsuario)
+    {
+      console.log('Se elimina el usuario' + this.idEliminar)
+    } else if(this.mensajeModal === this.mensajeEliminarProyecto)
+    {
+      console.log('Se elimina el proyecyo' + this.idEliminar)
+    }
   }
 
   consultaPeticionesUsuarioAEliminar(): void {

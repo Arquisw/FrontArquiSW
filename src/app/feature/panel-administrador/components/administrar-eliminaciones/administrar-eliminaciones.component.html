@@ -16,11 +16,11 @@
         <td>
           <button class="btn btn-success" (click)="abrirPerfil(usuario?.id)">Ver Perfil</button>
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#staticBackdrop" >Eliminar
-            <app-modal-confirmacion
+            <!-- <app-modal-confirmacion
             [titulo]="'Eliminar'"
             [descripcion]="mensajeEliminarUsuario"
             (confirmacion)="eliminarPersona(usuario?.id)"> 
-            </app-modal-confirmacion>
+            </app-modal-confirmacion> -->
           </button>
 
         </td>
@@ -52,7 +52,6 @@
             (confirmacion)="eliminarAsociacion(asociacion?.id)"> 
           </app-modal-confirmacion>
           </button>
-
         </td>
       </tr>
     </tbody>
@@ -88,6 +87,12 @@
     </tbody>
   </table>
 </div>
+
+<app-modal-confirmacion 
+[titulo]="'Eliminar'"
+[descripcion]="mensajeModal"
+(confirmacion)="eliminarPeticion()"> 
+</app-modal-confirmacion>
 
 
 
