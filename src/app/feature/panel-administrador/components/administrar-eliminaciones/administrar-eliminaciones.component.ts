@@ -163,7 +163,7 @@ export class AdministrarEliminacionesComponent implements OnInit{
     const navigationExtras: NavigationExtras = {
       state: {
         id: id,
-        asociacion: false,
+        proyecto: false,
       }
     };
     this.router.navigate(['/proyecto'], navigationExtras);
