@@ -8,7 +8,7 @@ import { Proyecto } from '../../shared/model/proyecto.model';
 import { TipoConsultoria } from '../../shared/model/tipo-consultoria.model';
 import { ProyectosService } from '../../shared/service/proyectos.service';
 import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-mis-proyectos',
@@ -256,5 +256,14 @@ export class ConsultarMisProyectosComponent implements OnInit {
       this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
+  }
+
+  abrirPerfilProyecto(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id
+      }
+    };
+    this.router.navigate(['/proyecto'], navigationExtras);
   }
 }

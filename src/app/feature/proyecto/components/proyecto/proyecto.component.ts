@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ProyectoService } from '../../shared/service/proyecto.service';
 import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
 import { ConfiguracionService } from 'src/app/feature/configuracion/shared/service/configuracion.service';
@@ -26,14 +26,12 @@ export class ProyectoComponent implements OnInit {
   tieneContrato = false;
   detalleDocumento;
 
-  constructor(private route: ActivatedRoute, private proyectoService: ProyectoService, private configuracionService: ConfiguracionService, private router: Router, private storageService: StorageService) {}
+  constructor(private proyectoService: ProyectoService, private configuracionService: ConfiguracionService, private router: Router, private storageService: StorageService) {}
 
   ngOnInit(): void {
-    this.necesidadId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
-
-    //const params = history.state;
+    const params = history.state;
+    this.necesidadId = params.id;
    
-
     this.consultarNecesidadPorId();
   }
 

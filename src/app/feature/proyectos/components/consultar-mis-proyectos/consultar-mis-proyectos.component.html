@@ -35,7 +35,7 @@
           <td class="table-body align-middle">{{necesidad.estado.nombre}}</td>
           <td class="table-body align-middle">{{necesidad.proyecto.estado.nombre}}</td>
           <td class="table-body align-middle">
-            <button [routerLink]="['/proyecto/', necesidad.id]" class="btn btn-watch-project btn-success mt-3">Ver
+            <button (click)="abrirPerfilProyecto(necesidad?.id)" class="btn btn-watch-project btn-success mt-3">Ver
               Proyecto</button>
             <button class="btn btn-update btn-success mt-3" (click)="openActualizar(necesidad.id)">Actualizar</button>
             <button class="btn btn-success mt-3" (click)="onEliminar(necesidad.id)">Eliminar</button>

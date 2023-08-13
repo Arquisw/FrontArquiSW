@@ -32,7 +32,7 @@
         <h5 class="card-title">Descripción</h5>
         <p class="card-text">{{proyectoResumen.descripcion}}</p>
         <div class="buttons-container">
-          <button [routerLink]="['/proyecto/', necesidadResumen.id]" class="btn btn-watch-project btn-success">Ver Proyecto</button>
+          <button (click)="abrirPerfilProyecto(necesidadResumen?.id)" class="btn btn-watch-project btn-success">Ver Proyecto</button>
         </div>
       </div>
     </div>

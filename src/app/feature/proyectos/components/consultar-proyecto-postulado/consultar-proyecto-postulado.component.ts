@@ -5,6 +5,7 @@ import { PostulacionResumen } from '../../shared/model/postulacion-resumen.model
 import { ProyectosService } from '../../shared/service/proyectos.service';
 import { Postulacion } from '../../shared/model/postulacion.model';
 import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-proyecto-postulado',
@@ -25,7 +26,7 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
   usuarioId = 0;
   proyectoId = 0;
 
-  constructor(private proyectosService: ProyectosService) { }
+  constructor(private proyectosService: ProyectosService, private router: Router) { }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -243,5 +244,14 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
     } else {
       this.mensajeError = 'Debes seleccionar por lo menos un rol al cual postularse';
     }
+  }
+
+  abrirPerfilProyecto(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id
+      }
+    };
+    this.router.navigate(['/proyecto'], navigationExtras);
   }
 }

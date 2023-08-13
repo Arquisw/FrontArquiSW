@@ -7,6 +7,7 @@ import { ConfiguracionService } from 'src/app/feature/configuracion/shared/servi
 import { PersonaResumen } from 'src/app/feature/configuracion/shared/model/persona-resumen.model';
 import { UsuarioResumen } from 'src/app/feature/configuracion/shared/model/usuario-resumen.model';
 import { PostulacionResumen } from '../../shared/model/postulacion-resumen.model';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-proyectos',
@@ -29,7 +30,7 @@ export class ConsultarProyectosComponent implements OnInit {
   proyectoActualId = 0;
   mostrarBotonPostulacion = true;
 
-  constructor(private proyectosService: ProyectosService, private configuracionService: ConfiguracionService) { }
+  constructor(private proyectosService: ProyectosService, private configuracionService: ConfiguracionService, private router: Router) { }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -241,5 +242,14 @@ export class ConsultarProyectosComponent implements OnInit {
     } else {
       this.mensajeError = 'Debes seleccionar por lo menos un rol al cual postularse';
     }
+  }
+
+  abrirPerfilProyecto(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id
+      }
+    };
+    this.router.navigate(['/proyecto'], navigationExtras);
   }
 }

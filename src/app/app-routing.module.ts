@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'recuperar-clave', component: RecuperarClaveComponent },
   { path: 'asociacion', component: AsociacionComponent, canActivate: [SecurityGuard] },
   { path: 'perfil', component: PerfilComponent, canActivate: [SecurityGuard] },
-  { path: 'proyecto/:id', component: ProyectoComponent, canActivate: [SecurityGuard] },
+  { path: 'proyecto', component: ProyectoComponent, canActivate: [SecurityGuard] },
   { path: 'configuracion', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: 'proyectos', loadChildren: () => import('./feature/proyectos/proyectos.module').then(mod => mod.ProyectosModule), canActivate: [SecurityGuard] },
   { path: 'ingenieria-de-requisitos', loadChildren: () => import('./feature/ingenieria-de-requisitos/ingenieria-de-requisitos.module').then(mod => mod.IngenieriaDeRequisitosModule), canActivate: [SecurityGuard] },

@@ -3,6 +3,7 @@ import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
 import { ProyectoResumen } from '../../shared/model/proyecto-resumen.model';
 import { SeleccionResumen } from '../../shared/model/seleccion-resumen.model';
 import { ProyectosService } from '../../shared/service/proyectos.service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-proyecto-seleccionado',
@@ -20,7 +21,7 @@ export class ConsultarProyectoSeleccionadoComponent implements OnInit {
   usuarioId = 0;
   proyectoId = 0;
 
-  constructor(private proyectosService: ProyectosService) {}
+  constructor(private proyectosService: ProyectosService, private router: Router) {}
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -76,5 +77,14 @@ export class ConsultarProyectoSeleccionadoComponent implements OnInit {
 
       this.necesidadResumen = response;
     });
+  }
+
+  abrirPerfilProyecto(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id
+      }
+    };
+    this.router.navigate(['/proyecto'], navigationExtras);
   }
 }
