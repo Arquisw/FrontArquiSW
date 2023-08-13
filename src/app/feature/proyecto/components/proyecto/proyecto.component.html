@@ -1,8 +1,8 @@
 <header class="header-content">
   <section class="information">
-    <h1>{{necesidadResumen.proyecto.nombre}}</h1>
-    <p><strong>Estado: </strong>{{necesidadResumen.proyecto.estado.nombre}}</p>
-    <p>{{necesidadResumen.proyecto.descripcion}}</p>
+    <h1>{{necesidadResumen?.proyecto.nombre}}</h1>
+    <p><strong>Estado: </strong>{{necesidadResumen?.proyecto.estado.nombre}}</p>
+    <p>{{necesidadResumen?.proyecto.descripcion}}</p>
   </section>
 </header>
 <main>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let seleccion of seleccionesResumen">
-            <td class="table-body align-middle">{{consultarNombreDeUsuarioPorId(seleccion.usuarioID)}}</td>
+            <td class="table-body align-middle">{{consultarNombreDeUsuarioPorId(seleccion?.usuarioID)}}</td>
             <td class="table-body align-middle">
               <p *ngFor="let rol of seleccion.roles">{{rol}}</p>
             </td>
@@ -49,7 +49,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let file of files">
-            <td class="table-body align-middle">{{file.nombre}}</td>
+            <td class="table-body align-middle">{{file?.nombre}}</td>
             <td class="table-body align-middle">
               <button class="btn btn-success" (click)="downloadFile()">Ver Documento</button>
             </td>

@@ -1,4 +1,4 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -21,7 +21,6 @@ import { ModalConfirmacionComponent } from './components/modal-confirmacion/moda
     ModalCargarPdfComponent,
     ModalDescripcionComponent,
     ModalConfirmacionComponent
-  ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  ]
 })
 export class SharedModule { }

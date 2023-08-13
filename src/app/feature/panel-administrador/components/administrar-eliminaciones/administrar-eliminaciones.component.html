@@ -72,7 +72,7 @@
         <td>{{proyecto?.proyecto.nombre}}</td>
         <td>{{proyecto?.proyecto.estado.nombre}}</td>
         <td>
-          <button class="btn btn-success" >Ver Proyecto</button>
+          <button class="btn btn-success" (click)="abrirPerfilProyecto(proyecto?.proyecto.id)">Ver Proyecto</button>
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProyectoModalId">Eliminar
             <app-modal-confirmacion
               [modalId]="'eliminarProyectoModalId'" 

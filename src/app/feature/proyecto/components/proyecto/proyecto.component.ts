@@ -31,6 +31,9 @@ export class ProyectoComponent implements OnInit {
   ngOnInit(): void {
     this.necesidadId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
 
+    //const params = history.state;
+   
+
     this.consultarNecesidadPorId();
   }
 

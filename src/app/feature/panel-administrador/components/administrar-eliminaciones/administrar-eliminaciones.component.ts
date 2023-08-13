@@ -21,7 +21,7 @@ export class AdministrarEliminacionesComponent implements OnInit{
 
 
   constructor(private router: Router,
-    private admistradorService: AdministradorService)  { }
+              private admistradorService: AdministradorService)  { }
     
   ngOnInit(): void {
     this.consultaPeticionesUsuarioAEliminar();
@@ -157,6 +157,16 @@ export class AdministrarEliminacionesComponent implements OnInit{
     (error) => {
       this.mensajeError=error.message;
     });
+  }
+
+  abrirPerfilProyecto(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id,
+        asociacion: false,
+      }
+    };
+    this.router.navigate(['/proyecto'], navigationExtras);
   }
 
 }
