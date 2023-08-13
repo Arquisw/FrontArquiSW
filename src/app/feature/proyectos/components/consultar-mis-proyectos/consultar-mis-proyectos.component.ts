@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import Modal from 'bootstrap/js/dist/modal';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
-import { Necesidad } from '../../shared/model/necesidad.model';
+import { Requerimientos } from '../../shared/model/requerimientos.model';
 import { Proyecto } from '../../shared/model/proyecto.model';
 import { TipoConsultoria } from '../../shared/model/tipo-consultoria.model';
 import { ProyectosService } from '../../shared/service/proyectos.service';
@@ -20,7 +20,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   guardarNecesidadForm: FormGroup;
   actualizarNecesidadForm: FormGroup;
   usuarioId = 0;
-  proyectoId= 0;
+  necesidadId= 0;
   tiposConsultoriaSeleccionados: string[] = [];
   guardadoError = false;
   mensajeError = '';
@@ -69,27 +69,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   onClickSaveNeed(): void {
-    this.uploadFile();
-  }
-
-  uploadFile() {
-    if (this.archivo) {
-      const filePath = 'necesidad/' + this.guardarNecesidadForm.get('nombreProyecto')?.value + '/' + this.proyectoId + '.pdf';
-      const fileRef = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, this.archivo);
-
-      task.snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.urlArchivo = url;
-            this.saveNeed();
-          });
-        })
-      ).subscribe();
-    } else {
-      this.guardadoError = true;
-      this.mensajeError = 'El archivo de los detalles de la necesidad es obligatorio';
-    }
+    this.saveNeed();
   }
 
   saveNeed(): void {
@@ -102,13 +82,11 @@ export class ConsultarMisProyectosComponent implements OnInit {
       });
 
       const proyecto = new Proyecto(this.guardarNecesidadForm.get('nombreProyecto')?.value, this.guardarNecesidadForm.get('descripcionProyecto')?.value, tiposConsultoria);
-      const necesidad = new Necesidad(this.urlArchivo, proyecto);
-   
-      this.proyectosService.guardar(necesidad, this.asociacionId).subscribe((response) => {
+
+      this.proyectosService.guardar(proyecto, this.asociacionId).subscribe((response) => {
         console.log('Data:', response);
-        this.proyectoId = response.valor;
-        this.loginModal?.hide();
-        window.location.reload();
+        this.necesidadId = response.valor;
+        this.uploadFile();
       }, (error) => {
         this.guardadoError = true;
         this.mensajeError = error?.error?.mensaje;
@@ -118,9 +96,42 @@ export class ConsultarMisProyectosComponent implements OnInit {
     }
   }
 
+  uploadFile() {
+    if (this.archivo) {
+      const filePath = 'necesidad/' + this.necesidadId + '/' + this.guardarNecesidadForm.get('nombreProyecto')?.value + '.pdf';
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, this.archivo);
+
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.urlArchivo = url;
+            this.saveRequeriments();
+          });
+        })
+      ).subscribe();
+    } else {
+      this.guardadoError = true;
+      this.mensajeError = 'El archivo de los detalles de la necesidad es obligatorio';
+    }
+  }
+
+  saveRequeriments(): void {
+    const requerimientos = new Requerimientos(this.urlArchivo);
+
+    this.proyectosService.guardarRequerimientos(requerimientos, this.necesidadId).subscribe((response) => {
+      console.log('Data:', response);
+      this.loginModal?.hide();
+      window.location.reload();
+    }, (error) => {
+      this.guardadoError = true;
+      this.mensajeError = error?.error?.mensaje;
+    });
+  }
+
   onIngenieriaDeRequisitosSelected(): void {
     const tipoDeConsultoria = 'Ingenieria de Requisitos';
-    
+
     if (this.tiposConsultoriaSeleccionados.includes(tipoDeConsultoria)) {
       const index = this.tiposConsultoriaSeleccionados.indexOf(tipoDeConsultoria);
 
@@ -192,35 +203,24 @@ export class ConsultarMisProyectosComponent implements OnInit {
     this.loginModal?.show();
 
     this.necesidad = this.necesidades.find(item => item.id = id);
+    this.necesidadId = this.necesidad.id;
 
     this.necesidad.proyecto.tiposConsultoria.forEach(tipoConsultoria => {
       this.tiposConsultoriaSeleccionados.push(tipoConsultoria.nombre);
     });
 
-    this.urlArchivo = this.necesidad.rutaArchivo;
+    this.consultarRequerimientos();
+  }
+
+  consultarRequerimientos(): void {
+    this.proyectosService.consultarRequerimientosPorNecesidadId(this.necesidadId).subscribe((response) => {
+      console.log('Data:', response);
+      this.urlArchivo = response.rutaArchivo;
+    });
   }
 
   onClickUpdateNeed(): void {
-    this.updateFile();
-  }
-
-  updateFile() {
-    if(this.archivo) {
-      const filePath = 'necesidad/' + this.nombreProyecto + '/' + this.usuarioId + '.pdf';
-      const fileRef = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, this.archivo);
-
-      task.snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.urlArchivo = url;
-            this.actualizarNecesidad();
-          });
-        })
-      ).subscribe();
-    } else {
-      this.actualizarNecesidad();
-    }
+    this.actualizarNecesidad();
   }
 
   actualizarNecesidad(): void {
@@ -233,12 +233,10 @@ export class ConsultarMisProyectosComponent implements OnInit {
       });
 
       const proyecto = new Proyecto(this.actualizarNecesidadForm.get('nombreProyectoActualizar')?.value, this.actualizarNecesidadForm.get('descripcionProyectoActualizar')?.value, tiposConsultoria);
-      const necesidad = new Necesidad(this.urlArchivo, proyecto);
 
-      this.proyectosService.actualizar(necesidad, this.asociacionId).subscribe((response) => {
+      this.proyectosService.actualizar(proyecto, this.asociacionId).subscribe((response) => {
         console.log('Data:', response);
-        this.loginModal?.hide();
-        window.location.reload();
+        this.updateFile();
       }, (error) => {
         this.actualizacionError = true;
         this.mensajeError = error?.error?.mensaje;
@@ -246,6 +244,35 @@ export class ConsultarMisProyectosComponent implements OnInit {
     } else {
       this.mensajeError = 'Debes seleccionar por lo menos un servicio de consultoria';
     }
+  }
+
+  updateFile() {
+    if(this.archivo) {
+      const filePath = 'necesidad/' + this.necesidadId + '/' + this.actualizarNecesidadForm.get('nombreProyectoActualizar')?.value + '.pdf';
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(filePath, this.archivo);
+
+      task.snapshotChanges().pipe(
+        finalize(() => {
+          fileRef.getDownloadURL().subscribe((url) => {
+            this.urlArchivo = url;
+            this.actualizarRequerimientos();
+          });
+        })
+      ).subscribe();
+    }
+  }
+
+  actualizarRequerimientos(): void {
+    const requerimientos = new Requerimientos(this.urlArchivo);
+    this.proyectosService.actualizarRequerimientos(requerimientos, this.necesidadId).subscribe((response) => {
+      console.log('Data:', response);
+      this.loginModal?.hide();
+      window.location.reload();
+    }, (error) => {
+      this.actualizacionError = true;
+      this.mensajeError = error?.error?.mensaje;
+    });
   }
 
   onEliminar(id: number): void {

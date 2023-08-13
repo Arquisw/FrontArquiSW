@@ -38,7 +38,7 @@ export class ProyectoComponent implements OnInit {
   consultarNecesidadPorId(): void {
     this.proyectoService.consultarNecesidadPorId(this.necesidadId).subscribe((response) => {
       this.necesidadResumen = response;
-      this.urlDescarga = this.necesidadResumen.rutaArchivo;
+      this.urlDescarga = 'https://firebasestorage.googleapis.com/v0/b/arquisw-4dc7f.appspot.com/o/necesidad%2Fhbkjnlk%2F0.pdf?alt=media&token=d2c9634e-8eb9-45cb-b81a-1e87a77d49ef';
       this.proyectoId = this.necesidadResumen.proyecto.id;
       this.definirServicios();
       this.consultarSeleccionesPorId();

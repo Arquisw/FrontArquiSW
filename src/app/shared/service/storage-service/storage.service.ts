@@ -25,7 +25,7 @@ export class StorageService {
   }
 
   listaDeArchivosNecesidad(necesidad: NecesidadResumen): Observable<any[]> {
-    return this.storage.ref('necesidad/' + necesidad.proyecto.nombre + '/').listAll().pipe(
+    return this.storage.ref('necesidad/' + necesidad.id + '/').listAll().pipe(
       map((result) => {
         const files = result.items.map((item) => {
           return {
