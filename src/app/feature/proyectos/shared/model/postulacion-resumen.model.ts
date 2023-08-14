@@ -1,12 +1,18 @@
 export class PostulacionResumen {
   public id: number;
+  public seleccionado: boolean;
+  public rechazado: boolean;
+  public motivoDelRechazo: string;
   public fecha: string;
   public roles: string[];
   public proyectoID: number;
   public usuarioID: number;
 
-  constructor(id?: number, fecha?: string, roles?: string[], proyectoID?: number, usuarioID?: number, ) {
+  constructor(id?: number, seleccionado?: boolean, rechazado?: boolean, motivoDelRechazo?: string, fecha?: string, roles?: string[], proyectoID?: number, usuarioID?: number, ) {
     this.id = id || 0;
+    this.seleccionado = seleccionado || false;
+    this.rechazado = rechazado || false;
+    this.motivoDelRechazo = motivoDelRechazo || '';
     this.fecha = fecha || '';
     this.roles = roles;
     this.proyectoID = proyectoID || 0;

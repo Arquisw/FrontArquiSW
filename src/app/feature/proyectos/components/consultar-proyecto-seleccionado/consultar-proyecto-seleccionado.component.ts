@@ -12,10 +12,13 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class ConsultarProyectoSeleccionadoComponent implements OnInit {
   proyectoResumen: ProyectoResumen;
+  proyectosResumen: ProyectoResumen[];
   seleccionResumen: SeleccionResumen;
+  seleccionesResumen: SeleccionResumen [] = [];
   necesidadResumen: NecesidadResumen;
   rolesSeleccionados: string[] = [];
   codigoRolesSeleccionados: string[] = [];
+  tieneMasDeUnaSeleccion = false;
   roles: Map<string, string> = new Map();
   estaSeleccionado = false;
   usuarioId = 0;
@@ -29,7 +32,7 @@ export class ConsultarProyectoSeleccionadoComponent implements OnInit {
     this.usuarioId = tokenPayload.id;
 
     this.cargarMapaDeRoles();
-    this.consultarSeleccion();
+    this.consultarSelecciones();
   }
 
   cargarMapaDeRoles(): void {
@@ -43,11 +46,21 @@ export class ConsultarProyectoSeleccionadoComponent implements OnInit {
     this.roles.set('ROLE_PATROCINADOR', 'Patrocinador');
   }
 
-  consultarSeleccion(): void {
-    this.proyectosService.consultarSeleccionPorUsuarioId(this.usuarioId).subscribe((response) => {
+  consultarSelecciones(): void {
+    this.proyectosService.consultarSeleccionesPorUsuarioId(this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
 
-      this.seleccionResumen = response;
+      this.seleccionesResumen = response;
+
+      if(this.seleccionesResumen.length > 1) {
+        this.tieneMasDeUnaSeleccion = true;
+      }
+
+      this.seleccionesResumen.slice(1).forEach(seleccion => {
+        this.obtenerProyecto(seleccion.proyectoID);
+      });
+
+      this.seleccionResumen = this.seleccionesResumen[0];
 
       this.seleccionResumen.roles.forEach(rol => {
         this.rolesSeleccionados.push(this.roles.get(rol));
@@ -58,6 +71,16 @@ export class ConsultarProyectoSeleccionadoComponent implements OnInit {
     }, (error) => {
       this.estaSeleccionado = false;
       console.log(error?.error?.mensaje);
+    });
+  }
+
+  obtenerProyecto(id: number): void {
+    this.proyectosService.consultarProyectoPorId(id).subscribe((response) => {
+      console.log('Data:', response);
+
+      this.proyectosResumen.push(response);
+
+      this.consultarNecesidad();
     });
   }
 
@@ -80,11 +103,24 @@ export class ConsultarProyectoSeleccionadoComponent implements OnInit {
   }
 
   abrirPerfilProyecto(id): void {
+    const idActual = this.obtenerNecesidadIdPorProyectoId(id);
+
     const navigationExtras: NavigationExtras = {
       state: {
-        id: id
+        id: idActual
       }
     };
+
     this.router.navigate(['/proyecto'], navigationExtras);
+  }
+
+  obtenerNecesidadIdPorProyectoId(id: number): number {
+    let necesidadId = 0;
+
+    this.proyectosService.consultarNecesidadPorProyectoId(id).subscribe((response) => {
+      necesidadId = response.id;
+    });
+
+    return necesidadId;
   }
 }

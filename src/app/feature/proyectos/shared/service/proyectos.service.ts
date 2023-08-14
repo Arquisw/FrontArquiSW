@@ -94,14 +94,14 @@ export class ProyectosService {
     return this.httpService.doPut<Postulacion, ProyectoRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}/${id}`, postulacion);
   }
 
-  public consultarPostulacionPorUsuarioId(id: number): Observable<PostulacionResumen>
+  public consultarPostulacionesPorUsuarioId(id: number): Observable<PostulacionResumen[]>
   {
-    return this.httpService.doGetById<PostulacionResumen>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.POSTULACION_ENDPOINT}${this.USUARIO_ENDPOINT}/`, id);
+    return this.httpService.doGetById<PostulacionResumen[]>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.POSTULACION_ENDPOINT}${this.USUARIO_ENDPOINT}/`, id);
   }
 
-  public consultarSeleccionPorUsuarioId(id: number): Observable<SeleccionResumen>
+  public consultarSeleccionesPorUsuarioId(id: number): Observable<SeleccionResumen[]>
   {
-    return this.httpService.doGetById<SeleccionResumen>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.SELECCIONES_ENDPOINT}${this.SELECCION_ENDPOINT}${this.USUARIO_ENDPOINT}/`, id);
+    return this.httpService.doGetById<SeleccionResumen[]>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.SELECCIONES_ENDPOINT}${this.SELECCION_ENDPOINT}${this.USUARIO_ENDPOINT}/`, id);
   }
 
   public consultarNecesidadPorProyectoId(id: number): Observable<NecesidadResumen>

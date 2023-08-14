@@ -37,4 +37,36 @@
       </div>
     </div>
   </div>
+  <div class="table-responsive" *ngIf="tieneMasDeUnaSeleccion">
+    <table class="table align-middle table-striped">
+      <thead>
+        <tr>
+          <th class="table-title" scope="col">Nombre</th>
+          <th class="table-title" scope="col">Descripción</th>
+          <th class="table-title" scope="col">Tipos de Consultoria</th>
+          <th class="table-title" scope="col">Estado del Proyecto</th>
+          <th class="table-title" scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let proyecto of proyectosResumen">
+          <td class="table-body align-middle">{{proyecto.nombre}}</td>
+          <td class="table-body align-middle">
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+              data-bs-dismiss="modal">Ver Descripción</button>
+            <app-modal-descripcion
+            [titulo]="'Descripción'"
+            [descripcion]="proyecto.descripcion"></app-modal-descripcion>
+          </td>
+          <td class="table-body align-middle">
+            <p *ngFor="let tipoConsultoria of proyecto.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
+          </td>
+          <td class="table-body align-middle">{{proyecto.estado.nombre}}</td>
+          <td class="table-body align-middle">
+            <button (click)="abrirPerfilProyecto(proyecto?.id)" class="btn btn-success mt-3">Ver Proyecto</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </section>

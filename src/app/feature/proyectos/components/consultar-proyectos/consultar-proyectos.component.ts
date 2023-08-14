@@ -20,6 +20,7 @@ export class ConsultarProyectosComponent implements OnInit {
   personaResumen: PersonaResumen;
   usuarioResumen: UsuarioResumen;
   postulacionResumen: PostulacionResumen;
+  postulacionesResumen: PostulacionResumen[];
   correo = '';
   loginModal: Modal | undefined;
   rolesSeleccionados: string[] = [];
@@ -70,9 +71,15 @@ export class ConsultarProyectosComponent implements OnInit {
   }
 
   consultarPostulacionPorUsuarioId(): void {
-    this.proyectosService.consultarPostulacionPorUsuarioId(this.usuarioId).subscribe((response) => {
+    this.proyectosService.consultarPostulacionesPorUsuarioId(this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
-      this.postulacionResumen = response;
+      this.postulacionesResumen = response;
+
+      this.postulacionesResumen.forEach(postulacion => {
+        if(postulacion.proyectoID === this.proyectoActualId) {
+          this.postulacionResumen = postulacion;
+        }
+      });
     }, (error) => {
       this.mostrarBotonPostulacion = false;
       console.log(error?.error?.mensaje);

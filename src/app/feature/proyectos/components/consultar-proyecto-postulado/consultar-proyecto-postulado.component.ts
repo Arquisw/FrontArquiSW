@@ -15,13 +15,16 @@ import { NavigationExtras, Router } from '@angular/router';
 export class ConsultarProyectoPostuladoComponent implements OnInit {
   loginModal: Modal | undefined;
   proyectoResumen: ProyectoResumen;
+  proyectosResumen: ProyectoResumen[];
   postulacionResumen: PostulacionResumen;
+  postulacionesResumen: PostulacionResumen[] = [];
   necesidadResumen: NecesidadResumen;
   rolesSeleccionados: string[] = [];
   codigoRolesSeleccionados: string[] = [];
   roles: Map<string, string> = new Map();
   estaPostulado = false;
   postulacionError = false;
+  tieneMasDeUnaPostulacion = false;
   mensajeError = '';
   usuarioId = 0;
   proyectoId = 0;
@@ -34,7 +37,7 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
     this.usuarioId = tokenPayload.id;
 
     this.cargarMapaDeRoles();
-    this.consultarPostulacion();
+    this.consultarPostulaciones();
   }
 
   cargarMapaDeRoles(): void {
@@ -60,11 +63,27 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
     window.location.reload();
   }
 
-  consultarPostulacion(): void {
-    this.proyectosService.consultarPostulacionPorUsuarioId(this.usuarioId).subscribe((response) => {
+  consultarPostulaciones(): void {
+    this.proyectosService.consultarPostulacionesPorUsuarioId(this.usuarioId).subscribe((response) => {
       console.log('Data:', response);
 
-      this.postulacionResumen = response;
+      this.postulacionesResumen = response;
+
+      if(this.postulacionesResumen.length > 1) {
+        this.tieneMasDeUnaPostulacion = true;
+      }
+
+      this.postulacionesResumen.forEach(postulacion => {
+        if(postulacion.rechazado) {
+          this.obtenerProyecto(postulacion.proyectoID);
+        }
+      });
+
+      this.postulacionesResumen.forEach(postulacion => {
+        if(!postulacion.seleccionado && !postulacion.rechazado) {
+          this.postulacionResumen = postulacion;
+        }
+      });
 
       this.postulacionResumen.roles.forEach(rol => {
         this.rolesSeleccionados.push(this.roles.get(rol));
@@ -79,6 +98,12 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
     });
   }
 
+  obtenerProyecto(id: number): void {
+    this.proyectosService.consultarProyectoPorId(id).subscribe((response) => {
+      this.proyectosResumen.push(response);
+    });
+  }
+
   consultarProyecto(): void {
     this.proyectosService.consultarProyectoPorId(this.postulacionResumen.proyectoID).subscribe((response) => {
       console.log('Data:', response);
@@ -86,9 +111,6 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
       this.proyectoResumen = response;
 
       this.consultarNecesidad();
-    }, (error) => {
-      this.postulacionError = true;
-      this.mensajeError = error?.error?.mensaje;
     });
   }
 
@@ -247,11 +269,24 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
   }
 
   abrirPerfilProyecto(id): void {
+    const idActual = this.obtenerNecesidadIdPorProyectoId(id);
+
     const navigationExtras: NavigationExtras = {
       state: {
-        id: id
+        id: idActual
       }
     };
+    
     this.router.navigate(['/proyecto'], navigationExtras);
+  }
+
+  obtenerNecesidadIdPorProyectoId(id: number): number {
+    let necesidadId = 0;
+
+    this.proyectosService.consultarNecesidadPorProyectoId(id).subscribe((response) => {
+      necesidadId = response.id;
+    });
+
+    return necesidadId;
   }
 }
