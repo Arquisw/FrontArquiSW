@@ -14,15 +14,15 @@ export class ProyectosComponent implements OnInit {
 
   public menuItemsSinAsociacion: MenuItem[] = [
     { url: './buscar', nombre: 'Buscar' },
-    { url: './proyecto-seleccionado', nombre: 'Mi Proyecto' },
-    { url: './proyecto-postulado', nombre: 'Proyecto Postulado' }
+    { url: './proyectos-seleccionados', nombre: 'Mis Proyectos' },
+    { url: './proyectos-postulados', nombre: 'Proyectos Postulados' }
   ];
 
   public menuItemsConAsociacion: MenuItem[] = [
     { url: './buscar', nombre: 'Buscar' },
     { url: './mis-proyectos', nombre: 'Mis Proyectos' },
   ];
-  
+
   usuarioId = 0;
   correo = '';
   tieneAsociacion = false;

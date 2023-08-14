@@ -41,6 +41,8 @@ export class ConsultarProyectosComponent implements OnInit {
     this.consultarPersona();
 
     this.consultarProyectos();
+
+    this.consultarPostulacionesPorUsuarioId();
   }
 
   consultarPersona(): void {
@@ -70,25 +72,23 @@ export class ConsultarProyectosComponent implements OnInit {
     });
   }
 
-  consultarPostulacionPorUsuarioId(): void {
+  consultarPostulacionesPorUsuarioId(): void {
     this.proyectosService.consultarPostulacionesPorUsuarioId(this.usuarioId).subscribe((response) => {
-      console.log('Data:', response);
       this.postulacionesResumen = response;
 
-      this.postulacionesResumen.forEach(postulacion => {
-        if(postulacion.proyectoID === this.proyectoActualId) {
-          this.postulacionResumen = postulacion;
-        }
-      });
-    }, (error) => {
-      this.mostrarBotonPostulacion = false;
-      console.log(error?.error?.mensaje);
+      if(this.postulacionesResumen.length > 0) {
+        this.mostrarBotonPostulacion = false;
+        this.postulacionesResumen.forEach(postulacion => {
+          if(postulacion.proyectoID === this.proyectoActualId) {
+            this.postulacionResumen = postulacion;
+          }
+        });
+      }
     });
   }
 
   consultarProyectos(): void {
     this.proyectosService.consultarProyectos().subscribe((response) => {
-      console.log('Data:', response);
       this.necesidades = response;
     });
   }

@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProyectosComponent } from './components/proyectos/proyectos.component';
 import { ConsultarProyectosComponent } from './components/consultar-proyectos/consultar-proyectos.component';
 import { ConsultarMisProyectosComponent } from './components/consultar-mis-proyectos/consultar-mis-proyectos.component';
-import { ConsultarProyectoSeleccionadoComponent } from './components/consultar-proyecto-seleccionado/consultar-proyecto-seleccionado.component';
-import { ConsultarProyectoPostuladoComponent } from './components/consultar-proyecto-postulado/consultar-proyecto-postulado.component';
+import { ConsultarProyectosSeleccionadosComponent } from './components/consultar-proyectos-seleccionados/consultar-proyectos-seleccionados.component';
+import { ConsultarProyectosPostuladosComponent } from './components/consultar-proyectos-postulados/consultar-proyectos-postulados.component';
 import { SecurityGuard } from '@core/guard/security.guard';
 
 const routes: Routes = [{
@@ -22,13 +22,13 @@ const routes: Routes = [{
       canActivate: [SecurityGuard]
     },
     {
-      path: 'proyecto-seleccionado',
-      component: ConsultarProyectoSeleccionadoComponent,
+      path: 'proyectos-seleccionados',
+      component: ConsultarProyectosSeleccionadosComponent,
       canActivate: [SecurityGuard]
     },
     {
-      path: 'proyecto-postulado',
-      component: ConsultarProyectoPostuladoComponent,
+      path: 'proyectos-postulados',
+      component: ConsultarProyectosPostuladosComponent,
       canActivate: [SecurityGuard]
     }
   ]

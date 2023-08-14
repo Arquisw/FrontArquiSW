@@ -8,11 +8,11 @@ import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-consultar-proyecto-postulado',
-  templateUrl: './consultar-proyecto-postulado.component.html',
-  styleUrls: ['./consultar-proyecto-postulado.component.scss']
+  selector: 'app-consultar-proyectos-postulados',
+  templateUrl: './consultar-proyectos-postulados.component.html',
+  styleUrls: ['./consultar-proyectos-postulados.component.scss']
 })
-export class ConsultarProyectoPostuladoComponent implements OnInit {
+export class ConsultarProyectosPostuladosComponent implements OnInit {
   loginModal: Modal | undefined;
   proyectoResumen: ProyectoResumen;
   proyectosResumen: ProyectoResumen[];
@@ -65,36 +65,32 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
 
   consultarPostulaciones(): void {
     this.proyectosService.consultarPostulacionesPorUsuarioId(this.usuarioId).subscribe((response) => {
-      console.log('Data:', response);
-
       this.postulacionesResumen = response;
 
-      if(this.postulacionesResumen.length > 1) {
-        this.tieneMasDeUnaPostulacion = true;
+      if(this.postulacionesResumen.length > 0) {
+        if(this.postulacionesResumen.length > 1) {
+          this.tieneMasDeUnaPostulacion = true;
+        }
+
+        this.postulacionesResumen.forEach(postulacion => {
+          if(!postulacion.seleccionado && !postulacion.rechazado) {
+            this.postulacionResumen = postulacion;
+          }
+
+          if(postulacion.rechazado) {
+            this.obtenerProyecto(postulacion.proyectoID);
+          }
+        });
+
+        this.postulacionResumen.roles.forEach(rol => {
+          this.rolesSeleccionados.push(this.roles.get(rol));
+        });
+
+        this.estaPostulado = true;
+        this.consultarProyecto();
+      } else {
+        this.estaPostulado = false;
       }
-
-      this.postulacionesResumen.forEach(postulacion => {
-        if(postulacion.rechazado) {
-          this.obtenerProyecto(postulacion.proyectoID);
-        }
-      });
-
-      this.postulacionesResumen.forEach(postulacion => {
-        if(!postulacion.seleccionado && !postulacion.rechazado) {
-          this.postulacionResumen = postulacion;
-        }
-      });
-
-      this.postulacionResumen.roles.forEach(rol => {
-        this.rolesSeleccionados.push(this.roles.get(rol));
-      });
-
-      this.estaPostulado = true;
-      this.consultarProyecto();
-    }, (error) => {
-      this.postulacionError = true;
-      this.estaPostulado = false;
-      this.mensajeError = error?.error?.mensaje;
     });
   }
 
@@ -106,8 +102,6 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
 
   consultarProyecto(): void {
     this.proyectosService.consultarProyectoPorId(this.postulacionResumen.proyectoID).subscribe((response) => {
-      console.log('Data:', response);
-
       this.proyectoResumen = response;
 
       this.consultarNecesidad();
@@ -116,10 +110,21 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
 
   consultarNecesidad(): void {
     this.proyectosService.consultarNecesidadPorProyectoId(this.proyectoResumen.id).subscribe((response) => {
-      console.log('Data:', response);
 
       this.necesidadResumen = response;
     });
+  }
+
+  obtenerMotivoDeRechazo(id: number): string {
+    let motivoDelRechazo = '';
+
+    this.postulacionesResumen.forEach(postulacion => {
+      if(postulacion.proyectoID === id) {
+        motivoDelRechazo = postulacion.motivoDelRechazo;
+      }
+    });
+
+    return motivoDelRechazo;
   }
 
   onDirectorDeProyectoSelected(): void {
@@ -276,7 +281,7 @@ export class ConsultarProyectoPostuladoComponent implements OnInit {
         id: idActual
       }
     };
-    
+
     this.router.navigate(['/proyecto'], navigationExtras);
   }
 

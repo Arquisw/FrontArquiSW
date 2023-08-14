@@ -6,11 +6,11 @@ import { ProyectosService } from '../../shared/service/proyectos.service';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-consultar-proyecto-seleccionado',
-  templateUrl: './consultar-proyecto-seleccionado.component.html',
-  styleUrls: ['./consultar-proyecto-seleccionado.component.scss']
+  selector: 'app-consultar-proyectos-seleccionados',
+  templateUrl: './consultar-proyectos-seleccionados.component.html',
+  styleUrls: ['./consultar-proyectos-seleccionados.component.scss']
 })
-export class ConsultarProyectoSeleccionadoComponent implements OnInit {
+export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   proyectoResumen: ProyectoResumen;
   proyectosResumen: ProyectoResumen[];
   seleccionResumen: SeleccionResumen;
@@ -48,29 +48,28 @@ export class ConsultarProyectoSeleccionadoComponent implements OnInit {
 
   consultarSelecciones(): void {
     this.proyectosService.consultarSeleccionesPorUsuarioId(this.usuarioId).subscribe((response) => {
-      console.log('Data:', response);
-
       this.seleccionesResumen = response;
 
-      if(this.seleccionesResumen.length > 1) {
-        this.tieneMasDeUnaSeleccion = true;
+      if(this.seleccionesResumen.length > 0) {
+        if(this.seleccionesResumen.length > 1) {
+          this.tieneMasDeUnaSeleccion = true;
+        }
+
+        this.seleccionesResumen.slice(1).forEach(seleccion => {
+          this.obtenerProyecto(seleccion.proyectoID);
+        });
+
+        this.seleccionResumen = this.seleccionesResumen[0];
+
+        this.seleccionResumen.roles.forEach(rol => {
+          this.rolesSeleccionados.push(this.roles.get(rol));
+        });
+
+        this.estaSeleccionado = true;
+        this.consultarProyecto();
+      } else {
+        this.estaSeleccionado = false;
       }
-
-      this.seleccionesResumen.slice(1).forEach(seleccion => {
-        this.obtenerProyecto(seleccion.proyectoID);
-      });
-
-      this.seleccionResumen = this.seleccionesResumen[0];
-
-      this.seleccionResumen.roles.forEach(rol => {
-        this.rolesSeleccionados.push(this.roles.get(rol));
-      });
-
-      this.estaSeleccionado = true;
-      this.consultarProyecto();
-    }, (error) => {
-      this.estaSeleccionado = false;
-      console.log(error?.error?.mensaje);
     });
   }
 

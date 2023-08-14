@@ -5,7 +5,7 @@
   <p *ngIf="!estaPostulado">No has postulado a ningun proyecto actualmente...</p>
   <div class="card-container" *ngIf="estaPostulado">
     <div class="card">
-      <h4 class="card-header">{{proyectoResumen.nombre}}</h4>
+      <h4 class="card-header">{{proyectoResumen?.nombre}}</h4>
       <div class="table-responsive">
         <table class="table align-middle table-bordered">
           <thead>
@@ -17,9 +17,9 @@
           </thead>
           <tbody>
             <tr>
-              <td class="table-body align-middle">{{proyectoResumen.estado.nombre}}</td>
+              <td class="table-body align-middle">{{proyectoResumen?.estado?.nombre}}</td>
               <td class="table-body align-middle">
-                <p *ngFor="let estado of proyectoResumen.tiposConsultoria">{{estado.nombre}}</p>
+                <p *ngFor="let estado of proyectoResumen?.tiposConsultoria">{{estado?.nombre}}</p>
               </td>
               <td class="table-body align-middle">
                 <p *ngFor="let rol of rolesSeleccionados">{{rol}}</p>
@@ -30,7 +30,7 @@
       </div>
       <div class="card-body">
         <h5 class="card-title">Descripción</h5>
-        <p class="card-text">{{proyectoResumen.descripcion}}</p>
+        <p class="card-text">{{proyectoResumen?.descripcion}}</p>
         <div class="buttons-container">
           <button (click)="abrirPerfilProyecto(necesidadResumen?.id)" class="btn btn-watch-project btn-success">Ver Proyecto</button>
           <button class="btn btn-success" (click)="openActualizarPostulacionModal()">Actualizar Postulación</button>
@@ -64,7 +64,12 @@
           </td>
           <td class="table-body align-middle">{{proyecto?.estado?.nombre}}</td>
           <td class="table-body align-middle">
-            <button (click)="abrirPerfilProyecto(proyecto?.id)" class="btn btn-success mt-3">Ver Proyecto</button>
+            <button (click)="abrirPerfilProyecto(proyecto?.id)" class="btn btn-watch-project btn-success mt-3">Ver Proyecto</button>
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+              data-bs-dismiss="modal">Ver Motivo del Rechazo</button>
+            <app-modal-descripcion
+            [titulo]="'Motivo del Rechazo'"
+            [descripcion]="obtenerMotivoDeRechazo(proyecto?.id)"></app-modal-descripcion>
           </td>
         </tr>
       </tbody>
