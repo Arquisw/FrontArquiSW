@@ -24,7 +24,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let file of files">
-          <td>{{file.nombre}}</td>
+          <td>{{file?.nombre}}</td>
           <td>
             <button class="btn btn-success" (click)="downloadFile()">Ver Documento</button>
           </td>

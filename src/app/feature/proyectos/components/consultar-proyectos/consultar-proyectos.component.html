@@ -19,22 +19,22 @@
       </thead>
       <tbody>
         <tr *ngFor="let necesidad of necesidades | filter: filterTerm">
-          <td class="table-body align-middle">{{necesidad?.proyecto.nombre}}</td>
+          <td class="table-body align-middle">{{necesidad?.proyecto?.nombre}}</td>
           <td class="table-body align-middle">
             <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
               data-bs-dismiss="modal">Ver Descripción</button>
             <app-modal-descripcion
             [titulo]="'Descripción'"
-            [descripcion]="necesidad.proyecto.descripcion"></app-modal-descripcion>
+            [descripcion]="necesidad?.proyecto?.descripcion"></app-modal-descripcion>
           </td>
           <td class="table-body align-middle">
-            <p *ngFor="let tipoConsultoria of necesidad.proyecto.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
+            <p *ngFor="let tipoConsultoria of necesidad?.proyecto?.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
           </td>
-          <td class="table-body align-middle">{{necesidad?.proyecto.estado.nombre}}</td>
+          <td class="table-body align-middle">{{necesidad?.proyecto?.estado?.nombre}}</td>
           <td class="table-body align-middle">
             <button (click)="abrirPerfilProyecto(necesidad?.id)" class="btn btn-watch-project btn-success mt-3">Ver
               Proyecto</button>
-            <button *ngIf="mostrarBotonPostulacion" class="btn btn-success mt-3" (click)="openPostularse(necesidad?.proyecto.id)">Postularse</button>
+            <button *ngIf="mostrarBotonPostulacion" class="btn btn-success mt-3" (click)="openPostularse(necesidad?.proyecto?.id)">Postularse</button>
           </td>
         </tr>
       </tbody>

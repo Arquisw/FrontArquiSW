@@ -1,8 +1,8 @@
 <header class="header-content">
   <section class="information">
-    <h1>{{necesidadResumen?.proyecto.nombre}}</h1>
+    <h1>{{necesidadResumen?.proyecto?.nombre}}</h1>
     <p><strong>Estado: </strong>{{necesidadResumen?.proyecto.estado.nombre}}</p>
-    <p>{{necesidadResumen?.proyecto.descripcion}}</p>
+    <p>{{necesidadResumen?.proyecto?.descripcion}}</p>
   </section>
 </header>
 <main>
@@ -27,7 +27,7 @@
           <tr *ngFor="let seleccion of seleccionesResumen">
             <td class="table-body align-middle">{{consultarNombreDeUsuarioPorId(seleccion?.usuarioID)}}</td>
             <td class="table-body align-middle">
-              <p *ngFor="let rol of seleccion.roles">{{rol}}</p>
+              <p *ngFor="let rol of seleccion?.roles">{{rol}}</p>
             </td>
             <td class="table-body align-middle">
               <button class="btn btn-watch-project btn-success mt-3">Ver Perfil</button>

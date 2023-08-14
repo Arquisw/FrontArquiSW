@@ -293,4 +293,12 @@ export class ConsultarMisProyectosComponent implements OnInit {
     };
     this.router.navigate(['/proyecto'], navigationExtras);
   }
+
+  esUnaNecesidadRechazada(estado: string): boolean {
+    if(estado === 'Rechazado') {
+      return true;
+    }
+
+    return false;
+  }
 }
