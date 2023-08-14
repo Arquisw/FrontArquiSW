@@ -18,10 +18,6 @@ export class ProyectosService {
   private readonly NECESIDADES_ENDPOINT: string = '/necesidades';
   private readonly REQUERIMIENTOS_ENDPOINT: string = '/requerimientos';
   private readonly ASOCIACION_ENDPOINT: string = '/asociacion';
-  private readonly APROBACION_ENDPOINT: string = '/aprobacion';
-  private readonly INGENIERIA_ENDPOINT: string = '/ingenieria';
-  private readonly LIDER_DE_EQUIPO_ENDPOINT: string = '/liderDeEquipo';
-  private readonly DIRECTOR_DE_PROYECTO_ENDPOINT: string = '/directorDeProyecto';
   private readonly PROYECTOS_ENDPOINT: string = '/proyectos';
   private readonly PROYECTO_ENDPOINT: string = '/proyectos';
   private readonly ASOCIACIONES_ENDPOINT: string = '/asociaciones';
@@ -56,21 +52,6 @@ export class ProyectosService {
   public eliminar(id: number): Observable<ProyectoRespuesta<number>>
   {
     return this.httpService.doDelete<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/${id}`);
-  }
-
-  public aprobarProyectoPorRolIngenieria(id: number): Observable<ProyectoRespuesta<number>>
-  {
-    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.INGENIERIA_ENDPOINT}`, id);
-  }
-
-  public aprobarProyectoPorRolLiderDeEquipo(id: number): Observable<ProyectoRespuesta<number>>
-  {
-    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.LIDER_DE_EQUIPO_ENDPOINT}`, id);
-  }
-
-  public aprobarProyectoPorRolDirectorDeProyecto(id: number): Observable<ProyectoRespuesta<number>>
-  {
-    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.DIRECTOR_DE_PROYECTO_ENDPOINT}`, id);
   }
 
   public consultarNecesidadPorId(id: number): Observable<NecesidadResumen>

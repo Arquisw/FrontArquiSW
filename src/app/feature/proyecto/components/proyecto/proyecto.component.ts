@@ -5,6 +5,9 @@ import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesid
 import { ConfiguracionService } from 'src/app/feature/configuracion/shared/service/configuracion.service';
 import { SeleccionResumen } from 'src/app/feature/proyectos/shared/model/seleccion-resumen.model';
 import { StorageService } from '@shared/service/storage-service/storage.service';
+import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
+import { PersonaResumen } from 'src/app/feature/configuracion/shared/model/persona-resumen.model';
+import { UsuarioResumen } from 'src/app/feature/configuracion/shared/model/usuario-resumen.model';
 
 @Component({
   selector: 'app-proyecto',
@@ -12,9 +15,14 @@ import { StorageService } from '@shared/service/storage-service/storage.service'
   styleUrls: ['./proyecto.component.scss']
 })
 export class ProyectoComponent implements OnInit {
+  usuarioId: number;
   necesidadId: number;
   proyectoId: number;
   necesidadResumen: NecesidadResumen;
+  requerimientosResumen: RequerimientosResumen;
+  personaResumen: PersonaResumen;
+  usuarioResumen: UsuarioResumen;
+  correo: string;
   seleccionesResumen: SeleccionResumen[] = [];
   tieneUsuariosSeleccionados = false;
   tieneServicioIngenieriaDeRequisitos = false;
@@ -25,23 +33,70 @@ export class ProyectoComponent implements OnInit {
   urlContrato = '';
   tieneContrato = false;
   detalleDocumento;
+  tieneRolIngenieria = false;
+  tieneRolLiderDeEquipo = false;
+  tieneRolDirectorDeProyecto = false;
 
   constructor(private proyectoService: ProyectoService, private configuracionService: ConfiguracionService, private router: Router, private storageService: StorageService) {}
 
   ngOnInit(): void {
     const params = history.state;
     this.necesidadId = params.id;
-   
+
+    const token = window.sessionStorage.getItem('Authorization');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    this.usuarioId = tokenPayload.id;
+
+    this.consultarPersona();
     this.consultarNecesidadPorId();
+  }
+
+  consultarPersona(): void {
+    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
+      this.personaResumen = response;
+      this.correo = this.personaResumen.correo;
+      this.consultarUsuario();
+    });
+  }
+
+  consultarUsuario(): void {
+    this.configuracionService.consultarUsuarioPorCorreo(this.correo).subscribe((response) => {
+      this.usuarioResumen = response;
+      this.filtrarMenu(this.usuarioResumen.roles);
+    });
+  }
+
+  filtrarMenu(roles): void {
+    roles.forEach(rol => {
+      if (rol.nombre === 'ROLE_INGENIERIA') {
+        this.tieneRolIngenieria = true;
+      }
+
+      if (rol.nombre === 'ROLE_LIDER_DE_EQUIPO') {
+        this.tieneRolLiderDeEquipo = true;
+      }
+
+      if (rol.nombre === 'ROLE_DIRECTOR_PROYECTO') {
+        this.tieneRolDirectorDeProyecto = true;
+      }
+    });
   }
 
   consultarNecesidadPorId(): void {
     this.proyectoService.consultarNecesidadPorId(this.necesidadId).subscribe((response) => {
       this.necesidadResumen = response;
-      this.urlDescarga = 'https://firebasestorage.googleapis.com/v0/b/arquisw-4dc7f.appspot.com/o/necesidad%2Fhbkjnlk%2F0.pdf?alt=media&token=d2c9634e-8eb9-45cb-b81a-1e87a77d49ef';
+      this.consultarRequerimientosPorId();
       this.proyectoId = this.necesidadResumen.proyecto.id;
       this.definirServicios();
       this.consultarSeleccionesPorId();
+    });
+  }
+
+  consultarRequerimientosPorId(): void {
+    this.proyectoService.consultarRequerimientosPorNecesidadId(this.necesidadId).subscribe((response) => {
+      this.requerimientosResumen = response;
+      this.urlDescarga = this.requerimientosResumen.rutaArchivo;
+      this.obtenerListaArchivos();
     });
   }
 
@@ -118,6 +173,37 @@ export class ProyectoComponent implements OnInit {
       link.target = '_blank';
       link.download = this.urlDescarga.substring(this.urlDescarga.lastIndexOf('/') + 1);
       link.click();
+    });
+  }
+
+  onAprobarProyecto(): void {
+    if(this.tieneRolIngenieria) {
+      this.aprobarProyectoPorRolIngenieria();
+    } else if(this.tieneRolLiderDeEquipo) {
+      this.aprobarProyectoRolLiderDeEquipo();
+    } else if (this.tieneRolDirectorDeProyecto) {
+      this.aprobarProyectoPorRolDirectorDeProyecto();
+    }
+  }
+
+  aprobarProyectoPorRolIngenieria(): void {
+    this.proyectoService.aprobarProyectoPorRolIngenieria(this.necesidadResumen.proyecto.id).subscribe((response) => {
+      console.log('Data:', response);
+      window.location.reload();
+    });
+  }
+
+  aprobarProyectoRolLiderDeEquipo(): void {
+    this.proyectoService.aprobarProyectoPorRolLiderDeEquipo(this.necesidadResumen.proyecto.id).subscribe((response) => {
+      console.log('Data:', response);
+      window.location.reload();
+    });
+  }
+
+  aprobarProyectoPorRolDirectorDeProyecto(): void {
+    this.proyectoService.aprobarProyectoPorRolDirectorDeProyecto(this.necesidadResumen.proyecto.id).subscribe((response) => {
+      console.log('Data:', response);
+      window.location.reload();
     });
   }
 }

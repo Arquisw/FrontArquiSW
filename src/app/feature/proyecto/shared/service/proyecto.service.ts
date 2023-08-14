@@ -5,13 +5,20 @@ import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesid
 import { SeleccionResumen } from 'src/app/feature/proyectos/shared/model/seleccion-resumen.model';
 import { environment } from 'src/environments/environment';
 import { ContratoResumen } from '../model/contrato-resumen-model';
+import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
+import { ProyectoRespuesta } from 'src/app/feature/proyectos/shared/model/proyecto-respuesta.model';
 
 @Injectable()
 export class ProyectoService {
   private readonly NECESIDADES_ENDPOINT: string = '/necesidades';
+  private readonly REQUERIMIENTOS_ENDPOINT: string = '/requerimientos';
   private readonly POSTULACIONES_ENDPOINT: string = '/postulaciones';
   private readonly SELECCIONES_ENDPOINT: string = '/selecciones';
   private readonly CONTRATOS_ENDPOINT: string = '/contratos';
+  private readonly APROBACION_ENDPOINT: string = '/aprobacion';
+  private readonly INGENIERIA_ENDPOINT: string = '/ingenieria';
+  private readonly LIDER_DE_EQUIPO_ENDPOINT: string = '/liderDeEquipo';
+  private readonly DIRECTOR_DE_PROYECTO_ENDPOINT: string = '/directorDeProyecto';
 
   constructor(private httpService: HttpService) { }
 
@@ -25,5 +32,25 @@ export class ProyectoService {
 
   public consultarContratoPorNecesidadId(id: number): Observable<ContratoResumen> {
     return this.httpService.doGetById<ContratoResumen>(`${environment.endpoint}${this.CONTRATOS_ENDPOINT}/`, id);
+  }
+
+  public consultarRequerimientosPorNecesidadId(id: number): Observable<RequerimientosResumen>
+  {
+    return this.httpService.doGetById<RequerimientosResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.REQUERIMIENTOS_ENDPOINT}/`, id);
+  }
+
+  public aprobarProyectoPorRolIngenieria(id: number): Observable<ProyectoRespuesta<number>>
+  {
+    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.INGENIERIA_ENDPOINT}`, id);
+  }
+
+  public aprobarProyectoPorRolLiderDeEquipo(id: number): Observable<ProyectoRespuesta<number>>
+  {
+    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.LIDER_DE_EQUIPO_ENDPOINT}`, id);
+  }
+
+  public aprobarProyectoPorRolDirectorDeProyecto(id: number): Observable<ProyectoRespuesta<number>>
+  {
+    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.DIRECTOR_DE_PROYECTO_ENDPOINT}`, id);
   }
 }

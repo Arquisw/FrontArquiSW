@@ -37,6 +37,9 @@
       </table>
     </div>
   </section>
+  <section *ngIf="tieneRolIngenieria || tieneRolLiderDeEquipo || tieneRolDirectorDeProyecto" class="services-section container text-center">
+    <button class="btn btn-idr btn-success mt-3" (click)="onAprobarProyecto()">Aprobar Proyecto</button>
+  </section>
   <section class="docs-section container">
     <h2>Documentos</h2>
     <div class="table-responsive">
