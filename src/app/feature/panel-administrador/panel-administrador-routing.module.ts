@@ -6,6 +6,8 @@ import { AprobacionesComponent } from './components/aprobaciones/aprobaciones.co
 import { ContratacionesComponent } from './components/contrataciones/contrataciones.component';
 import { RolesComponent } from './components/roles/roles.component';
 import { SecurityGuard } from '@core/guard/security.guard';
+import { PostulacionesComponent } from './components/postulaciones/postulaciones.component';
+import { PostulacionesProyectoComponent } from './components/postulaciones-proyecto/postulaciones-proyecto.component';
 
 const routes: Routes = [{
   path: '',
@@ -13,22 +15,30 @@ const routes: Routes = [{
   children: [
     {
       path: 'eliminaciones',
-      component: AdministrarEliminacionesComponent
+      component: AdministrarEliminacionesComponent,
+      canActivate: [SecurityGuard]
     },
     {
       path: 'aprobaciones',
-      component: AprobacionesComponent
+      component: AprobacionesComponent,
+      canActivate: [SecurityGuard]
     },
     {
       path: 'contrataciones',
-      component: ContratacionesComponent
+      component: ContratacionesComponent,
+      canActivate: [SecurityGuard]
     },
     {
       path: 'roles',
-      component: RolesComponent
+      component: RolesComponent,
+      canActivate: [SecurityGuard]
     },
     { path: 'postulaciones',
-      loadChildren: () => import('../../feature/panel-administrador/components/postulaciones/postulaciones.module').then(mod => mod.PostulacionesModule),
+      component: PostulacionesComponent,
+      canActivate: [SecurityGuard]
+    },
+    { path: 'postulaciones-proyecto',
+      component: PostulacionesProyectoComponent,
       canActivate: [SecurityGuard]
     }
   ]

@@ -9,6 +9,8 @@ import { AprobacionesComponent } from './components/aprobaciones/aprobaciones.co
 import { AdministradorService } from './shared/service/administrador.service';
 import { ContratacionesComponent } from './components/contrataciones/contrataciones.component';
 import { RolesComponent } from './components/roles/roles.component';
+import { PostulacionesComponent } from './components/postulaciones/postulaciones.component';
+import { PostulacionesProyectoComponent } from './components/postulaciones-proyecto/postulaciones-proyecto.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { RolesComponent } from './components/roles/roles.component';
     AdministrarEliminacionesComponent,
     AprobacionesComponent,
     ContratacionesComponent,
+    PostulacionesComponent,
+    PostulacionesProyectoComponent,
     RolesComponent
   ],
   imports: [

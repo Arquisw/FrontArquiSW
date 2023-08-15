@@ -5,12 +5,16 @@ import { RolResumen } from '../model/rol-resumen.model';
 import { Observable } from 'rxjs';
 import { Rol } from '../model/rol.model';
 import { PanelAdministradorRespuesta } from '../model/panel-administrador-respuesta.model';
+import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
 
 @Injectable()
 
 export class AdministradorService {
   private readonly USUARIOS_ENDPOINT: string = '/usuarios';
   private readonly ROLES_ENDPOINT: string = '/roles';
+  private readonly NECESIDADES_ENDPOINT: string = '/necesidades';
+  private readonly PROYECTOS_ENDPOINT: string = '/proyectos';
+  private readonly NEGOCICADOS_ENDPOINT: string = '/negociados';
 
   constructor(private http: HttpService) { }
 
@@ -62,5 +66,10 @@ export class AdministradorService {
   public actualizarRol(rol: Rol, id: number): Observable<PanelAdministradorRespuesta<number>>
   {
     return this.http.doPut<Rol, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ROLES_ENDPOINT}/${id}`, rol);
+  }
+
+  public consultarProyectosNegociados(): Observable<NecesidadResumen[]>
+  {
+    return this.http.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}${this.NEGOCICADOS_ENDPOINT}`);
   }
 }

@@ -36,8 +36,7 @@
           <td class="table-body align-middle">{{necesidad?.estado?.nombre}}</td>
           <td class="table-body align-middle">{{necesidad?.proyecto?.estado?.nombre}}</td>
           <td class="table-body align-middle">
-            <button (click)="abrirPerfilProyecto(necesidad?.id)" class="btn btn-watch-project btn-success mt-3">Ver
-              Proyecto</button>
+            <button (click)="abrirPerfilProyecto(necesidad?.id)" class="btn btn-watch-project btn-success mt-3">Ver Proyecto</button>
             <button *ngIf="esUnaNecesidadRechazada(necesidad?.estado?.nombre)" type="submit" class="btn btn-watch-project btn-success mt-3" data-bs-toggle="modal" data-bs-target="#motivoRechazoModalId"
               data-bs-dismiss="modal">Ver Motivo del Rechazo</button>
             <app-modal-descripcion

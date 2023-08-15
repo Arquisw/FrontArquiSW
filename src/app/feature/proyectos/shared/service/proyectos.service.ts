@@ -77,7 +77,7 @@ export class ProyectosService {
 
   public consultarProyectosNegociados(): Observable<NecesidadResumen[]>
   {
-    return this.httpService.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}${this.NEGOCICADOS_ENDPOINT}/`);
+    return this.httpService.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}${this.NEGOCICADOS_ENDPOINT}`);
   }
 
   public consultarAsociacionPorId(id: number): Observable<AsociacionResumen>

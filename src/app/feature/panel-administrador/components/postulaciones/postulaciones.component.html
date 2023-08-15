@@ -1,0 +1,33 @@
+<section class="projects_section">
+  <h1>Postulaciones por Proyecto</h1>
+  <div class="table-responsive">
+      <table class="table align-middle table-striped">
+          <thead>
+              <tr>
+                  <th class="table-title" scope="col">Nombre</th>
+                  <th class="table-title" scope="col">Descripción</th>
+                  <th class="table-title" scope="col">Tipos de Consultoria</th>
+                  <th class="table-title" scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let necesidad of necesidadesResumen">
+                  <td class="table-body align-middle mark">{{necesidad?.proyecto?.nombre}}</td>
+                  <td class="table-body align-middle mark">
+                      <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal"
+                          data-bs-target="#descripcionModal" data-bs-dismiss="modal">Ver Descripción</button>
+                      <app-modal-descripcion [modalId]="'descripcionModal'"
+                          [descripcion]="necesidad?.proyecto?.descripcion"
+                          [titulo]="'Descripcion'"></app-modal-descripcion>
+                  </td>
+                  <td class="table-body align-middle mark">
+                      <p *ngFor="let tipoConsultoria of necesidad?.proyecto?.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
+                  </td>
+                  <td class="table-body align-middle mark">
+                      <button (click)="abrirPostulacionesDelProyecto(necesidad?.proyecto?.id)" class="btn btn-watch-project btn-success mt-3">Ver Proyecto</button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</section>
