@@ -20,7 +20,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   guardarNecesidadForm: FormGroup;
   actualizarNecesidadForm: FormGroup;
   usuarioId = 0;
-  necesidadId= 0;
+  necesidadId = 0;
   tiposConsultoriaSeleccionados: string[] = [];
   guardadoError = false;
   mensajeError = '';
@@ -69,7 +69,12 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   onClickSaveNeed(): void {
-    this.saveNeed();
+    if (this.archivo) {
+      this.saveNeed();
+    } else {
+      this.guardadoError = true;
+      this.mensajeError = 'El archivo de los detalles de la necesidad es obligatorio';
+    }
   }
 
   saveNeed(): void {
@@ -97,23 +102,18 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   uploadFile() {
-    if (this.archivo) {
-      const filePath = 'necesidad/' + this.necesidadId + '/' + this.guardarNecesidadForm.get('nombreProyecto')?.value + '_Requerimientos' + '.pdf';
-      const fileRef = this.storage.ref(filePath);
-      const task = this.storage.upload(filePath, this.archivo);
+    const filePath = 'necesidad/' + this.necesidadId + '/' + this.guardarNecesidadForm.get('nombreProyecto')?.value + '_Requerimientos' + '.pdf';
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, this.archivo);
 
-      task.snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.urlArchivo = url;
-            this.saveRequeriments();
-          });
-        })
-      ).subscribe();
-    } else {
-      this.guardadoError = true;
-      this.mensajeError = 'El archivo de los detalles de la necesidad es obligatorio';
-    }
+    task.snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          this.urlArchivo = url;
+          this.saveRequeriments();
+        });
+      })
+    ).subscribe();
   }
 
   saveRequeriments(): void {
@@ -247,8 +247,8 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   updateFile() {
-    if(this.archivo) {
-      const filePath = 'necesidad/' + this.necesidadId + '/' + this.actualizarNecesidadForm.get('nombreProyectoActualizar')?.value + '_Requerimientos'  + '.pdf';
+    if (this.archivo) {
+      const filePath = 'necesidad/' + this.necesidadId + '/' + this.actualizarNecesidadForm.get('nombreProyectoActualizar')?.value + '_Requerimientos' + '.pdf';
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.archivo);
 
@@ -295,7 +295,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   esUnaNecesidadRechazada(estado: string): boolean {
-    if(estado === 'Rechazado') {
+    if (estado === 'Rechazado') {
       return true;
     }
 
