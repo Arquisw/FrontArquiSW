@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { RolResumen } from '../../shared/model/rol-resumen';
+import { RolResumen } from '../../shared/model/rol-resumen.model';
 import Modal from 'bootstrap/js/dist/modal';
 import { AdministradorService } from '../../shared/service/administrador.service';
+import { Rol } from '../../shared/model/rol.model';
 
 @Component({
   selector: 'app-roles',
@@ -12,6 +13,7 @@ export class RolesComponent implements OnInit {
   loginModal: Modal | undefined;
   rolesResumen: RolResumen[] = [];
   rolActual: RolResumen;
+  rolesMapa: Map<string, string> = new Map();
   actualizarActual = false;
   eliminarActual = false;
   escribirActual = false;
@@ -22,7 +24,19 @@ export class RolesComponent implements OnInit {
   constructor(private administradorService: AdministradorService) { }
 
   ngOnInit(): void {
+    this.cargarMapa();
     this.consultarRoles();
+  }
+
+  cargarMapa(): void {
+    this.rolesMapa.set('ROLE_DIRECTOR_PROYECTO', 'Director de Proyecto');
+    this.rolesMapa.set('ROLE_PARTE_INTERESADA', 'Parte Interesada');
+    this.rolesMapa.set('ROLE_EQUIPO_DESARROLLO', 'Equipo de Desarrollo');
+    this.rolesMapa.set('ROLE_INGENIERIA', 'Ingeniería');
+    this.rolesMapa.set('ROLE_ARQUITECTURA', 'Arquitectura');
+    this.rolesMapa.set('ROLE_ANALISTA', 'Analista');
+    this.rolesMapa.set('ROLE_LIDER_DE_EQUIPO', 'Lider de Equipo');
+    this.rolesMapa.set('ROLE_PATROCINADOR', 'Patrocinador');
   }
 
   consultarRoles(): void {
@@ -38,7 +52,11 @@ export class RolesComponent implements OnInit {
 
     this.loginModal?.show();
 
-    console.log(id);
+    this.rolActual = this.rolesResumen.find(rol => rol.id === id);
+    this.actualizarActual = this.rolActual.actualizar;
+    this.eliminarActual = this.rolActual.eliminar;
+    this.escribirActual = this.rolActual.escribir;
+    this.leerActual = this.rolActual.leer;
   }
 
   onVerdaderoActualizar(): void {
@@ -73,6 +91,10 @@ export class RolesComponent implements OnInit {
     this.leerActual = false;
   }
 
+  obtenerNombreDelRol(clave: string): string {
+    return this.rolesMapa.get(clave);
+  }
+
   obtenerMarca(estado: boolean): string {
     if(estado) {
       return 'X';
@@ -82,6 +104,14 @@ export class RolesComponent implements OnInit {
   }
 
   onClickUpdateNeed(): void {
+    const rol = new Rol(this.leerActual, this.escribirActual, this.actualizarActual, this.eliminarActual);
 
+    this.administradorService.actualizarRol(rol, this.rolActual.id).subscribe(() => {
+      this.loginModal?.hide();
+      window.location.reload();
+    }, (error) => {
+      this.actualizacionError = true;
+      this.mensajeError = error?.error?.mensaje;
+    });
   }
 }

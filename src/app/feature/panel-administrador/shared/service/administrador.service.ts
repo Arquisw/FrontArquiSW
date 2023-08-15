@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
-import { RolResumen } from '../model/rol-resumen';
+import { RolResumen } from '../model/rol-resumen.model';
 import { Observable } from 'rxjs';
+import { Rol } from '../model/rol.model';
+import { PanelAdministradorRespuesta } from '../model/panel-administrador-respuesta.model';
 
 @Injectable()
 
@@ -55,5 +57,10 @@ export class AdministradorService {
   public consultarRoles(): Observable<RolResumen[]>
   {
     return this.http.doGet<RolResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ROLES_ENDPOINT}`);
+  }
+
+  public actualizarRol(rol: Rol, id: number): Observable<PanelAdministradorRespuesta<number>>
+  {
+    return this.http.doPut<Rol, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ROLES_ENDPOINT}/${id}`, rol);
   }
 }

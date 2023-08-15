@@ -1,53 +1,50 @@
 h1 {
-    color: var(--just-white);
-    font-size: 3rem;
-    border-bottom: 1px solid var(--grey);
+  color: var(--just-white);
+  font-size: 3rem;
 }
 
 .table-header {
-    border: 1px solid #ccc; /* Puedes ajustar el color y grosor del borde según tus preferencias */
-    padding: 8px; /* Añade un relleno para separar el texto del borde */
-  }
+  border: 1px solid var(--just-white);
+  padding: 8px;
+}
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color:var(--background-color);
-    color: var(--just-white);
-    border: 1px solid var(--just-white);
-  
-  }
-  
-  .tabla {
-    padding: 10px;
-  }
-  
-  th {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  td {
-    padding: 10px;
-    text-align: center;
-    border: 1px solid var(--just-white);
-  }
-  
-  button:hover {
-    background-color: var(--just-white);
-    color: var(--uco-green);
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--background-color);
+  color: var(--just-white);
+  border: 1px solid var(--just-white);
+}
 
-  }
+.tabla {
+  padding: 10px;
+}
 
-  button {
-    margin-right: 2%;
-    font-size: 15px;
+th {
+  padding: 10px;
+  text-align: center;
+}
+
+td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--just-white);
+}
+
+button:hover {
+  background-color: var(--just-white);
+  color: var(--uco-green);
+}
+
+button {
+  margin-right: 2%;
+  font-size: 15px;
+}
+
+/* Media query para tabletas */
+@media (min-width: 577px) and (max-width: 1024px) {
+  .header-content {
+    background-size: contain;
+    background-position: center top;
   }
-  
-  /* Media query para tabletas */
-  @media (min-width: 577px) and (max-width: 1024px) {
-    .header-content {
-      background-size: contain;
-      background-position: center top;
-    }
-  }
+}

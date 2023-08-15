@@ -14,12 +14,12 @@
           </thead>
           <tbody>
               <tr *ngFor="let rol of rolesResumen">
-                  <td class="table-body align-middle">{{rol?.nombre}}</td>
-                  <td class="table-body align-middle">{{obtenerMarca(rol?.actualizar)}}</td>
-                  <td class="table-body align-middle">{{obtenerMarca(rol?.eliminar)}}</td>
-                  <td class="table-body align-middle">{{obtenerMarca(rol?.escribir)}}</td>
-                  <td class="table-body align-middle">{{obtenerMarca(rol?.leer)}}</td>
-                  <td class="table-body align-middle">
+                  <td class="table-body align-middle">{{obtenerNombreDelRol(rol?.nombre)}}</td>
+                  <td class="table-body align-middle mark">{{obtenerMarca(rol?.actualizar)}}</td>
+                  <td class="table-body align-middle mark">{{obtenerMarca(rol?.eliminar)}}</td>
+                  <td class="table-body align-middle mark">{{obtenerMarca(rol?.escribir)}}</td>
+                  <td class="table-body align-middle mark">{{obtenerMarca(rol?.leer)}}</td>
+                  <td class="table-body align-middle mark">
                       <button class="btn btn-update btn-success mt-3"
                           (click)="openActualizar(rol?.id)">Actualizar</button>
                   </td>
@@ -38,7 +38,7 @@
           </div>
           <div class="modal-body">
               <div class="container-fluid h-100">
-                  <p>{{rolActual?.nombre}}</p>
+                  <p>{{obtenerNombreDelRol(rolActual?.nombre)}}</p>
               </div>
               <div class="actualizar-option">
                   <div class="dropdown">
