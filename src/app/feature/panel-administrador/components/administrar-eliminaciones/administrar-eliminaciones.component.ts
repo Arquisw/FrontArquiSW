@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AdministradorService } from '../../service/administrador.service';
+import { AdministradorService } from '../../shared/service/administrador.service';
 import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
@@ -22,7 +22,7 @@ export class AdministrarEliminacionesComponent implements OnInit{
 
   constructor(private router: Router,
               private admistradorService: AdministradorService)  { }
-    
+
   ngOnInit(): void {
     this.consultaPeticionesUsuarioAEliminar();
     this.consultaPeticionesAsociacionesAEliminar();
@@ -112,7 +112,7 @@ export class AdministrarEliminacionesComponent implements OnInit{
       this.mensajeError=error.message;
     });
   }
-  
+
   abrirPerfilAsociacion(id): void {
     const navigationExtras: NavigationExtras = {
       state: {

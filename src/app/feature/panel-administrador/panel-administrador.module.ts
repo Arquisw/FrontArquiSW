@@ -5,15 +5,16 @@ import { AdministrarEliminacionesComponent } from './components/administrar-elim
 import { PanelAdministradorRoutingModule } from './panel-administrador-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '@shared/shared.module';
-import { AdministradorService } from './service/administrador.service';
-
-
-
+import { AdministradorService } from './shared/service/administrador.service';
+import { ContratacionesComponent } from './components/contrataciones/contrataciones.component';
+import { RolesComponent } from './components/roles/roles.component';
 
 @NgModule({
   declarations: [
     PanelAdministradorComponent,
     AdministrarEliminacionesComponent,
+    ContratacionesComponent,
+    RolesComponent
   ],
   imports: [
     CommonModule,
