@@ -95,7 +95,7 @@ export class ProyectoComponent implements OnInit {
   consultarRequerimientosPorId(): void {
     this.proyectoService.consultarRequerimientosPorNecesidadId(this.necesidadId).subscribe((response) => {
       this.requerimientosResumen = response;
-      this.urlDescarga = this.requerimientosResumen.rutaArchivo;
+      this.urlDescarga = this.requerimientosResumen?.rutaArchivo;
       this.obtenerListaArchivos();
     });
   }

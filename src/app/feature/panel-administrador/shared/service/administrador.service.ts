@@ -32,6 +32,10 @@ export class AdministradorService {
     return this.http.doGet(environment.endpoint +'/necesidades/'+ id);
   }
 
+  consultarNecesidadesPendienteAprobacion() {
+    return this.http.doGet(environment.endpoint +'/necesidades');
+  }
+
   eliminarAsociacion(id: number) {
     return this.http.doDelete(environment.endpoint +'/asociaciones/administrador/'+ id);
   }

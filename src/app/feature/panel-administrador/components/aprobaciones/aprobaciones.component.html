@@ -1,0 +1,29 @@
+<div class="tabla">
+    <h1>Proyectos por aprobar</h1>
+    <table>
+      <thead>
+        <tr>
+          <th class="table-header">Nombre</th>
+          <th class="table-header">Descripción</th>
+          <th class="table-header">Tipos de Consultroria</th>
+          <th class="table-header">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let necesidad of necesidadAprobar">
+          <td>{{necesidad?.proyecto.nombre}}</td>
+          <td>
+            <button class="btn btn-success" >Ver Descripción</button>
+          </td>
+          <td>
+            <p *ngFor="let tipoConsultoria of necesidad?.proyecto?.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
+          </td>
+          <td>
+            <button class="btn btn-success" (click)="abrirPerfilProyecto(necesidad?.id)" >Ver Perfil</button>
+            <button class="btn btn-success">Aprobar</button>
+            <button class="btn btn-success">Declinar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div> 

@@ -29,7 +29,6 @@ export class AdministrarEliminacionesComponent implements OnInit{
     this.consultaPeticionesNecesidadAEliminar();
   }
 
-
   consultaPeticionesUsuarioAEliminar(): void {
     this.usuariosEliminar= [];
     let petecionEliminar;

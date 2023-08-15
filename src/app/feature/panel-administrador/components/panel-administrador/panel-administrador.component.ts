@@ -9,7 +9,7 @@ import { MenuItem } from '@core/modelo/menu-item';
 export class PanelAdministradorComponent {
   public menuItems: MenuItem[] = [
     { url: './eliminaciones', nombre: 'Administrar Eliminaciones' },
-    { url: '#', nombre: 'Aprobaciones' },
+    { url: './aprobaciones', nombre: 'Aprobaciones' },
     { url: './contrataciones', nombre: 'Contrataciones' },
     { url: './roles', nombre: 'Roles y Permisos' },
     { url: './postulaciones', nombre: 'Postulaciones' }

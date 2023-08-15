@@ -5,6 +5,7 @@ import { AdministrarEliminacionesComponent } from './components/administrar-elim
 import { PanelAdministradorRoutingModule } from './panel-administrador-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '@shared/shared.module';
+import { AprobacionesComponent } from './components/aprobaciones/aprobaciones.component';
 import { AdministradorService } from './shared/service/administrador.service';
 import { ContratacionesComponent } from './components/contrataciones/contrataciones.component';
 import { RolesComponent } from './components/roles/roles.component';
@@ -13,6 +14,7 @@ import { RolesComponent } from './components/roles/roles.component';
   declarations: [
     PanelAdministradorComponent,
     AdministrarEliminacionesComponent,
+    AprobacionesComponent,
     ContratacionesComponent,
     RolesComponent
   ],
