@@ -13,7 +13,12 @@
         <tr *ngFor="let necesidad of necesidadAprobar">
           <td>{{necesidad?.proyecto.nombre}}</td>
           <td>
-            <button class="btn btn-success" >Ver Descripción</button>
+            <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="obtnerIdModal(necesidad?.id)">Ver Descripción</button>
+            <app-modal-descripcion
+              [modalId]="obtnerIdModal(necesidad?.id)"
+              [descripcion]="necesidad?.proyecto.descripcion"
+              [titulo]="'Descripcion'"
+            ></app-modal-descripcion>
           </td>
           <td>
             <p *ngFor="let tipoConsultoria of necesidad?.proyecto?.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
@@ -27,3 +32,4 @@
       </tbody>
     </table>
   </div> 
+  

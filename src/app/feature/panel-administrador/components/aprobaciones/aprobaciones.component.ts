@@ -17,6 +17,10 @@ export class AprobacionesComponent implements  OnInit{
     this.consultaAprobaciones();
   }
 
+  obtnerIdModal(id:number): string {
+    return '#descripcionModal' + id;
+  }
+
   consultaAprobaciones(): void {
     this.necesidadAprobar= [];
     let petecionAprobar;
