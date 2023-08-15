@@ -18,7 +18,7 @@ export class AprobacionesComponent implements  OnInit{
   }
 
   obtnerIdModal(id:number): string {
-    return '#descripcionModal' + id;
+    return 'descripcionModal' + id;
   }
 
   consultaAprobaciones(): void {
