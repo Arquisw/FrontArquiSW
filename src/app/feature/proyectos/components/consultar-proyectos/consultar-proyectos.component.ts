@@ -40,7 +40,7 @@ export class ConsultarProyectosComponent implements OnInit {
 
     this.consultarPersona();
 
-    this.consultarProyectos();
+    this.consultarProyectosNegociados();
 
     this.consultarPostulacionesPorUsuarioId();
   }
@@ -87,8 +87,8 @@ export class ConsultarProyectosComponent implements OnInit {
     });
   }
 
-  consultarProyectos(): void {
-    this.proyectosService.consultarProyectos().subscribe((response) => {
+  consultarProyectosNegociados(): void {
+    this.proyectosService.consultarProyectosNegociados().subscribe((response) => {
       this.necesidades = response;
     });
   }

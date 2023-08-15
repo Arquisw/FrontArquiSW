@@ -19,7 +19,8 @@ export class ProyectosService {
   private readonly REQUERIMIENTOS_ENDPOINT: string = '/requerimientos';
   private readonly ASOCIACION_ENDPOINT: string = '/asociacion';
   private readonly PROYECTOS_ENDPOINT: string = '/proyectos';
-  private readonly PROYECTO_ENDPOINT: string = '/proyectos';
+  private readonly PROYECTO_ENDPOINT: string = '/proyecto';
+  private readonly NEGOCICADOS_ENDPOINT: string = '/negociados';
   private readonly ASOCIACIONES_ENDPOINT: string = '/asociaciones';
   private readonly POSTULACIONES_ENDPOINT: string = '/postulaciones';
   private readonly POSTULACION_ENDPOINT: string = '/postulacion';
@@ -74,9 +75,9 @@ export class ProyectosService {
     return this.httpService.doGetById<RequerimientosResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.REQUERIMIENTOS_ENDPOINT}/`, id);
   }
 
-  public consultarProyectos(): Observable<NecesidadResumen[]>
+  public consultarProyectosNegociados(): Observable<NecesidadResumen[]>
   {
-    return this.httpService.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}/`);
+    return this.httpService.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}${this.NEGOCICADOS_ENDPOINT}/`);
   }
 
   public consultarAsociacionPorId(id: number): Observable<AsociacionResumen>
