@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '@core/services/http.service';
 import { environment } from 'src/environments/environment';
+import { RolResumen } from '../model/rol-resumen';
+import { Observable } from 'rxjs';
 
 @Injectable()
 
 export class AdministradorService {
+  private readonly USUARIOS_ENDPOINT: string = '/usuarios';
+  private readonly ROLES_ENDPOINT: string = '/roles';
 
   constructor(private http: HttpService) { }
 
@@ -46,5 +50,10 @@ export class AdministradorService {
 
   eliminarProyecto(id: number) {
     return this.http.doDelete(environment.endpoint +'/necesidades/administrador/'+ id);
+  }
+
+  public consultarRoles(): Observable<RolResumen[]>
+  {
+    return this.http.doGet<RolResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ROLES_ENDPOINT}`);
   }
 }

@@ -45,8 +45,8 @@
             [descripcion]="necesidad?.motivoRechazo"
             [titulo]="'Motivo del Rechazo'"
             ></app-modal-descripcion>
-            <button class="btn btn-update btn-success mt-3" (click)="openActualizar(necesidad.id)">Actualizar</button>
-            <button class="btn btn-success mt-3" (click)="onEliminar(necesidad.id)">Eliminar</button>
+            <button class="btn btn-update btn-success mt-3" (click)="openActualizar(necesidad?.id)">Actualizar</button>
+            <button class="btn btn-success mt-3" (click)="onEliminar(necesidad?.id)">Eliminar</button>
           </td>
         </tr>
       </tbody>
@@ -132,7 +132,7 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Registrar una Necesidad</h5>
+        <h5 class="modal-title">Actualizar una Necesidad</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

@@ -1,1 +1,140 @@
-<p>roles works!</p>
+<section class="roles_section">
+  <h1>Roles y Permisos</h1>
+  <div class="table-responsive">
+      <table class="table align-middle table-striped">
+          <thead>
+              <tr>
+                  <th class="table-title" scope="col">Nombre del Rol</th>
+                  <th class="table-title" scope="col">Actualizar</th>
+                  <th class="table-title" scope="col">Eliminar</th>
+                  <th class="table-title" scope="col">Escribir</th>
+                  <th class="table-title" scope="col">Leer</th>
+                  <th class="table-title" scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let rol of rolesResumen">
+                  <td class="table-body align-middle">{{rol?.nombre}}</td>
+                  <td class="table-body align-middle">{{obtenerMarca(rol?.actualizar)}}</td>
+                  <td class="table-body align-middle">{{obtenerMarca(rol?.eliminar)}}</td>
+                  <td class="table-body align-middle">{{obtenerMarca(rol?.escribir)}}</td>
+                  <td class="table-body align-middle">{{obtenerMarca(rol?.leer)}}</td>
+                  <td class="table-body align-middle">
+                      <button class="btn btn-update btn-success mt-3"
+                          (click)="openActualizar(rol?.id)">Actualizar</button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</section>
+<div class="modal fade" id="updateRole" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Actualizar Roles y Permisos</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="container-fluid h-100">
+                  <p>{{rolActual?.nombre}}</p>
+              </div>
+              <div class="actualizar-option">
+                  <div class="dropdown">
+                      <button class="btn roles-btn dropdown-toggle" type="button"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          Actualizar
+                      </button>
+                      <ul class="dropdown-menu">
+                          <li class="dropdown-item" (click)="onVerdaderoActualizar()">Verdadero</li>
+                          <li class="dropdown-item" (click)="onFalsoActualizar()">Falso</li>
+                      </ul>
+                  </div>
+                  <div class="card card-container card-roles">
+                      <div class="card-body">
+                          <div class="card-text">
+                              {{actualizarActual}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="eliminar-option">
+                  <div class="dropdown">
+                      <button class="btn roles-btn dropdown-toggle" type="button"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          Eliminar
+                      </button>
+                      <ul class="dropdown-menu">
+                          <li class="dropdown-item" (click)="onVerdaderoEliminar()">Verdadero</li>
+                          <li class="dropdown-item" (click)="onFalsoEliminar()">Falso</li>
+                      </ul>
+                  </div>
+                  <div class="card card-container card-roles">
+                      <div class="card-body">
+                          <div class="card-text">
+                              {{eliminarActual}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="escribir-option">
+                  <div class="dropdown">
+                      <button class="btn roles-btn dropdown-toggle" type="button"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          Escribir
+                      </button>
+                      <ul class="dropdown-menu">
+                          <li class="dropdown-item" (click)="onVerdaderoEscribir()">Verdadero</li>
+                          <li class="dropdown-item" (click)="onFalsoEscribir()">Falso</li>
+                      </ul>
+                  </div>
+                  <div class="card card-container card-roles">
+                      <div class="card-body">
+                          <div class="card-text">
+                              {{escribirActual}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="leer-option">
+                  <div class="dropdown">
+                      <button class="btn roles-btn dropdown-toggle" type="button"
+                          data-bs-toggle="dropdown" aria-expanded="false">
+                          Leer
+                      </button>
+                      <ul class="dropdown-menu">
+                          <li class="dropdown-item" (click)="onVerdaderoLeer()">Verdadero</li>
+                          <li class="dropdown-item" (click)="onFalsoLeer()">Falso</li>
+                      </ul>
+                  </div>
+                  <div class="card card-container card-roles">
+                      <div class="card-body">
+                          <div class="card-text">
+                              {{leerActual}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <div class="container-fluid h-100">
+                  <div class="row w-100 align-items-center">
+                      <div class="col text-center">
+                          <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdateNeed()">Actualizar Necesidad</button>
+                      </div>
+                  </div>
+              </div>
+              <div class="container-fluid h-100">
+                  <div class="row w-100 align-items-center">
+                      <div class="col text-center">
+                          <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
+                              {{mensajeError}}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
