@@ -12,6 +12,9 @@ export class AprobacionesComponent implements  OnInit{
   mensajeError= '';
   hayProyectosPorAprobar = false;
 
+  mensajeAsociacion;
+  registroError;
+
   constructor(private router: Router,private admistradorService: AdministradorService)  { }
 
   ngOnInit(): void {
@@ -35,6 +38,32 @@ export class AprobacionesComponent implements  OnInit{
 
       console.log(this.necesidadAprobar);
     });
+  }
+
+  AprobarNecesidad(id: number): void {
+    this.admistradorService.aprobarNecesidad(id).subscribe(() => {
+      this.consultaAprobaciones();
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+  }
+
+  declinarNecesidad(id: number): void {
+    let razonRechazo = {
+      motivo: 'holi'
+    };
+    this.admistradorService.declinarNecesidad(id, razonRechazo).subscribe(() => {
+      this.consultaAprobaciones();
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+  }
+
+  rechazarPostulacion(motivo: string): void 
+  {
+    console.log('Se rechazo por: ' + motivo);
   }
 
   abrirPerfilProyecto(id): void {

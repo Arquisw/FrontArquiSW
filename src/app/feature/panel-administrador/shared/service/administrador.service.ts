@@ -101,4 +101,12 @@ export class AdministradorService {
   {
     return this.http.doPut<MotivoRechazoPostulacion, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.RECHAZAR_ENDPOINT}/${id}`, motivoRechazo);
   }
+
+  aprobarNecesidad(id: number) {
+    return this.http.doGet(environment.endpoint +'/necesidades/administrador/aprobar/'+ id);
+  }
+
+  declinarNecesidad(id: number, razonRechazo) {
+    return this.http.doPut(environment.endpoint +'/necesidades/administrador/aprobar/'+ id, razonRechazo);
+  }
 }
