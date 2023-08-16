@@ -1,0 +1,125 @@
+.modal-title
+{
+  font-size: 1.8rem;
+}
+
+.modal-body{
+  font-size: 1.4rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-header, .modal-body, .modal-footer {
+  background-color: var(--background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+
+.modal-body select, label {
+  font-size: 1.4rem;
+}
+
+.btn
+{
+  font-size: 1.6rem;
+  height: 35px;
+  width: 100px;
+  background-color: var(--uco-green);
+}
+
+.input {
+  background-color: var(--background-color);
+}
+
+.modal-body select, label {
+  font-size: 1.4rem;
+  align-items: center;
+}
+
+.modal-content p {
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+.custom-file {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.custom-file-label {
+  background-color: var(--uco-green);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-control:not(:placeholder-shown) {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control:placeholder-shown {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control, li, .card-text {
+  font-size: 1.4rem;
+}
+
+.form-floating label {
+  font-size: 1.4rem;
+}
+
+input {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+  border-color: var(--black);
+}
+
+label {
+  color: var(--black);
+}
+
+.alert {
+  padding-top: 10px;
+}
+
+.modal-title
+{
+  font-size: 1.8rem;
+}
+
+.modal-body{
+  font-size: 1.4rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+.modal-header {
+  background-color: var(--background-color);
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+
+.modal-body select, label, .tipos-consultoria-btn{
+  font-size: 1.4rem;
+}
+
+

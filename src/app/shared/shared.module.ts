@@ -5,12 +5,16 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ModalCargarPdfComponent } from './components/modal-cargar-pdf/modal-cargar-pdf.component';
 import { ModalDescripcionComponent } from './components/modal-descripcion/modal-descripcion.component';
 import { ModalConfirmacionComponent } from './components/modal-confirmacion/modal-confirmacion.component';
+import { ModalRechazoComponent } from './components/modal-rechazo/modal-rechazo.component';
+
+
 
 @NgModule({
   declarations: [
     ModalCargarPdfComponent,
     ModalDescripcionComponent,
-    ModalConfirmacionComponent
+    ModalConfirmacionComponent,
+    ModalRechazoComponent
   ],
   imports: [ReactiveFormsModule, FormsModule],
   exports: [
@@ -20,7 +24,8 @@ import { ModalConfirmacionComponent } from './components/modal-confirmacion/moda
     FormsModule,
     ModalCargarPdfComponent,
     ModalDescripcionComponent,
-    ModalConfirmacionComponent
+    ModalConfirmacionComponent,
+    ModalRechazoComponent
   ]
 })
 export class SharedModule { }
