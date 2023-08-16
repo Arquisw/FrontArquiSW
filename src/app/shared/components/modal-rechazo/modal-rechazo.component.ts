@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 
 
 
@@ -8,7 +8,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./modal-rechazo.component.scss']
 })
 export class ModalRechazoComponent {
-  //@Input() modalId: string;
+  @Input() modalIdRechazo: string;
+  @Input() proyecto;
   @Output() confirmacion = new EventEmitter<void>();
   motivo;
   mensajeError= '';
@@ -16,9 +17,8 @@ export class ModalRechazoComponent {
 
 
   confirmarRechazo() {
-    this.confirmacion.emit(this.motivo);
+    this.confirmacion.emit(this.motivo)
   }
-
 }
 
 

@@ -1,17 +1,17 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" [id]="modalIdRechazo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Modal Title</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Declinar</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <label for="textInput">Texto:</label>
-        <input type="text" id="textInput" class="form-control" [(ngModel)]="motivo">
+        <h5>Dijite la razon por la cual declina la aprobación del proyecto: {{proyecto}} </h5>        
+        <input type="text" class="form-control" [(ngModel)]="motivo">
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" class="btn btn-primary" (click)="confirmarRechazo()">Guardar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="confirmarRechazo()" data-bs-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>

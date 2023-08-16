@@ -26,15 +26,12 @@
         <td>
           <button class="btn btn-success" (click)="abrirPerfilProyecto(necesidad?.id)" >Ver Perfil</button>
           <button class="btn btn-success" (click)="AprobarNecesidad(necesidad?.id)">Aprobar</button>
-          <!-- <button class="btn btn-success" data-toggle="modal" data-target="#eliminarUsuarioModalId">Declinar
-          </button> -->
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-            Abrir Modal
-          </button>
+          <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModalRechazo(necesidad?.id)">Declinar</button>
           <app-modal-rechazo
-            (confirmacion)="rechazarPostulacion($event)"> 
-          </app-modal-rechazo>
-
+            [modalIdRechazo]="obtnerIdModalRechazo(necesidad?.id)"
+            [proyecto]="necesidad?.proyecto.nombre"
+            (confirmacion)="rechazarPostulacion($event)">
+          ></app-modal-rechazo>         
         </td>
       </tr>
     </tbody>

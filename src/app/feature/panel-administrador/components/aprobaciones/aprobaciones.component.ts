@@ -25,6 +25,10 @@ export class AprobacionesComponent implements  OnInit{
     return 'descripcionModal' + id;
   }
 
+  obtnerIdModalRechazo(nombreProyecto: string): string {
+    return 'rechazoModal' + nombreProyecto;
+  }
+
   consultaAprobaciones(): void {
     this.necesidadAprobar= [];
     let petecionAprobar;
