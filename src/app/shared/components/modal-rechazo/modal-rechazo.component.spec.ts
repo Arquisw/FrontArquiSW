@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ModalRechazoComponent } from './modal-rechazo.component';
 
 describe('ModalRechazoComponent', () => {
