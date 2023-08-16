@@ -10,14 +10,15 @@ import { AdministradorService } from '../../shared/service/administrador.service
 export class AprobacionesComponent implements  OnInit{
   necesidadAprobar: any[] = [];
   mensajeError= '';
+  hayProyectosPorAprobar = false;
 
   constructor(private router: Router,private admistradorService: AdministradorService)  { }
-    
+
   ngOnInit(): void {
     this.consultaAprobaciones();
   }
 
-  obtnerIdModal(id:number): string {
+  obtnerIdModal(id: number): string {
     return 'descripcionModal' + id;
   }
 
@@ -27,10 +28,12 @@ export class AprobacionesComponent implements  OnInit{
     this.admistradorService.consultarNecesidadesPendienteAprobacion().subscribe((response) => {
       petecionAprobar = response;
       this.necesidadAprobar = petecionAprobar;
+
+      if(this.necesidadAprobar.length > 0) {
+        this.hayProyectosPorAprobar = true;
+      }
+
       console.log(this.necesidadAprobar);
-    },
-    (error) => {
-      this.mensajeError=error.message;
     });
   }
 

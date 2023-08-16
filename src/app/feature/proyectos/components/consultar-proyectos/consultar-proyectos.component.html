@@ -21,9 +21,10 @@
         <tr *ngFor="let necesidad of necesidades | filter: filterTerm">
           <td class="table-body align-middle">{{necesidad?.proyecto?.nombre}}</td>
           <td class="table-body align-middle">
-            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(necesidad?.id)"
               data-bs-dismiss="modal">Ver Descripción</button>
             <app-modal-descripcion
+            [modalId]="obtenerIdModalDescripcion(necesidad?.id)"
             [titulo]="'Descripción'"
             [descripcion]="necesidad?.proyecto?.descripcion"></app-modal-descripcion>
           </td>

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostulacionesProyectoComponent implements OnInit {
   proyectoId = 0;
-  
+
   constructor() {}
 
   ngOnInit(): void {

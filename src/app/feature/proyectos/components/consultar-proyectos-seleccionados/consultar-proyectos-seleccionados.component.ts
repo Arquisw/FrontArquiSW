@@ -122,4 +122,8 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
 
     return necesidadId;
   }
+
+  obtenerIdModalDescripcion(id: number): string {
+    return 'descripcionModal' + id;
+  }
 }

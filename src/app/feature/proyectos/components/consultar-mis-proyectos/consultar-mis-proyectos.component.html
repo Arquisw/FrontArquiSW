@@ -22,10 +22,10 @@
         <tr *ngFor="let necesidad of necesidades">
           <td class="table-body align-middle">{{necesidad?.proyecto?.nombre}}</td>
           <td class="table-body align-middle">
-            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(necesidad?.id)"
               data-bs-dismiss="modal">Ver Descripción</button>
             <app-modal-descripcion
-            [modalId]="'descripcionModal'"
+            [modalId]="obtenerIdModalDescripcion(necesidad?.id)"
             [descripcion]="necesidad?.proyecto?.descripcion"
             [titulo]="'Descripcion'"
             ></app-modal-descripcion>
@@ -37,10 +37,10 @@
           <td class="table-body align-middle">{{necesidad?.proyecto?.estado?.nombre}}</td>
           <td class="table-body align-middle">
             <button (click)="abrirPerfilProyecto(necesidad?.id)" class="btn btn-watch-project btn-success mt-3">Ver Proyecto</button>
-            <button *ngIf="esUnaNecesidadRechazada(necesidad?.estado?.nombre)" type="submit" class="btn btn-watch-project btn-success mt-3" data-bs-toggle="modal" data-bs-target="#motivoRechazoModalId"
+            <button *ngIf="esUnaNecesidadRechazada(necesidad?.estado?.nombre)" type="submit" class="btn btn-watch-project btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalMotivoRechazo(necesidad?.id)"
               data-bs-dismiss="modal">Ver Motivo del Rechazo</button>
             <app-modal-descripcion
-            [modalId]="'motivoRechazoModalId'"
+            [modalId]="obtenerIdModalMotivoRechazo(necesidad?.id)"
             [descripcion]="necesidad?.motivoRechazo"
             [titulo]="'Motivo del Rechazo'"
             ></app-modal-descripcion>

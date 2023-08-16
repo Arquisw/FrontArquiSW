@@ -1,7 +1,8 @@
 
-<div class="tabla" *ngIf="hayUsuariosAEliminar">
+<div class="tabla">
   <h1>Usuarios</h1>
-  <table>
+  <p *ngIf="!hayUsuariosAEliminar">No hay peticiones de eliminación de usuarios por revisar en estos momentos...</p>
+  <table *ngIf="hayUsuariosAEliminar">
     <thead>
       <tr>
         <th class="table-header">Nombre</th>
@@ -17,20 +18,21 @@
           <button class="btn btn-success" (click)="abrirPerfil(usuario?.id)">Ver Perfil</button>
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModalId" >Eliminar
             <app-modal-confirmacion
-              [modalId]="'eliminarUsuarioModalId'" 
+              [modalId]="'eliminarUsuarioModalId'"
               [titulo]="'Eliminar'"
               [descripcion]="mensajeEliminarUsuario"
-              (confirmacion)="eliminarPersona(usuario?.id)"> 
+              (confirmacion)="eliminarPersona(usuario?.id)">
             </app-modal-confirmacion>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-</div> 
-<div class="tabla" *ngIf="hayAsociacionesAEliminar">
-  <h1>Asociacion</h1>
-  <table>
+</div>
+<div class="tabla" >
+  <h1>Empresas o Asociaciones</h1>
+  <p *ngIf="!hayAsociacionesAEliminar">No hay peticiones de eliminación de Empresas o Asociaciones por revisar en estos momentos...</p>
+  <table *ngIf="hayAsociacionesAEliminar">
     <thead>
       <tr>
         <th class="table-header">Nombre</th>
@@ -46,20 +48,21 @@
           <button class="btn btn-success" (click)="abrirPerfilAsociacion(asociacion?.id)">Ver Perfil</button>
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarAsociacionModalId" >Eliminar
             <app-modal-confirmacion
-              [modalId]="'eliminarAsociacionModalId'" 
+              [modalId]="'eliminarAsociacionModalId'"
               [titulo]="'Eliminar'"
               [descripcion]="mensajeEliminarAsociacion"
-              (confirmacion)="eliminarAsociacion(asociacion?.id)"> 
+              (confirmacion)="eliminarAsociacion(asociacion?.id)">
           </app-modal-confirmacion>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-</div> 
-<div class="tabla" *ngIf="hayNecesidadAEliminar">
+</div>
+<div class="tabla">
   <h1>Proyectos</h1>
-  <table>
+  <p *ngIf="!hayNecesidadAEliminar">No hay peticiones de eliminación de Proyectos por revisar en estos momentos...</p>
+  <table *ngIf="hayNecesidadAEliminar">
     <thead>
       <tr>
         <th class="table-header">Nombre</th>
@@ -69,16 +72,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let necesidad of necesidadEliminar">
-        <td>{{necesidad?.proyecto.nombre}}</td>
-        <td>{{necesidad?.proyecto.estado.nombre}}</td>
+        <td>{{necesidad?.proyecto?.nombre}}</td>
+        <td>{{necesidad?.proyecto?.estado?.nombre}}</td>
         <td>
           <button class="btn btn-success" (click)="abrirPerfilProyecto(necesidad?.id)">Ver Proyecto</button>
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProyectoModalId">Eliminar
             <app-modal-confirmacion
-              [modalId]="'eliminarProyectoModalId'" 
+              [modalId]="'eliminarProyectoModalId'"
               [titulo]="'Eliminar'"
               [descripcion]="mensajeEliminarProyecto"
-              (confirmacion)="eliminarProyecto(necesidad?.proyecto.id)"> 
+              (confirmacion)="eliminarProyecto(necesidad?.proyecto?.id)">
           </app-modal-confirmacion>
           </button>
         </td>

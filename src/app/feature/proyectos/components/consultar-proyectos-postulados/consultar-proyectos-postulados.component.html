@@ -53,9 +53,10 @@
         <tr *ngFor="let proyecto of proyectosResumen">
           <td class="table-body align-middle">{{proyecto?.nombre}}</td>
           <td class="table-body align-middle">
-            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(proyecto?.id)"
               data-bs-dismiss="modal">Ver Descripción</button>
             <app-modal-descripcion
+            [modalId]="obtenerIdModalDescripcion(proyecto?.id)"
             [titulo]="'Descripción'"
             [descripcion]="proyecto.descripcion"></app-modal-descripcion>
           </td>

@@ -31,4 +31,8 @@ export class PostulacionesComponent implements OnInit {
     };
     this.router.navigate(['./panel-administrador/postulaciones-proyecto'], navigationExtras);
   }
+
+  obtenerIdModalDescripcion(id: number): string {
+    return 'descripcionModal' + id;
+  }
 }

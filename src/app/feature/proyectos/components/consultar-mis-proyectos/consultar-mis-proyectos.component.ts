@@ -301,4 +301,13 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
     return false;
   }
+
+  obtenerIdModalDescripcion(id: number): string {
+    return 'descripcionModal' + id;
+  }
+
+  obtenerIdModalMotivoRechazo(id: number): string {
+    return 'motivoRechazoModal' + id;
+  }
+
 }

@@ -294,4 +294,8 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
 
     return necesidadId;
   }
+
+  obtenerIdModalDescripcion(id: number): string {
+    return 'descripcionModal' + id;
+  }
 }

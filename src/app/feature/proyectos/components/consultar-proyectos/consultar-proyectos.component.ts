@@ -259,4 +259,8 @@ export class ConsultarProyectosComponent implements OnInit {
     };
     this.router.navigate(['/proyecto'], navigationExtras);
   }
+
+  obtenerIdModalDescripcion(id: number): string {
+    return 'descripcionModal' + id;
+  }
 }
