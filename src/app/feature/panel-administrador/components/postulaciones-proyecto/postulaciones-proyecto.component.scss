@@ -1,3 +1,80 @@
-* {
+.users_section {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.users_section h1 {
   color: var(--just-white);
+  font-size: 3rem;
+}
+
+.users_section p {
+  color: var(--just-white);
+  font-size: 1.4rem;
+}
+
+.btn
+{
+  font-size: 1.6rem;
+  background-color: var(--uco-green);
+}
+
+.btn-watch-profile, .btn-select-user {
+  margin-right: 5px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--background-color);
+  color: var(--just-white);
+  border: 1px solid var(--just-white);
+}
+
+thead th
+{
+  padding: 10px;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+  border: 1px solid var(--just-white);
+}
+
+tbody th
+{
+  padding: 10px;
+  text-align: center;
+  font-size: 1.4rem;
+}
+
+tbody .mark {
+  padding: 10px;
+  text-align: center;
+}
+
+tbody td
+{
+  border: 1px solid var(--just-white);
+  font-size: 1.4rem;
+  justify-content: center;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+.table-title
+{
+  vertical-align: middle;
+}
+
+.table-body {
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.table-body p {
+  font-size: 1.4rem;
 }

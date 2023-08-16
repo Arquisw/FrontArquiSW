@@ -1,1 +1,30 @@
-<p>postulaciones-proyecto works!</p>
+<section class="users_section">
+  <h1>Usuarios postulados al proyecto {{proyecto?.nombre}}</h1>
+  <p *ngIf="!hayUsuariosPostulados">No hay usuarios postulados a este proyecto actualmente...</p>
+  <div class="table-responsive" *ngIf="hayUsuariosPostulados">
+      <table class="table align-middle table-striped">
+          <thead>
+              <tr>
+                  <th class="table-title" scope="col">Nombre</th>
+                  <th class="table-title" scope="col">Correo Electronico</th>
+                  <th class="table-title" scope="col">Roles Elegidos</th>
+                  <th class="table-title" scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let postulacion of postulacionesResumen">
+                  <td class="table-body align-middle mark">{{postulacion?.nombreDelUsuario}}</td>
+                  <td class="table-body align-middle mark">{{postulacion?.correoDelUsuario}}</td>
+                  <td class="table-body align-middle mark">
+                      <p *ngFor="let rol of postulacion?.roles">{{obtenerNombreDelRol(rol)}}</p>
+                  </td>
+                  <td class="table-body align-middle mark">
+                      <button (click)="abrirPerfilUsuario(postulacion?.usuarioID)" class="btn btn-watch-profile btn-success mt-3">Ver Perfil</button>
+                      <button (click)="seleccionarUsuario(postulacion?.id)" class="btn btn-select-user btn-success mt-3">Seleccionar</button>
+                      <button (click)="rechazarUsuario(postulacion?.id)" class="btn btn-success mt-3">Rechazar</button>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</section>

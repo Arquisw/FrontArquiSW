@@ -10,6 +10,7 @@ import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesid
 })
 export class PostulacionesComponent implements OnInit {
   necesidadesResumen: NecesidadResumen[] = [];
+  hayProyectosNegociados = false;
 
   constructor(private administradorService: AdministradorService, private router: Router) { }
 
@@ -20,6 +21,10 @@ export class PostulacionesComponent implements OnInit {
   consultarNecesidades(): void {
     this.administradorService.consultarProyectosNegociados().subscribe((response) => {
       this.necesidadesResumen = response;
+
+      if(this.necesidadesResumen.length > 0) {
+        this.hayProyectosNegociados = true;
+      }
     });
   }
 

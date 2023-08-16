@@ -1,6 +1,7 @@
 <section class="projects_section">
   <h1>Postulaciones por Proyecto</h1>
-  <div class="table-responsive">
+  <p *ngIf="!hayProyectosNegociados">No hay usuarios postulados a este proyecto actualmente...</p>
+  <div class="table-responsive" *ngIf="hayProyectosNegociados">
     <table class="table align-middle table-striped">
       <thead>
         <tr>
@@ -24,7 +25,7 @@
           </td>
           <td class="table-body align-middle mark">
             <button (click)="abrirPostulacionesDelProyecto(necesidad?.proyecto?.id)"
-              class="btn btn-watch-project btn-success mt-3">Ver Proyecto</button>
+              class="btn btn-watch-project btn-success mt-3">Ver Postulaciones</button>
           </td>
         </tr>
       </tbody>

@@ -3,6 +3,8 @@ export class PostulacionResumen {
   public seleccionado: boolean;
   public rechazado: boolean;
   public motivoDelRechazo: string;
+  public nombreDelUsuario: string;
+  public correoDelUsuario: string;
   public fecha: string;
   public roles: string[];
   public proyectoID: number;

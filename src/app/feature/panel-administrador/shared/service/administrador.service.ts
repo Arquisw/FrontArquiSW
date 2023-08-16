@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { Rol } from '../model/rol.model';
 import { PanelAdministradorRespuesta } from '../model/panel-administrador-respuesta.model';
 import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
+import { PostulacionResumen } from 'src/app/feature/proyectos/shared/model/postulacion-resumen.model';
+import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
 
 @Injectable()
 
@@ -15,6 +17,8 @@ export class AdministradorService {
   private readonly NECESIDADES_ENDPOINT: string = '/necesidades';
   private readonly PROYECTOS_ENDPOINT: string = '/proyectos';
   private readonly NEGOCICADOS_ENDPOINT: string = '/negociados';
+  private readonly POSTULACIONES_ENDPOINT: string = '/postulaciones';
+  private readonly PROYECTO_ENDPOINT: string = '/proyecto';
 
   constructor(private http: HttpService) { }
 
@@ -71,5 +75,15 @@ export class AdministradorService {
   public consultarProyectosNegociados(): Observable<NecesidadResumen[]>
   {
     return this.http.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}${this.NEGOCICADOS_ENDPOINT}`);
+  }
+
+  public consultarPostulacionesPorProyectoId(id: number): Observable<PostulacionResumen[]>
+  {
+    return this.http.doGetById<PostulacionResumen[]>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.PROYECTO_ENDPOINT}/`, id);
+  }
+
+  public consultarProyectoPorId(id: number): Observable<ProyectoResumen>
+  {
+    return this.http.doGetById<ProyectoResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}/`, id);
   }
 }
