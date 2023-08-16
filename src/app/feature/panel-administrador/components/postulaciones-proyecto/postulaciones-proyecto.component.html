@@ -28,3 +28,93 @@
       </table>
   </div>
 </section>
+<div class="modal fade" id="select" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Seleccionar Usuario</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+      </div>
+      <div class="modal-body">
+        <div class="dropdown">
+          <button class="btn roles-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Rol(es) que desempeñara el usuario
+          </button>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" (click)="onDirectorDeProyectoSelected()">Director del Proyecto</li>
+            <li class="dropdown-item" (click)="onParteInteresadaSelected()">Parte Interesada</li>
+            <li class="dropdown-item" (click)="onEquipoDeDesarrolloSelected()">Equipo de Desarrollo</li>
+            <li class="dropdown-item" (click)="onIngenieriaSelected()">Ingenieria</li>
+            <li class="dropdown-item" (click)="onArquitecturaSelected()">Arquitectura</li>
+            <li class="dropdown-item" (click)="onAnalistaSelected()">Analista</li>
+            <li class="dropdown-item" (click)="onLiderDelEquipoSelected()">Lider Del Equipo</li>
+            <li class="dropdown-item" (click)="onPatrocinadorSelected()">Patrocinador</li>
+          </ul>
+        </div>
+        <div class="card card-container card-roles">
+          <div class="card-body">
+            <div class="card-text" *ngFor="let rolSeleccionado of rolesSeleccionados">
+              {{rolSeleccionado}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickSelect(postulacionActual?.id)">Seleccionar</button>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <div *ngIf="seleccionError" class="alert alert-danger" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="decline" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Rechazar Postulacion</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="rechazarPostulacionForm">
+          <div class="form-floating mb-3">
+            <textarea type="text" class="description-project form-control" id="motivoRechazoPostulacion"
+              placeholder="motivo" formControlName="motivoRechazoPostulacion" required></textarea>
+            <label for="floatingInput">Motivo del Rechazo</label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3" (click)="onDeclineSelect(postulacionActual?.id)">Rechazar Postulación</button>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <div *ngIf="rechazoError" class="alert alert-danger" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

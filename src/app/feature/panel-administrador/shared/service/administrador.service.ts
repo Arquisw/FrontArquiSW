@@ -8,6 +8,8 @@ import { PanelAdministradorRespuesta } from '../model/panel-administrador-respue
 import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
 import { PostulacionResumen } from 'src/app/feature/proyectos/shared/model/postulacion-resumen.model';
 import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
+import { Seleccion } from '../model/seleccion.model';
+import { MotivoRechazoPostulacion } from '../model/motivo-rechazo-postulacion.module';
 
 @Injectable()
 
@@ -18,6 +20,9 @@ export class AdministradorService {
   private readonly PROYECTOS_ENDPOINT: string = '/proyectos';
   private readonly NEGOCICADOS_ENDPOINT: string = '/negociados';
   private readonly POSTULACIONES_ENDPOINT: string = '/postulaciones';
+  private readonly ADMINISTRADOR_ENDPOINT: string = '/administrador';
+  private readonly SELECCIONAR_ENDPOINT: string = '/seleccionar';
+  private readonly RECHAZAR_ENDPOINT: string = '/rechazar';
   private readonly PROYECTO_ENDPOINT: string = '/proyecto';
 
   constructor(private http: HttpService) { }
@@ -85,5 +90,15 @@ export class AdministradorService {
   public consultarProyectoPorId(id: number): Observable<ProyectoResumen>
   {
     return this.http.doGetById<ProyectoResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}/`, id);
+  }
+
+  public seleccionarUsuario(seleccion: Seleccion, id: number): Observable<PanelAdministradorRespuesta<number>>
+  {
+    return this.http.doPut<Seleccion, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.SELECCIONAR_ENDPOINT}/${id}`, seleccion);
+  }
+
+  public rechazarUsuario(motivoRechazo: MotivoRechazoPostulacion, id: number): Observable<PanelAdministradorRespuesta<number>>
+  {
+    return this.http.doPut<MotivoRechazoPostulacion, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.RECHAZAR_ENDPOINT}/${id}`, motivoRechazo);
   }
 }

@@ -23,6 +23,8 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   estaSeleccionado = false;
   usuarioId = 0;
   proyectoId = 0;
+  necesidadActualResumen: NecesidadResumen;
+  necesidadActualId = 0;
 
   constructor(private proyectosService: ProyectosService, private router: Router) {}
 
@@ -75,8 +77,6 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
 
   obtenerProyecto(id: number): void {
     this.proyectosService.consultarProyectoPorId(id).subscribe((response) => {
-      console.log('Data:', response);
-
       this.proyectosResumen.push(response);
 
       this.consultarNecesidad();
@@ -85,7 +85,6 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
 
   consultarProyecto(): void {
     this.proyectosService.consultarProyectoPorId(this.seleccionResumen.proyectoID).subscribe((response) => {
-      console.log('Data:', response);
 
       this.proyectoResumen = response;
 
@@ -95,32 +94,18 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
 
   consultarNecesidad(): void {
     this.proyectosService.consultarNecesidadPorProyectoId(this.proyectoResumen.id).subscribe((response) => {
-      console.log('Data:', response);
-
       this.necesidadResumen = response;
     });
   }
 
-  abrirPerfilProyecto(id): void {
-    const idActual = this.obtenerNecesidadIdPorProyectoId(id);
-
+  abrirPerfilProyecto(): void {
     const navigationExtras: NavigationExtras = {
       state: {
-        id: idActual
+        id: this.necesidadResumen.id
       }
     };
 
     this.router.navigate(['/proyecto'], navigationExtras);
-  }
-
-  obtenerNecesidadIdPorProyectoId(id: number): number {
-    let necesidadId = 0;
-
-    this.proyectosService.consultarNecesidadPorProyectoId(id).subscribe((response) => {
-      necesidadId = response.id;
-    });
-
-    return necesidadId;
   }
 
   obtenerIdModalDescripcion(id: number): string {

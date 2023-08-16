@@ -25,9 +25,9 @@
         </thead>
         <tbody>
           <tr *ngFor="let seleccion of seleccionesResumen">
-            <td class="table-body align-middle">{{consultarNombreDeUsuarioPorId(seleccion?.usuarioID)}}</td>
+            <td class="table-body align-middle">{{seleccion?.nombreDelUsuario}}</td>
             <td class="table-body align-middle">
-              <p *ngFor="let rol of seleccion?.roles">{{rol}}</p>
+              <p *ngFor="let rol of seleccion?.roles">{{obtenerNombreDelRol(rol)}}</p>
             </td>
             <td class="table-body align-middle">
               <button class="btn btn-watch-project btn-success mt-3">Ver Perfil</button>

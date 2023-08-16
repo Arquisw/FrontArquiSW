@@ -1,3 +1,7 @@
+* {
+  color: var(--just-white);
+}
+
 .users_section {
   padding: 15px;
   display: flex;
@@ -77,4 +81,109 @@ tbody td
 
 .table-body p {
   font-size: 1.4rem;
+}
+
+.card-body p, p {
+  color: var(--just-white);
+}
+
+.btn
+{
+  font-size: 1.6rem;
+  background-color: var(--uco-green);
+}
+
+.card-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card
+{
+  transition: all 0.2s ease;
+  background-color: var(--just-white);
+  border-color: var(--just-white);
+}
+
+.description-project {
+  height: 100px;
+}
+
+.card-body
+{
+  vertical-align: middle;
+  color: var(--just-white);
+}
+
+.card-text {
+  color: var(--black);
+}
+
+
+.form-control:not(:placeholder-shown) {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control:placeholder-shown {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control, li, .card-text {
+  font-size: 1.4rem;
+}
+
+.form-floating label {
+  font-size: 1.4rem;
+}
+
+.tipos-consultoria-btn, .card-tipos-consultoria {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.dropdown-menu {
+  background-color: var(--background-clear-color);
+}
+
+input {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+  border-color: var(--black);
+}
+
+label {
+  color: var(--black);
+}
+
+.alert {
+  padding-top: 10px;
+}
+
+.modal-body{
+  font-size: 1.4rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+.modal-header {
+  background-color: var(--background-color);
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+
+.modal-body select, label, .tipos-consultoria-btn{
+  font-size: 1.4rem;
+}
+
+.modal-footer {
+  background-color: var(--background-color);
 }

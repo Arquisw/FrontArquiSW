@@ -36,6 +36,7 @@ export class ProyectoComponent implements OnInit {
   tieneRolIngenieria = false;
   tieneRolLiderDeEquipo = false;
   tieneRolDirectorDeProyecto = false;
+  rolesMapa: Map<string, string> = new Map();
 
   constructor(private proyectoService: ProyectoService, private configuracionService: ConfiguracionService, private router: Router, private storageService: StorageService) {}
 
@@ -47,8 +48,24 @@ export class ProyectoComponent implements OnInit {
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;
 
+    this.cargarMapa();
     this.consultarPersona();
     this.consultarNecesidadPorId();
+  }
+
+  cargarMapa(): void {
+    this.rolesMapa.set('ROLE_DIRECTOR_PROYECTO', 'Director de Proyecto');
+    this.rolesMapa.set('ROLE_PARTE_INTERESADA', 'Parte Interesada');
+    this.rolesMapa.set('ROLE_EQUIPO_DESARROLLO', 'Equipo de Desarrollo');
+    this.rolesMapa.set('ROLE_INGENIERIA', 'Ingeniería');
+    this.rolesMapa.set('ROLE_ARQUITECTURA', 'Arquitectura');
+    this.rolesMapa.set('ROLE_ANALISTA', 'Analista');
+    this.rolesMapa.set('ROLE_LIDER_DE_EQUIPO', 'Lider de Equipo');
+    this.rolesMapa.set('ROLE_PATROCINADOR', 'Patrocinador');
+  }
+
+  obtenerNombreDelRol(clave: string): string {
+    return this.rolesMapa.get(clave);
   }
 
   consultarPersona(): void {
@@ -137,16 +154,6 @@ export class ProyectoComponent implements OnInit {
       console.log('Error:', error?.error?.mensaje);
       this.tieneContrato = false;
     });
-  }
-
-  consultarNombreDeUsuarioPorId(id: number): string {
-    let nombreCompleto = '';
-
-    this.configuracionService.consultarPersonaPorId(id).subscribe((response) => {
-      nombreCompleto = response.nombre + ' ' + response.apellidos;
-    });
-
-    return nombreCompleto;
   }
 
   abrirIngenieriaDeRequisitos(): void {
