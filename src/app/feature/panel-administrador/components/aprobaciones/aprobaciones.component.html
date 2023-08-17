@@ -1,6 +1,7 @@
 <div class="tabla">
   <h1>Proyectos por aprobar</h1>
-  <table>
+  <p *ngIf="!hayProyectosPorAprobar">No hay proyectos por aprobar actualmente...</p>
+  <table *ngIf="hayProyectosPorAprobar">
     <thead>
       <tr>
         <th class="table-header">Nombre</th>
@@ -31,11 +32,11 @@
             [modalIdRechazo]="obtnerIdModalRechazo(necesidad?.id)"
             [proyecto]="necesidad?.proyecto.nombre"
             (confirmacion)="rechazarPostulacion($event)">
-          ></app-modal-rechazo>         
+          ></app-modal-rechazo>
         </td>
       </tr>
     </tbody>
   </table>
-</div> 
+</div>
 
 

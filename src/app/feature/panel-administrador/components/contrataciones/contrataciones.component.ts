@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { AdministradorService } from '../../shared/service/administrador.service';
 
@@ -7,11 +7,16 @@ import { AdministradorService } from '../../shared/service/administrador.service
   templateUrl: './contrataciones.component.html',
   styleUrls: ['./contrataciones.component.scss']
 })
-export class ContratacionesComponent {
+export class ContratacionesComponent implements OnInit {
   necesidadAprobadas: any[] = [];
+  hayNecesidadesPorConcretar = false;
   mensajeError= '';
 
   constructor(private router: Router, private admistradorService: AdministradorService)  { }
+
+  ngOnInit(): void {
+    this.consultaAprobaciones();
+  }
 
   consultaAprobaciones(): void {
     this.necesidadAprobadas= [];
@@ -19,6 +24,11 @@ export class ContratacionesComponent {
     this.admistradorService.consultarNecesidadesPendienteAprobacion().subscribe((response) => {
       petecionAprobar = response;
       this.necesidadAprobadas = petecionAprobar;
+
+      if(this.necesidadAprobadas.length > 0) {
+        this.hayNecesidadesPorConcretar = true;
+      }
+      
       console.log(this.necesidadAprobadas);
     },
     (error) => {
