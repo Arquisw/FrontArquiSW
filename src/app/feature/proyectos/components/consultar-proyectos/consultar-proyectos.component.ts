@@ -69,6 +69,14 @@ export class ConsultarProyectosComponent implements OnInit {
       if (rol.nombre === 'ROLE_POSTULADO') {
         this.mostrarBotonPostulacion = false;
       }
+
+      if (rol.nombre === 'ROLE_SELECCIONADO') {
+        this.mostrarBotonPostulacion = false;
+      }
+
+      if (rol.nombre === 'ROLE_ADMINISTRADOR') {
+        this.mostrarBotonPostulacion = false;
+      }
     });
   }
 
@@ -102,7 +110,8 @@ export class ConsultarProyectosComponent implements OnInit {
 
     this.loginModal?.show();
 
-    console.log(id);
+    this.rolesSeleccionados = [];
+    this.codigoRolesSeleccionados = [];
   }
 
   onDirectorDeProyectoSelected(): void {

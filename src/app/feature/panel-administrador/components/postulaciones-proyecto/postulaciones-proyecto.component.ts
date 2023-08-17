@@ -5,7 +5,6 @@ import { AdministradorService } from '../../shared/service/administrador.service
 import { NavigationExtras, Router } from '@angular/router';
 import Modal from 'bootstrap/js/dist/modal';
 import { Seleccion } from '../../shared/model/seleccion.model';
-import { FormControl, FormGroup } from '@angular/forms';
 import { MotivoRechazoPostulacion } from '../../shared/model/motivo-rechazo-postulacion.module';
 
 @Component({
@@ -15,7 +14,6 @@ import { MotivoRechazoPostulacion } from '../../shared/model/motivo-rechazo-post
 })
 export class PostulacionesProyectoComponent implements OnInit {
   seleccionModal: Modal | undefined;
-  rechazarModal: Modal | undefined;
   proyectoId = 0;
   hayUsuariosPostulados = false;
   postulacionesResumen: PostulacionResumen[] = [];
@@ -26,18 +24,12 @@ export class PostulacionesProyectoComponent implements OnInit {
   rolesMapa: Map<string, string> = new Map();
   seleccionError = false;
   mensajeError = '';
-  rechazarPostulacionForm: FormGroup;
-  rechazoError = false;
 
   constructor(private router: Router, private administradorService: AdministradorService) { }
 
   ngOnInit(): void {
     const params = history.state;
     this.proyectoId = params.id;
-
-    this.rechazarPostulacionForm = new FormGroup({
-      motivoRechazoPostulacion: new FormControl('')
-    });
 
     this.cargarMapa();
     this.consultarProyectoPorId();
@@ -105,16 +97,6 @@ export class PostulacionesProyectoComponent implements OnInit {
     this.rolesSeleccionados = [];
 
     window.location.reload();
-  }
-
-  rechazarUsuario(id: number): void {
-    this.rechazarModal = new Modal(document.getElementById('decline') ?? false, {
-      keyboard: false
-    });
-
-    this.rechazarModal?.show();
-
-    this.postulacionActual = this.postulacionesResumen.find(postulacion => postulacion.id === id);
   }
 
   onDirectorDeProyectoSelected(): void {
@@ -264,15 +246,18 @@ export class PostulacionesProyectoComponent implements OnInit {
     }
   }
 
-  onDeclineSelect(id: number): void {
-    const motivoRechazo = new MotivoRechazoPostulacion(this.rechazarPostulacionForm.get('motivoRechazoPostulacion')?.value);
+  onDeclineSelect(motivoDeclinacion: string, id: number): void {
+    const motivoRechazo = new MotivoRechazoPostulacion(motivoDeclinacion);
 
     this.administradorService.rechazarUsuario(motivoRechazo, id).subscribe(() => {
-      this.rechazarModal?.hide();
       window.location.reload();
     }, (error) => {
-      this.rechazoError = true;
       this.mensajeError = error?.error?.mensaje;
+      console.log(this.mensajeError);
     });
+  }
+
+  obtenerIdModalRechazo(id: number): string {
+    return 'rechazoModal' + id;
   }
 }
