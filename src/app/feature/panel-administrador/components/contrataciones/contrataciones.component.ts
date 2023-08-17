@@ -11,7 +11,7 @@ export class ContratacionesComponent implements OnInit {
   necesidadAprobadas: any[] = [];
   hayNecesidadesPorConcretar = false;
   mensajeError= '';
-  contrato
+  contrato;
 
 
   constructor(private router: Router, private admistradorService: AdministradorService)  { }
@@ -68,16 +68,16 @@ export class ContratacionesComponent implements OnInit {
 
   guardarContrato(necesidadId: number, contrato): void {
     this.admistradorService.guardarContrato(necesidadId, contrato ).subscribe(() => {},
-    (error) => {
-      this.mensajeError =error?.error?.mensaje;
-    });
+      (error) => {
+        this.mensajeError =error?.error?.mensaje;
+      });
   }
 
   actualizarContrato(necesidadId: number, contrato): void {
     this.admistradorService.actualizarContrato(necesidadId, contrato ).subscribe(() => {},
-    (error) => {
-      this.mensajeError =error?.error?.mensaje;
-    });
+      (error) => {
+        this.mensajeError =error?.error?.mensaje;
+      });
   }
 
 

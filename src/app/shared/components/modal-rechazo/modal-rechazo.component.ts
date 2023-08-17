@@ -14,7 +14,7 @@ export class ModalRechazoComponent {
   motivo;
 
   confirmarRechazo() {
-    this.confirmacion.emit(this.motivo)
+    this.confirmacion.emit(this.motivo);
   }
 }
 

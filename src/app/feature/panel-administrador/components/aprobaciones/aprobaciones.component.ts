@@ -51,7 +51,7 @@ export class AprobacionesComponent implements  OnInit{
   }
 
   declinarNecesidad(motivoDeclinada: string, id: number): void {
-    let razonRechazo = {
+    const razonRechazo = {
       motivoRechazo: motivoDeclinada
     };
     this.admistradorService.declinarNecesidad(id, razonRechazo).subscribe(() => {

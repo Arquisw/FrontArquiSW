@@ -8,8 +8,7 @@ describe('ModalRechazoComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ModalRechazoComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ModalRechazoComponent);
     component = fixture.componentInstance;

@@ -9,8 +9,7 @@ describe('AprobacionesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ AprobacionesComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AprobacionesComponent);
     component = fixture.componentInstance;
