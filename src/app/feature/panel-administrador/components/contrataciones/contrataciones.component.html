@@ -1,6 +1,7 @@
 <div class="tabla">
     <h1>Proyectos aprobados por concretar</h1>
-    <table>
+    <p *ngIf="!hayNecesidadesPorConcretar">No hay proyectos por concretar actualmente...</p>
+    <table *ngIf="hayNecesidadesPorConcretar">
       <thead>
         <tr>
           <th class="table-header">Nombre</th>
@@ -26,5 +27,5 @@
         </tr>
       </tbody>
     </table>
-  </div> 
-  
+  </div>
+

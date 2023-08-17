@@ -201,8 +201,8 @@ export class ConsultarMisProyectosComponent implements OnInit {
     });
 
     this.loginModal?.show();
-
-    this.necesidad = this.necesidades.find(item => item.id = id);
+    this.tiposConsultoriaSeleccionados = [];
+    this.necesidad = this.necesidades.find(item => item.id === id);
     this.necesidadId = this.necesidad.id;
 
     this.necesidad.proyecto.tiposConsultoria.forEach(tipoConsultoria => {

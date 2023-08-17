@@ -23,6 +23,10 @@ export class ProyectosComponent implements OnInit {
     { url: './mis-proyectos', nombre: 'Mis Proyectos' },
   ];
 
+  public menuItemsAdministrador: MenuItem[] = [
+    { url: './buscar', nombre: 'Buscar' }
+  ];
+
   usuarioId = 0;
   correo = '';
   tieneAsociacion = false;
@@ -56,7 +60,9 @@ export class ProyectosComponent implements OnInit {
 
   filtrarMenu(roles): void {
     roles.forEach(rol => {
-      if (rol.nombre === 'ROLE_ASOCIACION') {
+      if(rol.nombre === 'ROLE_ADMINISTRADOR') {
+        this.menuItems = this.menuItemsAdministrador;
+      }else if (rol.nombre === 'ROLE_ASOCIACION') {
         this.menuItems = this.menuItemsConAsociacion;
       } else {
         this.menuItems = this.menuItemsSinAsociacion;

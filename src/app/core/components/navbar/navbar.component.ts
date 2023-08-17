@@ -101,7 +101,7 @@ export class NavbarComponent implements OnInit {
       }
     };
 
-    this.estaAbierto = false;
+    this.cerrarMenuDeplegable();
     this.router.navigate(['/perfil'], navigationExtras);
   }
 
@@ -113,7 +113,7 @@ export class NavbarComponent implements OnInit {
       }
     };
 
-    this.estaAbierto = false;
+    this.cerrarMenuDeplegable();
     this.router.navigate(['/asociacion'], navigationExtras);
   }
 
@@ -234,5 +234,9 @@ export class NavbarComponent implements OnInit {
     this.inicioSesion = false;
     this.router.navigate(['/inicio']);
     window.sessionStorage.removeItem('Authorization');
+  }
+
+  cerrarMenuDeplegable(): void {
+    this.estaAbierto = false;
   }
 }

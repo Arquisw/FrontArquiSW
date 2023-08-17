@@ -91,7 +91,7 @@ export class PostulacionesProyectoComponent implements OnInit {
     });
 
     this.seleccionModal?.show();
-
+    this.codigoRolesSeleccionados = [];
     this.postulacionActual = this.postulacionesResumen.find(postulacion => postulacion.id === id);
     this.codigoRolesSeleccionados = this.postulacionActual.roles;
     this.codigoRolesSeleccionados.forEach(codigoRol => {
@@ -115,10 +115,6 @@ export class PostulacionesProyectoComponent implements OnInit {
     this.rechazarModal?.show();
 
     this.postulacionActual = this.postulacionesResumen.find(postulacion => postulacion.id === id);
-    this.codigoRolesSeleccionados = this.postulacionActual.roles;
-    this.codigoRolesSeleccionados.forEach(codigoRol => {
-      this.rolesSeleccionados.push(this.rolesMapa.get(codigoRol));
-    });
   }
 
   onDirectorDeProyectoSelected(): void {
