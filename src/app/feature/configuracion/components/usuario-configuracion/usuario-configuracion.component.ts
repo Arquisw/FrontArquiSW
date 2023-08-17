@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 import { PersonaResumen } from '../../shared/model/persona-resumen.model';
 import { AsociacionResumen } from '../../shared/model/asociacion-resumen.model';
@@ -24,10 +24,12 @@ export class UsuarioConfiguracionComponent implements OnInit {
   mensajeActualizacion= '';
   usuarioId = 0;
 
-  constructor(private route: ActivatedRoute, private configuracionService: ConfiguracionService, private router: Router) {}
+  constructor(private configuracionService: ConfiguracionService, private router: Router) {}
 
   ngOnInit(): void {
-    this.usuarioId = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    const token = window.sessionStorage.getItem('Authorization');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    this.usuarioId = tokenPayload.id;
 
     this.consultarUsuario();
 

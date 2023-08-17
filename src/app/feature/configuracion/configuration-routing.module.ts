@@ -10,12 +10,12 @@ const routes: Routes = [{
   component: ConfiguracionComponent,
   children: [
     {
-      path: 'usuario/:id',
+      path: 'usuario',
       component: UsuarioConfiguracionComponent,
       canActivate: [SecurityGuard]
     },
     {
-      path: 'asociacion/:id',
+      path: 'asociacion',
       component: AsociacionConfiguracionComponent,
       canActivate: [SecurityGuard]
     }
