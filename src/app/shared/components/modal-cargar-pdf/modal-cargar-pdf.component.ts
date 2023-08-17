@@ -9,8 +9,9 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./modal-cargar-pdf.component.scss']
 })
 export class ModalCargarPdfComponent {
+  @Input() modalId: string;
   @Input() titulo;
-  @Input() usuario;
+  @Input() objeto;
   @Output() enviarValor  = new EventEmitter();
   @ViewChild('cargarInput') cargarInput: ElementRef;
   selectedFileName = 'Seleccionar archivo';
@@ -27,7 +28,7 @@ export class ModalCargarPdfComponent {
 
   uploadFile() {
     if (this.archivo) {
-      const filePath = 'hojaDeVida/' + this.usuario.apellidos + this.usuario.nombre + '/' +'Hoja de vida ' + this.usuario.nombre + '.pdf';
+      const filePath = 'hojaDeVida/' + this.objeto.apellidos + this.objeto.nombre + '/' +'Hoja de vida ' + this.objeto.nombre + '.pdf';
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.archivo);
 
