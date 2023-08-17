@@ -27,7 +27,7 @@
               [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(postulacion?.id)">Rechazar</button>
             <app-modal-rechazo
               [modalIdRechazo]="obtenerIdModalRechazo(postulacion?.id)"
-              [titulo]="'Postulación'"
+              [titulo]="'postulación del usuario ' + postulacion?.nombreDelUsuario"
               (confirmacion)="onDeclineSelect($event, postulacion?.id)">
               ></app-modal-rechazo>
           </td>

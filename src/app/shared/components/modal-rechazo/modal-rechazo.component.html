@@ -3,16 +3,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title" id="myModalLabel">Declinar</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="input-container">
-          <h4>Dijite la razon por la cual declina la: <em>{{titulo}}</em> </h4>        
-          <textarea class="form-control" rows="4" [(ngModel)]="motivo"></textarea>
+          <p>Dijite la razon por la cual declina la {{titulo}}</p>
+          <div class="form-floating mb-3">
+            <textarea type="text" class="description form-control" placeholder="descripcion" [(ngModel)]="motivo"></textarea>
+            <label for="floatingInput">Motivo de la Declinación</label>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="button" class="btn btn-primary" (click)="confirmarRechazo()" data-bs-dismiss="modal">Guardar</button>
       </div>
     </div>

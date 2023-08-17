@@ -1,3 +1,11 @@
+p {
+  font-size: 1.4rem;
+}
+
+.description {
+  height: 150px;
+}
+
 .modal-title
 {
   font-size: 1.8rem;
@@ -7,11 +15,9 @@
   font-size: 1.4rem;
   background-color: var(--background-color);
   color: var(--just-white);
-  justify-content: center;
-  align-items: center;
 }
 
-.modal-header, .modal-body, .modal-footer {
+.modal-header, .modal-footer {
   background-color: var(--background-color);
   display: flex;
   justify-content: center;
@@ -37,29 +43,6 @@
 
 .input {
   background-color: var(--background-color);
-}
-
-.modal-body select, label {
-  font-size: 1.4rem;
-  align-items: center;
-}
-
-.modal-content p {
-  text-align: center;
-  font-size: 1.4rem;
-}
-
-.custom-file {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.custom-file-label {
-  background-color: var(--uco-green);
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
 }
 
 .form-control:not(:placeholder-shown) {
@@ -94,10 +77,6 @@ label {
   color: var(--black);
 }
 
-.alert {
-  padding-top: 10px;
-}
-
 .modal-title
 {
   font-size: 1.8rem;
@@ -107,7 +86,6 @@ label {
   font-size: 1.4rem;
   background-color: var(--background-color);
   color: var(--just-white);
-  text-align: center; 
 }
 
 .modal-header {
@@ -119,13 +97,5 @@ label {
   color: var(--just-white);
 }
 
-h5 {
-  margin-bottom: 10px; 
-}
 
-.input-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
