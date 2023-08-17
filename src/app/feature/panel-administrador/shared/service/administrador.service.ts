@@ -107,6 +107,6 @@ export class AdministradorService {
   }
 
   declinarNecesidad(id: number, razonRechazo) {
-    return this.http.doPut(environment.endpoint +'/necesidades/administrador/aprobar/'+ id, razonRechazo);
+    return this.http.doPut(environment.endpoint +'/necesidades/administrador/rechazar/'+ id, razonRechazo);
   }
 }

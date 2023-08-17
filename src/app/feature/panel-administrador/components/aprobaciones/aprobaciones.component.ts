@@ -25,8 +25,8 @@ export class AprobacionesComponent implements  OnInit{
     return 'descripcionModal' + id;
   }
 
-  obtnerIdModalRechazo(nombreProyecto: string): string {
-    return 'rechazoModal' + nombreProyecto;
+  obtnerIdModalRechazo(id: number): string {
+    return 'rechazoModal' + id;
   }
 
   consultaAprobaciones(): void {
@@ -35,12 +35,9 @@ export class AprobacionesComponent implements  OnInit{
     this.admistradorService.consultarNecesidadesPendienteAprobacion().subscribe((response) => {
       petecionAprobar = response;
       this.necesidadAprobar = petecionAprobar;
-
       if(this.necesidadAprobar.length > 0) {
         this.hayProyectosPorAprobar = true;
       }
-
-      console.log(this.necesidadAprobar);
     });
   }
 
@@ -53,9 +50,9 @@ export class AprobacionesComponent implements  OnInit{
     });
   }
 
-  declinarNecesidad(id: number): void {
+  declinarNecesidad(id: number, motivoDeclinada: string): void {
     let razonRechazo = {
-      motivo: 'holi'
+      motivoRechazo: motivoDeclinada
     };
     this.admistradorService.declinarNecesidad(id, razonRechazo).subscribe(() => {
       this.consultaAprobaciones();
@@ -65,9 +62,8 @@ export class AprobacionesComponent implements  OnInit{
     });
   }
 
-  rechazarPostulacion(motivo: string): void 
-  {
-    console.log('Se rechazo por: ' + motivo);
+  rechazarPostulacion(motivo: string, idNecesidad: number): void {
+    this.declinarNecesidad(idNecesidad, motivo);
   }
 
   abrirPerfilProyecto(id): void {

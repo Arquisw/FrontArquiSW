@@ -107,6 +107,7 @@ label {
   font-size: 1.4rem;
   background-color: var(--background-color);
   color: var(--just-white);
+  text-align: center; 
 }
 
 .modal-header {
@@ -118,13 +119,13 @@ label {
   color: var(--just-white);
 }
 
-.modal-body select, label, .tipos-consultoria-btn{
-  font-size: 1.4rem;
+h5 {
+  margin-bottom: 10px; 
 }
 
-.input {
-  width: 5px;
-  height: 5px;
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
 

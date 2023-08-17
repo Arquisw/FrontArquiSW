@@ -6,8 +6,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h5>Dijite la razon por la cual declina la aprobación del proyecto: {{proyecto}} </h5>        
-        <input type="text" class="form-control" [(ngModel)]="motivo">
+        <div class="input-container">
+          <h4>Dijite la razon por la cual declina la aprobación del proyecto: <em>{{proyecto}}</em> </h4>        
+          <textarea class="form-control" rows="4" [(ngModel)]="motivo"></textarea>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

@@ -30,7 +30,7 @@
           <app-modal-rechazo
             [modalIdRechazo]="obtnerIdModalRechazo(necesidad?.id)"
             [proyecto]="necesidad?.proyecto.nombre"
-            (confirmacion)="rechazarPostulacion($event)">
+            (confirmacion)="rechazarPostulacion($event, necesidad?.id)">
           ></app-modal-rechazo>         
         </td>
       </tr>
