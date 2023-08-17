@@ -55,6 +55,10 @@ export class AdministradorService {
     return this.http.doGet(environment.endpoint +'/necesidades');
   }
 
+  consultarNecesidadesAprobadas() {
+    return this.http.doGet(environment.endpoint +'/necesidades/proyectos');
+  }
+
   eliminarAsociacion(id: number) {
     return this.http.doDelete(environment.endpoint +'/asociaciones/administrador/'+ id);
   }
@@ -109,4 +113,18 @@ export class AdministradorService {
   declinarNecesidad(id: number, razonRechazo) {
     return this.http.doPut(environment.endpoint +'/necesidades/administrador/rechazar/'+ id, razonRechazo);
   }
+
+  consultarContrato(id: number) {
+    return this.http.doGet(environment.endpoint +'/contratos/'+ id);
+  }
+
+  guardarContrato(id: number, contrato) {
+    return this.http.doPost(environment.endpoint +'/contratos/'+ id, contrato);
+  }
+
+  actualizarContrato(id: number, contrato) {
+    return this.http.doPut(environment.endpoint +'/contratos/'+ id, contrato);
+  }
+
+
 }

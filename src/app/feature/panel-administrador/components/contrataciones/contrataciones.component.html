@@ -15,14 +15,27 @@
         <tr *ngFor="let necesidad of necesidadAprobadas">
           <td>{{necesidad?.proyecto.nombre}}</td>
           <td>
-            <button class="btn btn-success">Ver Descripción</button>
+            <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModal(necesidad?.id)">Ver Descripción</button>
+            <app-modal-descripcion
+              [modalId]="obtnerIdModal(necesidad?.id)"
+              [descripcion]="necesidad?.proyecto.descripcion"
+              [titulo]="'Descripcion'"
+            ></app-modal-descripcion>
           </td>
           <td>
             <p *ngFor="let tipoConsultoria of necesidad?.proyecto?.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
           </td>
+          <td>{{necesidad?.estado.nombre}}</td>
           <td>
             <button class="btn btn-success" (click)="abrirPerfilProyecto(necesidad?.id)" >Ver Proyecto</button>
-            <button class="btn btn-success">Aprobar</button>
+            <button class="btn btn-success"data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModalCarga(necesidad?.id)"
+            data-bs-dismiss="modal">Guardar ó Actualizar contrato</button>
+            <app-modal-cargar-pdf 
+              [modalId]="obtnerIdModalCarga(necesidad?.id)"
+              [titulo]="'Guardar ó Actualizar contrato del proyecto'" 
+              [objeto]="necesidad"
+              (enviarValor)="recibirUrlContrato($event, necesidad?.id)">
+          </app-modal-cargar-pdf>
           </td>
         </tr>
       </tbody>

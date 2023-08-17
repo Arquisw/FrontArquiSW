@@ -24,11 +24,17 @@ export class ModalCargarPdfComponent {
     this.archivo = event.target.files[0];
     this.selectedFileName = this.archivo ?  this.archivo.name : 'Seleccionar archivo';
   }
+  
 
 
   uploadFile() {
     if (this.archivo) {
-      const filePath = 'hojaDeVida/' + this.objeto.apellidos + this.objeto.nombre + '/' +'Hoja de vida ' + this.objeto.nombre + '.pdf';
+      let filePath;
+      if (this.objeto.proyecto === null) {
+        filePath = 'hojaDeVida/' + this.objeto.apellidos + this.objeto.nombre + '/' +'Hoja de vida ' + this.objeto.nombre + '.pdf';
+      } else {
+        filePath = 'necesidad/' + this.objeto.id + '/' + this.objeto.proyecto.nombre + '_Contrato' + '.pdf';
+      }
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.archivo);
 

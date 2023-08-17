@@ -11,6 +11,8 @@ export class ContratacionesComponent implements OnInit {
   necesidadAprobadas: any[] = [];
   hayNecesidadesPorConcretar = false;
   mensajeError= '';
+  contrato
+
 
   constructor(private router: Router, private admistradorService: AdministradorService)  { }
 
@@ -18,23 +20,66 @@ export class ContratacionesComponent implements OnInit {
     this.consultaAprobaciones();
   }
 
+  obtnerIdModal(id: number): string {
+    return 'descripcionModal' + id;
+  }
+
+  obtnerIdModalCarga(id: number): string {
+    return 'cargaModal' + id;
+  }
+
   consultaAprobaciones(): void {
     this.necesidadAprobadas= [];
     let petecionAprobar;
-    this.admistradorService.consultarNecesidadesPendienteAprobacion().subscribe((response) => {
+    this.admistradorService.consultarNecesidadesAprobadas().subscribe((response) => {
       petecionAprobar = response;
       this.necesidadAprobadas = petecionAprobar;
 
       if(this.necesidadAprobadas.length > 0) {
         this.hayNecesidadesPorConcretar = true;
       }
-      
-      console.log(this.necesidadAprobadas);
     },
     (error) => {
       this.mensajeError=error.message;
     });
   }
+
+  recibirUrlContrato(valor , necesidadId: number): void {
+    this.consultaContrato(necesidadId);
+    const contratoAlmacenar = {
+      rutaArchivo: valor
+    };
+    if(this.contrato === null) {
+      this.guardarContrato(necesidadId, contratoAlmacenar);
+    } else {
+      this.actualizarContrato(necesidadId, contratoAlmacenar);
+    }
+  }
+
+  consultaContrato(necesidadId: number): void {
+    this.contrato = null;
+    this.admistradorService.consultarContrato(necesidadId).subscribe((response) => {
+      this.contrato = response;
+    },
+    (error) => {
+      this.mensajeError=error.message;
+    });
+  }
+
+  guardarContrato(necesidadId: number, contrato): void {
+    this.admistradorService.guardarContrato(necesidadId, contrato ).subscribe(() => {},
+    (error) => {
+      this.mensajeError =error?.error?.mensaje;
+    });
+  }
+
+  actualizarContrato(necesidadId: number, contrato): void {
+    this.admistradorService.actualizarContrato(necesidadId, contrato ).subscribe(() => {},
+    (error) => {
+      this.mensajeError =error?.error?.mensaje;
+    });
+  }
+
 
   abrirPerfilProyecto(id): void {
     const navigationExtras: NavigationExtras = {

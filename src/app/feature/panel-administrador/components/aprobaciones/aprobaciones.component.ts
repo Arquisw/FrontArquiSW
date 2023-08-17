@@ -50,7 +50,7 @@ export class AprobacionesComponent implements  OnInit{
     });
   }
 
-  declinarNecesidad(id: number, motivoDeclinada: string): void {
+  declinarNecesidad(motivoDeclinada: string, id: number): void {
     let razonRechazo = {
       motivoRechazo: motivoDeclinada
     };
@@ -60,10 +60,6 @@ export class AprobacionesComponent implements  OnInit{
     (error) => {
       this.mensajeError=error.message;
     });
-  }
-
-  rechazarPostulacion(motivo: string, idNecesidad: number): void {
-    this.declinarNecesidad(idNecesidad, motivo);
   }
 
   abrirPerfilProyecto(id): void {

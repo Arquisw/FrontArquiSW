@@ -30,10 +30,8 @@
           <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModalRechazo(necesidad?.id)">Declinar</button>
           <app-modal-rechazo
             [modalIdRechazo]="obtnerIdModalRechazo(necesidad?.id)"
-            [proyecto]="necesidad?.proyecto.nombre"
-            (confirmacion)="rechazarPostulacion($event)">
-          ></app-modal-rechazo>
-            (confirmacion)="rechazarPostulacion($event, necesidad?.id)">
+            [titulo]="necesidad?.proyecto.nombre"
+            (confirmacion)="declinarNecesidad($event, necesidad?.id)">
           ></app-modal-rechazo>         
         </td>
       </tr>
