@@ -9,12 +9,9 @@ import { Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class ModalRechazoComponent {
   @Input() modalIdRechazo: string;
-  @Input() proyecto;
+  @Input() titulo;
   @Output() confirmacion = new EventEmitter<void>();
   motivo;
-  mensajeError= '';
-  mensajeAsociacion;
-
 
   confirmarRechazo() {
     this.confirmacion.emit(this.motivo)
