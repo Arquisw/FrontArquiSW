@@ -12,7 +12,7 @@
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item" *ngFor="let item of standarItems">
-            <a class="nav-link" [routerLink]="item.url" routerLinkActive="active">{{item.nombre}}</a>
+            <a class="nav-link" [routerLink]="item.url" routerLinkActive="active" (click)="cerrarMenuDeplegable()">{{item.nombre}}</a>
           </li>
           <li class="nav-item" *ngIf="!inicioSesion">
             <button type="button" class="btn btn-success" (click)="open()">Iniciar Sesión</button>
