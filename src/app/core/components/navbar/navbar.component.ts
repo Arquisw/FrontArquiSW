@@ -29,6 +29,8 @@ export class NavbarComponent implements OnInit {
   estaAbierto = false;
   administrador = false;
   tieneAsociacion = false;
+  estaPostulado = false;
+  estaSeleccionado = false;
   opcionSeleccionada = false;
   correo = '';
   mensajeError= '';
@@ -207,8 +209,17 @@ export class NavbarComponent implements OnInit {
       if (rol.nombre === 'ROLE_ADMINISTRADOR') {
         this.administrador = true;
       }
+
       if (rol.nombre === 'ROLE_ASOCIACION') {
         this.tieneAsociacion = true;
+      }
+
+      if (rol.nombre === 'ROLE_POSTULACION') {
+        this.estaPostulado = true;
+      }
+
+      if (rol.nombre === 'ROLE_SELECCION') {
+        this.estaSeleccionado = true;
       }
     });
   }

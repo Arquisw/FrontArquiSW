@@ -26,7 +26,7 @@
                 <a class="dropdown-item" (click)="abrirPerfil()">Mi Perfil</a>
                 <a class="dropdown-item" *ngIf="tieneAsociacion" (click)="abrirAsociacion()">Mi Empresa ó Asociación</a>
                 <a class="dropdown-item" *ngIf="administrador" [routerLink]="['/panel-administrador']" (click)="cerrarMenuDeplegable()">Panel de Administrador</a>
-                <a class="dropdown-item" *ngIf="!tieneAsociacion && !administrador" (click)="openModalAsociacion()">Registrar Empresa ó Asociación</a>
+                <a class="dropdown-item" *ngIf="!tieneAsociacion && !administrador && !estaPostulado && !estaSeleccionado" (click)="openModalAsociacion()">Registrar Empresa ó Asociación</a>
                 <a class="dropdown-item" [routerLink]="['/configuracion']" (click)="cerrarMenuDeplegable()">{{configuracionMenu?.nombre}}</a>
                 <a class="dropdown-item" (click)="openLogOut()">Cerrar Sesión</a>
               </div>
