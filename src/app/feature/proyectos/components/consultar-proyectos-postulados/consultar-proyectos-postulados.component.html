@@ -32,7 +32,8 @@
         <h5 class="card-title">Descripción</h5>
         <p class="card-text">{{proyectoResumen?.descripcion}}</p>
         <div class="buttons-container">
-          <button (click)="abrirPerfilProyecto(necesidadResumen?.id)" class="btn btn-watch-project btn-success">Ver Proyecto</button>
+          <button (click)="abrirPerfilProyecto(necesidadResumen?.id)" class="btn btn-watch-project btn-success">Ver
+            Proyecto</button>
           <button class="btn btn-success" (click)="openActualizarPostulacionModal()">Actualizar Postulación</button>
         </div>
       </div>
@@ -53,24 +54,25 @@
         <tr *ngFor="let proyecto of proyectosResumen">
           <td class="table-body align-middle">{{proyecto?.nombre}}</td>
           <td class="table-body align-middle">
-            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(proyecto?.id)"
-              data-bs-dismiss="modal">Ver Descripción</button>
-            <app-modal-descripcion
-            [modalId]="obtenerIdModalDescripcion(proyecto?.id)"
-            [titulo]="'Descripción'"
-            [descripcion]="proyecto.descripcion"></app-modal-descripcion>
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal"
+              [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(proyecto?.id)" data-bs-dismiss="modal">Ver
+              Descripción</button>
+            <app-modal-descripcion [modalId]="obtenerIdModalDescripcion(proyecto?.id)" [titulo]="'Descripción'"
+              [descripcion]="proyecto.descripcion"></app-modal-descripcion>
           </td>
           <td class="table-body align-middle">
             <p *ngFor="let tipoConsultoria of proyecto?.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
           </td>
           <td class="table-body align-middle">{{proyecto?.estado?.nombre}}</td>
           <td class="table-body align-middle">
-            <button (click)="abrirPerfilProyecto(proyecto?.id)" class="btn btn-watch-project btn-success mt-3">Ver Proyecto</button>
-            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#descripcionModal"
+            <button (click)="abrirPerfilProyecto(proyecto?.id)" class="btn btn-watch-project btn-success mt-3">Ver
+              Proyecto</button>
+            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalMotivoRechazo(proyecto?.id)"
               data-bs-dismiss="modal">Ver Motivo del Rechazo</button>
             <app-modal-descripcion
-            [titulo]="'Motivo del Rechazo'"
-            [descripcion]="obtenerMotivoDeRechazo(proyecto?.id)"></app-modal-descripcion>
+              [modalId]="obtenerIdModalMotivoRechazo(proyecto?.id)"
+              [descripcion]="obtenerMotivoDeRechazo(proyecto?.id)"
+              [titulo]="'Motivo del Rechazo'"></app-modal-descripcion>
           </td>
         </tr>
       </tbody>
@@ -82,12 +84,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">Postularse al Proyecto</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" (click)="cerrarModal()"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"
+          (click)="cerrarModal()"></button>
       </div>
       <div class="modal-body">
         <div class="dropdown">
-          <button class="btn roles-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
+          <button class="btn roles-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             ¿A cúal o cuales roles quieres postular?
           </button>
           <ul class="dropdown-menu">
@@ -113,7 +115,8 @@
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
             <div class="col text-center">
-              <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdatePostulation()">Postularse</button>
+              <button type="submit" class="btn btn-success mt-3"
+                (click)="onClickUpdatePostulation()">Postularse</button>
             </div>
           </div>
         </div>

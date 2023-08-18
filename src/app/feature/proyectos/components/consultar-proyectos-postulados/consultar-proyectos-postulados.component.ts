@@ -15,7 +15,7 @@ import { NavigationExtras, Router } from '@angular/router';
 export class ConsultarProyectosPostuladosComponent implements OnInit {
   loginModal: Modal | undefined;
   proyectoResumen: ProyectoResumen;
-  proyectosResumen: ProyectoResumen[];
+  proyectosResumen: ProyectoResumen[] = [];
   postulacionResumen: PostulacionResumen;
   postulacionesResumen: PostulacionResumen[] = [];
   necesidadResumen: NecesidadResumen;
@@ -75,11 +75,16 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
         this.postulacionesResumen.forEach(postulacion => {
           if(!postulacion.seleccionado && !postulacion.rechazado) {
             this.postulacionResumen = postulacion;
-          }
+            const index = this.postulacionesResumen.indexOf(postulacion);
 
-          if(postulacion.rechazado) {
-            this.obtenerProyecto(postulacion.proyectoID);
+            this.postulacionesResumen.splice(index);
+          } else {
+            this.tieneMasDeUnaPostulacion = true;
           }
+        });
+
+        this.postulacionesResumen.forEach(postulacion => {
+          this.obtenerProyecto(postulacion?.proyectoID);
         });
 
         this.postulacionResumen.roles.forEach(rol => {
@@ -96,12 +101,13 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
 
   obtenerProyecto(id: number): void {
     this.proyectosService.consultarProyectoPorId(id).subscribe((response) => {
-      this.proyectosResumen.push(response);
+      const unProyecto = response;
+      this.proyectosResumen.push(unProyecto);
     });
   }
 
   consultarProyecto(): void {
-    this.proyectosService.consultarProyectoPorId(this.postulacionResumen.proyectoID).subscribe((response) => {
+    this.proyectosService.consultarProyectoPorId(this.postulacionResumen?.proyectoID).subscribe((response) => {
       this.proyectoResumen = response;
 
       this.consultarNecesidad();
@@ -297,5 +303,9 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
 
   obtenerIdModalDescripcion(id: number): string {
     return 'descripcionModal' + id;
+  }
+
+  obtenerIdModalMotivoRechazo(id: number): string {
+    return 'motivoRechazoModal' + id;
   }
 }
