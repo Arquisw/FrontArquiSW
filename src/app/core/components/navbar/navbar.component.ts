@@ -164,7 +164,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogin(): void {
-    this.loginError=false;
+    this.loginError = false;
     window.sessionStorage.setItem('userdetails',JSON.stringify({...this.loginForm.value}));
     const usuario: Usuario= new Usuario(0,'','',this.loginForm.get('correoLogin').value,this.loginForm.get('claveLogin').value);
     this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
@@ -172,8 +172,10 @@ export class NavbarComponent implements OnInit {
       this.id = this.usuarioId.valor;
       this.consultarPersona();
       this.loginModal?.hide();
+      location.reload();
       this.standarItems = this.principalItems;
       this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
+      location.reload();
     },
     (error) => {
       this.mensajeError= error.error;
