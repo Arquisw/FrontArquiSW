@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '@core/modelo/menu-item';
-import { PersonaResumen } from 'src/app/feature/configuracion/shared/model/persona-resumen.model';
-import { UsuarioResumen } from 'src/app/feature/configuracion/shared/model/usuario-resumen.model';
-import { ConfiguracionService } from 'src/app/feature/configuracion/shared/service/configuracion.service';
 
 @Component({
   selector: 'app-proyectos',
@@ -27,45 +24,27 @@ export class ProyectosComponent implements OnInit {
     { url: './buscar', nombre: 'Buscar' }
   ];
 
-  usuarioId = 0;
-  correo = '';
   tieneAsociacion = false;
-  personaResumen: PersonaResumen;
-  usuarioResumen: UsuarioResumen;
+  authorities: string[] = [];
 
-  constructor(private configuracionService: ConfiguracionService) {}
+  constructor() {}
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-    this.usuarioId = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
 
-    this.consultarPersona();
+    this.filtrarMenu();
   }
 
-  consultarPersona(): void {
-    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
-      this.personaResumen = response;
-      this.correo = this.personaResumen.correo;
-      this.consultarUsuario();
-    });
-  }
+  filtrarMenu(): void {
+    this.menuItems = this.menuItemsSinAsociacion;
 
-  consultarUsuario(): void {
-    this.configuracionService.consultarUsuarioPorCorreo(this.correo).subscribe((response) => {
-      this.usuarioResumen = response;
-      this.filtrarMenu(this.usuarioResumen.roles);
-    });
-  }
-
-  filtrarMenu(roles): void {
-    roles.forEach(rol => {
-      if(rol.nombre === 'ROLE_ADMINISTRADOR') {
-        this.menuItems = this.menuItemsAdministrador;
-      }else if (rol.nombre === 'ROLE_ASOCIACION') {
+    this.authorities.forEach(authority => {
+      if (authority === 'ROLE_ASOCIACION') {
         this.menuItems = this.menuItemsConAsociacion;
-      } else {
-        this.menuItems = this.menuItemsSinAsociacion;
+      } else if(authority === 'ROLE_ADMINISTRADOR') {
+        this.menuItems = this.menuItemsAdministrador;
       }
     });
   }

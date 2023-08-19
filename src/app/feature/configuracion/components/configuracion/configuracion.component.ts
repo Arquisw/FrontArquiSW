@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PersonaResumen } from '../../shared/model/persona-resumen.model';
-import { ConfiguracionService } from '../../shared/service/configuracion.service';
-import { UsuarioResumen } from '../../shared/model/usuario-resumen.model';
 
 @Component({
   selector: 'app-configuracion',
@@ -9,42 +6,22 @@ import { UsuarioResumen } from '../../shared/model/usuario-resumen.model';
   styleUrls: ['./configuracion.component.scss']
 })
 export class ConfiguracionComponent implements OnInit {
-  usuarioId = 0;
-  correo = '';
-  personaResumen: PersonaResumen;
-  usuarioResumen: UsuarioResumen;
   tieneAsociacion = false;
+  authorities: string[] = [];
 
-  constructor(private configuracionService: ConfiguracionService) {}
+  constructor() {}
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-    this.usuarioId = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
 
-    console.log('ID: ' + this.usuarioId);
-
-    this.consultarPersona();
+    this.filtrarMenu();
   }
 
-  consultarPersona(): void {
-    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
-      this.personaResumen = response;
-      this.correo = this.personaResumen.correo;
-      this.consultarUsuario();
-    });
-  }
-
-  consultarUsuario(): void {
-    this.configuracionService.consultarUsuarioPorCorreo(this.correo).subscribe((response) => {
-      this.usuarioResumen = response;
-      this.filtrarMenu(this.usuarioResumen.roles);
-    });
-  }
-
-  filtrarMenu(roles): void {
-    roles.forEach(rol => {
-      if (rol.nombre === 'ROLE_ASOCIACION') {
+  filtrarMenu(): void {
+    this.authorities.forEach(authority => {
+      if (authority === 'ROLE_ASOCIACION') {
         this.tieneAsociacion = true;
       }
     });

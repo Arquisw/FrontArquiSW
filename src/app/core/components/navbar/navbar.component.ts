@@ -32,12 +32,11 @@ export class NavbarComponent implements OnInit {
   estaPostulado = false;
   estaSeleccionado = false;
   opcionSeleccionada = false;
-  correo = '';
+  authorities: string[] = [];
   mensajeError= '';
   id = 0;
   usuarioId;
   persona;
-  usuario;
   mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
   mensajeAsociacion= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
   loginForm: FormGroup;
@@ -67,9 +66,14 @@ export class NavbarComponent implements OnInit {
 
     if(this.inicioSesion) {
       this.standarItems = this.principalItems;
+
       const token = window.sessionStorage.getItem('Authorization');
       const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+
       this.id = tokenPayload.id;
+      this.authorities = tokenPayload.authorities.split(',');
+
+      this.filtrarMenu();
       this.consultarPersona();
     } else {
       this.standarItems = this.principalItems.filter((item) => item.nombre !== 'Proyectos');
@@ -92,6 +96,26 @@ export class NavbarComponent implements OnInit {
       nombreAsociacion: [null, Validators.required],
       nit: [null, Validators.required],
       numeroContacto: [null, Validators.required]
+    });
+  }
+
+  filtrarMenu(): void {
+    this.authorities.forEach(authority => {
+      if (authority === 'ROLE_ADMINISTRADOR') {
+        this.administrador = true;
+      }
+
+      if (authority === 'ROLE_ASOCIACION') {
+        this.tieneAsociacion = true;
+      }
+
+      if (authority === 'ROLE_POSTULACION') {
+        this.estaPostulado = true;
+      }
+
+      if (authority === 'ROLE_SELECCION') {
+        this.estaSeleccionado = true;
+      }
     });
   }
 
@@ -184,43 +208,10 @@ export class NavbarComponent implements OnInit {
   consultarPersona(): void {
     this.servicioGestionusuario.consultarPersona(this.id).subscribe((response) => {
       this.persona = response;
-      this.correo = this.persona.correo;
-      this.consultarUsuario();
     },
     (error) => {
       this.mensajeError=error.message;
       this.inicioSesion = false;
-    });
-  }
-
-  consultarUsuario(): void {
-    this.servicioGestionusuario.consultarUsuario(this.correo).subscribe((response) => {
-      this.usuario = response;
-      this.filtrarMenu();
-    },
-    (error) => {
-      this.mensajeError=error.message;
-      this.inicioSesion = false;
-    });
-  }
-
-  filtrarMenu(): void {
-    this.usuario.roles.forEach(rol => {
-      if (rol.nombre === 'ROLE_ADMINISTRADOR') {
-        this.administrador = true;
-      }
-
-      if (rol.nombre === 'ROLE_ASOCIACION') {
-        this.tieneAsociacion = true;
-      }
-
-      if (rol.nombre === 'ROLE_POSTULACION') {
-        this.estaPostulado = true;
-      }
-
-      if (rol.nombre === 'ROLE_SELECCION') {
-        this.estaSeleccionado = true;
-      }
     });
   }
 

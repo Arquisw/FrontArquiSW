@@ -3,9 +3,6 @@ import Modal from 'bootstrap/js/dist/modal';
 import { ProyectosService } from '../../shared/service/proyectos.service';
 import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
 import { Postulacion } from '../../shared/model/postulacion.model';
-import { ConfiguracionService } from 'src/app/feature/configuracion/shared/service/configuracion.service';
-import { PersonaResumen } from 'src/app/feature/configuracion/shared/model/persona-resumen.model';
-import { UsuarioResumen } from 'src/app/feature/configuracion/shared/model/usuario-resumen.model';
 import { PostulacionResumen } from '../../shared/model/postulacion-resumen.model';
 import { Router, NavigationExtras } from '@angular/router';
 
@@ -17,8 +14,6 @@ import { Router, NavigationExtras } from '@angular/router';
 export class ConsultarProyectosComponent implements OnInit {
   filterTerm!: string;
   necesidades: NecesidadResumen[] = [];
-  personaResumen: PersonaResumen;
-  usuarioResumen: UsuarioResumen;
   postulacionResumen: PostulacionResumen;
   postulacionesResumen: PostulacionResumen[];
   correo = '';
@@ -30,51 +25,29 @@ export class ConsultarProyectosComponent implements OnInit {
   usuarioId = 0;
   proyectoActualId = 0;
   mostrarBotonPostulacion = true;
+  authorities: string[] = [];
 
-  constructor(private proyectosService: ProyectosService, private configuracionService: ConfiguracionService, private router: Router) { }
+  constructor(private proyectosService: ProyectosService, private router: Router) { }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
 
-    this.consultarPersona();
+    this.filtrarBotonPostulacion();
 
     this.consultarProyectosNegociados();
 
     this.consultarPostulacionesPorUsuarioId();
   }
 
-  consultarPersona(): void {
-    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
-      this.personaResumen = response;
-      this.correo = this.personaResumen.correo;
-      this.consultarUsuario();
-    });
-  }
-
-  consultarUsuario(): void {
-    this.configuracionService.consultarUsuarioPorCorreo(this.correo).subscribe((response) => {
-      this.usuarioResumen = response;
-      this.filtrarBotonPostulacion(this.usuarioResumen.roles);
-    });
-  }
-
-  filtrarBotonPostulacion(roles): void {
-    roles.forEach(rol => {
-      if (rol.nombre === 'ROLE_ASOCIACION') {
-        this.mostrarBotonPostulacion = false;
-      }
-
-      if (rol.nombre === 'ROLE_POSTULADO') {
-        this.mostrarBotonPostulacion = false;
-      }
-
-      if (rol.nombre === 'ROLE_SELECCIONADO') {
-        this.mostrarBotonPostulacion = false;
-      }
-
-      if (rol.nombre === 'ROLE_ADMINISTRADOR') {
+  filtrarBotonPostulacion(): void {
+    this.authorities.forEach(authority => {
+      if (authority === 'ROLE_ASOCIACION' ||
+          authority === 'ROLE_POSTULADO' ||
+          authority === 'ROLE_SELECCIONADO' ||
+          authority === 'ROLE_ADMINISTRADOR') {
         this.mostrarBotonPostulacion = false;
       }
     });

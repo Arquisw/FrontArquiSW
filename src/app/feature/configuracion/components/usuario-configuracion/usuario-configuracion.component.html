@@ -6,17 +6,17 @@
         <div class="update-person card card-container">
           <form [formGroup]="actualizacionForm" class="card-body">
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="nombre"
+              <input type="text" class="form-control" id="nombreActualizacion"
                 placeholder="nombre" formControlName="nombreActualizacion" required [value]="personaResumen?.nombre">
               <label for="floatingInput">Nombres</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="text" class="form-control" id="apellidos"
+              <input type="text" class="form-control" id="apellidosActualizacion"
                 placeholder="apellidos" formControlName="apellidosActualizacion" required [value]="personaResumen?.apellidos">
               <label for="floatingInput">Apellidos</label>
             </div>
             <div class="form-floating mb-3">
-              <input type="email" class="form-control" id="correo"
+              <input type="email" class="form-control" id="correoActualizacion"
                 placeholder="correo@ejemplo.com" formControlName="correoActualizacion" required [value]="personaResumen?.correo">
               <label for="floatingInput">Correo Electrónico</label>
             </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="form-floating mb-3">
               <input type="password" class="form-control"
-                id="confirmarClave" placeholder="confirmar contraseña" formControlName="confirmarClaveActualizacion" required>
+                id="confirmarClaveActualizacion" placeholder="confirmar contraseña" formControlName="confirmarClaveActualizacion" required>
               <label for="floatingPassword">Confirmar Contraseña</label>
             </div>
             <div class="container-fluid h-100">
