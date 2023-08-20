@@ -4,6 +4,7 @@ import { RecuperarClaveService } from '../../shared/service/recuperar-clave.serv
 import { Codigo } from '../../shared/model/codigo.model';
 import { RecuperarClave } from '../../shared/model/recuperar-clave.model';
 import { Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-recuperar-clave',
@@ -24,9 +25,11 @@ export class RecuperarClaveComponent  implements OnInit {
   correo = '';
   mensajeError= '';
 
-  constructor(private recuperarClaveService: RecuperarClaveService, private router: Router) {}
+  constructor(private viewportScroller: ViewportScroller, private recuperarClaveService: RecuperarClaveService, private router: Router) {}
 
   ngOnInit(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
+    
     this.mensajeError = '';
 
     this.iniciarRecuperacionClaveForm = new FormGroup({

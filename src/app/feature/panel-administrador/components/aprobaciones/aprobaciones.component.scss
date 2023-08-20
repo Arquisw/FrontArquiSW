@@ -45,7 +45,12 @@ button {
   font-size: 15px;
 }
 
-/* Media query para tabletas */
+@media(max-width: 920px) {
+  .btn-watch-project, .btn-aprove, .btn-decline {
+    margin-bottom: 8px;
+  }
+}
+
 @media (min-width: 577px) and (max-width: 1024px) {
   .header-content {
     background-size: contain;

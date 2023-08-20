@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AsociacionService } from '../../shared/service/asociacion.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-asociacion',
@@ -13,18 +14,20 @@ export class AsociacionComponent implements OnInit {
   asociacion;
   esMiAsociacion = true;
 
-  constructor(private miAsociacionService: AsociacionService) { }
+  constructor(private viewportScroller: ViewportScroller, private miAsociacionService: AsociacionService) { }
 
   ngOnInit(): void {
     const params = history.state;
     this.id = params.id;
     this.esMiAsociacion = params.asociacion;
 
+    this.viewportScroller.scrollToPosition([0, 0]);
+
     if(this.esMiAsociacion === true) {
       this.consultaAsociacionUsuarioId();
     } else {
       this.consultaAsociacion();
-    }   
+    }
   }
 
   consultaAsociacionUsuarioId(): void {

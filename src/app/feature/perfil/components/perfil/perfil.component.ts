@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PerfilService } from '../../shared/service/perfil.service';
 import { StorageService } from '@shared/service/storage-service/storage.service';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-perfil',
@@ -21,17 +22,22 @@ export class PerfilComponent implements OnInit {
   files = [];
   detalleDocumento;
 
-  constructor(private miPerfilSevice: PerfilService,
+  constructor(private viewportScroller: ViewportScroller,
+              private miPerfilSevice: PerfilService,
               private storageService: StorageService) { }
 
   ngOnInit(): void {
     const params = history.state;
     this.usuario = params.usuario;
     this.usuarioId = this.usuario?.id;
+
+    this.viewportScroller.scrollToPosition([0, 0]);
+
     if(params.id !== null) {
       this.usuarioId = params.id;
       this.consultaUsuario();
     }
+
     if(this.usuario !== null) {
       this.obtenerListaArchivos();
     }

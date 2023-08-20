@@ -25,6 +25,7 @@ export class ConsultarProyectosComponent implements OnInit {
   usuarioId = 0;
   proyectoActualId = 0;
   mostrarBotonPostulacion = true;
+  hayNecesidades = false;
   authorities: string[] = [];
 
   constructor(private proyectosService: ProyectosService, private router: Router) { }
@@ -71,6 +72,10 @@ export class ConsultarProyectosComponent implements OnInit {
   consultarProyectosNegociados(): void {
     this.proyectosService.consultarProyectosNegociados().subscribe((response) => {
       this.necesidades = response;
+
+      if(this.necesidades.length > 0) {
+        this.hayNecesidades = true;
+      }
     });
   }
 

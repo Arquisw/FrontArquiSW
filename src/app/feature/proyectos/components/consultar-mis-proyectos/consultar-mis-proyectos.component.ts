@@ -19,8 +19,8 @@ export class ConsultarMisProyectosComponent implements OnInit {
   loginModal: Modal | undefined;
   guardarNecesidadForm: FormGroup;
   actualizarNecesidadForm: FormGroup;
-  usuarioId = 0;
   necesidadId = 0;
+  asociacionId = 0;
   tiposConsultoriaSeleccionados: string[] = [];
   guardadoError = false;
   mensajeError = '';
@@ -28,7 +28,6 @@ export class ConsultarMisProyectosComponent implements OnInit {
   urlArchivo: string;
   archivo: File;
   nombreProyecto = '';
-  asociacionId = 0;
   necesidades: NecesidadResumen[] = [];
   necesidad: NecesidadResumen;
   tiposConsultoria: string;
@@ -45,9 +44,9 @@ export class ConsultarMisProyectosComponent implements OnInit {
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-    this.usuarioId = tokenPayload.id;
+    const usuarioId = tokenPayload.id;
 
-    this.consultarAsociacion();
+    this.consultarAsociacion(usuarioId);
 
     this.guardarNecesidadForm = new FormGroup({
       nombreProyecto: new FormControl(''),
@@ -175,16 +174,15 @@ export class ConsultarMisProyectosComponent implements OnInit {
     this.selectedFileName = this.archivo ? this.archivo.name : this.files[0].nombre;
   }
 
-  consultarAsociacion(): void {
-    this.proyectosService.consultarAsociacionPorId(this.usuarioId).subscribe((response) => {
+  consultarAsociacion(usuarioId: number): void {
+    this.proyectosService.consultarAsociacionPorId(usuarioId).subscribe((response) => {
       this.asociacionId = response.id;
-
-      this.consultarNecesidades();
+      this.consultarNecesidades(this.asociacionId);
     });
   }
 
-  consultarNecesidades(): void {
-    this.proyectosService.consultarNecesidadesPorAsociacionId(this.asociacionId).subscribe((response) => {
+  consultarNecesidades(id: number): void {
+    this.proyectosService.consultarNecesidadesPorAsociacionId(id).subscribe((response) => {
       this.necesidades = response;
 
       if (this.necesidades.length > 0) {
@@ -202,7 +200,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
     this.loginModal?.show();
     this.tiposConsultoriaSeleccionados = [];
-    this.necesidad = this.necesidades.find(item => item.id === id);
+    this.necesidad = this.necesidades.find(item => item?.id === id);
     this.necesidadId = this.necesidad.id;
 
     this.necesidad.proyecto.tiposConsultoria.forEach(tipoConsultoria => {

@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class IngenieriaDeRequisitosComponent implements OnInit {
   proyectoId = 0;
 
-  constructor() { }
+  constructor(private viewportScroller: ViewportScroller) { }
 
   ngOnInit(): void {
     const params = history.state;
     this.proyectoId = params.id;
 
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
 }

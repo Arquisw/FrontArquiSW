@@ -1,24 +1,16 @@
-import { Component } from '@angular/core';
-import Modal from 'bootstrap/js/dist/modal';
+import { ViewportScroller } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-acercanosotros',
   templateUrl: './acercanosotros.component.html',
   styleUrls: ['./acercanosotros.component.scss']
 })
-export class AcercanosotrosComponent {
-  loginModal: Modal| undefined;
+export class AcercanosotrosComponent implements OnInit {
+  constructor(private viewportScroller: ViewportScroller) {}
 
-  constructor() { }
-
-  open(): void
-  {
-    if(document.getElementById('loginModal') !== null) {
-      this.loginModal = new Modal(document.getElementById('loginModal'), {
-        keyboard: false
-      });
-      this.loginModal?.show();
-    }
-
+  ngOnInit(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
 }
+

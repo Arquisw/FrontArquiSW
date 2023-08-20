@@ -6,7 +6,8 @@
           <label for="floatingInput">Buscar...</label>
       </div>
   </div>
-  <div class="table-responsive">
+  <p *ngIf="!hayNecesidades">Aun no hay proyectos disponibles para postularse en la platafoma...</p>
+  <div class="table-responsive" *ngIf="hayNecesidades">
     <table class="table align-middle table-striped">
       <thead>
         <tr>

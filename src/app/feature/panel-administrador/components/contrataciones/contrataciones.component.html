@@ -27,12 +27,12 @@
           </td>
           <td>{{necesidad?.estado.nombre}}</td>
           <td>
-            <button class="btn btn-success" (click)="abrirPerfilProyecto(necesidad?.id)" >Ver Proyecto</button>
-            <button class="btn btn-success"data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModalCarga(necesidad?.id)"
+            <button class="btn btn-watch-project btn-success" (click)="abrirPerfilProyecto(necesidad?.id)">Ver Proyecto</button>
+            <button class="btn btn-save-or-update-contract btn-success"data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModalCarga(necesidad?.id)"
             data-bs-dismiss="modal">Guardar ó Actualizar contrato</button>
-            <app-modal-cargar-pdf 
+            <app-modal-cargar-pdf
               [modalId]="obtnerIdModalCarga(necesidad?.id)"
-              [titulo]="'Guardar ó Actualizar contrato del proyecto'" 
+              [titulo]="'Guardar ó Actualizar contrato del proyecto'"
               [objeto]="necesidad"
               (enviarValor)="recibirUrlContrato($event, necesidad?.id)">
           </app-modal-cargar-pdf>

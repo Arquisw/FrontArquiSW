@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,12 +10,14 @@ export class ConfiguracionComponent implements OnInit {
   tieneAsociacion = false;
   authorities: string[] = [];
 
-  constructor() {}
+  constructor(private viewportScroller: ViewportScroller) {}
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.authorities = tokenPayload.authorities.split(',');
+
+    this.viewportScroller.scrollToPosition([0, 0]);
 
     this.filtrarMenu();
   }

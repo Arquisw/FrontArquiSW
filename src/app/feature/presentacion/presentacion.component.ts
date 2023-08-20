@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-presentacion',
   templateUrl: './presentacion.component.html',
   styleUrls: ['./presentacion.component.scss']
 })
-export class PresentacionComponent {
+export class PresentacionComponent implements OnInit {
 
-  constructor() { }
+  constructor(private viewportScroller: ViewportScroller) { }
 
+  ngOnInit(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
+  }
 }

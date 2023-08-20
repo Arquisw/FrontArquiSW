@@ -25,7 +25,7 @@ export class AprobacionesComponent implements  OnInit{
     return 'descripcionModal' + id;
   }
 
-  obtnerIdModalRechazo(id: number): string {
+  obtenerIdModalRechazo(id: number): string {
     return 'rechazoModal' + id;
   }
 
@@ -43,7 +43,7 @@ export class AprobacionesComponent implements  OnInit{
 
   AprobarNecesidad(id: number): void {
     this.admistradorService.aprobarNecesidad(id).subscribe(() => {
-      this.consultaAprobaciones();
+      window.location.reload();
     },
     (error) => {
       this.mensajeError=error.message;

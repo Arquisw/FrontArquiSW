@@ -10,11 +10,11 @@ import { AdministradorService } from '../../shared/service/administrador.service
 export class ContratacionesComponent implements OnInit {
   necesidadAprobadas: any[] = [];
   hayNecesidadesPorConcretar = false;
-  mensajeError= '';
+  mensajeError = '';
   contrato;
 
 
-  constructor(private router: Router, private admistradorService: AdministradorService)  { }
+  constructor(private router: Router, private admistradorService: AdministradorService) { }
 
   ngOnInit(): void {
     this.consultaAprobaciones();
@@ -29,27 +29,27 @@ export class ContratacionesComponent implements OnInit {
   }
 
   consultaAprobaciones(): void {
-    this.necesidadAprobadas= [];
+    this.necesidadAprobadas = [];
     let petecionAprobar;
     this.admistradorService.consultarNecesidadesAprobadas().subscribe((response) => {
       petecionAprobar = response;
       this.necesidadAprobadas = petecionAprobar;
 
-      if(this.necesidadAprobadas.length > 0) {
+      if (this.necesidadAprobadas.length > 0) {
         this.hayNecesidadesPorConcretar = true;
       }
     },
     (error) => {
-      this.mensajeError=error.message;
+      this.mensajeError = error.message;
     });
   }
 
-  recibirUrlContrato(valor , necesidadId: number): void {
+  recibirUrlContrato(valor, necesidadId: number): void {
     this.consultaContrato(necesidadId);
     const contratoAlmacenar = {
       rutaArchivo: valor
     };
-    if(this.contrato === null) {
+    if (this.contrato === null) {
       this.guardarContrato(necesidadId, contratoAlmacenar);
     } else {
       this.actualizarContrato(necesidadId, contratoAlmacenar);
@@ -62,22 +62,26 @@ export class ContratacionesComponent implements OnInit {
       this.contrato = response;
     },
     (error) => {
-      this.mensajeError=error.message;
+      this.mensajeError = error.message;
     });
   }
 
   guardarContrato(necesidadId: number, contrato): void {
-    this.admistradorService.guardarContrato(necesidadId, contrato ).subscribe(() => {},
-      (error) => {
-        this.mensajeError =error?.error?.mensaje;
-      });
+    this.admistradorService.guardarContrato(necesidadId, contrato).subscribe(() => {
+      window.location.reload();
+    },
+    (error) => {
+      this.mensajeError = error?.error?.mensaje;
+    });
   }
 
   actualizarContrato(necesidadId: number, contrato): void {
-    this.admistradorService.actualizarContrato(necesidadId, contrato ).subscribe(() => {},
-      (error) => {
-        this.mensajeError =error?.error?.mensaje;
-      });
+    this.admistradorService.actualizarContrato(necesidadId, contrato).subscribe(() => {
+      window.location.reload();
+    },
+    (error) => {
+      this.mensajeError = error?.error?.mensaje;
+    });
   }
 
 

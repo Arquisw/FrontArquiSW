@@ -8,6 +8,7 @@ import { StorageService } from '@shared/service/storage-service/storage.service'
 import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
 import { PersonaResumen } from 'src/app/feature/configuracion/shared/model/persona-resumen.model';
 import { UsuarioResumen } from 'src/app/feature/configuracion/shared/model/usuario-resumen.model';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-proyecto',
@@ -38,7 +39,7 @@ export class ProyectoComponent implements OnInit {
   tieneRolDirectorDeProyecto = false;
   rolesMapa: Map<string, string> = new Map();
 
-  constructor(private proyectoService: ProyectoService, private configuracionService: ConfiguracionService, private router: Router, private storageService: StorageService) {}
+  constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private configuracionService: ConfiguracionService, private router: Router, private storageService: StorageService) {}
 
   ngOnInit(): void {
     const params = history.state;
@@ -47,6 +48,8 @@ export class ProyectoComponent implements OnInit {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;
+
+    this.viewportScroller.scrollToPosition([0, 0]);
 
     this.cargarMapa();
     this.consultarPersona();
