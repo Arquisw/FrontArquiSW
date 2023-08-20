@@ -80,9 +80,11 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
             const index = this.postulacionesResumen.indexOf(postulacion);
 
             this.postulacionesResumen.splice(index);
-          } if(postulacion.seleccionado) {
+          }
+
+          if(postulacion.seleccionado) {
             this.tieneMasDeUnaPostulacion = false;
-          } else {
+          } else if(postulacion.rechazado) {
             this.tieneMasDeUnaPostulacion = true;
             this.proyectosPostulacionesRechazadas.push(postulacion?.proyectoID);
           }
@@ -96,10 +98,11 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
           this.consultarProyecto();
 
           this.estaPostulado = true;
-        } else {
-          this.obtenerProyectos();
         }
 
+        if(this.proyectosPostulacionesRechazadas.length > 0) {
+          this.obtenerProyectos();
+        }
       } else {
         this.estaPostulado = false;
       }
