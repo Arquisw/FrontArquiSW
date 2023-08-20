@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { ProyectoService } from '../../shared/service/proyecto.service';
 import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
-import { ConfiguracionService } from 'src/app/feature/configuracion/shared/service/configuracion.service';
 import { SeleccionResumen } from 'src/app/feature/proyectos/shared/model/seleccion-resumen.model';
 import { StorageService } from '@shared/service/storage-service/storage.service';
 import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
-import { PersonaResumen } from 'src/app/feature/configuracion/shared/model/persona-resumen.model';
-import { UsuarioResumen } from 'src/app/feature/configuracion/shared/model/usuario-resumen.model';
 import { ViewportScroller } from '@angular/common';
 
 @Component({
@@ -21,14 +18,13 @@ export class ProyectoComponent implements OnInit {
   proyectoId: number;
   necesidadResumen: NecesidadResumen;
   requerimientosResumen: RequerimientosResumen;
-  personaResumen: PersonaResumen;
-  usuarioResumen: UsuarioResumen;
-  correo: string;
   seleccionesResumen: SeleccionResumen[] = [];
   tieneUsuariosSeleccionados = false;
   tieneServicioIngenieriaDeRequisitos = false;
   tieneServicioSQA = false;
   tieneServicioSQC = false;
+  aprobacionError = false;
+  mensajeError = '';
   files = [];
   urlDescarga = '';
   urlContrato = '';
@@ -38,8 +34,9 @@ export class ProyectoComponent implements OnInit {
   tieneRolLiderDeEquipo = false;
   tieneRolDirectorDeProyecto = false;
   rolesMapa: Map<string, string> = new Map();
+  authorities: string[] = [];
 
-  constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private configuracionService: ConfiguracionService, private router: Router, private storageService: StorageService) {}
+  constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private router: Router, private storageService: StorageService) {}
 
   ngOnInit(): void {
     const params = history.state;
@@ -48,11 +45,12 @@ export class ProyectoComponent implements OnInit {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
 
     this.viewportScroller.scrollToPosition([0, 0]);
 
     this.cargarMapa();
-    this.consultarPersona();
+    this.filtrarMenu();
     this.consultarNecesidadPorId();
   }
 
@@ -71,32 +69,17 @@ export class ProyectoComponent implements OnInit {
     return this.rolesMapa.get(clave);
   }
 
-  consultarPersona(): void {
-    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
-      this.personaResumen = response;
-      this.correo = this.personaResumen.correo;
-      this.consultarUsuario();
-    });
-  }
-
-  consultarUsuario(): void {
-    this.configuracionService.consultarUsuarioPorCorreo(this.correo).subscribe((response) => {
-      this.usuarioResumen = response;
-      this.filtrarMenu(this.usuarioResumen.roles);
-    });
-  }
-
-  filtrarMenu(roles): void {
-    roles.forEach(rol => {
-      if (rol.nombre === 'ROLE_INGENIERIA') {
+  filtrarMenu(): void {
+    this.authorities.forEach(authority => {
+      if (authority === 'ROLE_INGENIERIA') {
         this.tieneRolIngenieria = true;
       }
 
-      if (rol.nombre === 'ROLE_LIDER_DE_EQUIPO') {
+      if (authority === 'ROLE_LIDER_DE_EQUIPO') {
         this.tieneRolLiderDeEquipo = true;
       }
 
-      if (rol.nombre === 'ROLE_DIRECTOR_PROYECTO') {
+      if (authority === 'ROLE_DIRECTOR_PROYECTO') {
         this.tieneRolDirectorDeProyecto = true;
       }
     });
@@ -186,20 +169,13 @@ export class ProyectoComponent implements OnInit {
     });
   }
 
-  onAprobarProyecto(): void {
-    if(this.tieneRolIngenieria) {
-      this.aprobarProyectoPorRolIngenieria();
-    } else if(this.tieneRolLiderDeEquipo) {
-      this.aprobarProyectoRolLiderDeEquipo();
-    } else if (this.tieneRolDirectorDeProyecto) {
-      this.aprobarProyectoPorRolDirectorDeProyecto();
-    }
-  }
-
   aprobarProyectoPorRolIngenieria(): void {
     this.proyectoService.aprobarProyectoPorRolIngenieria(this.necesidadResumen.proyecto.id).subscribe((response) => {
       console.log('Data:', response);
       window.location.reload();
+    }, (error) => {
+      this.aprobacionError = true;
+      this.mensajeError = error?.error?.mensaje;
     });
   }
 
@@ -207,6 +183,9 @@ export class ProyectoComponent implements OnInit {
     this.proyectoService.aprobarProyectoPorRolLiderDeEquipo(this.necesidadResumen.proyecto.id).subscribe((response) => {
       console.log('Data:', response);
       window.location.reload();
+    }, (error) => {
+      this.aprobacionError = true;
+      this.mensajeError = error?.error?.mensaje;
     });
   }
 
@@ -214,6 +193,9 @@ export class ProyectoComponent implements OnInit {
     this.proyectoService.aprobarProyectoPorRolDirectorDeProyecto(this.necesidadResumen.proyecto.id).subscribe((response) => {
       console.log('Data:', response);
       window.location.reload();
+    }, (error) => {
+      this.aprobacionError = true;
+      this.mensajeError = error?.error?.mensaje;
     });
   }
 }

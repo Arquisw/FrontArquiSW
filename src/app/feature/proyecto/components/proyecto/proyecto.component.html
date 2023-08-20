@@ -38,7 +38,18 @@
     </div>
   </section>
   <section *ngIf="tieneRolIngenieria || tieneRolLiderDeEquipo || tieneRolDirectorDeProyecto" class="services-section container text-center">
-    <button class="btn btn-idr btn-success mt-3" (click)="onAprobarProyecto()">Aprobar Proyecto</button>
+    <button *ngIf="tieneRolIngenieria && !necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria" class="btn btn-ingenieria btn-success mt-3" (click)="aprobarProyectoPorRolIngenieria()">Aprobar Proyecto (Ingeniería)</button>
+    <button *ngIf="tieneRolLiderDeEquipo && !necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo" class="btn btn-lider_de_equipo btn-success mt-3" (click)="aprobarProyectoRolLiderDeEquipo()">Aprobar Proyecto (Lider del Equipo)</button>
+    <button *ngIf="tieneRolDirectorDeProyecto && !necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto" class="btn btn-director_de_proyecto btn-success mt-3" (click)="aprobarProyectoPorRolDirectorDeProyecto()">Aprobar Proyecto (Director de Proyecto)</button>
+    <div class="container-fluid h-100">
+      <div class="row w-100 align-items-center">
+        <div class="col text-center">
+          <div *ngIf="aprobacionError" class="alert alert-danger" role="alert">
+            {{mensajeError}}
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <section class="docs-section container">
     <h2>Documentos</h2>

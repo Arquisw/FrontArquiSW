@@ -41,16 +41,16 @@ export class ProyectoService {
 
   public aprobarProyectoPorRolIngenieria(id: number): Observable<ProyectoRespuesta<number>>
   {
-    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.INGENIERIA_ENDPOINT}`, id);
+    return this.httpService.doPutWithOutBody<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.INGENIERIA_ENDPOINT}/`, id);
   }
 
   public aprobarProyectoPorRolLiderDeEquipo(id: number): Observable<ProyectoRespuesta<number>>
   {
-    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.LIDER_DE_EQUIPO_ENDPOINT}`, id);
+    return this.httpService.doPutWithOutBody<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.LIDER_DE_EQUIPO_ENDPOINT}/`, id);
   }
 
   public aprobarProyectoPorRolDirectorDeProyecto(id: number): Observable<ProyectoRespuesta<number>>
   {
-    return this.httpService.doRequestMapping<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.DIRECTOR_DE_PROYECTO_ENDPOINT}`, id);
+    return this.httpService.doPutWithOutBody<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.DIRECTOR_DE_PROYECTO_ENDPOINT}/`, id);
   }
 }
