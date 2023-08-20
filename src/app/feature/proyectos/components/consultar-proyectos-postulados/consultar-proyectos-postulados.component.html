@@ -67,7 +67,7 @@
           <td class="table-body align-middle">
             <button (click)="abrirPerfilProyecto(proyecto?.id)" class="btn btn-watch-project btn-success mt-3">Ver
               Proyecto</button>
-            <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalMotivoRechazo(proyecto?.id)"
+            <button *ngIf="tieneMotivoRechazo" type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalMotivoRechazo(proyecto?.id)"
               data-bs-dismiss="modal">Ver Motivo del Rechazo</button>
             <app-modal-descripcion
               [modalId]="obtenerIdModalMotivoRechazo(proyecto?.id)"

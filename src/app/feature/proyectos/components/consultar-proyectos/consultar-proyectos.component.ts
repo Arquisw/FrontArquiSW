@@ -50,6 +50,8 @@ export class ConsultarProyectosComponent implements OnInit {
           authority === 'ROLE_SELECCIONADO' ||
           authority === 'ROLE_ADMINISTRADOR') {
         this.mostrarBotonPostulacion = false;
+      } else {
+        this.mostrarBotonPostulacion = true;
       }
     });
   }
@@ -59,7 +61,6 @@ export class ConsultarProyectosComponent implements OnInit {
       this.postulacionesResumen = response;
 
       if(this.postulacionesResumen.length > 0) {
-        this.mostrarBotonPostulacion = false;
         this.postulacionesResumen.forEach(postulacion => {
           if(postulacion.proyectoID === this.proyectoActualId) {
             this.postulacionResumen = postulacion;
