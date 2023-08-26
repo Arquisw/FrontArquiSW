@@ -30,7 +30,7 @@
               <p *ngFor="let rol of seleccion?.roles">{{obtenerNombreDelRol(rol)}}</p>
             </td>
             <td class="table-body align-middle">
-              <button class="btn btn-watch-project btn-success mt-3">Ver Perfil</button>
+              <button class="btn btn-watch-project btn-success mt-3" (click)="abrirPerfil(seleccion?.usuarioID)">Ver Perfil</button>
             </td>
           </tr>
         </tbody>

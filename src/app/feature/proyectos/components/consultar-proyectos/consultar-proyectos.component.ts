@@ -45,13 +45,20 @@ export class ConsultarProyectosComponent implements OnInit {
 
   filtrarBotonPostulacion(): void {
     this.authorities.forEach(authority => {
-      if (authority === 'ROLE_ASOCIACION' ||
-          authority === 'ROLE_POSTULADO' ||
-          authority === 'ROLE_SELECCIONADO' ||
-          authority === 'ROLE_ADMINISTRADOR') {
+      if (authority === 'ROLE_ASOCIACION') {
         this.mostrarBotonPostulacion = false;
-      } else {
-        this.mostrarBotonPostulacion = true;
+      }
+
+      if (authority === 'ROLE_POSTULADO') {
+        this.mostrarBotonPostulacion = false;
+      }
+
+      if (authority === 'ROLE_SELECCIONADO') {
+        this.mostrarBotonPostulacion = false;
+      }
+
+      if (authority === 'ROLE_ADMINISTRADOR') {
+        this.mostrarBotonPostulacion = false;
       }
     });
   }
@@ -60,9 +67,9 @@ export class ConsultarProyectosComponent implements OnInit {
     this.proyectosService.consultarPostulacionesPorUsuarioId(this.usuarioId).subscribe((response) => {
       this.postulacionesResumen = response;
 
-      if(this.postulacionesResumen.length > 0) {
+      if (this.postulacionesResumen.length > 0) {
         this.postulacionesResumen.forEach(postulacion => {
-          if(postulacion.proyectoID === this.proyectoActualId) {
+          if (postulacion.proyectoID === this.proyectoActualId) {
             this.postulacionResumen = postulacion;
           }
         });
@@ -74,7 +81,7 @@ export class ConsultarProyectosComponent implements OnInit {
     this.proyectosService.consultarProyectosNegociados().subscribe((response) => {
       this.necesidades = response;
 
-      if(this.necesidades.length > 0) {
+      if (this.necesidades.length > 0) {
         this.hayNecesidades = true;
       }
     });
@@ -97,7 +104,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Director de Proyecto';
     const rolCodigo = 'ROLE_DIRECTOR_PROYECTO';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -113,7 +120,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Parte Interesada';
     const rolCodigo = 'ROLE_PARTE_INTERESADA';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -129,7 +136,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Equipo de Desarrollo';
     const rolCodigo = 'ROLE_EQUIPO_DESARROLLO';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -145,7 +152,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Ingenieria';
     const rolCodigo = 'ROLE_INGENIERIA';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -161,7 +168,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Arquitectura';
     const rolCodigo = 'ROLE_ARQUITECTURA';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -177,7 +184,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Analista';
     const rolCodigo = 'ROLE_ANALISTA';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -193,7 +200,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Lider del Equipo';
     const rolCodigo = 'ROLE_LIDER_DE_EQUIPO';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -209,7 +216,7 @@ export class ConsultarProyectosComponent implements OnInit {
     const rol = 'Patrocinador';
     const rolCodigo = 'ROLE_PATROCINADOR';
 
-    if (this.rolesSeleccionados.includes(rol)) {
+    if(this.rolesSeleccionados.includes(rol)) {
       const index = this.rolesSeleccionados.indexOf(rol);
       const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
 
@@ -222,8 +229,7 @@ export class ConsultarProyectosComponent implements OnInit {
   }
 
   onClickPostule(): void {
-    if (this.codigoRolesSeleccionados.length > 0) {
-
+    if(this.codigoRolesSeleccionados.length > 0) {
       const postulacion = new Postulacion(this.codigoRolesSeleccionados, this.proyectoActualId, this.usuarioId);
 
       this.proyectosService.guardarPostulacion(postulacion).subscribe((response) => {

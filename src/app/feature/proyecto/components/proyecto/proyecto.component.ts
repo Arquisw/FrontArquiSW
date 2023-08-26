@@ -198,4 +198,14 @@ export class ProyectoComponent implements OnInit {
       this.mensajeError = error?.error?.mensaje;
     });
   }
+
+  abrirPerfil(id): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id,
+        usuario: null,
+      }
+    };
+    this.router.navigate(['/perfil'], navigationExtras);
+  }
 }

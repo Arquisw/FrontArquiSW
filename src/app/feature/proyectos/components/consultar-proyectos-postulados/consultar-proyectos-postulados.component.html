@@ -1,5 +1,5 @@
 <section class="title">
-  <h1>Proyecto Postulado Actualmente</h1>
+  <h1>Proyectos Postulados</h1>
 </section>
 <section class="postulated-projects">
   <p *ngIf="!estaPostulado">No has postulado a ningun proyecto actualmente...</p>
@@ -40,7 +40,8 @@
     </div>
   </div>
   <div class="table-responsive" *ngIf="tieneMasDeUnaPostulacion">
-    <table class="table align-middle table-striped">
+    <H2>Postulaciones Rechazadas</H2>
+    <table class="table align-middle table-striped rejected-table">
       <thead>
         <tr>
           <th class="table-title" scope="col">Nombre</th>
