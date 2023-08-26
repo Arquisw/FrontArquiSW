@@ -65,7 +65,7 @@
           <tr *ngFor="let file of files">
             <td class="table-body align-middle">{{file?.nombre}}</td>
             <td class="table-body align-middle">
-              <button class="btn btn-success" (click)="downloadFile()">Ver Documento</button>
+              <button class="btn btn-success" (click)="downloadFile(file?.nombre)">Ver Documento</button>
             </td>
           </tr>
         </tbody>

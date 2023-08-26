@@ -89,6 +89,7 @@ export class ProyectoComponent implements OnInit {
     this.proyectoService.consultarNecesidadPorId(this.necesidadId).subscribe((response) => {
       this.necesidadResumen = response;
       this.consultarRequerimientosPorId();
+      this.consultarContratoPorId();
       this.proyectoId = this.necesidadResumen.proyecto.id;
       this.definirServicios();
       this.consultarSeleccionesPorId();
@@ -158,13 +159,25 @@ export class ProyectoComponent implements OnInit {
     });
   }
 
-  downloadFile(): void {
-    this.storageService.obtenerArchivoUrl(this.urlDescarga).subscribe((file) => {
+  downloadFile(nombre: string): void {
+    const contratoPatron = /_Contrato.pdf$/;
+    const requerimientosPatron = /_Requerimientos.pdf$/;
+    let url = '';
+
+    if(contratoPatron.test(nombre)) {
+      url = this.urlContrato;
+    }
+
+    if(requerimientosPatron.test(nombre)) {
+      url = this.urlDescarga;
+    }
+
+    this.storageService.obtenerArchivoUrl(url).subscribe((file) => {
       this.detalleDocumento = file;
       const link = document.createElement('a');
-      link.href = this.urlDescarga;
+      link.href = url;
       link.target = '_blank';
-      link.download = this.urlDescarga.substring(this.urlDescarga.lastIndexOf('/') + 1);
+      link.download = url.substring(url.lastIndexOf('/') + 1);
       link.click();
     });
   }
