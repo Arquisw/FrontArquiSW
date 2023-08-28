@@ -1,0 +1,19 @@
+<header class="header-content">
+  <section class="information">
+    <h1>Proceso de Ingeniería de Requisitos</h1>
+  </section>
+</header>
+<main>
+  <section class="no-process-started-message" *ngIf="!inicioElProcesoDeConsultoria">
+    <p>El proceso de consultoria de Ingeniería de Requisitos necesita la aprobación de los miembros del equipo con los roles Ingeniería, Lider de Equipo y Director de Proyecto respectivamente para iniciar con el proceso...</p>
+  </section>
+  <section class="phases" *ngIf="!inicioElProcesoDeConsultoria">
+    <div class="phases-container">
+      <div class="container">
+        <div class="row">
+          <app-fase class="col"></app-fase>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
