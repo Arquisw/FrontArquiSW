@@ -7,11 +7,11 @@
   <section class="no-process-started-message" *ngIf="!inicioElProcesoDeConsultoria">
     <p>El proceso de consultoria de Ingeniería de Requisitos necesita la aprobación de los miembros del equipo con los roles Ingeniería, Lider de Equipo y Director de Proyecto respectivamente para iniciar con el proceso...</p>
   </section>
-  <section class="phases" *ngIf="!inicioElProcesoDeConsultoria">
+  <section class="phases" *ngIf="inicioElProcesoDeConsultoria">
     <div class="phases-container">
-      <div class="container">
+      <div class="container" *ngFor="let fase of fasesResumen">
         <div class="row">
-          <app-fase class="col"></app-fase>
+          <app-fase class="col" [fase]="fase"></app-fase>
         </div>
       </div>
     </div>
