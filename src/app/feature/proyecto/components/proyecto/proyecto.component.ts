@@ -134,8 +134,7 @@ export class ProyectoComponent implements OnInit {
 
   consultarContratoPorId(): void {
     this.proyectoService.consultarContratoPorNecesidadId(this.necesidadResumen.id).subscribe((response) => {
-      console.log('Data:', response);
-      this.urlContrato = response.rutaArchivo;
+      this.urlContrato = response?.rutaArchivo;
       this.tieneContrato = true;
     }, (error) => {
       console.log('Error:', error?.error?.mensaje);

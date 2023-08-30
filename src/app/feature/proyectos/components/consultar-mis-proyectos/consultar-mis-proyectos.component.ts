@@ -212,8 +212,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
   consultarRequerimientos(): void {
     this.proyectosService.consultarRequerimientosPorNecesidadId(this.necesidadId).subscribe((response) => {
-      console.log('Data:', response);
-      this.urlArchivo = response.rutaArchivo;
+      this.urlArchivo = response?.rutaArchivo;
     });
   }
 

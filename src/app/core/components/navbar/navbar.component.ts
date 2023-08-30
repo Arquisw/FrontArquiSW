@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
   usuarioId;
   persona;
   mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
-  mensajeAsociacion= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
+  mensajeAsociacion= 'Se ha registrado la Asociacion exitosamente';
   loginForm: FormGroup;
   registroForm: FormGroup;
   registroAsociacionForm: FormGroup;
@@ -223,7 +223,7 @@ export class NavbarComponent implements OnInit {
       nit: this.registroAsociacionForm.get('nit').value,
       numeroContacto: this.registroAsociacionForm.get('numeroContacto').value
     };
-    this.asociasociacionService.registrarAsociacion(asociacion, this.usuarioId.valor).subscribe(() => {
+    this.asociasociacionService.registrarAsociacion(asociacion, this.id).subscribe(() => {
       this.registroAsociacionForm.reset();
       this.registroExitoso= true;
     },
