@@ -17,8 +17,7 @@ El Frontend de ArquiSW corresponde a la interfaz grafica de la plataforma con la
 
 ## Documentación
 
-**Modelo de Documentación:**  [Modelo C4][2]
-[2]: https://arquisw.github.io/ArquiSW-Documentacion/
+**Modelo de Documentación:**  [Modelo C4](https://arquisw.github.io/ArquiSW-Documentacion/)
 
 ## Instalación
 
