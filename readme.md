@@ -1,51 +1,37 @@
-### app-angular-base
+# ArquiSW - Single Page Application (Frontend)
 
-**Recordar adjuntar uno de los bloques con estilo para complementar este bloque.**
+El Frontend de ArquiSW corresponde a la interfaz grafica de la plataforma con la que el usuario interactua con los diferentes servicios que este ofrece, en este caso esta Single Page Applicatión, se encarga de exponer los servicios del proceso de consultoria de [Ingeniería de Requisitos](https://github.com/Arquisw/IngenieriaDeRequisitos) y toda la interacción con el [Sistema Principal](https://github.com/Arquisw/ArquiSW-Backend)
 
-**se recomienda el uso de node 16 para tener compatibilidad con la libreria de mutation testing.**
+## Tecnología
 
-Este bloque contiene la estructura necesaria para construir un proyecto en angular siguiendo la guia de estilos de angular.
+**Node:** Versión 18.16.1
+**Angular:** Versión 15.2.9
+**Bootstrap:** Versión 5.2.3
+**Firebase:** Versión 9.23.0
+**EsLint:** Versión 8.23.0
+**Jasmine:** Versión 4.1.1
 
-[https://angular.io/guide/styleguide#style-guide](https://angular.io/guide/styleguide#style-guide)
+## Arquitectura Implementada
 
-Las caracter&iacute;sticas principales son
-- Soporte de enrutamiento
-- Manejo de seguridad
-- Soporte lazy loading
-- Arquitectura core-shared-feature
-- Directiva para mostrar errores de formularios
-- Pipe para uso de TrackBy dentro de los ngFor
-- Pruebas unitarias y e2e
-- Manejo centralizado de errores
-- Libreria para realizar Mutation testing
+**Arquitectura:**  Core-Feature-Shared
 
-#### Estructura del proyecto
+## Documentación
 
-Los archivos de la aplicaci&oacute;n se encuentran en la subcarpeta src. Las pruebas iniciales correspondientes de extremo a extremo se encuentran en la subcarpeta e2e.
+**Modelo de Documentación:**  [Modelo C4][2]
+[2]: https://arquisw.github.io/ArquiSW-Documentacion/
 
-El proyecto base est&aacute; estructurado en los m&oacute;dulos feature, shared y core. Asegurando una separaci&oacute;n adecuada de las preocupaciones, lo que facilitar&aacute; la escalabilidad a medida que su aplicaci&oacute;n crezca. Lo siguiente describe brevemente cada tipo de m&oacute;dulo.
+## Instalación
 
-##### M&oacute;dulo core
-Deben estar lo transversal y de una sola instancia en la aplicaci&oacute;n. Por ejemplo: NavBar o interceptor.
+1. Clonar el Repositorio:
+	`git https://github.com/Arquisw/Arquisw-Front`
+2. Abrir el proyecto con Visual Studio Code
+3. Ejecutar la aplicación:
+	`npm start`
+4. Acceder a la Aplicación en la siguiente dirección:
+	`http://localhost:4200/inicio`
 
-##### M&oacute;dulo feature
-Deben estar los componentes que implementan funcionalidades especificas de la aplicaci&oacute;n. Por ejemplo, el componente datos de contacto el cual es el componente que implementa la feature de contacto. Es posible tener compartidos dentro de esta feature.
+## Colaboradores
 
-##### M&oacute;dulo shared
-Deben estar componentes o utilidades comunes a las diferentes feature. Por ejemplo, un componente de un bot&oacute;n azul que usted desea repetir en varios lugares. Un filtro para ser utilizado en todos los componentes.
-
-#### Calidad en las pruebas:
-El bloque cuenta con la libreria Stryker la cual nos ayuda a validar la calidad de las pruebas que estamos desarrollando.
-Esta libreria funciona bajo el principio de mutation testing y se recomienda ejecutar la tarea **test:mutation** y luego revisar 
-el informe generado. Siempre se debe buscar tener los mutantes vivos en cero.  
-
-# todas las pruebas con mutation
-$ npm run test:mutation
-
-Despu&eacute;s de importar el proyecto se muestra de la siguiente manera
-
-
-![enter image description here](https://drive.google.com/uc?export=download&id=1Kp5uXDxH42HE-1y1qkgx5nzUeeYnCq7A)
-
-
-Hash de git relacionado: b4dde452
+- Esteban Colorado González
+- Juan Diego Valencia Sanchez
+- Juan Esteban Ceballos Quintero
