@@ -34,6 +34,7 @@ export class ProyectoComponent implements OnInit {
   tieneRolIngenieria = false;
   tieneRolLiderDeEquipo = false;
   tieneRolDirectorDeProyecto = false;
+  puedeVerContrato = false;
   rolesMapa: Map<string, string> = new Map();
   authorities: string[] = [];
 
@@ -86,6 +87,10 @@ export class ProyectoComponent implements OnInit {
 
       if (authority === 'ROLE_SELECCIONADO') {
         this.validarSiUsuarioActualEstaSeleccionado();
+      }
+
+      if (authority === 'ROLE_ADMINISTRADOR' || authority === 'ROLE_ASOCIACION') {
+        this.puedeVerContrato = true;
       }
     });
   }
@@ -169,6 +174,16 @@ export class ProyectoComponent implements OnInit {
     this.storageService.listaDeArchivosNecesidad(this.necesidadResumen).subscribe((files) => {
       this.files = files;
     });
+  }
+
+  obtenerPuedeVerContrato(nombre: string): boolean {
+    const contratoPatron = /_Contrato.pdf$/;
+
+    if(contratoPatron.test(nombre)) {
+      return this.usuarioActualEstaSeleccionado || this.puedeVerContrato;
+    } else {
+      return false;
+    }
   }
 
   downloadFile(nombre: string): void {
