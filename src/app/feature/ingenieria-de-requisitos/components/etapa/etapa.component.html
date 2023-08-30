@@ -1,1 +1,38 @@
-<p>etapa works!</p>
+<header class="header-content">
+  <section class="information">
+    <h1>Etapa: {{etapaResumen?.nombre}}</h1>
+    <p>{{obtenerEstadoDeLaEtapa()}}</p>
+    <p><b>Descripción:</b> {{etapaResumen?.descripcion}}</p>
+  </section>
+  <main>
+    <section class="versions">
+      <h1>Gestor de Versiones</h1>
+      <div class="table-responsive">
+        <table class="table align-middle table-bordered">
+          <thead>
+            <tr>
+              <th class="table-title" scope="col">ID</th>
+              <th class="table-title" scope="col">Fecha</th>
+              <th class="table-title" scope="col">¿Es la versión final?</th>
+              <th class="table-title" scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-body align-middle">1</td>
+              <td class="table-body align-middle">15/05/2023</td>
+              <td class="table-body align-middle">No</td>
+              <td class="table-body align-middle">
+                <button (click)="abrirRequisitos(1)" class="btn btn-watch-project btn-success mt-3">Ver Etapa</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="approvals" *ngIf="puedeAprobarEtapa">
+      <button (click)="aprobarEtapa(etapaResumen?.id)" class="btn btn-watch-project btn-success mt-3">Aprobar Etapa</button>
+      <button (click)="declinarEtapa(etapaResumen?.id)" class="btn btn-watch-project btn-success mt-3">Declinar Etapa</button>
+    </section>
+  </main>
+</header>

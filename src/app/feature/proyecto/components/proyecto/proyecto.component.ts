@@ -21,6 +21,7 @@ export class ProyectoComponent implements OnInit {
   seleccionesResumen: SeleccionResumen[] = [];
   tieneUsuariosSeleccionados = false;
   tieneServicioIngenieriaDeRequisitos = false;
+  usuarioActualEstaSeleccionado = false;
   tieneServicioSQA = false;
   tieneServicioSQC = false;
   aprobacionError = false;
@@ -81,6 +82,18 @@ export class ProyectoComponent implements OnInit {
 
       if (authority === 'ROLE_DIRECTOR_PROYECTO') {
         this.tieneRolDirectorDeProyecto = true;
+      }
+
+      if (authority === 'ROLE_SELECCIONADO') {
+        this.validarSiUsuarioActualEstaSeleccionado();
+      }
+    });
+  }
+
+  validarSiUsuarioActualEstaSeleccionado(): void {
+    this.seleccionesResumen.forEach(seleccion => {
+      if(seleccion.usuarioID === this.usuarioId) {
+        this.usuarioActualEstaSeleccionado = true;
       }
     });
   }

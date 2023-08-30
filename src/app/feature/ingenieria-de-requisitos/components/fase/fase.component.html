@@ -22,10 +22,20 @@
             <tr *ngFor="let etapa of fase?.etapas">
               <td class="table-body align-middle">{{etapa?.nombre}}</td>
               <td class="table-body align-middle">
-                {{etapa?.descripcion}}
+                <button type="submit" class="btn btn-success mt-3"
+                  data-bs-toggle="modal"
+                  [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(etapa?.id)"
+                  data-bs-dismiss="modal">
+                  Ver Descripción
+                </button>
+                <app-modal-descripcion
+                  [modalId]="obtenerIdModalDescripcion(etapa?.id)"
+                  [titulo]="'Descripción'"
+                  [descripcion]="etapa?.descripcion">
+                </app-modal-descripcion>
               </td>
               <td class="table-body align-middle">
-                Ver Etapa
+                <button (click)="abrirEtapa(etapa?.id)" class="btn btn-watch-project btn-success mt-3">Ver Etapa</button>
               </td>
             </tr>
           </tbody>
