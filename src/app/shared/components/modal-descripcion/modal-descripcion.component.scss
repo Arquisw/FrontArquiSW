@@ -1,14 +1,18 @@
 .modal-body{
   font-size: 1.4rem;
-  background-color: var(--background-color);
-  color: var(--just-white);
+  background-color: var(--just-white);
+  color: var(--background-color);
 }
 
 .modal-header {
-  background-color: var(--background-color);
+  background-color: var(--just-white);
 }
 
 .modal-title {
   font-size: 1.8rem;
-  color: var(--just-white);
+  color: var(--background-color);
+}
+
+.modal-footer {
+  background-color: var(--just-white);
 }

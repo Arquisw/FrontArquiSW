@@ -6,19 +6,8 @@ p {
   height: 150px;
 }
 
-.modal-title
-{
-  font-size: 1.8rem;
-}
-
-.modal-body{
-  font-size: 1.4rem;
-  background-color: var(--background-color);
-  color: var(--just-white);
-}
-
 .modal-header, .modal-footer {
-  background-color: var(--background-color);
+  background-color: var(--just-white);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,11 +15,17 @@ p {
 
 .modal-title {
   font-size: 1.8rem;
-  color: var(--just-white);
+  color: var(--background-color);
 }
 
 .modal-body select, label {
   font-size: 1.4rem;
+}
+
+.modal-body{
+  font-size: 1.4rem;
+  background-color: var(--just-white);
+  color: var(--background-color);
 }
 
 .btn
@@ -76,26 +71,3 @@ input {
 label {
   color: var(--black);
 }
-
-.modal-title
-{
-  font-size: 1.8rem;
-}
-
-.modal-body{
-  font-size: 1.4rem;
-  background-color: var(--background-color);
-  color: var(--just-white);
-}
-
-.modal-header {
-  background-color: var(--background-color);
-}
-
-.modal-title {
-  font-size: 1.8rem;
-  color: var(--just-white);
-}
-
-
-
