@@ -22,6 +22,7 @@ export class ProyectoComponent implements OnInit {
   tieneUsuariosSeleccionados = false;
   tieneServicioIngenieriaDeRequisitos = false;
   usuarioActualEstaSeleccionado = false;
+  usuarioActualEsDuenoDelProyecto = false;
   tieneServicioSQA = false;
   tieneServicioSQC = false;
   aprobacionError = false;
@@ -52,8 +53,8 @@ export class ProyectoComponent implements OnInit {
     this.viewportScroller.scrollToPosition([0, 0]);
 
     this.cargarMapa();
-    this.filtrarMenu();
     this.consultarNecesidadPorId();
+    this.filtrarMenu();
   }
 
   cargarMapa(): void {
@@ -85,20 +86,13 @@ export class ProyectoComponent implements OnInit {
         this.tieneRolDirectorDeProyecto = true;
       }
 
-      if (authority === 'ROLE_SELECCIONADO') {
-        this.validarSiUsuarioActualEstaSeleccionado();
-      }
-
-      if (authority === 'ROLE_ADMINISTRADOR' || authority === 'ROLE_ASOCIACION') {
+      if(authority === 'ROLE_ASOCIACION') {
+        this.usuarioActualEsDuenoDelProyecto = true;
         this.puedeVerContrato = true;
       }
-    });
-  }
 
-  validarSiUsuarioActualEstaSeleccionado(): void {
-    this.seleccionesResumen.forEach(seleccion => {
-      if(seleccion.usuarioID === this.usuarioId) {
-        this.usuarioActualEstaSeleccionado = true;
+      if (authority === 'ROLE_ADMINISTRADOR') {
+        this.puedeVerContrato = true;
       }
     });
   }
@@ -146,6 +140,20 @@ export class ProyectoComponent implements OnInit {
 
       if(this.seleccionesResumen.length > 0) {
         this.tieneUsuariosSeleccionados = true;
+
+        this.validarSiUsuarioActualEstaSeleccionado();
+      }
+    });
+  }
+
+  validarSiUsuarioActualEstaSeleccionado(): void {
+    this.authorities.forEach(authority => {
+      if (authority === 'ROLE_SELECCIONADO') {
+        this.seleccionesResumen.forEach(seleccion => {
+          if(seleccion.usuarioID === this.usuarioId) {
+            this.usuarioActualEstaSeleccionado = true;
+          }
+        });
       }
     });
   }
@@ -176,11 +184,14 @@ export class ProyectoComponent implements OnInit {
     });
   }
 
-  obtenerPuedeVerContrato(nombre: string): boolean {
+  obtenerPuedeVerArchivo(nombre: string): boolean {
     const contratoPatron = /_Contrato.pdf$/;
+    const requerimientoPatron = /_Requerimientos.pdf$/;
 
     if(contratoPatron.test(nombre)) {
-      return this.usuarioActualEstaSeleccionado || this.puedeVerContrato;
+      return this.puedeVerContrato;
+    } else if(requerimientoPatron.test(nombre)) {
+      return true;
     } else {
       return false;
     }

@@ -7,9 +7,9 @@
 </header>
 <main>
   <section class="services-section container text-center">
-    <button [disabled]="!usuarioActualEstaSeleccionado || !tieneServicioIngenieriaDeRequisitos" class="btn btn-idr btn-success mt-3" (click)="abrirIngenieriaDeRequisitos()">Ingeniería de Requisitos</button>
-    <button [disabled]="!usuarioActualEstaSeleccionado || !tieneServicioSQA" class="btn btn-sqa btn-success mt-3">SQA</button>
-    <button [disabled]="!usuarioActualEstaSeleccionado || !tieneServicioSQC" class="btn btn-sqc btn-success mt-3">SQC</button>
+    <button [disabled]="!tieneServicioIngenieriaDeRequisitos && (!usuarioActualEstaSeleccionado || !usuarioActualEsDuenoDelProyecto)" class="btn btn-idr btn-success mt-3" (click)="abrirIngenieriaDeRequisitos()">Ingeniería de Requisitos</button>
+    <button [disabled]="!tieneServicioSQA && (!usuarioActualEstaSeleccionado || !usuarioActualEsDuenoDelProyecto)" class="btn btn-sqa btn-success mt-3">SQA</button>
+    <button [disabled]="!tieneServicioSQC && (!usuarioActualEstaSeleccionado || !usuarioActualEsDuenoDelProyecto)" class="btn btn-sqc btn-success mt-3">SQC</button>
   </section>
   <section class="team-section container">
     <h2>Miembros del Equipo</h2>
@@ -62,10 +62,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let file of files" ngIf="puedeVerContrato(file?.nombre)">
+          <tr *ngFor="let file of files" >
             <td class="table-body align-middle">{{file?.nombre}}</td>
             <td class="table-body align-middle">
-              <button class="btn btn-success" (click)="downloadFile(file?.nombre)">Ver Documento</button>
+              <button [disabled]="!obtenerPuedeVerArchivo(file?.nombre)" class="btn btn-success" (click)="downloadFile(file?.nombre)">Ver Documento</button>
             </td>
           </tr>
         </tbody>
