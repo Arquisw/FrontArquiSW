@@ -12,7 +12,7 @@ import { ConfiguracionModule } from './feature/configuracion/configuracion.modul
 import { PerfilModule } from './feature/perfil/perfil.module';
 import { AsociacionModule } from './feature/asociacion/asociacion.module';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire/compat'; // Ajusta esta línea
+import { AngularFireModule } from '@angular/fire/compat';
 import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.module';
 import { ProyectosModule } from './feature/proyectos/proyectos.module';
 import { ProyectoModule } from './feature/proyecto/proyecto.module';
