@@ -39,7 +39,7 @@ export class IngenieriaDeRequisitosService {
 
   public aprobarEtapa(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
   {
-    return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpoint}${this.FASES_ENDPOINT}${this.APROBACION_ENDPOINT}/`, id);
+    return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.FASES_ENDPOINT}${this.APROBACION_ENDPOINT}/`, id);
   }
 
   public consultarVersionesPorEtapaId(id: number): Observable<VersionResumen[]>
@@ -49,16 +49,16 @@ export class IngenieriaDeRequisitosService {
 
   public generarVersionInicial(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
   {
-    return this.httpService.doPostWithOutBodyAndId<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpoint}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}/`, id);
+    return this.httpService.doPostWithOutBodyAndId<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}/`, id);
   }
 
   public generarVersionFinal(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
   {
-    return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpoint}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}/`, id);
+    return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}/`, id);
   }
 
   public rechazarVersionPorId(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
   {
-    return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpoint}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}${this.RECHAZAR_ENDPOINT}/`, id);
+    return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}${this.RECHAZAR_ENDPOINT}/`, id);
   }
 }
