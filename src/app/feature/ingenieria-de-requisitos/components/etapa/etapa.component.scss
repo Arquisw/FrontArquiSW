@@ -28,3 +28,66 @@
   color: var(--just-white);
   font-size: 1.8rem;
 }
+
+.create-first-version p
+{
+  color: var(--just-white);
+  font-size: 1.6rem;
+}
+
+.alert {
+  padding-top: 10px;
+}
+
+.btn
+{
+  font-size: 1.6rem;
+  background-color: var(--uco-green);
+  margin-bottom: 10px;
+}
+
+.btn-watch-requeriments {
+  margin-right: 5px;
+}
+
+
+.table-responsive {
+  max-width: 767px;
+  width: 100%;
+  justify-content: center;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+thead th {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody th {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+tbody td {
+  font-size: 1.4rem;
+  color: var(--just-white);
+  background-color: var(--background-color);
+}
+
+.table-responsive {
+  padding-top: 5px;
+}
+
+.table-title {
+  vertical-align: middle;
+}
+
+.table-body {
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
