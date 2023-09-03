@@ -221,8 +221,7 @@ export class ProyectoComponent implements OnInit {
   }
 
   aprobarProyectoPorRolIngenieria(): void {
-    this.proyectoService.aprobarProyectoPorRolIngenieria(this.necesidadResumen.proyecto.id).subscribe((response) => {
-      console.log('Data:', response);
+    this.proyectoService.aprobarProyectoPorRolIngenieria(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
       this.aprobacionError = true;
@@ -231,8 +230,7 @@ export class ProyectoComponent implements OnInit {
   }
 
   aprobarProyectoRolLiderDeEquipo(): void {
-    this.proyectoService.aprobarProyectoPorRolLiderDeEquipo(this.necesidadResumen.proyecto.id).subscribe((response) => {
-      console.log('Data:', response);
+    this.proyectoService.aprobarProyectoPorRolLiderDeEquipo(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
       this.aprobacionError = true;
@@ -241,8 +239,7 @@ export class ProyectoComponent implements OnInit {
   }
 
   aprobarProyectoPorRolDirectorDeProyecto(): void {
-    this.proyectoService.aprobarProyectoPorRolDirectorDeProyecto(this.necesidadResumen.proyecto.id).subscribe((response) => {
-      console.log('Data:', response);
+    this.proyectoService.aprobarProyectoPorRolDirectorDeProyecto(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
       this.aprobacionError = true;

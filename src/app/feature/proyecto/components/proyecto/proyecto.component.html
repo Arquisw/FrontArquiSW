@@ -37,7 +37,7 @@
       </table>
     </div>
   </section>
-  <section *ngIf="usuarioActualEstaSeleccionado && (tieneRolIngenieria || tieneRolLiderDeEquipo || tieneRolDirectorDeProyecto)" class="services-section container text-center">
+  <section *ngIf="usuarioActualEstaSeleccionado && (tieneRolIngenieria || tieneRolLiderDeEquipo || tieneRolDirectorDeProyecto) && (!necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria && !necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo && !necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto)" class="services-section container text-center">
     <button *ngIf="tieneRolIngenieria && !necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria" class="btn btn-ingenieria btn-success mt-3" (click)="aprobarProyectoPorRolIngenieria()">Aprobar Proyecto (Ingeniería)</button>
     <button *ngIf="tieneRolLiderDeEquipo && !necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo" class="btn btn-lider_de_equipo btn-success mt-3" (click)="aprobarProyectoRolLiderDeEquipo()">Aprobar Proyecto (Lider del Equipo)</button>
     <button *ngIf="tieneRolDirectorDeProyecto && !necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto" class="btn btn-director_de_proyecto btn-success mt-3" (click)="aprobarProyectoPorRolDirectorDeProyecto()">Aprobar Proyecto (Director de Proyecto)</button>

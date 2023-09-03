@@ -57,10 +57,13 @@ tbody td
 .table-body {
   align-items: center;
   justify-content: center;
+  text-align: center;
   vertical-align: middle;
 }
 
 .btn {
   font-size: 1.6rem;
   background-color: var(--uco-green);
+  margin: 0 auto;
+  display: block;
 }

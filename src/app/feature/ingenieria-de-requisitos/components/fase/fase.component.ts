@@ -10,9 +10,7 @@ import { Router, NavigationExtras } from '@angular/router';
 export class FaseComponent {
   @Input() fase: FaseResumen;
 
-  constructor(private router: Router) {
-
-  }
+  constructor(private router: Router) { }
 
   obtenerIdModalDescripcion(id: number): string {
     return 'descripcionModal' + id;
@@ -24,7 +22,7 @@ export class FaseComponent {
         id: id
       }
     };
-    
-    this.router.navigate(['/etapa'], navigationExtras);
+
+    this.router.navigate(['./ingenieria-de-requisitos/etapa'], navigationExtras);
   }
 }
