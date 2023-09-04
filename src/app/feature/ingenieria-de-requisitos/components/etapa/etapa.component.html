@@ -4,48 +4,48 @@
     <p>{{obtenerEstadoDeLaEtapa()}}</p>
     <p><b>Descripción:</b> {{etapaResumen?.descripcion}}</p>
   </section>
-  <main>
-    <section class="versions">
-      <h1>Gestor de Versiones</h1>
-      <div class="table-responsive" *ngIf="tieneVersiones">
-        <table class="table align-middle table-bordered">
-          <thead>
-            <tr>
-              <th class="table-title" scope="col">ID</th>
-              <th class="table-title" scope="col">Fecha</th>
-              <th class="table-title" scope="col">¿Es la versión final?</th>
-              <th class="table-title" scope="col">Acciones</th>
-            </tr>
-          </thead>
-          <tbody *ngFor="let version of versionesResumen">
-            <tr>
-              <td class="table-body align-middle">{{version?.id}}</td>
-              <td class="table-body align-middle">{{version?.fecha}}</td>
-              <td class="table-body align-middle">{{obtenerEstadoDeLaVersion(version?.esFinal)}}</td>
-              <td class="table-body align-middle">
-                <button (click)="abrirRequisitos(version?.id)" class="btn btn-watch-requeriments btn-success mt-3">Ver Requisitos</button>
-                <button *ngIf="puedeRechazarVersion" (click)="rechazarVersion(version?.id)" class="btn btn-success mt-3">Rechazar Versión</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="create-first-version" *ngIf="!tieneVersiones">
-        <p>No hay aun versiones de los requisitos. El o los miembros del equipo con el rol Ingeniería pueden dar inicio a la versión...</p>
-        <button *ngIf="puedeIniciarPrimeraVersion" (click)="iniciarPrimeraVersion(etapaResumen?.id)" class="btn btn-success mt-3">Iniciar Primera Versión</button>
-        <div class="container-fluid h-100">
-          <div class="row w-100 align-items-center">
-            <div class="col text-center">
-              <div *ngIf="generarVersionInicialError" class="alert alert-danger" role="alert">
-                {{mensajeError}}
-              </div>
+</header>
+<main>
+  <section class="versions">
+    <h1>Gestor de Versiones</h1>
+    <div class="table-responsive" *ngIf="tieneVersiones">
+      <table class="table align-middle table-bordered">
+        <thead>
+          <tr>
+            <th class="table-title" scope="col">ID</th>
+            <th class="table-title" scope="col">Fecha</th>
+            <th class="table-title" scope="col">¿Es la versión final?</th>
+            <th class="table-title" scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let version of versionesResumen">
+          <tr>
+            <td class="table-body align-middle">{{version?.id}}</td>
+            <td class="table-body align-middle">{{version?.fecha}}</td>
+            <td class="table-body align-middle">{{obtenerEstadoDeLaVersion(version?.esFinal)}}</td>
+            <td class="table-body align-middle">
+              <button (click)="abrirRequisitos(version?.id)" class="btn btn-watch-requeriments btn-success mt-3">Ver Requisitos</button>
+              <button *ngIf="puedeRechazarVersion" (click)="rechazarVersion(version?.id)" class="btn btn-success mt-3">Rechazar Versión</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="create-first-version" *ngIf="!tieneVersiones">
+      <p>No hay aun versiones de los requisitos. El o los miembros del equipo con el rol Ingeniería pueden dar inicio a la versión...</p>
+      <button *ngIf="puedeIniciarPrimeraVersion" (click)="iniciarPrimeraVersion(etapaResumen?.id)" class="btn btn-success mt-3">Iniciar Primera Versión</button>
+      <div class="container-fluid h-100">
+        <div class="row w-100 align-items-center">
+          <div class="col text-center">
+            <div *ngIf="generarVersionInicialError" class="alert alert-danger" role="alert">
+              {{mensajeError}}
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <section class="approvals" *ngIf="puedeAprobarEtapa">
-      <button *ngIf="puedeAprobarEtapa" (click)="aprobarEtapa(etapaResumen?.id)" class="btn btn-success mt-3">Aprobar Etapa</button>
-    </section>
-  </main>
-</header>
+    </div>
+  </section>
+  <section class="approvals" *ngIf="puedeAprobarEtapa">
+    <button *ngIf="puedeAprobarEtapa" (click)="aprobarEtapa(etapaResumen?.id)" class="btn btn-success mt-3">Aprobar Etapa</button>
+  </section>
+</main>

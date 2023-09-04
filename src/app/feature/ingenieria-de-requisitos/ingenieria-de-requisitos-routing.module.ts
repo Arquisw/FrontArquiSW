@@ -8,18 +8,17 @@ import { VersionComponent } from './components/version/version.component';
 const routes: Routes = [{
   path: '',
   component: IngenieriaDeRequisitosComponent,
-  children: [
-    {
-      path: 'etapa',
-      component: EtapaComponent,
-      canActivate: [SecurityGuard]
-    },
-    {
-      path: 'version',
-      component: VersionComponent,
-      canActivate: [SecurityGuard]
-    }
-  ]
+  canActivate: [SecurityGuard],
+},
+{
+  path: 'etapa',
+  component: EtapaComponent,
+  canActivate: [SecurityGuard]
+},
+{
+  path: 'version',
+  component: VersionComponent,
+  canActivate: [SecurityGuard]
 }];
 
 @NgModule({

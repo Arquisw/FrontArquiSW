@@ -23,6 +23,6 @@ export class FaseComponent {
       }
     };
 
-    this.router.navigate(['./ingenieria-de-requisitos/etapa'], navigationExtras);
+    this.router.navigate(['/ingenieria-de-requisitos/etapa'], navigationExtras);
   }
 }
