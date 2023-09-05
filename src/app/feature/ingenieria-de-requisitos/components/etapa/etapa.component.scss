@@ -36,6 +36,18 @@
   font-size: 1.6rem;
 }
 
+main {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.versions {
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .versions h1
 {
   color: var(--just-white);
@@ -56,7 +68,6 @@
 .btn-watch-requeriments {
   margin-right: 5px;
 }
-
 
 .table-responsive {
   max-width: 767px;

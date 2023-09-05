@@ -1,7 +1,7 @@
 <header class="header-content">
   <section class="information">
     <h1>Etapa: {{etapaResumen?.nombre}}</h1>
-    <p>{{obtenerEstadoDeLaEtapa()}}</p>
+    <p>{{obtenerEstadoDeLaEtapa(etapaResumen?.completada)}}</p>
     <p><b>Descripción:</b> {{etapaResumen?.descripcion}}</p>
   </section>
 </header>
@@ -31,7 +31,7 @@
         </tbody>
       </table>
     </div>
-    <div class="create-first-version" *ngIf="!tieneVersiones">
+    <div class="create-first-version text-center" *ngIf="!tieneVersiones">
       <p>No hay aun versiones de los requisitos. El o los miembros del equipo con el rol Ingeniería pueden dar inicio a la versión...</p>
       <button *ngIf="puedeIniciarPrimeraVersion" (click)="iniciarPrimeraVersion(etapaResumen?.id)" class="btn btn-success mt-3">Iniciar Primera Versión</button>
       <div class="container-fluid h-100">
@@ -45,7 +45,7 @@
       </div>
     </div>
   </section>
-  <section class="approvals" *ngIf="puedeAprobarEtapa">
+  <section class="approvals text-center" *ngIf="puedeAprobarEtapa">
     <button *ngIf="puedeAprobarEtapa" (click)="aprobarEtapa(etapaResumen?.id)" class="btn btn-success mt-3">Aprobar Etapa</button>
   </section>
 </main>

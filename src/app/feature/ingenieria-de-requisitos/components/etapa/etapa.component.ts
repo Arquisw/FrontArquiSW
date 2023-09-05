@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-de-requisitos.service';
 import { EtapaResumen } from '../../shared/model/etapa-resumen.module';
 import { VersionResumen } from '../../shared/model/version-resumen.module';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-etapa',
@@ -21,7 +22,7 @@ export class EtapaComponent implements OnInit {
   generarVersionInicialError = false;
   mensajeError = '';
 
-  constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
+  constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService, private router: Router) {}
 
   ngOnInit(): void {
     this.posicionarPaginaAlInicio();
@@ -74,8 +75,8 @@ export class EtapaComponent implements OnInit {
     });
   }
 
-  obtenerEstadoDeLaEtapa(): string {
-    if(this.etapaResumen.completada) {
+  obtenerEstadoDeLaEtapa(completada: boolean): string {
+    if(completada) {
       return 'Etapa Completada';
     } else {
       return 'Etapa NO Completada';
@@ -91,8 +92,8 @@ export class EtapaComponent implements OnInit {
   }
 
   iniciarPrimeraVersion(id: number): void {
-    this.ingenieriaDeRequisitosService.generarVersionInicial(id).subscribe((response) => {
-      console.log('Data:', response);
+    this.ingenieriaDeRequisitosService.generarVersionInicial(id).subscribe(() => {
+      window.location.reload();
     }, (error) => {
       this.generarVersionInicialError = true;
       this.mensajeError = error?.error?.mensaje;
@@ -100,7 +101,13 @@ export class EtapaComponent implements OnInit {
   }
 
   abrirRequisitos(id: number): void {
-    console.log(id);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id
+      }
+    };
+
+    this.router.navigate(['/ingenieria-de-requisitos/version'], navigationExtras);
   }
 
   aprobarEtapa(id: number): void {

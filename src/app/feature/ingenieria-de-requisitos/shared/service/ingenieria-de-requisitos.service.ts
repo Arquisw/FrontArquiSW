@@ -47,6 +47,11 @@ export class IngenieriaDeRequisitosService {
     return this.httpService.doGetById<VersionResumen[]>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}${this.ETAPA_ENDPOINT}/`, id);
   }
 
+  public consultarVersionPorId(id: number): Observable<VersionResumen>
+  {
+    return this.httpService.doGetById<VersionResumen>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}/`, id);
+  }
+
   public generarVersionInicial(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
   {
     return this.httpService.doPostWithOutBodyAndId<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}/`, id);
