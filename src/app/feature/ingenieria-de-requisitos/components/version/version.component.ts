@@ -21,9 +21,11 @@ export class VersionComponent implements OnInit {
   requisitosResumen: RequisitoResumen[] = [];
   authorities: string[] = [];
   puedeGenerarVersionFinal = false;
+  puedeGestionarRequisito = false;
   guardadoError = false;
   mensajeError = '';
   guardarRequisitoForm: FormGroup;
+  seleccionarMensaje = 'Seleccionar';
 
   constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
 
@@ -33,7 +35,6 @@ export class VersionComponent implements OnInit {
     this.obtenerVersionId();
     this.obtenerAuthorities();
     this.filtrarMenu();
-    console.log(this.versionId);
     this.consultarVersionPorId(this.versionId);
     this.consultarRequisitosPorVersionId(this.versionId);
     this.inicializarFormulario();
@@ -60,6 +61,10 @@ export class VersionComponent implements OnInit {
       if (authority === 'ROLE_INGENIERIA') {
         this.puedeGenerarVersionFinal = true;
       }
+
+      if (authority === 'ROLE_EQUIPO_DESARROLLO') {
+        this.puedeGestionarRequisito = true;
+      }
     });
   }
 
@@ -70,7 +75,6 @@ export class VersionComponent implements OnInit {
   }
 
   consultarRequisitosPorVersionId(id: number): void {
-    console.log(id);
     this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id).subscribe((response) => {
       this.requisitosResumen = response;
     });

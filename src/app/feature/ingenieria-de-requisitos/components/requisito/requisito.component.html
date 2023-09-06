@@ -11,7 +11,54 @@
     </p>
   </div>
   <div class="card-footer d-flex justify-content-between">
-    <button (click)="actualizarRequisito(requisito?.id)" class="btn btn-create-requeriment btn-success mx-1">Actualizar</button>
-    <button (click)="eliminarRequisito(requisito?.id)" class="btn btn-create-requeriment btn-success mx-1">Eliminar</button>
+    <button [disabled]="!puedeGestionarRequisito" (click)="abrirModalActualizarRequisito()" class="btn btn-create-requeriment btn-success mx-1">Actualizar</button>
+    <button [disabled]="!puedeGestionarRequisito" (click)="eliminarRequisito()" class="btn btn-create-requeriment btn-success mx-1">Eliminar</button>
+  </div>
+</div>
+<div class="modal fade" id="actualizarRequisito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Actualizar Requisito</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="actualizarRequisitoForm">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="nombreRequisitoActualizar" placeholder="nombre"
+              formControlName="nombreRequisitoActualizar" required>
+            <label for="floatingInput">Nombre del Requisito</label>
+          </div>
+          <div class="form-floating mb-3">
+            <textarea type="text" class="description-requeriment form-control" id="descripcionRequisitoActualizar"
+              placeholder="descripcion" formControlName="descripcionRequisitoActualizar" required></textarea>
+            <label for="floatingInput">Descripción del Requisito</label>
+          </div>
+          <select class="form-select" aria-label="Default select example" formControlName="tipoRequisitoActualizar">
+            <option selected>{{seleccionarMensaje}}</option>
+            <option value="Funcional">Funcional</option>
+            <option value="NO Funcional">NO Funcional</option>
+          </select>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3" (click)="actualizarRequisito()">Actualizar Requisito</button>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
