@@ -29,3 +29,112 @@
   color: var(--just-white);
   font-size: 1.8rem;
 }
+
+.buttons-section {
+  margin: 10px;
+}
+
+.btn {
+  font-size: 1.6rem;
+  background-color: var(--uco-green);
+}
+
+.requeriments {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.requeriments-container {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col-6 {
+  margin-bottom: 10px;
+}
+
+.row {
+  width: 100;
+}
+
+.modal-title
+{
+  font-size: 1.8rem;
+}
+
+.modal-body{
+  font-size: 1.4rem;
+  background-color: var(--background-color);
+  color: var(--just-white);
+}
+
+.modal-header {
+  background-color: var(--background-color);
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  color: var(--just-white);
+}
+
+.modal-body select, label {
+  font-size: 1.4rem;
+}
+
+.modal-footer {
+  background-color: var(--background-color);
+}
+
+.form-control:not(:placeholder-shown) {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control:placeholder-shown {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control, option {
+  font-size: 1.4rem;
+}
+
+.form-floating label {
+  font-size: 1.4rem;
+}
+
+input, select {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+  border-color: var(--black);
+}
+
+label {
+  color: var(--black);
+}
+
+.alert {
+  padding-top: 10px;
+}
+
+.description-requeriment {
+  height: 100px;
+}
+
+@media (max-width: 992px) {
+  .col-6 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

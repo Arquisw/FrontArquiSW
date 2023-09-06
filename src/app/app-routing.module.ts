@@ -9,6 +9,9 @@ import { AsociacionComponent } from './feature/asociacion/components/asociacion/
 import { PerfilComponent } from './feature/perfil/components/perfil/perfil.component';
 import { RecuperarClaveComponent } from './feature/recuperar-clave/components/recuperar-clave/recuperar-clave.component';
 import { ProyectoComponent } from './feature/proyecto/components/proyecto/proyecto.component';
+import { IngenieriaDeRequisitosComponent } from './feature/ingenieria-de-requisitos/components/ingenieria-de-requisitos/ingenieria-de-requisitos.component';
+import { EtapaComponent } from './feature/ingenieria-de-requisitos/components/etapa/etapa.component';
+import { VersionComponent } from './feature/ingenieria-de-requisitos/components/version/version.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
@@ -22,7 +25,9 @@ const routes: Routes = [
   { path: 'proyecto', component: ProyectoComponent, canActivate: [SecurityGuard] },
   { path: 'configuracion', loadChildren: () => import('./feature/configuracion/configuracion.module').then(mod => mod.ConfiguracionModule), canActivate: [SecurityGuard] },
   { path: 'proyectos', loadChildren: () => import('./feature/proyectos/proyectos.module').then(mod => mod.ProyectosModule), canActivate: [SecurityGuard] },
-  { path: 'ingenieria-de-requisitos', loadChildren: () => import('./feature/ingenieria-de-requisitos/ingenieria-de-requisitos.module').then(mod => mod.IngenieriaDeRequisitosModule), canActivate: [SecurityGuard] },
+  { path: 'ingenieria-de-requisitos', component: IngenieriaDeRequisitosComponent, canActivate: [SecurityGuard] },
+  { path: 'ingenieria-de-requisitos/etapa', component: EtapaComponent, canActivate: [SecurityGuard] },
+  { path: 'ingenieria-de-requisitos/etapa/version', component: VersionComponent, canActivate: [SecurityGuard] },
   { path: 'panel-administrador', loadChildren: () => import('./feature/panel-administrador/panel-administrador.module').then(mod => mod.PanelAdministradorModule), canActivate: [SecurityGuard] },
   { path: '**', redirectTo: '/inicio' }
 ];

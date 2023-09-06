@@ -20,6 +20,7 @@ export class EtapaComponent implements OnInit {
   puedeRechazarVersion = false;
   tieneVersiones = false;
   generarVersionInicialError = false;
+  aprobarEtapaError = false;
   mensajeError = '';
 
   constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService, private router: Router) {}
@@ -107,14 +108,19 @@ export class EtapaComponent implements OnInit {
       }
     };
 
-    this.router.navigate(['/ingenieria-de-requisitos/version'], navigationExtras);
+    this.router.navigate(['/ingenieria-de-requisitos/etapa/version'], navigationExtras);
   }
 
+
   aprobarEtapa(id: number): void {
-    console.log(id);
+    this.ingenieriaDeRequisitosService.aprobarEtapa(id).subscribe(() => {
+      window.location.reload();
+    });
   }
 
   rechazarVersion(id: number): void {
-    console.log(id);
+    this.ingenieriaDeRequisitosService.rechazarVersionPorId(id).subscribe(() => {
+      window.location.reload();
+    });
   }
 }

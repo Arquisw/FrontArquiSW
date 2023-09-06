@@ -7,6 +7,8 @@ import { FaseResumen } from '../model/fase-resumen.module';
 import { EtapaResumen } from '../model/etapa-resumen.module';
 import { VersionResumen } from '../model/version-resumen.module';
 import { IngenieriaDeRequisitosRespuesta } from '../model/ingenieria-de-requisitos-respuesta.module';
+import { Requisito } from '../model/requisito.model';
+import { RequisitoResumen } from '../model/requisito-resumen.module';
 
 @Injectable()
 export class IngenieriaDeRequisitosService {
@@ -17,6 +19,7 @@ export class IngenieriaDeRequisitosService {
   private readonly PROYECTO_ENDPOINT: string = '/proyecto';
   private readonly REQUISITOS_ENDPOINT: string = '/requisitos';
   private readonly VERSIONES_ENDPOINT: string = '/versiones';
+  private readonly VERSION_ENDPOINT: string = '/version';
   private readonly ETAPA_ENDPOINT: string = '/etapa';
   private readonly RECHAZAR_ENDPOINT: string = '/rechazar';
 
@@ -65,5 +68,25 @@ export class IngenieriaDeRequisitosService {
   public rechazarVersionPorId(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
   {
     return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}${this.RECHAZAR_ENDPOINT}/`, id);
+  }
+
+  public guardarRequisito(requisito: Requisito , id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
+  {
+    return this.httpService.doPost<Requisito, IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}/${id}`, requisito);
+  }
+
+  public actualizarRequisito(requisito: Requisito , id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
+  {
+    return this.httpService.doPut<Requisito, IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}/${id}`, requisito);
+  }
+
+  public eliminarRequisito(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
+  {
+    return this.httpService.doDelete<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}/${id}`);
+  }
+
+  public consultarRequisitosPorVersionId(id: number): Observable<RequisitoResumen[]>
+  {
+    return this.httpService.doGetById<RequisitoResumen[]>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSION_ENDPOINT}/`, id);
   }
 }

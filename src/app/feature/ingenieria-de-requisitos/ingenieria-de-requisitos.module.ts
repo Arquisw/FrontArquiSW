@@ -4,7 +4,6 @@ import { IngenieriaDeRequisitosComponent } from './components/ingenieria-de-requ
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
-import { IngenieriaDeRequisitosRoutingModule } from './ingenieria-de-requisitos-routing.module';
 import { IngenieriaDeRequisitosService } from './shared/service/ingenieria-de-requisitos.service';
 import { FaseComponent } from './components/fase/fase.component';
 import { EtapaComponent } from './components/etapa/etapa.component';
@@ -21,7 +20,6 @@ import { RequisitoComponent } from './components/requisito/requisito.component';
   ],
   imports: [
     CommonModule,
-    IngenieriaDeRequisitosRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
     SharedModule

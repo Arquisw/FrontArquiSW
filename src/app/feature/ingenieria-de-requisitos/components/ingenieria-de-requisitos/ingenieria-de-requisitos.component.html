@@ -9,8 +9,8 @@
   </section>
   <section class="phases" *ngIf="inicioElProcesoDeConsultoria">
     <div class="phases-container">
-      <div class="container" *ngFor="let fase of fasesResumen">
-        <div class="row">
+      <div class="container">
+        <div class="row" *ngFor="let fase of fasesResumen">
           <app-fase class="col" [fase]="fase"></app-fase>
         </div>
       </div>

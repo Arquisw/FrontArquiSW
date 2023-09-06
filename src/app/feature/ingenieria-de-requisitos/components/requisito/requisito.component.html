@@ -1,1 +1,17 @@
-<p>requisito works!</p>
+<div class="card">
+  <div class="card-header">
+    <b>Requisito:</b> {{requisito?.nombre}}
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <b>Tipo de Requisito:</b> {{requisito?.tipoRequisito?.nombre}}
+    </p>
+    <p class="card-text">
+      <b>Descripción:</b> {{requisito?.descripcion}}
+    </p>
+  </div>
+  <div class="card-footer d-flex justify-content-between">
+    <button (click)="actualizarRequisito(requisito?.id)" class="btn btn-create-requeriment btn-success mx-1">Actualizar</button>
+    <button (click)="eliminarRequisito(requisito?.id)" class="btn btn-create-requeriment btn-success mx-1">Eliminar</button>
+  </div>
+</div>
