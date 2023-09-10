@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { ContratoResumen } from '../model/contrato-resumen-model';
 import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
 import { ProyectoRespuesta } from 'src/app/feature/proyectos/shared/model/proyecto-respuesta.model';
+import { PropetarioProyecto } from '../model/propetario-proyecto.model';
 
 @Injectable()
 export class ProyectoService {
@@ -19,6 +20,7 @@ export class ProyectoService {
   private readonly INGENIERIA_ENDPOINT: string = '/ingenieria';
   private readonly LIDER_DE_EQUIPO_ENDPOINT: string = '/liderDeEquipo';
   private readonly DIRECTOR_DE_PROYECTO_ENDPOINT: string = '/directorDeProyecto';
+  private readonly ES_PROPETARIO_DEL_PROYECTO_ENDPOINT: string = '/esPropetarioDelProyecto';
 
   constructor(private httpService: HttpService) { }
 
@@ -52,5 +54,10 @@ export class ProyectoService {
   public aprobarProyectoPorRolDirectorDeProyecto(id: number): Observable<ProyectoRespuesta<number>>
   {
     return this.httpService.doPutWithOutBody<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.APROBACION_ENDPOINT}${this.DIRECTOR_DE_PROYECTO_ENDPOINT}/`, id);
+  }
+
+  public esPropetarioDelProyecto(propetarioProyecto: PropetarioProyecto): Observable<ProyectoRespuesta<boolean>>
+  {
+    return this.httpService.doPost<PropetarioProyecto, ProyectoRespuesta<boolean>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ES_PROPETARIO_DEL_PROYECTO_ENDPOINT}`, propetarioProyecto);
   }
 }

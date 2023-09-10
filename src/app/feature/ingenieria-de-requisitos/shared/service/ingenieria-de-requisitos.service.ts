@@ -9,6 +9,7 @@ import { VersionResumen } from '../model/version-resumen.module';
 import { IngenieriaDeRequisitosRespuesta } from '../model/ingenieria-de-requisitos-respuesta.module';
 import { Requisito } from '../model/requisito.model';
 import { RequisitoResumen } from '../model/requisito-resumen.module';
+import { MotivoRechazoVersion } from '../model/motivo-rechazo-version.module';
 
 @Injectable()
 export class IngenieriaDeRequisitosService {
@@ -65,9 +66,9 @@ export class IngenieriaDeRequisitosService {
     return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}/`, id);
   }
 
-  public rechazarVersionPorId(id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
+  public rechazarVersionPorId(motivoRechazoVersion: MotivoRechazoVersion, id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
   {
-    return this.httpService.doPutWithOutBody<IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}${this.RECHAZAR_ENDPOINT}/`, id);
+    return this.httpService.doPut<MotivoRechazoVersion, IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSIONES_ENDPOINT}${this.RECHAZAR_ENDPOINT}/${id}`, motivoRechazoVersion);
   }
 
   public guardarRequisito(requisito: Requisito , id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>

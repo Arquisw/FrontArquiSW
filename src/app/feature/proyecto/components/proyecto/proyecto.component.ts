@@ -6,6 +6,7 @@ import { SeleccionResumen } from 'src/app/feature/proyectos/shared/model/selecci
 import { StorageService } from '@shared/service/storage-service/storage.service';
 import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
 import { ViewportScroller } from '@angular/common';
+import { PropetarioProyecto } from '../../shared/model/propetario-proyecto.model';
 
 @Component({
   selector: 'app-proyecto',
@@ -87,11 +88,21 @@ export class ProyectoComponent implements OnInit {
       }
 
       if(authority === 'ROLE_ASOCIACION') {
-        this.usuarioActualEsDuenoDelProyecto = true;
-        this.puedeVerContrato = true;
+        this.consultarSiUsuarioActualEsPropetarioDelProyecto();
       }
 
       if (authority === 'ROLE_ADMINISTRADOR') {
+        this.puedeVerContrato = true;
+      }
+    });
+  }
+
+  consultarSiUsuarioActualEsPropetarioDelProyecto(): void {
+    const propetarioProyecto = new PropetarioProyecto(this.necesidadId, this.usuarioId);
+
+    this.proyectoService.esPropetarioDelProyecto(propetarioProyecto).subscribe((response) => {
+      if(response.valor) {
+        this.usuarioActualEsDuenoDelProyecto = true;
         this.puedeVerContrato = true;
       }
     });

@@ -25,7 +25,13 @@
             <td class="table-body align-middle">{{obtenerEstadoDeLaVersion(version?.esFinal)}}</td>
             <td class="table-body align-middle">
               <button (click)="abrirRequisitos(version?.id)" class="btn btn-watch-requeriments btn-success mt-3">Ver Requisitos</button>
-              <button *ngIf="puedeRechazarVersion" (click)="rechazarVersion(version?.id)" class="btn btn-success mt-3">Rechazar Versión</button>
+              <button *ngIf="puedeRechazarVersion && !version?.estaRechazado" class="btn btn-success mt-3" data-bs-toggle="modal"
+              [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(version?.id)">Rechazar Versión</button>
+              <app-modal-rechazo
+                [modalIdRechazo]="obtenerIdModalRechazo(version?.id)"
+                [titulo]="'Version #' + version?.id"
+                (confirmacion)="rechazarVersion($event, version?.id)">
+              ></app-modal-rechazo>
             </td>
           </tr>
         </tbody>

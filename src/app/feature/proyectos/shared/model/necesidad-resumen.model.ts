@@ -6,11 +6,13 @@ export class NecesidadResumen {
   public motivoRechazo: string;
   public estado: EstadoNecesidadResumen;
   public proyecto: ProyectoResumen;
+  public asociacion: number;
 
-  constructor(id?: number, motivoRechazo?: string, estado?: EstadoNecesidadResumen, proyecto?: ProyectoResumen) {
+  constructor(id?: number, motivoRechazo?: string, estado?: EstadoNecesidadResumen, proyecto?: ProyectoResumen, asociacion?: number) {
     this.id = id || 0;
     this.motivoRechazo = motivoRechazo || '';
     this.estado = estado;
     this.proyecto = proyecto;
+    this.asociacion = asociacion || 0;
   }
 }

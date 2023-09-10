@@ -2,6 +2,9 @@
   <section class="information">
     <h1>Version # {{versionResumen.id}}</h1>
     <p>{{versionResumen.fecha}}</p>
+    <p *ngIf="versionResumen?.estaRechazada">
+      <b>Motivo del Rechazo:</b> {{versionResumen?.motivoRechazo}}
+    </p>
   </section>
 </header>
 <main>

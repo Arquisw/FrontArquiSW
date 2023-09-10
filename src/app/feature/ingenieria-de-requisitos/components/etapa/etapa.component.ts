@@ -4,6 +4,7 @@ import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-d
 import { EtapaResumen } from '../../shared/model/etapa-resumen.module';
 import { VersionResumen } from '../../shared/model/version-resumen.module';
 import { NavigationExtras, Router } from '@angular/router';
+import { MotivoRechazoVersion } from '../../shared/model/motivo-rechazo-version.module';
 
 @Component({
   selector: 'app-etapa',
@@ -118,9 +119,14 @@ export class EtapaComponent implements OnInit {
     });
   }
 
-  rechazarVersion(id: number): void {
-    this.ingenieriaDeRequisitosService.rechazarVersionPorId(id).subscribe(() => {
+  rechazarVersion(motivoRechazo: string, id: number): void {
+    const motivoRechazoVersion = new MotivoRechazoVersion(motivoRechazo);
+    this.ingenieriaDeRequisitosService.rechazarVersionPorId(motivoRechazoVersion, id).subscribe(() => {
       window.location.reload();
     });
+  }
+
+  obtenerIdModalRechazo(id: number): string {
+    return 'rechazoModal' + id;
   }
 }
