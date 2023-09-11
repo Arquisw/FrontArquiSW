@@ -34,6 +34,9 @@ export class ConsultarMisProyectosComponent implements OnInit {
   tieneNecesidades = false;
   actualizacionError = false;
   eliminacionError = false;
+  estaCargandoEliminar = false;
+  estaCargandoGuardar = false;
+  estaCargandoActualizar = false;
   files = [];
 
   constructor(
@@ -68,9 +71,12 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   onClickSaveNeed(): void {
+    this.estaCargandoGuardar = true;
+
     if (this.archivo) {
       this.saveNeed();
     } else {
+      this.estaCargandoGuardar = false;
       this.guardadoError = true;
       this.mensajeError = 'El archivo de los detalles de la necesidad es obligatorio';
     }
@@ -92,10 +98,12 @@ export class ConsultarMisProyectosComponent implements OnInit {
         this.necesidadId = response.valor;
         this.uploadFile();
       }, (error) => {
+        this.estaCargandoGuardar = false;
         this.guardadoError = true;
         this.mensajeError = error?.error?.mensaje;
       });
     } else {
+      this.estaCargandoGuardar = false;
       this.mensajeError = 'Debes seleccionar por lo menos un servicio de consultoria';
     }
   }
@@ -123,6 +131,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
       this.loginModal?.hide();
       window.location.reload();
     }, (error) => {
+      this.estaCargandoGuardar = false;
       this.guardadoError = true;
       this.mensajeError = error?.error?.mensaje;
     });
@@ -217,6 +226,8 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   onClickUpdateNeed(): void {
+    this.estaCargandoActualizar = true;
+
     this.actualizarNecesidad();
   }
 
@@ -231,14 +242,15 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
       const proyecto = new Proyecto(this.actualizarNecesidadForm.get('nombreProyectoActualizar')?.value, this.actualizarNecesidadForm.get('descripcionProyectoActualizar')?.value, tiposConsultoria);
 
-      this.proyectosService.actualizar(proyecto, this.asociacionId).subscribe((response) => {
-        console.log('Data:', response);
+      this.proyectosService.actualizar(proyecto, this.asociacionId).subscribe(() => {
         this.updateFile();
       }, (error) => {
+        this.estaCargandoActualizar = false;
         this.actualizacionError = true;
         this.mensajeError = error?.error?.mensaje;
       });
     } else {
+      this.estaCargandoActualizar = false;
       this.mensajeError = 'Debes seleccionar por lo menos un servicio de consultoria';
     }
   }
@@ -257,26 +269,32 @@ export class ConsultarMisProyectosComponent implements OnInit {
           });
         })
       ).subscribe();
+    } else {
+      this.loginModal?.hide();
+      window.location.reload();
     }
   }
 
   actualizarRequerimientos(): void {
     const requerimientos = new Requerimientos(this.urlArchivo);
-    this.proyectosService.actualizarRequerimientos(requerimientos, this.necesidadId).subscribe((response) => {
-      console.log('Data:', response);
+    this.proyectosService.actualizarRequerimientos(requerimientos, this.necesidadId).subscribe(() => {
       this.loginModal?.hide();
       window.location.reload();
     }, (error) => {
+      this.estaCargandoActualizar = false;
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
   onEliminar(id: number): void {
+    this.estaCargandoEliminar = true;
+
     this.proyectosService.eliminar(id).subscribe((response) => {
       console.log('Data:', response);
       this.router.navigate(['/proyectos/']);
     }, (error) => {
+      this.estaCargandoEliminar = false;
       this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });

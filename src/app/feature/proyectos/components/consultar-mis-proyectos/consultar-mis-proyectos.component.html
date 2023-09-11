@@ -45,7 +45,13 @@
             [titulo]="'Motivo del Rechazo'"
             ></app-modal-descripcion>
             <button class="btn btn-update btn-success mt-3" (click)="openActualizar(necesidad?.id)">Actualizar</button>
-            <button class="btn btn-success mt-3" (click)="onEliminar(necesidad?.id)">Eliminar</button>
+            <button class="btn btn-success mt-3" (click)="onEliminar(necesidad?.id)">
+              Eliminar
+
+              <div *ngIf="estaCargandoEliminar" class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -110,7 +116,13 @@
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
             <div class="col text-center">
-              <button type="submit" class="btn btn-success mt-3" (click)="onClickSaveNeed()">Guardar Necesidad</button>
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickSaveNeed()">
+                Guardar Necesidad
+
+                <div *ngIf="estaCargandoGuardar" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>
@@ -182,8 +194,13 @@
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
             <div class="col text-center">
-              <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdateNeed()">Actualizar
-                Necesidad</button>
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdateNeed()">
+                Actualizar Necesidad
+
+                <div *ngIf="estaCargandoActualizar" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>

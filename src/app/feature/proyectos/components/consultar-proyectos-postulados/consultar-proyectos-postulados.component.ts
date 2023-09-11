@@ -27,6 +27,7 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   postulacionError = false;
   tieneMasDeUnaPostulacion = false;
   tieneMotivoRechazo = false;
+  estaCargandoPostulacion = false;
   mensajeError = '';
   usuarioId = 0;
   proyectoId = 0;
@@ -277,6 +278,8 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   }
 
   onClickUpdatePostulation(): void {
+    this.estaCargandoPostulacion = true;
+
     if (this.codigoRolesSeleccionados.length > 0) {
 
       const postulacion = new Postulacion(this.codigoRolesSeleccionados, this.postulacionResumen.proyectoID, this.postulacionResumen.usuarioID);
@@ -286,10 +289,12 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
         this.loginModal?.hide();
         window.location.reload();
       }, (error) => {
+        this.estaCargandoPostulacion = false;
         this.postulacionError = true;
         this.mensajeError = error?.error?.mensaje;
       });
     } else {
+      this.estaCargandoPostulacion = false;
       this.mensajeError = 'Debes seleccionar por lo menos un rol al cual postularse';
     }
   }

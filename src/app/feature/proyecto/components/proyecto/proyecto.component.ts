@@ -36,6 +36,9 @@ export class ProyectoComponent implements OnInit {
   tieneRolIngenieria = false;
   tieneRolLiderDeEquipo = false;
   tieneRolDirectorDeProyecto = false;
+  estaCargandoAprobarProyectoPorRolIngenieria = false;
+  estaCargandoAprobarProyectoPorRolLiderDeEquipo = false;
+  estaCargandoAprobarProyectoPorRolDirectorDeProyecto = false;
   puedeVerContrato = false;
   rolesMapa: Map<string, string> = new Map();
   authorities: string[] = [];
@@ -232,27 +235,36 @@ export class ProyectoComponent implements OnInit {
   }
 
   aprobarProyectoPorRolIngenieria(): void {
+    this.estaCargandoAprobarProyectoPorRolIngenieria = true;
+
     this.proyectoService.aprobarProyectoPorRolIngenieria(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
+      this.estaCargandoAprobarProyectoPorRolIngenieria = false;
       this.aprobacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
   aprobarProyectoRolLiderDeEquipo(): void {
+    this.estaCargandoAprobarProyectoPorRolLiderDeEquipo = true;
+
     this.proyectoService.aprobarProyectoPorRolLiderDeEquipo(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
+      this.estaCargandoAprobarProyectoPorRolLiderDeEquipo = false;
       this.aprobacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
   aprobarProyectoPorRolDirectorDeProyecto(): void {
+    this.estaCargandoAprobarProyectoPorRolDirectorDeProyecto = true;
+
     this.proyectoService.aprobarProyectoPorRolDirectorDeProyecto(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
+      this.estaCargandoAprobarProyectoPorRolDirectorDeProyecto = false;
       this.aprobacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
