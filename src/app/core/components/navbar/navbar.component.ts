@@ -193,8 +193,8 @@ export class NavbarComponent implements OnInit {
     this.registroError= false;
     const usuario: Usuario= new Usuario(0,this.registroForm.get('nombreRegistro')?.value,this.registroForm.get('apellidosRegistro')?.value,this.registroForm.get('correoRegistro')?.value,this.registroForm.get('claveRegistro')?.value);
     if(this.registroForm.get('claveRegistro')?.value===this.registroForm.get('confirmarClaveRegistro')?.value){
-      this.servicioGestionusuario.registrarUsuario(usuario).subscribe((response) => {
-        console.log('Data:', response);
+      this.servicioGestionusuario.registrarUsuario(usuario).subscribe(() => {
+        this.estaCargandoRegistro = false;
         this.registroExitoso= true;
       },
       (error) => {
@@ -234,6 +234,7 @@ export class NavbarComponent implements OnInit {
     };
 
     this.asociasociacionService.registrarAsociacion(asociacion, this.id).subscribe(() => {
+      this.estaCargandoRegistroAsociacion = false;
       this.registroAsociacionForm.reset();
       this.registroExitoso= true;
     },
