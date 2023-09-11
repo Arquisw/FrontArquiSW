@@ -16,6 +16,8 @@ export class PostulacionesProyectoComponent implements OnInit {
   seleccionModal: Modal | undefined;
   proyectoId = 0;
   hayUsuariosPostulados = false;
+  estaCargandoSeleccionar = false;
+  estaCargandoDeclinar = false;
   postulacionesResumen: PostulacionResumen[] = [];
   postulacionActual: PostulacionResumen;
   proyecto: ProyectoResumen;
@@ -228,6 +230,8 @@ export class PostulacionesProyectoComponent implements OnInit {
   }
 
   onClickSelect(id: number): void {
+    this.estaCargandoSeleccionar = true;
+
     if (this.codigoRolesSeleccionados.length > 0) {
 
       const postulacion = new Seleccion(this.codigoRolesSeleccionados);
@@ -237,23 +241,26 @@ export class PostulacionesProyectoComponent implements OnInit {
         this.seleccionModal?.hide();
         window.location.reload();
       }, (error) => {
+        this.estaCargandoSeleccionar = false;
         this.seleccionError = true;
         this.mensajeError = error?.error?.mensaje;
       });
     } else {
+      this.estaCargandoSeleccionar = false;
       this.mensajeError = 'Debes seleccionar por lo menos un rol para seleccionar un usuario';
       this.seleccionError = true;
     }
   }
 
   onDeclineSelect(motivoDeclinacion: string, id: number): void {
+    this.estaCargandoDeclinar = true;
     const motivoRechazo = new MotivoRechazoPostulacion(motivoDeclinacion);
 
     this.administradorService.rechazarUsuario(motivoRechazo, id).subscribe(() => {
       window.location.reload();
     }, (error) => {
+      this.estaCargandoDeclinar = false;
       this.mensajeError = error?.error?.mensaje;
-      console.log(this.mensajeError);
     });
   }
 

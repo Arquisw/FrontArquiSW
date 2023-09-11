@@ -24,7 +24,13 @@
               <div class="row w-100 align-items-center">
                 <div class="col text-center">
                   <button type="submit" class="btn btn-success mt-3 btn-register"
-                    (click)="onClickUpdate()">Actualizar</button>
+                    (click)="onClickUpdate()">
+                    Actualizar
+
+                    <div *ngIf="estaCargandoActualizacion" class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -43,7 +49,13 @@
             <h3 class="card-title">¿Deseas eliminar la empresa o asociación?</h3>
             <div class="row w-100 align-items-center">
               <div class="col text-center">
-                <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">Eliminar</button>
+                <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">
+                  Eliminar
+
+                  <div *ngIf="estaCargandoEliminacion" class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
               </div>
             </div>
             <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">

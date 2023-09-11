@@ -20,6 +20,7 @@ export class RolesComponent implements OnInit {
   leerActual = false;
   actualizacionError = false;
   mensajeError = false;
+  estaCargandoActualizar = false;
 
   constructor(private administradorService: AdministradorService) { }
 
@@ -104,12 +105,14 @@ export class RolesComponent implements OnInit {
   }
 
   onClickUpdateNeed(): void {
+    this.estaCargandoActualizar = true;
     const rol = new Rol(this.leerActual, this.escribirActual, this.actualizarActual, this.eliminarActual);
 
     this.administradorService.actualizarRol(rol, this.rolActual.id).subscribe(() => {
       this.loginModal?.hide();
       window.location.reload();
     }, (error) => {
+      this.estaCargandoActualizar = false;
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });

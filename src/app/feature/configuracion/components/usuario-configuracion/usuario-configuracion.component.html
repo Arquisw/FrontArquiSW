@@ -23,7 +23,13 @@
             <div class="container-fluid h-100">
               <div class="row w-100 align-items-center">
                 <div class="col text-center">
-                  <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdate()">Actualizar</button>
+                  <button type="submit" class="btn btn-success mt-3" (click)="onClickUpdate()">
+                    Actualizar
+
+                    <div *ngIf="estaCargandoActualizacion" class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -54,7 +60,13 @@
             <div class="container-fluid h-100">
               <div class="row w-100 align-items-center">
                 <div class="col text-center">
-                  <button type="submit" class="btn btn-success mt-3 btn-register" (click)="onClickUpdatePassword()">Actualizar Contraseña</button>
+                  <button type="submit" class="btn btn-success mt-3 btn-register" (click)="onClickUpdatePassword()">
+                    Actualizar Contraseña
+
+                    <div *ngIf="estaCargandoActualizacionClave" class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </button>
                 </div>
               </div>
             </div>
@@ -74,7 +86,13 @@
             <h3 class="card-title">¿Deseas eliminar la cuenta?</h3>
             <div class="row w-100 align-items-center">
               <div class="col text-center">
-                <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">Eliminar</button> <br> <br>
+                <button type="button" class="btn btn-success mt-3" (click)="onClickDelete()">
+                  Eliminar
+
+                  <div *ngIf="estaCargandoEliminacion" class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </button>
               </div>
             </div>
             <div *ngIf="eliminacionError" class="alert alert-danger" role="alert">

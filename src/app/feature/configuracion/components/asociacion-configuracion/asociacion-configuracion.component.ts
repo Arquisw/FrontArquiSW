@@ -17,6 +17,8 @@ export class AsociacionConfiguracionComponent implements OnInit {
   actualizacionExitosa = false;
   eliminacionExitosa = false;
   eliminacionError = false;
+  estaCargandoActualizacion = false;
+  estaCargandoEliminacion = false;
   mensajeError= '';
   mensajeActualizacion= '';
   usuarioId = 0;
@@ -38,27 +40,30 @@ export class AsociacionConfiguracionComponent implements OnInit {
   }
 
   onClickUpdate(): void {
+    this.estaCargandoActualizacion = true;
     this.actualizacionError= false;
 
     const asociacion: Asociacion = new Asociacion(this.actualizacionForm.get('nombreActualizacion')?.value,this.actualizacionForm.get('nitActualizacion')?.value,this.actualizacionForm.get('numeroContactoActualizacion')?.value);
 
-    this.configuracionService.actualizarAsociacionPorId(asociacion, this.usuarioId).subscribe((response) => {
-      console.log('Data:', response);
+    this.configuracionService.actualizarAsociacionPorId(asociacion, this.usuarioId).subscribe(() => {
       window.location.reload();
     },
     (error) => {
+      this.estaCargandoActualizacion = false;
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
   onClickDelete(): void {
-    this.configuracionService.eliminarAsociacionPorId(this.asociacionResumen.id).subscribe((response) => {
-      console.log('Data:', response);
+    this.estaCargandoEliminacion = true;
+
+    this.configuracionService.eliminarAsociacionPorId(this.asociacionResumen.id).subscribe(() => {
       this.eliminacionExitosa= true;
       this.router.navigate(['/configuracion/']);
     },
     (error) => {
+      this.estaCargandoEliminacion = false;
       this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });

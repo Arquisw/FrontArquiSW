@@ -1,10 +1,10 @@
+import { MotivoRechazoVersion } from './../../shared/model/motivo-rechazo-version.module';
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-de-requisitos.service';
 import { EtapaResumen } from '../../shared/model/etapa-resumen.module';
 import { VersionResumen } from '../../shared/model/version-resumen.module';
 import { NavigationExtras, Router } from '@angular/router';
-import { MotivoRechazoVersion } from '../../shared/model/motivo-rechazo-version.module';
 
 @Component({
   selector: 'app-etapa',
@@ -22,6 +22,9 @@ export class EtapaComponent implements OnInit {
   tieneVersiones = false;
   generarVersionInicialError = false;
   aprobarEtapaError = false;
+  estaCargandoRechazarVersion = false;
+  estaCargandoIniciarPrimeraVersion = false;
+  estaCargandoAprobarEtapa = false;
   mensajeError = '';
 
   constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService, private router: Router) {}
@@ -94,9 +97,11 @@ export class EtapaComponent implements OnInit {
   }
 
   iniciarPrimeraVersion(id: number): void {
+    this.estaCargandoIniciarPrimeraVersion = true;
     this.ingenieriaDeRequisitosService.generarVersionInicial(id).subscribe(() => {
       window.location.reload();
     }, (error) => {
+      this.estaCargandoIniciarPrimeraVersion = false;
       this.generarVersionInicialError = true;
       this.mensajeError = error?.error?.mensaje;
     });
@@ -114,15 +119,24 @@ export class EtapaComponent implements OnInit {
 
 
   aprobarEtapa(id: number): void {
+    this.estaCargandoAprobarEtapa = true;
+
     this.ingenieriaDeRequisitosService.aprobarEtapa(id).subscribe(() => {
       window.location.reload();
+    }, () => {
+      this.estaCargandoAprobarEtapa = false;
     });
   }
 
   rechazarVersion(motivoRechazo: string, id: number): void {
+    this.estaCargandoRechazarVersion = true;
+
     const motivoRechazoVersion = new MotivoRechazoVersion(motivoRechazo);
+
     this.ingenieriaDeRequisitosService.rechazarVersionPorId(motivoRechazoVersion, id).subscribe(() => {
       window.location.reload();
+    }, () => {
+      this.estaCargandoRechazarVersion = false;
     });
   }
 

@@ -26,8 +26,20 @@
         </td>
         <td>
           <button class="btn btn-watch-project btn-success" (click)="abrirPerfilProyecto(necesidad?.id)">Ver Proyecto</button>
-          <button class="btn btn-aprove btn-success" (click)="AprobarNecesidad(necesidad?.id)">Aprobar</button>
-          <button class="btn btn-decline btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(necesidad?.id)">Declinar</button>
+          <button class="btn btn-aprove btn-success" (click)="AprobarNecesidad(necesidad?.id)">
+            Aprobar
+
+            <div *ngIf="estaCargandoAprobarNecesidad" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </button>
+          <button class="btn btn-decline btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(necesidad?.id)">
+            Declinar
+
+            <div *ngIf="estaCargandoDeclinarNecesidad" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </button>
           <app-modal-rechazo
             [modalIdRechazo]="obtenerIdModalRechazo(necesidad?.id)"
             [titulo]="'aprobación del proyecto ' + necesidad?.proyecto?.nombre"

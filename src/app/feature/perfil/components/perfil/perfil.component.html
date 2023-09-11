@@ -8,10 +8,16 @@
   <section class="nav-container">
     <div class="container-fluid nav" *ngIf="miPerfil">
       <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#cargarArchivo"
-        data-bs-dismiss="modal">Guardar ó Actualizar Hoja de Vida</button>
-      <app-modal-cargar-pdf  
+        data-bs-dismiss="modal">
+        Guardar ó Actualizar Hoja de Vida
+
+        <div *ngIf="estaCargandoGuardar" class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </button>
+      <app-modal-cargar-pdf
         [modalId]="'cargarArchivo'"
-        [titulo]="titulo" 
+        [titulo]="titulo"
         [objeto]="usuario"
         (enviarValor)="recibirUrlHojaDeVida($event)">
       </app-modal-cargar-pdf>

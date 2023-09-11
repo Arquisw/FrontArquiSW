@@ -29,7 +29,13 @@
           <td>
             <button class="btn btn-watch-project btn-success" (click)="abrirPerfilProyecto(necesidad?.id)">Ver Proyecto</button>
             <button class="btn btn-save-or-update-contract btn-success"data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModalCarga(necesidad?.id)"
-            data-bs-dismiss="modal">Guardar ó Actualizar contrato</button>
+            data-bs-dismiss="modal">
+            Guardar ó Actualizar contrato
+
+            <div *ngIf="estaCargandoGuardarContrato" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </button>
             <app-modal-cargar-pdf
               [modalId]="obtnerIdModalCarga(necesidad?.id)"
               [titulo]="'Guardar ó Actualizar contrato del proyecto'"

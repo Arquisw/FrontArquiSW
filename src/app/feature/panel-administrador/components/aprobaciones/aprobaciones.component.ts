@@ -11,6 +11,8 @@ export class AprobacionesComponent implements  OnInit{
   necesidadAprobar: any[] = [];
   mensajeError= '';
   hayProyectosPorAprobar = false;
+  estaCargandoAprobarNecesidad = false;
+  estaCargandoDeclinarNecesidad = false;
 
   mensajeAsociacion;
   registroError;
@@ -42,22 +44,29 @@ export class AprobacionesComponent implements  OnInit{
   }
 
   AprobarNecesidad(id: number): void {
+    this.estaCargandoAprobarNecesidad = true;
+
     this.admistradorService.aprobarNecesidad(id).subscribe(() => {
       window.location.reload();
     },
     (error) => {
+      this.estaCargandoAprobarNecesidad = false;
       this.mensajeError=error.message;
     });
   }
 
   declinarNecesidad(motivoDeclinada: string, id: number): void {
+    this.estaCargandoDeclinarNecesidad = true;
+
     const razonRechazo = {
       motivoRechazo: motivoDeclinada
     };
+
     this.admistradorService.declinarNecesidad(id, razonRechazo).subscribe(() => {
       this.consultaAprobaciones();
     },
     (error) => {
+      this.estaCargandoDeclinarNecesidad = false;
       this.mensajeError=error.message;
     });
   }

@@ -12,7 +12,13 @@
   </div>
   <div class="card-footer d-flex justify-content-between">
     <button [disabled]="!puedeGestionarRequisito" (click)="abrirModalActualizarRequisito()" class="btn btn-create-requeriment btn-success mx-1">Actualizar</button>
-    <button [disabled]="!puedeGestionarRequisito" (click)="eliminarRequisito()" class="btn btn-create-requeriment btn-success mx-1">Eliminar</button>
+    <button [disabled]="!puedeGestionarRequisito" (click)="eliminarRequisito()" class="btn btn-create-requeriment btn-success mx-1">
+      Eliminar
+
+      <div *ngIf="estaCargandoEliminacion" class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </button>
   </div>
 </div>
 <div class="modal fade" id="actualizarRequisito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -45,7 +51,14 @@
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
             <div class="col text-center">
-              <button type="submit" class="btn btn-success mt-3" (click)="actualizarRequisito()">Actualizar Requisito</button>
+              <button type="submit" class="btn btn-success mt-3" (click)="actualizarRequisito()">
+                Actualizar Requisito
+
+                <div *ngIf="estaCargandoActualizacion" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+
+              </button>
             </div>
           </div>
         </div>

@@ -20,6 +20,9 @@ export class UsuarioConfiguracionComponent implements OnInit {
   actualizacionError = false;
   actualizacionClaveError = false;
   eliminacionError= false;
+  estaCargandoActualizacion = false;
+  estaCargandoActualizacionClave = false;
+  estaCargandoEliminacion = false;
   mensajeError= '';
   mensajeActualizacion= '';
   usuarioId = 0;
@@ -47,46 +50,51 @@ export class UsuarioConfiguracionComponent implements OnInit {
   }
 
   onClickUpdate(): void {
+    this.estaCargandoActualizacion = true;
     this.actualizacionError= false;
 
     const persona: Persona = new Persona(this.actualizacionForm.get('nombreActualizacion')?.value,this.actualizacionForm.get('apellidosActualizacion')?.value,this.actualizacionForm.get('correoActualizacion')?.value);
 
-    this.configuracionService.actualizarUsuarioPorId(persona, this.usuarioId).subscribe((response) => {
-      console.log('Data:', response);
+    this.configuracionService.actualizarUsuarioPorId(persona, this.usuarioId).subscribe(() => {
       window.location.reload();
     },
     (error) => {
+      this.estaCargandoActualizacion = false;
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
   onClickUpdatePassword(): void {
+    this.estaCargandoActualizacionClave = true;
     this.actualizacionError= false;
 
     const clave: Clave = new Clave(this.actualizacionClaveForm.get('claveAntiguaActualizacion')?.value,this.actualizacionClaveForm.get('claveNuevaActualizacion')?.value);
 
     if(this.actualizacionClaveForm.get('claveNuevaActualizacion')?.value===this.actualizacionClaveForm.get('confirmarClaveActualizacion')?.value) {
-      this.configuracionService.actualizarClavePorId(clave, this.usuarioId).subscribe((response) => {
-        console.log('Data:', response);
+      this.configuracionService.actualizarClavePorId(clave, this.usuarioId).subscribe(() => {
         window.location.reload();
       },
       (error) => {
+        this.estaCargandoActualizacionClave = false;
         this.actualizacionClaveError = true;
         this.mensajeError = error?.error?.mensaje;
       });
     } else {
+      this.estaCargandoActualizacionClave = false;
       this.actualizacionClaveError = true;
       this.mensajeError= 'Las contraseñas no coinciden';
     }
   }
 
   onClickDelete(): void {
-    this.configuracionService.eliminarUsuarioPorId(this.usuarioId).subscribe((response) => {
-      console.log('Data:', response);
+    this.estaCargandoEliminacion = true;
+
+    this.configuracionService.eliminarUsuarioPorId(this.usuarioId).subscribe(() => {
       this.router.navigate(['/inicio']);
     },
     (error) => {
+      this.estaCargandoEliminacion = false;
       this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });

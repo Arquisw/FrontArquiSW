@@ -13,7 +13,13 @@
       <button [disabled]="!puedeGestionarRequisito" (click)="abrirModalCrearRequisito(versionResumen.id)" class="btn btn-create-requeriment btn-success mt-3">Crear Nuevo Requisito</button>
     </div>
     <div class="button-container">
-      <button [disabled]="!puedeGenerarVersionFinal" (click)="generarVersionFinal(versionResumen.id)" class="btn btn-generate-final-version btn-success mt-3">Generar Versión Final</button>
+      <button [disabled]="!puedeGenerarVersionFinal" (click)="generarVersionFinal(versionResumen.id)" class="btn btn-generate-final-version btn-success mt-3">
+        Generar Versión Final
+
+        <div *ngIf="estaCargandoGenerarVersionFinal" class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </button>
     </div>
   </section>
   <section class="requeriments">
@@ -60,7 +66,13 @@
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
             <div class="col text-center">
-              <button type="submit" class="btn btn-success mt-3" (click)="onClickGuardarRequisito()">Guardar Requisito</button>
+              <button type="submit" class="btn btn-success mt-3" (click)="onClickGuardarRequisito()">
+                Guardar Requisito
+
+                <div *ngIf="estaCargandoGuardarRequisito" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>

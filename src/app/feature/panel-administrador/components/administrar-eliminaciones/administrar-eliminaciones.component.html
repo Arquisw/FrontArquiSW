@@ -16,7 +16,13 @@
         <td>{{usuario?.correo}}</td>
         <td>
           <button class="btn btn-success" (click)="abrirPerfil(usuario?.id)">Ver Perfil</button>
-          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModalId" >Eliminar
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModalId">
+            Eliminar
+
+            <div *ngIf="estaCargandoEliminarUsuario" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+
             <app-modal-confirmacion
               [modalId]="'eliminarUsuarioModalId'"
               [titulo]="'Eliminar'"
@@ -46,7 +52,13 @@
         <td>{{asociacion?.nit}}</td>
         <td>
           <button class="btn btn-success" (click)="abrirPerfilAsociacion(asociacion?.id)">Ver Perfil</button>
-          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarAsociacionModalId" >Eliminar
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarAsociacionModalId">
+            Eliminar
+
+            <div *ngIf="estaCargandoEliminarAsociacion" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+
             <app-modal-confirmacion
               [modalId]="'eliminarAsociacionModalId'"
               [titulo]="'Eliminar'"
@@ -76,7 +88,13 @@
         <td>{{necesidad?.proyecto?.estado?.nombre}}</td>
         <td>
           <button class="btn btn-success" (click)="abrirPerfilProyecto(necesidad?.id)">Ver Proyecto</button>
-          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProyectoModalId">Eliminar
+          <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProyectoModalId">
+            Eliminar
+
+            <div *ngIf="estaCargandoEliminarProyecto" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+
             <app-modal-confirmacion
               [modalId]="'eliminarProyectoModalId'"
               [titulo]="'Eliminar'"

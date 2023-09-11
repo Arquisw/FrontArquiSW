@@ -24,7 +24,14 @@
             <button (click)="seleccionarUsuario(postulacion?.id)"
               class="btn btn-select-user btn-success mt-3">Seleccionar</button>
             <button class="btn btn-success mt-3" data-bs-toggle="modal"
-              [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(postulacion?.id)">Rechazar</button>
+              [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(postulacion?.id)">
+              Rechazar
+
+              <div *ngIf="estaCargandoDeclinar" class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+
+            </button>
             <app-modal-rechazo
               [modalIdRechazo]="obtenerIdModalRechazo(postulacion?.id)"
               [titulo]="'postulación del usuario ' + postulacion?.nombreDelUsuario"
@@ -73,7 +80,13 @@
           <div class="row w-100 align-items-center">
             <div class="col text-center">
               <button type="submit" class="btn btn-success mt-3"
-                (click)="onClickSelect(postulacionActual?.id)">Seleccionar</button>
+                (click)="onClickSelect(postulacionActual?.id)">
+                Seleccionar
+
+                <div *ngIf="estaCargandoSeleccionar" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
             </div>
           </div>
         </div>

@@ -23,6 +23,8 @@ export class VersionComponent implements OnInit {
   puedeGenerarVersionFinal = false;
   puedeGestionarRequisito = false;
   guardadoError = false;
+  estaCargandoGenerarVersionFinal = false;
+  estaCargandoGuardarRequisito = false;
   mensajeError = '';
   guardarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
@@ -99,6 +101,7 @@ export class VersionComponent implements OnInit {
   }
 
   onClickGuardarRequisito(): void {
+    this.estaCargandoGuardarRequisito = true;
     const tipoRequisito = new TipoRequisito(this.guardarRequisitoForm.get('tipoRequisito')?.value);
     const requisito = new Requisito(this.guardarRequisitoForm.get('nombreRequisito')?.value, this.guardarRequisitoForm.get('descripcionRequisito')?.value, tipoRequisito);
 
@@ -106,14 +109,19 @@ export class VersionComponent implements OnInit {
       this.crearRequisito?.hide();
       window.location.reload();
     }, (error) => {
+      this.estaCargandoGuardarRequisito = false;
       this.guardadoError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
   generarVersionFinal(id: number): void {
+    this.estaCargandoGenerarVersionFinal = true;
+
     this.ingenieriaDeRequisitosService.generarVersionFinal(id).subscribe(() => {
       window.location.reload();
+    }, () => {
+      this.estaCargandoGenerarVersionFinal = false;
     });
   }
 }

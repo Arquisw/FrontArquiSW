@@ -19,6 +19,7 @@ export class PerfilComponent implements OnInit {
   urlDescarga;
   miPerfil = true;
   seCargoHojaDevida= false;
+  estaCargandoGuardar = false;
   files = [];
   detalleDocumento;
 
@@ -55,12 +56,15 @@ export class PerfilComponent implements OnInit {
   }
 
   recibirUrlHojaDeVida(valor: any): void {
+    this.estaCargandoGuardar = true;
+
     this.urlArchivo = valor;
     if(this.files.length === 0) {
       this.guardarHojaDeVida();
     } else {
       this.actualizarHojaDeVida();
     }
+
     this.obtenerListaArchivos();
   }
 
@@ -68,10 +72,12 @@ export class PerfilComponent implements OnInit {
     const hojaDeVida = {
       ruta: this.urlArchivo
     };
-    this.miPerfilSevice.guardarHojaDeVida(this.usuarioId, hojaDeVida ).subscribe(() => {},
-      (error) => {
-        this.mensajeError =error?.error?.mensaje;
-      });
+    this.miPerfilSevice.guardarHojaDeVida(this.usuarioId, hojaDeVida ).subscribe(() => {
+      window.location.reload();
+    }, (error) => {
+      this.estaCargandoGuardar = false;
+      this.mensajeError = error?.error?.mensaje;
+    });
   }
 
   consultaHojaDeVida(): void {
@@ -89,10 +95,12 @@ export class PerfilComponent implements OnInit {
     const hojaDeVida = {
       ruta: this.urlArchivo
     };
-    this.miPerfilSevice.actualizarHojaDeVida(this.usuarioId, hojaDeVida ).subscribe(() => {},
-      (error) => {
-        this.mensajeError =error?.error?.mensaje;
-      });
+    this.miPerfilSevice.actualizarHojaDeVida(this.usuarioId, hojaDeVida ).subscribe(() => {
+      window.location.reload();
+    }, (error) => {
+      this.estaCargandoGuardar = false;
+      this.mensajeError = error?.error?.mensaje;
+    });
   }
 
   obtenerListaArchivos() {

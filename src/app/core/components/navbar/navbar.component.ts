@@ -33,6 +33,9 @@ export class NavbarComponent implements OnInit {
   estaSeleccionado = false;
   opcionSeleccionada = false;
   authorities: string[] = [];
+  estaCargandoLogin = false;
+  estaCargandoRegistro = false;
+  estaCargandoRegistroAsociacion = false;
   mensajeError= '';
   id = 0;
   usuarioId;
@@ -164,6 +167,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onLogin(): void {
+    this.estaCargandoLogin = true;
     this.loginError = false;
     window.sessionStorage.setItem('userdetails',JSON.stringify({...this.loginForm.value}));
     const usuario: Usuario= new Usuario(0,'','',this.loginForm.get('correoLogin').value,this.loginForm.get('claveLogin').value);
@@ -171,13 +175,13 @@ export class NavbarComponent implements OnInit {
       this.usuarioId = response;
       this.id = this.usuarioId.valor;
       this.consultarPersona();
-      this.loginModal?.hide();
-      location.reload();
       this.standarItems = this.principalItems;
       this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
+      this.loginModal?.hide();
       location.reload();
     },
     (error) => {
+      this.estaCargandoLogin = false;
       this.mensajeError= error.error;
       this.loginError=true;
       this.loginError=true;
@@ -185,6 +189,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onClickRegister(): void {
+    this.estaCargandoRegistro = true;
     this.registroError= false;
     const usuario: Usuario= new Usuario(0,this.registroForm.get('nombreRegistro')?.value,this.registroForm.get('apellidosRegistro')?.value,this.registroForm.get('correoRegistro')?.value,this.registroForm.get('claveRegistro')?.value);
     if(this.registroForm.get('claveRegistro')?.value===this.registroForm.get('confirmarClaveRegistro')?.value){
@@ -193,11 +198,13 @@ export class NavbarComponent implements OnInit {
         this.registroExitoso= true;
       },
       (error) => {
+        this.estaCargandoRegistro = false;
         this.registroError= true;
         this.mensajeError =error?.error?.mensaje;
       });
     }
     else{
+      this.estaCargandoRegistro = false;
       this.registroError= true;
       this.mensajeError= 'Las contraseñas no coinciden';
     }
@@ -218,16 +225,20 @@ export class NavbarComponent implements OnInit {
   }
 
   registrarAsociacion(): void {
+    this.estaCargandoRegistroAsociacion = true;
+
     const asociacion = {
       nombre: this.registroAsociacionForm.get('nombreAsociacion').value,
       nit: this.registroAsociacionForm.get('nit').value,
       numeroContacto: this.registroAsociacionForm.get('numeroContacto').value
     };
+
     this.asociasociacionService.registrarAsociacion(asociacion, this.id).subscribe(() => {
       this.registroAsociacionForm.reset();
       this.registroExitoso= true;
     },
     (error) => {
+      this.estaCargandoRegistroAsociacion = false;
       this.registroError= true;
       this.mensajeError =error?.error?.mensaje;
     });

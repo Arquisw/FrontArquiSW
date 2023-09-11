@@ -10,9 +10,9 @@ import { AdministradorService } from '../../shared/service/administrador.service
 export class ContratacionesComponent implements OnInit {
   necesidadAprobadas: any[] = [];
   hayNecesidadesPorConcretar = false;
+  estaCargandoGuardarContrato = false;
   mensajeError = '';
   contrato;
-
 
   constructor(private router: Router, private admistradorService: AdministradorService) { }
 
@@ -31,6 +31,7 @@ export class ContratacionesComponent implements OnInit {
   consultaAprobaciones(): void {
     this.necesidadAprobadas = [];
     let petecionAprobar;
+
     this.admistradorService.consultarNecesidadesAprobadas().subscribe((response) => {
       petecionAprobar = response;
       this.necesidadAprobadas = petecionAprobar;
@@ -38,17 +39,20 @@ export class ContratacionesComponent implements OnInit {
       if (this.necesidadAprobadas.length > 0) {
         this.hayNecesidadesPorConcretar = true;
       }
-    },
-    (error) => {
+    }, (error) => {
       this.mensajeError = error.message;
     });
   }
 
   recibirUrlContrato(valor, necesidadId: number): void {
+    this.estaCargandoGuardarContrato = true;
+
     this.consultaContrato(necesidadId);
+
     const contratoAlmacenar = {
       rutaArchivo: valor
     };
+
     if (this.contrato === null) {
       this.guardarContrato(necesidadId, contratoAlmacenar);
     } else {
@@ -69,8 +73,8 @@ export class ContratacionesComponent implements OnInit {
   guardarContrato(necesidadId: number, contrato): void {
     this.admistradorService.guardarContrato(necesidadId, contrato).subscribe(() => {
       window.location.reload();
-    },
-    (error) => {
+    }, (error) => {
+      this.estaCargandoGuardarContrato = false;
       this.mensajeError = error?.error?.mensaje;
     });
   }
@@ -78,8 +82,8 @@ export class ContratacionesComponent implements OnInit {
   actualizarContrato(necesidadId: number, contrato): void {
     this.admistradorService.actualizarContrato(necesidadId, contrato).subscribe(() => {
       window.location.reload();
-    },
-    (error) => {
+    }, (error) => {
+      this.estaCargandoGuardarContrato = false;
       this.mensajeError = error?.error?.mensaje;
     });
   }
@@ -92,6 +96,7 @@ export class ContratacionesComponent implements OnInit {
         proyecto: false,
       }
     };
+
     this.router.navigate(['/proyecto'], navigationExtras);
   }
 

@@ -16,6 +16,8 @@ export class RequisitoComponent implements OnInit {
   @Input() authorities: string[];
   puedeGestionarRequisito = false;
   actualizacionError = false;
+  estaCargandoEliminacion = false;
+  estaCargandoActualizacion = false;
   mensajeError = '';
   actualizarRequisitoModal: Modal | undefined;
   actualizarRequisitoForm: FormGroup;
@@ -53,6 +55,7 @@ export class RequisitoComponent implements OnInit {
   }
 
   actualizarRequisito(): void {
+    this.estaCargandoActualizacion = true;
     const tipoRequisito = new TipoRequisito(this.actualizarRequisitoForm.get('tipoRequisitoActualizar')?.value);
     const requisito = new Requisito(this.actualizarRequisitoForm.get('nombreRequisitoActualizar')?.value, this.actualizarRequisitoForm.get('descripcionRequisitoActualizar')?.value, tipoRequisito);
 
@@ -60,14 +63,19 @@ export class RequisitoComponent implements OnInit {
       this.actualizarRequisitoModal?.hide();
       window.location.reload();
     }, (error) => {
+      this.estaCargandoActualizacion = false;
       this.actualizacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
   eliminarRequisito(): void {
+    this.estaCargandoEliminacion = true;
+
     this.ingenieriaDeRequisitosService.eliminarRequisito(this.requisito?.id).subscribe(() => {
       window.location.reload();
+    }, () => {
+      this.estaCargandoEliminacion = false;
     });
   }
 }
