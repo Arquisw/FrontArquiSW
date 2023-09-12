@@ -300,25 +300,13 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   }
 
   abrirPerfilProyecto(id): void {
-    const idActual = this.obtenerNecesidadIdPorProyectoId(id);
-
     const navigationExtras: NavigationExtras = {
       state: {
-        id: idActual
+        id: id
       }
     };
 
     this.router.navigate(['/proyecto'], navigationExtras);
-  }
-
-  obtenerNecesidadIdPorProyectoId(id: number): number {
-    let necesidadId = 0;
-
-    this.proyectosService.consultarNecesidadPorProyectoId(id).subscribe((response) => {
-      necesidadId = response.id;
-    });
-
-    return necesidadId;
   }
 
   obtenerIdModalDescripcion(id: number): string {

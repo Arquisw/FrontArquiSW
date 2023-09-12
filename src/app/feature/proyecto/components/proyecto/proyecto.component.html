@@ -7,9 +7,9 @@
 </header>
 <main>
   <section class="services-section container text-center">
-    <button [disabled]="!tieneServicioIngenieriaDeRequisitos && (!usuarioActualEstaSeleccionado || !usuarioActualEsDuenoDelProyecto)" class="btn btn-idr btn-success mt-3" (click)="abrirIngenieriaDeRequisitos()">Ingeniería de Requisitos</button>
-    <button [disabled]="!tieneServicioSQA && (!usuarioActualEstaSeleccionado || !usuarioActualEsDuenoDelProyecto)" class="btn btn-sqa btn-success mt-3">SQA</button>
-    <button [disabled]="!tieneServicioSQC && (!usuarioActualEstaSeleccionado || !usuarioActualEsDuenoDelProyecto)" class="btn btn-sqc btn-success mt-3">SQC</button>
+    <button [disabled]="!usuarioActualPuedeVerElProcesoDeIngenieriaDeRequisitos()" class="btn btn-idr btn-success mt-3" (click)="abrirIngenieriaDeRequisitos()">Ingeniería de Requisitos</button>
+    <button [disabled]="!usuarioActualPuedeVerElProcesoDeSQA()" class="btn btn-sqa btn-success mt-3">SQA</button>
+    <button [disabled]="!usuarioActualPuedeVerElProcesoDeSQC()" class="btn btn-sqc btn-success mt-3">SQC</button>
   </section>
   <section class="team-section container">
     <h2>Miembros del Equipo</h2>
@@ -37,30 +37,27 @@
       </table>
     </div>
   </section>
-  <section *ngIf="usuarioActualEstaSeleccionado && (tieneRolIngenieria || tieneRolLiderDeEquipo || tieneRolDirectorDeProyecto) && (!necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria || !necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo || !necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto)" class="services-section container text-center">
-    <button *ngIf="tieneRolIngenieria && !necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria" class="btn btn-ingenieria btn-success mt-3" (click)="aprobarProyectoPorRolIngenieria()">
+  <section *ngIf="usuarioActualPuedeVerElMenuDeAprobacion()" class="services-section container text-center">
+    <button *ngIf="usuarioActualPuedeVerElBotonDeAprobacionPorRolIngenieria()" class="btn btn-ingenieria btn-success mt-3" (click)="aprobarProyectoPorRolIngenieria()">
       Aprobar Proyecto (Ingeniería)
 
       <div *ngIf="estaCargandoAprobarProyectoPorRolIngenieria" class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-
     </button>
-    <button *ngIf="tieneRolLiderDeEquipo && !necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo" [disabled]="necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria" class="btn btn-lider_de_equipo btn-success mt-3" (click)="aprobarProyectoRolLiderDeEquipo()">
+    <button *ngIf="usuarioActualPuedeVerElBotonDeAprobacionPorRolLiderDeEquipo()" class="btn btn-lider_de_equipo btn-success mt-3" (click)="aprobarProyectoRolLiderDeEquipo()">
       Aprobar Proyecto (Lider del Equipo)
 
       <div *ngIf="estaCargandoAprobarProyectoPorRolLiderDeEquipo" class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-
     </button>
-    <button *ngIf="tieneRolDirectorDeProyecto && !necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto" [disabled]="necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo" class="btn btn-director_de_proyecto btn-success mt-3" (click)="aprobarProyectoPorRolDirectorDeProyecto()">
+    <button *ngIf="usuarioActualPuedeVerElBotonDeAprobacionPorRolDirectorDeProyecto()" class="btn btn-director_de_proyecto btn-success mt-3" (click)="aprobarProyectoPorRolDirectorDeProyecto()">
       Aprobar Proyecto (Director de Proyecto)
 
       <div *ngIf="estaCargandoAprobarProyectoPorRolDirectorDeProyecto" class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>
       </div>
-
     </button>
     <div class="container-fluid h-100">
       <div class="row w-100 align-items-center">

@@ -46,19 +46,19 @@ export class ProyectoComponent implements OnInit {
   constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private router: Router, private storageService: StorageService) {}
 
   ngOnInit(): void {
+    this.posicionarPaginaAlInicio();
+
     const params = history.state;
     this.necesidadId = params.id;
 
-    const token = window.sessionStorage.getItem('Authorization');
-    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-    this.usuarioId = tokenPayload.id;
-    this.authorities = tokenPayload.authorities.split(',');
-
-    this.viewportScroller.scrollToPosition([0, 0]);
-
     this.cargarMapa();
     this.consultarNecesidadPorId();
+    this.obtenerAuthorities();
     this.filtrarMenu();
+  }
+
+  posicionarPaginaAlInicio(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
 
   cargarMapa(): void {
@@ -74,6 +74,13 @@ export class ProyectoComponent implements OnInit {
 
   obtenerNombreDelRol(clave: string): string {
     return this.rolesMapa.get(clave);
+  }
+
+  obtenerAuthorities(): void {
+    const token = window.sessionStorage.getItem('Authorization');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    this.usuarioId = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
   }
 
   filtrarMenu(): void {
@@ -278,5 +285,33 @@ export class ProyectoComponent implements OnInit {
       }
     };
     this.router.navigate(['/perfil'], navigationExtras);
+  }
+
+  usuarioActualPuedeVerElProcesoDeIngenieriaDeRequisitos(): boolean {
+    return this.tieneServicioIngenieriaDeRequisitos && (this.usuarioActualEstaSeleccionado || this.usuarioActualEsDuenoDelProyecto);
+  }
+
+  usuarioActualPuedeVerElProcesoDeSQA(): boolean {
+    return this.tieneServicioSQA && (this.usuarioActualEstaSeleccionado || this.usuarioActualEsDuenoDelProyecto);
+  }
+
+  usuarioActualPuedeVerElProcesoDeSQC(): boolean {
+    return this.tieneServicioSQC && (this.usuarioActualEstaSeleccionado || this.usuarioActualEsDuenoDelProyecto);
+  }
+
+  usuarioActualPuedeVerElMenuDeAprobacion(): boolean {
+    return this.usuarioActualEstaSeleccionado && (this.tieneRolIngenieria || this.tieneRolLiderDeEquipo || this.tieneRolDirectorDeProyecto) && (!this.necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria || !this.necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo || !this.necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto);
+  }
+
+  usuarioActualPuedeVerElBotonDeAprobacionPorRolIngenieria(): boolean {
+    return this.tieneRolIngenieria && !this.necesidadResumen?.proyecto?.aprobacionProyecto?.ingenieria;
+  }
+
+  usuarioActualPuedeVerElBotonDeAprobacionPorRolLiderDeEquipo(): boolean {
+    return this.tieneRolLiderDeEquipo && !this.necesidadResumen?.proyecto?.aprobacionProyecto?.liderDeEquipo;
+  }
+
+  usuarioActualPuedeVerElBotonDeAprobacionPorRolDirectorDeProyecto(): boolean {
+    return this.tieneRolDirectorDeProyecto && !this.necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto;
   }
 }

@@ -63,7 +63,7 @@ export class AprobacionesComponent implements  OnInit{
     };
 
     this.admistradorService.declinarNecesidad(id, razonRechazo).subscribe(() => {
-      this.consultaAprobaciones();
+      window.location.reload();
     },
     (error) => {
       this.estaCargandoDeclinarNecesidad = false;
