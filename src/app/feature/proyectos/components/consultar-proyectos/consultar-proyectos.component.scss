@@ -141,6 +141,16 @@ tbody td {
   vertical-align: middle;
 }
 
+.dropdown-content{
+  background-color: var(--background-clear-color) !important;
+  color: black !important;
+}
+
+.titulo{
+  color: white;
+}
+
+
 .table-body p {
   font-size: 1.4rem;
 }

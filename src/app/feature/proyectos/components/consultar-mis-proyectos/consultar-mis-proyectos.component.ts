@@ -39,6 +39,9 @@ export class ConsultarMisProyectosComponent implements OnInit {
   estaCargandoActualizar = false;
   files = [];
   p:number = 1;
+  tiposDisponibles = [];
+  tiposSeleccionados = [];
+  dropdownSettings = {};
 
 
   constructor(
@@ -65,13 +68,26 @@ export class ConsultarMisProyectosComponent implements OnInit {
       nombreProyectoActualizar: new FormControl(''),
       descripcionProyectoActualizar: new FormControl('')
     });
+
+    this.tiposDisponibles = [
+      { tipoCodigo: 'Ingenieria de Requisitos', tipo: 'Ingenieria de Requisitos' },
+      { tipoCodigo: 'SQA', tipo: 'SQA' },
+      { tipoCodigo: 'SQC', tipo: 'SQC' }
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'tipoCodigo',
+      textField: 'tipo',
+      allowSearchFilter: false,
+      enableCheckAll: false
+    };
   }
 
   open(): void {
     this.loginModal = new Modal(document.getElementById('saveNeed') ?? false, {
       keyboard: false
     });
-
+    this.tiposSeleccionados = [];
     this.loginModal?.show();
   }
 
@@ -88,11 +104,11 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   saveNeed(): void {
-    if (this.tiposConsultoriaSeleccionados.length > 0) {
+    if (this.tiposSeleccionados.length > 0) {
       const tiposConsultoria: TipoConsultoria[] = [];
 
-      this.tiposConsultoriaSeleccionados.forEach(tipoConsultoria => {
-        const tipoConsultoriaModel = new TipoConsultoria(tipoConsultoria);
+      this.tiposSeleccionados.forEach(tipoConsultoria => {
+        const tipoConsultoriaModel = new TipoConsultoria(tipoConsultoria.tipo);
         tiposConsultoria.push(tipoConsultoriaModel);
       });
 
@@ -142,42 +158,6 @@ export class ConsultarMisProyectosComponent implements OnInit {
     });
   }
 
-  onIngenieriaDeRequisitosSelected(): void {
-    const tipoDeConsultoria = 'Ingenieria de Requisitos';
-
-    if (this.tiposConsultoriaSeleccionados.includes(tipoDeConsultoria)) {
-      const index = this.tiposConsultoriaSeleccionados.indexOf(tipoDeConsultoria);
-
-      this.tiposConsultoriaSeleccionados.splice(index);
-    } else {
-      this.tiposConsultoriaSeleccionados.push(tipoDeConsultoria);
-    }
-  }
-
-  onSQASelected(): void {
-    const tipoDeConsultoria = 'SQA';
-
-    if (this.tiposConsultoriaSeleccionados.includes(tipoDeConsultoria)) {
-      const index = this.tiposConsultoriaSeleccionados.indexOf(tipoDeConsultoria);
-
-      this.tiposConsultoriaSeleccionados.splice(index);
-    } else {
-      this.tiposConsultoriaSeleccionados.push(tipoDeConsultoria);
-    }
-  }
-
-  onSQCSelected(): void {
-    const tipoDeConsultoria = 'SQC';
-
-    if (this.tiposConsultoriaSeleccionados.includes(tipoDeConsultoria)) {
-      const index = this.tiposConsultoriaSeleccionados.indexOf(tipoDeConsultoria);
-
-      this.tiposConsultoriaSeleccionados.splice(index);
-    } else {
-      this.tiposConsultoriaSeleccionados.push(tipoDeConsultoria);
-    }
-  }
-
   onFileSelected(event: any) {
     this.archivo = event.target.files[0];
     this.selectedFileName = this.archivo ? this.archivo.name : 'Seleccionar Archivo';
@@ -214,11 +194,15 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
     this.loginModal?.show();
     this.tiposConsultoriaSeleccionados = [];
+    this.tiposSeleccionados = [];
     this.necesidad = this.necesidades.find(item => item?.id === id);
     this.necesidadId = this.necesidad.id;
-
+    console.log(this.necesidad)
     this.necesidad.proyecto.tiposConsultoria.forEach(tipoConsultoria => {
-      this.tiposConsultoriaSeleccionados.push(tipoConsultoria.nombre);
+      const tipoEncontrado = this.tiposSeleccionados.find(item => item.tipoCodigo === tipoConsultoria.nombre);
+      if(!tipoEncontrado){
+        this.tiposSeleccionados = this.tiposSeleccionados.concat({ tipoCodigo: tipoConsultoria.nombre, tipo: tipoConsultoria.nombre  });
+      }
     });
 
     this.consultarRequerimientos();
@@ -237,17 +221,17 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   actualizarNecesidad(): void {
-    if (this.tiposConsultoriaSeleccionados.length > 0) {
+    if (this.tiposSeleccionados.length > 0) {
       const tiposConsultoria: TipoConsultoria[] = [];
 
-      this.tiposConsultoriaSeleccionados.forEach(tipoConsultoria => {
-        const tipoConsultoriaModel = new TipoConsultoria(tipoConsultoria);
+      this.tiposSeleccionados.forEach(tipoConsultoria => {
+        
+        const tipoConsultoriaModel = new TipoConsultoria(tipoConsultoria.tipo);
         tiposConsultoria.push(tipoConsultoriaModel);
       });
 
       const proyecto = new Proyecto(this.actualizarNecesidadForm.get('nombreProyectoActualizar')?.value, this.actualizarNecesidadForm.get('descripcionProyectoActualizar')?.value, tiposConsultoria);
-
-      this.proyectosService.actualizar(proyecto, this.asociacionId).subscribe(() => {
+      this.proyectosService.actualizar(proyecto, this.necesidad.id).subscribe(() => {
         this.updateFile();
       }, (error) => {
         this.estaCargandoActualizar = false;

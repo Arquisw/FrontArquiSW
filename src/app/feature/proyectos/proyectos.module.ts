@@ -12,6 +12,7 @@ import { ConsultarProyectosPostuladosComponent } from './components/consultar-pr
 import { SharedModule } from '@shared/shared.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ReactiveFormsModule,
     Ng2SearchPipeModule,
     SharedModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [ProyectosService]
 })

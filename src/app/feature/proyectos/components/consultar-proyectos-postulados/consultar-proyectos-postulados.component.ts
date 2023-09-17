@@ -20,7 +20,6 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   postulacionesResumen: PostulacionResumen[] = [];
   proyectosPostulacionesRechazadas: number[] = [];
   necesidadResumen: NecesidadResumen;
-  rolesSeleccionados: string[] = [];
   codigoRolesSeleccionados: string[] = [];
   roles: Map<string, string> = new Map();
   estaPostulado = false;
@@ -31,6 +30,10 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   mensajeError = '';
   usuarioId = 0;
   proyectoId = 0;
+  rolesDisponibles = [];
+  rolesSeleccionados = [];
+  rolesDeSeleccionados = [];
+  dropdownSettings = {};
 
   constructor(private proyectosService: ProyectosService, private router: Router) { }
 
@@ -41,6 +44,24 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
 
     this.cargarMapaDeRoles();
     this.consultarPostulaciones();
+
+    this.rolesDisponibles = [
+      { rolCodigo: 'ROLE_DIRECTOR_PROYECTO', rol: 'Director de Proyecto' },
+      { rolCodigo: 'ROLE_PARTE_INTERESADA', rol: 'Parte Interesada' },
+      { rolCodigo: 'ROLE_EQUIPO_DESARROLLO', rol: 'Equipo de Desarrollo' },
+      { rolCodigo: 'ROLE_INGENIERIA', rol: 'Ingeniería' },
+      { rolCodigo: 'ROLE_ARQUITECTURA', rol: 'Arquitectura' },
+      { rolCodigo: 'ROLE_ANALISTA', rol: 'Analista' },
+      { rolCodigo: 'ROLE_LIDER_DE_EQUIPO', rol: 'Lider de Equipo' },
+      { rolCodigo: 'ROLE_PATROCINADOR', rol: 'Patrocinador' }
+    ];
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'rolCodigo',
+      textField: 'rol',
+      allowSearchFilter: false,
+      enableCheckAll: false
+    };
   }
 
   cargarMapaDeRoles(): void {
@@ -92,10 +113,13 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
         });
 
         if(this.postulacionResumen !== null) {
-          this.postulacionResumen.roles.forEach(rol => {
-            this.rolesSeleccionados.push(this.roles.get(rol));
+          this.postulacionResumen.roles.forEach(codigoRol => {
+            this.rolesSeleccionados.push(this.roles.get(codigoRol));
+            const rolEncontrado = this.rolesDeSeleccionados.find(item => item.rolCodigo === codigoRol);
+            if(!rolEncontrado){
+              this.rolesDeSeleccionados = this.rolesDeSeleccionados.concat({ rolCodigo: codigoRol, rol: this.roles.get(codigoRol) });
+            }
           });
-
           this.consultarProyecto();
 
           this.estaPostulado = true;
@@ -149,139 +173,15 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
     return motivoDelRechazo;
   }
 
-  onDirectorDeProyectoSelected(): void {
-    const rol = 'Director de Proyecto';
-    const rolCodigo = 'ROLE_DIRECTOR_PROYECTO';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
-  onParteInteresadaSelected(): void {
-    const rol = 'Parte Interesada';
-    const rolCodigo = 'ROLE_PARTE_INTERESADA';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
-  onEquipoDeDesarrolloSelected(): void {
-    const rol = 'Equipo de Desarrollo';
-    const rolCodigo = 'ROLE_EQUIPO_DESARROLLO';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
-  onIngenieriaSelected(): void {
-    const rol = 'Ingenieria';
-    const rolCodigo = 'ROLE_INGENIERIA';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
-  onArquitecturaSelected(): void {
-    const rol = 'Arquitectura';
-    const rolCodigo = 'ROLE_ARQUITECTURA';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
-  onAnalistaSelected(): void {
-    const rol = 'Analista';
-    const rolCodigo = 'ROLE_ANALISTA';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
-  onLiderDelEquipoSelected(): void {
-    const rol = 'Lider del Equipo';
-    const rolCodigo = 'ROLE_LIDER_DE_EQUIPO';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
-  onPatrocinadorSelected(): void {
-    const rol = 'Patrocinador';
-    const rolCodigo = 'ROLE_PATROCINADOR';
-
-    if (this.rolesSeleccionados.includes(rol)) {
-      const index = this.rolesSeleccionados.indexOf(rol);
-      const indexCode = this.codigoRolesSeleccionados.indexOf(rolCodigo);
-
-      this.rolesSeleccionados.splice(index);
-      this.codigoRolesSeleccionados.splice(indexCode);
-    } else {
-      this.rolesSeleccionados.push(rol);
-      this.codigoRolesSeleccionados.push(rolCodigo);
-    }
-  }
-
   onClickUpdatePostulation(): void {
     this.estaCargandoPostulacion = true;
 
-    if (this.codigoRolesSeleccionados.length > 0) {
-
+    if (this.rolesDeSeleccionados.length > 0) {
+      this.codigoRolesSeleccionados =[];
+      this.rolesDeSeleccionados.forEach(rol => {
+        this.codigoRolesSeleccionados.push(rol.rolCodigo)
+      });
+      console.log(this.codigoRolesSeleccionados)
       const postulacion = new Postulacion(this.codigoRolesSeleccionados, this.postulacionResumen.proyectoID, this.postulacionResumen.usuarioID);
 
       this.proyectosService.actualizarPostulacion(postulacion, this.postulacionResumen.id).subscribe((response) => {
