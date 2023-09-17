@@ -26,6 +26,7 @@ export class EtapaComponent implements OnInit {
   estaCargandoIniciarPrimeraVersion = false;
   estaCargandoAprobarEtapa = false;
   mensajeError = '';
+  p:number = 1;
 
   constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService, private router: Router) {}
 

@@ -9,6 +9,7 @@ import { FaseComponent } from './components/fase/fase.component';
 import { EtapaComponent } from './components/etapa/etapa.component';
 import { VersionComponent } from './components/version/version.component';
 import { RequisitoComponent } from './components/requisito/requisito.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { RequisitoComponent } from './components/requisito/requisito.component';
     CommonModule,
     HttpClientModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ],
   providers: [IngenieriaDeRequisitosService]
 })

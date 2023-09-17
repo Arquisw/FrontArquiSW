@@ -28,6 +28,7 @@ export class ConsultarProyectosComponent implements OnInit {
   hayNecesidades = false;
   estaCargandoPostulacion = false;
   authorities: string[] = [];
+  p:number = 1;
 
   constructor(private proyectosService: ProyectosService, private router: Router) { }
 
