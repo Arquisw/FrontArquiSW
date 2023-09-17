@@ -28,6 +28,7 @@ export class ConsultarProyectosComponent implements OnInit {
   hayNecesidades = false;
   estaCargandoPostulacion = false;
   authorities: string[] = [];
+  p:number = 1;
 
   constructor(private proyectosService: ProyectosService, private router: Router) { }
 
@@ -45,7 +46,9 @@ export class ConsultarProyectosComponent implements OnInit {
   }
 
   filtrarBotonPostulacion(): void {
+    
     this.authorities.forEach(authority => {
+      
       if (authority === 'ROLE_ASOCIACION') {
         this.mostrarBotonPostulacion = false;
       }

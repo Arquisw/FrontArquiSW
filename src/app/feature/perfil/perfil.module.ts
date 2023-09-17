@@ -4,6 +4,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { PerfilService } from './shared/service/perfil.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '@shared/shared.module';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { SharedModule } from '@shared/shared.module';
   imports: [
     CommonModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ],
   exports:[PerfilComponent],
   providers: [PerfilService, DatePipe]

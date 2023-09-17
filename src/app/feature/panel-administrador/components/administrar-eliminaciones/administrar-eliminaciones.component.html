@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let usuario of usuariosEliminar">
+      <tr *ngFor="let usuario of usuariosEliminar; let i = index">
         <td>{{usuario?.nombre}}</td>
         <td>{{usuario?.correo}}</td>
         <td>
@@ -19,7 +19,7 @@
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarUsuarioModalId">
             Eliminar
 
-            <div *ngIf="estaCargandoEliminarUsuario" class="spinner-border" role="status">
+            <div *ngIf="estaCargandoEliminarUsuario[i]" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
 
@@ -27,7 +27,7 @@
               [modalId]="'eliminarUsuarioModalId'"
               [titulo]="'Eliminar'"
               [descripcion]="mensajeEliminarUsuario"
-              (confirmacion)="eliminarPersona(usuario?.id)">
+              (confirmacion)="eliminarPersona(usuario?.id,i)">
             </app-modal-confirmacion>
           </button>
         </td>
@@ -47,7 +47,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let asociacion of asociacionesEliminar">
+      <tr *ngFor="let asociacion of asociacionesEliminar; let i = index">
         <td>{{asociacion?.nombre}}</td>
         <td>{{asociacion?.nit}}</td>
         <td>
@@ -55,7 +55,7 @@
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarAsociacionModalId">
             Eliminar
 
-            <div *ngIf="estaCargandoEliminarAsociacion" class="spinner-border" role="status">
+            <div *ngIf="estaCargandoEliminarAsociacion[i]" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
 
@@ -63,7 +63,7 @@
               [modalId]="'eliminarAsociacionModalId'"
               [titulo]="'Eliminar'"
               [descripcion]="mensajeEliminarAsociacion"
-              (confirmacion)="eliminarAsociacion(asociacion?.id)">
+              (confirmacion)="eliminarAsociacion(asociacion?.id,i)">
           </app-modal-confirmacion>
           </button>
         </td>
@@ -83,7 +83,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let necesidad of necesidadEliminar">
+      <tr *ngFor="let necesidad of necesidadEliminar; let i = index">
         <td>{{necesidad?.proyecto?.nombre}}</td>
         <td>{{necesidad?.proyecto?.estado?.nombre}}</td>
         <td>
@@ -91,7 +91,7 @@
           <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#eliminarProyectoModalId">
             Eliminar
 
-            <div *ngIf="estaCargandoEliminarProyecto" class="spinner-border" role="status">
+            <div *ngIf="estaCargandoEliminarProyecto[i]" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
 
@@ -99,7 +99,7 @@
               [modalId]="'eliminarProyectoModalId'"
               [titulo]="'Eliminar'"
               [descripcion]="mensajeEliminarProyecto"
-              (confirmacion)="eliminarProyecto(necesidad?.proyecto?.id)">
+              (confirmacion)="eliminarProyecto(necesidad?.proyecto?.id,i)">
           </app-modal-confirmacion>
           </button>
         </td>

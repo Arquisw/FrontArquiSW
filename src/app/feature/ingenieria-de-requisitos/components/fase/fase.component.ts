@@ -9,6 +9,7 @@ import { Router, NavigationExtras } from '@angular/router';
 })
 export class FaseComponent {
   @Input() fase: FaseResumen;
+  p:number = 1;
 
   constructor(private router: Router) { }
 

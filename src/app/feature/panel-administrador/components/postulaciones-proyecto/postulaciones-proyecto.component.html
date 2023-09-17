@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let postulacion of postulacionesResumen">
+        <tr *ngFor="let postulacion of postulacionesResumen; let i = index ">
           <td class="table-body align-middle mark">{{postulacion?.nombreDelUsuario}}</td>
           <td class="table-body align-middle mark">{{postulacion?.correoDelUsuario}}</td>
           <td class="table-body align-middle mark">
@@ -27,7 +27,7 @@
               [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(postulacion?.id)">
               Rechazar
 
-              <div *ngIf="estaCargandoDeclinar" class="spinner-border" role="status">
+              <div *ngIf="estaCargandoDeclinar[i]" class="spinner-border" role="status">
                 <span class="visually-hidden">Loading...</span>
               </div>
 
@@ -35,7 +35,7 @@
             <app-modal-rechazo
               [modalIdRechazo]="obtenerIdModalRechazo(postulacion?.id)"
               [titulo]="'postulación del usuario ' + postulacion?.nombreDelUsuario"
-              (confirmacion)="onDeclineSelect($event, postulacion?.id)">
+              (confirmacion)="onDeclineSelect($event, postulacion?.id,i)">
               ></app-modal-rechazo>
           </td>
         </tr>
