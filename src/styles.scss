@@ -29,3 +29,14 @@
   --off-white: #faf8f7;
   --just-white: #fff;
 }
+
+.ngx-pagination .current {
+  background-color: var(--uco-green) !important;;
+  border-radius: 5px !important;;
+}
+
+
+.ngx-pagination a:hover,
+ .ngx-pagination button:hover {
+  background: transparent !important;
+}

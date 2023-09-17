@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpHeaders, HttpEvent, HttpResponse } from '@angular/common/http';
 import {  tap } from 'rxjs/operators';
 import { Usuario } from '@core/modelo/usuario.modelo';
-import { Router } from '@angular/router';
-
 
 const UNAUTHORIZED = 401;
 
@@ -11,7 +9,7 @@ const UNAUTHORIZED = 401;
 export class AuthInterceptor implements HttpInterceptor {
 
   user = new Usuario();
-  constructor(private router: Router) {}
+  constructor() {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     let httpHeaders = new HttpHeaders();
@@ -49,8 +47,6 @@ export class AuthInterceptor implements HttpInterceptor {
         if (err.status !== UNAUTHORIZED) {
           return;
         }
-        window.sessionStorage.removeItem('Authorization');
-        this.router.navigate(['/inicio']);
       }
     }));
   }

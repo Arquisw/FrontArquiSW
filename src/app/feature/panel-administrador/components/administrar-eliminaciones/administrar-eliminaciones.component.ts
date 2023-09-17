@@ -14,9 +14,9 @@ export class AdministrarEliminacionesComponent implements OnInit{
   hayUsuariosAEliminar = false;
   hayAsociacionesAEliminar = false;
   hayNecesidadAEliminar = false;
-  estaCargandoEliminarUsuario = false;
-  estaCargandoEliminarAsociacion = false;
-  estaCargandoEliminarProyecto = false;
+  estaCargandoEliminarUsuario : boolean[] = []; 
+  estaCargandoEliminarAsociacion : boolean[] = []; 
+  estaCargandoEliminarProyecto : boolean[] = []; 
   mensajeEliminarProyecto= '¿Estás seguro de desea eliminar el proyecto?';
   mensajeEliminarAsociacion = '¿Estás seguro de desea eliminar la Asociacion?';
   mensajeEliminarUsuario= '¿Estás seguro de desea eliminar el usuario?';
@@ -24,7 +24,12 @@ export class AdministrarEliminacionesComponent implements OnInit{
 
 
   constructor(private router: Router,
-              private admistradorService: AdministradorService)  { }
+              private admistradorService: AdministradorService)  {
+                this.usuariosEliminar.forEach(() => this.estaCargandoEliminarUsuario.push(false));
+                this.asociacionesEliminar.forEach(() => this.estaCargandoEliminarAsociacion.push(false));
+                this.necesidadEliminar.forEach(() => this.estaCargandoEliminarProyecto.push(false));
+
+               }
 
   ngOnInit(): void {
     this.consultaPeticionesUsuarioAEliminar();
@@ -59,14 +64,14 @@ export class AdministrarEliminacionesComponent implements OnInit{
     });
   }
 
-  eliminarPersona(id: number): void {
-    this.estaCargandoEliminarUsuario = true;
+  eliminarPersona(id: number,indice:number): void {
+    this.estaCargandoEliminarUsuario[indice] = true;
 
     this.admistradorService.eliminarPersona(id).subscribe(() => {
       this.consultaPeticionesUsuarioAEliminar();
     },
     (error) => {
-      this.estaCargandoEliminarUsuario = false;
+      this.estaCargandoEliminarUsuario[indice] = false;
       this.mensajeError=error.message;
     });
   }
@@ -109,14 +114,14 @@ export class AdministrarEliminacionesComponent implements OnInit{
     });
   }
 
-  eliminarAsociacion(id: number): void {
-    this.estaCargandoEliminarAsociacion = true;
+  eliminarAsociacion(id: number,indice:number): void {
+    this.estaCargandoEliminarAsociacion[indice] = true;
 
     this.admistradorService.eliminarAsociacion(id).subscribe(() => {
       this.consultaPeticionesAsociacionesAEliminar();
     },
     (error) => {
-      this.estaCargandoEliminarAsociacion = false;
+      this.estaCargandoEliminarAsociacion[indice] = false;
       this.mensajeError=error.message;
     });
   }
@@ -158,14 +163,14 @@ export class AdministrarEliminacionesComponent implements OnInit{
     });
   }
 
-  eliminarProyecto(id: number): void {
-    this.estaCargandoEliminarProyecto = true;
+  eliminarProyecto(id: number,indice:number): void {
+    this.estaCargandoEliminarProyecto[indice] = true;
 
     this.admistradorService.eliminarProyecto(id).subscribe(() => {
       this.consultaPeticionesNecesidadAEliminar();
     },
     (error) => {
-      this.estaCargandoEliminarProyecto = false;
+      this.estaCargandoEliminarProyecto[indice] = false;
       this.mensajeError=error.message;
     });
   }

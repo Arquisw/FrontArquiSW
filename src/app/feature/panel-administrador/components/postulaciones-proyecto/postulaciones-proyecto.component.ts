@@ -17,7 +17,7 @@ export class PostulacionesProyectoComponent implements OnInit {
   proyectoId = 0;
   hayUsuariosPostulados = false;
   estaCargandoSeleccionar = false;
-  estaCargandoDeclinar = false;
+  estaCargandoDeclinar : boolean[] = []; ;
   postulacionesResumen: PostulacionResumen[] = [];
   postulacionActual: PostulacionResumen;
   proyecto: ProyectoResumen;
@@ -27,7 +27,10 @@ export class PostulacionesProyectoComponent implements OnInit {
   seleccionError = false;
   mensajeError = '';
 
-  constructor(private router: Router, private administradorService: AdministradorService) { }
+  constructor(private router: Router, private administradorService: AdministradorService) { 
+    this.postulacionesResumen.forEach(() => this.estaCargandoDeclinar.push(false));
+
+  }
 
   ngOnInit(): void {
     const params = history.state;
@@ -252,14 +255,14 @@ export class PostulacionesProyectoComponent implements OnInit {
     }
   }
 
-  onDeclineSelect(motivoDeclinacion: string, id: number): void {
-    this.estaCargandoDeclinar = true;
+  onDeclineSelect(motivoDeclinacion: string, id: number,index:number): void {
+    this.estaCargandoDeclinar[index] = true;
     const motivoRechazo = new MotivoRechazoPostulacion(motivoDeclinacion);
 
     this.administradorService.rechazarUsuario(motivoRechazo, id).subscribe(() => {
       window.location.reload();
     }, (error) => {
-      this.estaCargandoDeclinar = false;
+      this.estaCargandoDeclinar[index] = false;
       this.mensajeError = error?.error?.mensaje;
     });
   }

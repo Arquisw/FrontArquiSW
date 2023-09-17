@@ -34,15 +34,20 @@ export class ConsultarMisProyectosComponent implements OnInit {
   tieneNecesidades = false;
   actualizacionError = false;
   eliminacionError = false;
-  estaCargandoEliminar = false;
+  estaCargandoEliminar : boolean[] = []; 
   estaCargandoGuardar = false;
   estaCargandoActualizar = false;
   files = [];
+  p:number = 1;
+
 
   constructor(
     private storage: AngularFireStorage,
     private proyectosService: ProyectosService,
-    private router: Router) { }
+    private router: Router) {
+      this.necesidades.forEach(() => this.estaCargandoEliminar.push(false));
+
+     }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -287,14 +292,14 @@ export class ConsultarMisProyectosComponent implements OnInit {
     });
   }
 
-  onEliminar(id: number): void {
-    this.estaCargandoEliminar = true;
+  onEliminar(id: number, indice:number): void {
+    this.estaCargandoEliminar[indice] = true;
 
     this.proyectosService.eliminar(id).subscribe((response) => {
       console.log('Data:', response);
       this.router.navigate(['/proyectos/']);
     }, (error) => {
-      this.estaCargandoEliminar = false;
+      this.estaCargandoEliminar[indice]  = false;
       this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
     });

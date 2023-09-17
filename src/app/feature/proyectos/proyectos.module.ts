@@ -11,6 +11,7 @@ import { ConsultarProyectosSeleccionadosComponent } from './components/consultar
 import { ConsultarProyectosPostuladosComponent } from './components/consultar-proyectos-postulados/consultar-proyectos-postulados.component';
 import { SharedModule } from '@shared/shared.module';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     HttpClientModule,
     ReactiveFormsModule,
     Ng2SearchPipeModule,
-    SharedModule
+    SharedModule,
+    NgxPaginationModule
   ],
   providers: [ProyectosService]
 })
