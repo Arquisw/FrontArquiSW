@@ -11,7 +11,7 @@
     </p>
   </div>
   <div class="card-footer d-flex justify-content-between">
-    <button [disabled]="!puedeGestionarRequisito" (click)="abrirModalActualizarRequisito()" class="btn btn-create-requeriment btn-success mx-1">Actualizar</button>
+    <button [disabled]="!puedeGestionarRequisito" (click)="abrirModalActualizarRequisito()" [attr.data-bs-target]="'#' + modalId" data-bs-toggle="modal"  class="btn btn-create-requeriment btn-success mx-1">Actualizar</button>
     <button [disabled]="!puedeGestionarRequisito" (click)="eliminarRequisito()" class="btn btn-create-requeriment btn-success mx-1">
       Eliminar
 
@@ -21,7 +21,7 @@
     </button>
   </div>
 </div>
-<div class="modal fade" id="actualizarRequisito" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div  class="modal fade" [id]="modalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">

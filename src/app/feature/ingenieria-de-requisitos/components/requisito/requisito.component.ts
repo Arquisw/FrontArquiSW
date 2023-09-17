@@ -22,13 +22,19 @@ export class RequisitoComponent implements OnInit {
   actualizarRequisitoModal: Modal | undefined;
   actualizarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
+  modalId: string;
 
-  constructor(private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
+  constructor(private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {
+    
+  }
 
   ngOnInit(): void {
     this.filtrarMenu();
     this.inicializarFormulario();
+    this.modalId = 'actualizarRequisitoModal_' + this.requisito?.id;
   }
+  
+ 
 
   filtrarMenu(): void {
     this.authorities.forEach(authority => {
@@ -47,11 +53,20 @@ export class RequisitoComponent implements OnInit {
   }
 
   abrirModalActualizarRequisito(): void {
-    this.actualizarRequisitoModal = new Modal(document.getElementById('actualizarRequisito') ?? false, {
-      keyboard: false
-    });
+    this.modalId = 'actualizarRequisitoModal_' + this.requisito?.id;
+    const modalElement = document.getElementById(this.modalId);
+    this.llenarForm()
+    if (modalElement) {
+      modalElement.classList.add('show'); 
+    }
+  }
 
-    this.actualizarRequisitoModal?.show();
+  private llenarForm(): void {
+    this.actualizarRequisitoForm.patchValue({
+      nombreRequisitoActualizar: this.requisito.nombre,
+      descripcionRequisitoActualizar: this.requisito.descripcion,
+      tipoRequisitoActualizar: this.requisito.tipoRequisito.nombre
+    });
   }
 
   actualizarRequisito(): void {
