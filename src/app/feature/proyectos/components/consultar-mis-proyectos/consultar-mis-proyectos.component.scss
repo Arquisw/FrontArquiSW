@@ -76,9 +76,10 @@
   color: var(--black);
 }
 
-.dropdown-menu {
-  background-color: var(--background-clear-color);
+.titulo{
+  color: white;
 }
+
 
 input {
   background-color: var(--background-clear-color);
@@ -103,6 +104,11 @@ label {
   font-size: 1.4rem;
   background-color: var(--background-color);
   color: var(--just-white);
+}
+
+.dropdown-content{
+  background-color: var(--background-clear-color) !important;
+  color: black !important;
 }
 
 .modal-header {

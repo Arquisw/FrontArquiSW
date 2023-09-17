@@ -89,26 +89,18 @@
           (click)="cerrarModal()"></button>
       </div>
       <div class="modal-body">
-        <div class="dropdown">
-          <button class="btn roles-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            ¿A cúal o cuales roles quieres postular?
-          </button>
-          <ul class="dropdown-menu">
-            <li class="dropdown-item" (click)="onDirectorDeProyectoSelected()">Director del Proyecto</li>
-            <li class="dropdown-item" (click)="onParteInteresadaSelected()">Parte Interesada</li>
-            <li class="dropdown-item" (click)="onEquipoDeDesarrolloSelected()">Equipo de Desarrollo</li>
-            <li class="dropdown-item" (click)="onIngenieriaSelected()">Ingenieria</li>
-            <li class="dropdown-item" (click)="onArquitecturaSelected()">Arquitectura</li>
-            <li class="dropdown-item" (click)="onAnalistaSelected()">Analista</li>
-            <li class="dropdown-item" (click)="onLiderDelEquipoSelected()">Lider Del Equipo</li>
-            <li class="dropdown-item" (click)="onPatrocinadorSelected()">Patrocinador</li>
-          </ul>
-        </div>
-        <div class="card card-container card-roles">
-          <div class="card-body">
-            <div class="card-text" *ngFor="let rolSeleccionado of rolesSeleccionados">
-              {{rolSeleccionado}}
-            </div>
+        <div class="dropdown-container">
+          <label class="titulo mt-3 mb-3" for="dropdown"> ¿A cúal o cuales roles quieres postular?</label>
+
+          <div class="dropdown-content">
+            <ng-multiselect-dropdown
+              class="drop"
+              id="dropdown"
+              [placeholder]="'Seleccionar'"
+              [settings]="dropdownSettings"
+              [data]="rolesDisponibles"
+              [(ngModel)]="rolesDeSeleccionados">
+            </ng-multiselect-dropdown>
           </div>
         </div>
       </div>

@@ -11,6 +11,7 @@ import { ContratacionesComponent } from './components/contrataciones/contratacio
 import { RolesComponent } from './components/roles/roles.component';
 import { PostulacionesComponent } from './components/postulaciones/postulaciones.component';
 import { PostulacionesProyectoComponent } from './components/postulaciones-proyecto/postulaciones-proyecto.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { PostulacionesProyectoComponent } from './components/postulaciones-proye
     CommonModule,
     HttpClientModule,
     SharedModule,
-    PanelAdministradorRoutingModule
+    PanelAdministradorRoutingModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   providers: [AdministradorService, DatePipe]
 })

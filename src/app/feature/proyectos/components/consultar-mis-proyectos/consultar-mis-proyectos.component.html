@@ -95,24 +95,22 @@
               placeholder="descripcion" formControlName="descripcionProyecto" required></textarea>
             <label for="floatingInput">Descripción del Proyecto</label>
           </div>
+          
         </form>
-        <div class="dropdown">
-          <button class="btn tipos-consultoria-btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Tipos de Consultoría
-          </button>
-          <ul class="dropdown-menu">
-            <li class="dropdown-item" (click)="onIngenieriaDeRequisitosSelected()">Ingenieria de Requisitos</li>
-            <li class="dropdown-item" (click)="onSQASelected()">SQA</li>
-            <li class="dropdown-item" (click)="onSQCSelected()">SQC</li>
-          </ul>
-        </div>
-        <div class="card card-container card-tipos-consultoria">
-          <div class="card-body">
-            <div class="card-text" *ngFor="let tipoConsultoriaSeleccionado of tiposConsultoriaSeleccionados">
-              {{tipoConsultoriaSeleccionado}}
-            </div>
+        <div class="dropdown-container">
+          <label class="titulo mb-3" for="dropdown">Tipos de Consultoría</label>
+          <div class="dropdown-content">
+            <ng-multiselect-dropdown
+              id="dropdown"
+              [placeholder]="''"
+              [settings]="dropdownSettings"
+              [data]="tiposDisponibles"
+              [(ngModel)]="tiposSeleccionados">
+            </ng-multiselect-dropdown>
           </div>
         </div>
+        
+       
       </div>
       <div class="modal-footer">
         <div class="container-fluid h-100">
@@ -172,25 +170,23 @@
               [value]="necesidad?.proyecto?.descripcion"></textarea>
             <label for="floatingInput">Descripción del Proyecto</label>
           </div>
+          
         </form>
-        <div class="dropdown">
-          <button class="btn tipos-consultoria-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Tipos de Consultoría
-          </button>
-          <ul class="dropdown-menu">
-            <li class="dropdown-item" (click)="onIngenieriaDeRequisitosSelected()">Ingenieria de Requisitos</li>
-            <li class="dropdown-item" (click)="onSQASelected()">SQA</li>
-            <li class="dropdown-item" (click)="onSQCSelected()">SQC</li>
-          </ul>
-        </div>
-        <div class="card card-container card-tipos-consultoria">
-          <div class="card-body">
-            <div class="card-text" *ngFor="let tipoConsultoriaSeleccionado of tiposConsultoriaSeleccionados">
-              {{tipoConsultoriaSeleccionado}}
-            </div>
+        <div class="dropdown-container">
+          <label class="titulo mt-3 mb-3" for="dropdown">Tipos de Consultoría</label>
+
+          <div class="dropdown-content">
+            <ng-multiselect-dropdown
+              class="drop"
+              id="dropdown"
+              [placeholder]="'Seleccionar'"
+              [settings]="dropdownSettings"
+              [data]="tiposDisponibles"
+              [(ngModel)]="tiposSeleccionados">
+            </ng-multiselect-dropdown>
           </div>
         </div>
+        
       </div>
       <div class="modal-footer">
         <div class="container-fluid h-100">
