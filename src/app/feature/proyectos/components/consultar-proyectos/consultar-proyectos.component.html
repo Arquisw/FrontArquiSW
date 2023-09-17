@@ -19,7 +19,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let necesidad of necesidades | filter: filterTerm | paginate: { itemsPerPage: 2, currentPage: p }">
+        <tr *ngFor="let necesidad of necesidades | filter: filterTerm | paginate: { itemsPerPage: 10, currentPage: p }">
           <td class="table-body align-middle">{{necesidad?.proyecto?.nombre}}</td>
           <td class="table-body align-middle">
             <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(necesidad?.id)"

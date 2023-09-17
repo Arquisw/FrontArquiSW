@@ -15,6 +15,7 @@ export class EtapaComponent implements OnInit {
   etapaId = 0;
   etapaResumen: EtapaResumen;
   versionesResumen: VersionResumen[] = [];
+  estaCargandoRechazarVersion: boolean[] = []; 
   authorities: string[] = [];
   puedeAprobarEtapa = false;
   puedeIniciarPrimeraVersion = false;
@@ -22,13 +23,14 @@ export class EtapaComponent implements OnInit {
   tieneVersiones = false;
   generarVersionInicialError = false;
   aprobarEtapaError = false;
-  estaCargandoRechazarVersion = false;
   estaCargandoIniciarPrimeraVersion = false;
   estaCargandoAprobarEtapa = false;
   mensajeError = '';
   p:number = 1;
 
-  constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService, private router: Router) {}
+  constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService, private router: Router) {
+    this.versionesResumen.forEach(() => this.estaCargandoRechazarVersion.push(false));
+  }
 
   ngOnInit(): void {
     this.posicionarPaginaAlInicio();
@@ -129,15 +131,15 @@ export class EtapaComponent implements OnInit {
     });
   }
 
-  rechazarVersion(motivoRechazo: string, id: number): void {
-    this.estaCargandoRechazarVersion = true;
+  rechazarVersion(motivoRechazo: string, id: number,indice: number): void {
+    this.estaCargandoRechazarVersion[indice] = true;
 
     const motivoRechazoVersion = new MotivoRechazoVersion(motivoRechazo);
 
     this.ingenieriaDeRequisitosService.rechazarVersionPorId(motivoRechazoVersion, id).subscribe(() => {
       window.location.reload();
     }, () => {
-      this.estaCargandoRechazarVersion = false;
+      this.estaCargandoRechazarVersion[indice]  = false;
     });
   }
 

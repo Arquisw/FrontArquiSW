@@ -46,7 +46,9 @@ export class ConsultarProyectosComponent implements OnInit {
   }
 
   filtrarBotonPostulacion(): void {
+    
     this.authorities.forEach(authority => {
+      
       if (authority === 'ROLE_ASOCIACION') {
         this.mostrarBotonPostulacion = false;
       }
