@@ -73,5 +73,14 @@
         <span class="visually-hidden">Loading...</span>
       </div>
     </button>
+    <div class="container-fluid h-100">
+      <div class="row w-100 align-items-center">
+        <div class="col text-center">
+          <div *ngIf="aprobarEtapaError" class="alert alert-danger" role="alert">
+            {{mensajeError}}
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </main>

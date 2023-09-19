@@ -133,8 +133,10 @@ export class EtapaComponent implements OnInit {
       const nuevaEtapaId = response.valor;
 
       this.consultarNuevaEtapaPorId(nuevaEtapaId);
-    }, () => {
+    }, (error) => {
       this.estaCargandoAprobarEtapa = false;
+      this.aprobarEtapaError = true;
+      this.mensajeError = error?.error?.mensaje;
     });
   }
 
@@ -145,7 +147,7 @@ export class EtapaComponent implements OnInit {
       if(nuevaEtapa.nombre === 'Definitiva') {
         this.construirRequisitosFinales(nuevaEtapa);
       } else {
-        this.abrirEtapa(id);
+        this.abrirIngenieriaDeRequisitos();
       }
     });
   }
@@ -195,17 +197,6 @@ export class EtapaComponent implements OnInit {
     };
 
     this.router.navigate(['/ingenieria-de-requisitos'], navigationExtras);
-  }
-
-  abrirEtapa(id: number): void {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        id: id,
-        proyectoId: this.proyectoId
-      }
-    };
-
-    this.router.navigate(['/ingenieria-de-requisitos/etapa'], navigationExtras);
   }
 
   rechazarVersion(motivoRechazo: string, id: number,indice: number): void {
