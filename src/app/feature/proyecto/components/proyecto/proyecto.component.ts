@@ -315,4 +315,12 @@ export class ProyectoComponent implements OnInit {
   usuarioActualPuedeVerElBotonDeAprobacionPorRolDirectorDeProyecto(): boolean {
     return this.tieneRolDirectorDeProyecto && !this.necesidadResumen?.proyecto?.aprobacionProyecto?.directorDeProyecto;
   }
+
+  usuarioActualPuedeAprobarPorRolLiderDeEquipo(): boolean {
+    return this.necesidadResumen.proyecto.aprobacionProyecto.ingenieria;
+  }
+
+  usuarioActualPuedeAprobarPorRolDirectorDeProyecto(): boolean {
+    return this.necesidadResumen.proyecto.aprobacionProyecto.liderDeEquipo;
+  }
 }
