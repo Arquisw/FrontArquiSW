@@ -20,9 +20,11 @@ export class RequisitoComponent implements OnInit {
   estaCargandoActualizacion = false;
   mensajeError = '';
   actualizarRequisitoModal: Modal | undefined;
+  requisitoCompleto: Modal | undefined;
   actualizarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
   modalId: string;
+  descripcionModalId: string;
 
   constructor(private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {
     
@@ -32,6 +34,8 @@ export class RequisitoComponent implements OnInit {
     this.filtrarMenu();
     this.inicializarFormulario();
     this.modalId = 'actualizarRequisitoModal_' + this.requisito?.id;
+    this.descripcionModalId = 'descripcion' + this.requisito?.id;
+
   }
   
  
@@ -56,6 +60,14 @@ export class RequisitoComponent implements OnInit {
     this.modalId = 'actualizarRequisitoModal_' + this.requisito?.id;
     const modalElement = document.getElementById(this.modalId);
     this.llenarForm()
+    if (modalElement) {
+      modalElement.classList.add('show'); 
+    }
+  }
+
+  abrirModalRequisito(){
+    this.descripcionModalId = 'descripcion' + this.requisito?.id;
+    const modalElement = document.getElementById(this.descripcionModalId);
     if (modalElement) {
       modalElement.classList.add('show'); 
     }
