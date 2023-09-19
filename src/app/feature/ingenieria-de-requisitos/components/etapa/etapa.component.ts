@@ -5,6 +5,8 @@ import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-d
 import { EtapaResumen } from '../../shared/model/etapa-resumen.module';
 import { VersionResumen } from '../../shared/model/version-resumen.module';
 import { NavigationExtras, Router } from '@angular/router';
+import { RequisitoResumen } from '../../shared/model/requisito-resumen.module';
+import { RequisitosFinales } from '../../shared/model/requisitos-finales.module';
 
 @Component({
   selector: 'app-etapa',
@@ -13,9 +15,10 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class EtapaComponent implements OnInit {
   etapaId = 0;
+  proyectoId = 0;
   etapaResumen: EtapaResumen;
   versionesResumen: VersionResumen[] = [];
-  estaCargandoRechazarVersion: boolean[] = []; 
+  estaCargandoRechazarVersion: boolean[] = [];
   authorities: string[] = [];
   puedeAprobarEtapa = false;
   puedeIniciarPrimeraVersion = false;
@@ -26,7 +29,7 @@ export class EtapaComponent implements OnInit {
   estaCargandoIniciarPrimeraVersion = false;
   estaCargandoAprobarEtapa = false;
   mensajeError = '';
-  p:number = 1;
+  p = 1;
 
   constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService, private router: Router) {
     this.versionesResumen.forEach(() => this.estaCargandoRechazarVersion.push(false));
@@ -37,9 +40,9 @@ export class EtapaComponent implements OnInit {
 
     const params = history.state;
     this.etapaId = params.id;
+    this.proyectoId = params.proyectoId;
 
     this.consultarEtapaPorId(this.etapaId);
-    this.consultarVersionesPorEtapaId(this.etapaId);
     this.obtenerAuthorities();
     this.filtrarMenu();
   }
@@ -51,6 +54,8 @@ export class EtapaComponent implements OnInit {
   consultarEtapaPorId(id: number): void {
     this.ingenieriaDeRequisitosService.consultarEtapaPorId(id).subscribe((response) => {
       this.etapaResumen = response;
+
+      this.consultarVersionesPorEtapaId(id);
     });
   }
 
@@ -124,11 +129,83 @@ export class EtapaComponent implements OnInit {
   aprobarEtapa(id: number): void {
     this.estaCargandoAprobarEtapa = true;
 
-    this.ingenieriaDeRequisitosService.aprobarEtapa(id).subscribe(() => {
-      window.location.reload();
+    this.ingenieriaDeRequisitosService.aprobarEtapa(id).subscribe((response) => {
+      const nuevaEtapaId = response.valor;
+
+      this.consultarNuevaEtapaPorId(nuevaEtapaId);
     }, () => {
       this.estaCargandoAprobarEtapa = false;
     });
+  }
+
+  consultarNuevaEtapaPorId(id: number): void {
+    this.ingenieriaDeRequisitosService.consultarEtapaPorId(id).subscribe((response) => {
+      const nuevaEtapa = response;
+
+      if(nuevaEtapa.nombre === 'Definitiva') {
+        this.construirRequisitosFinales(nuevaEtapa);
+      } else {
+        this.abrirEtapa(id);
+      }
+    });
+  }
+
+  construirRequisitosFinales(nuevaEtapa: EtapaResumen): void {
+    //this.consultarVersionEtapaDefinitiva(nuevaEtapa?.id);
+    console.log(nuevaEtapa);
+
+    this.abrirIngenieriaDeRequisitos();
+  }
+
+  consultarVersionEtapaDefinitiva(id: number): void {
+    this.ingenieriaDeRequisitosService.consultarVersionesPorEtapaId(id).subscribe((response) => {
+      const version = response[0];
+
+      this.consultarRequisitosPorVersionId(version?.id, id);
+    });
+  }
+
+  consultarRequisitosPorVersionId(id: number, nuevaEtapaId: number): void {
+    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id).subscribe((response) => {
+      const requisitos = response;
+
+      this.convertirRequisitosFinalesEnPDF(requisitos, nuevaEtapaId);
+    });
+  }
+
+  convertirRequisitosFinalesEnPDF(requisitos: RequisitoResumen[], nuevaEtapaId: number): void {
+    // Aqui se deberia implementar la funcionalidad para convertir los requisitos finales en pdf
+    const urlRequisitosFinales = '';
+    console.log(requisitos);
+
+    this.guardarRequisitosFinales(urlRequisitosFinales, nuevaEtapaId);
+  }
+
+  guardarRequisitosFinales(urlRequisitosFinales: string, id: number): void {
+    const requisitosFinales = new RequisitosFinales(urlRequisitosFinales);
+
+    this.ingenieriaDeRequisitosService.guardarRequisitosFinales(requisitosFinales, id).subscribe(() => {});
+  }
+
+  abrirIngenieriaDeRequisitos(): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: this.proyectoId
+      }
+    };
+
+    this.router.navigate(['/ingenieria-de-requisitos'], navigationExtras);
+  }
+
+  abrirEtapa(id: number): void {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: id,
+        proyectoId: this.proyectoId
+      }
+    };
+
+    this.router.navigate(['/ingenieria-de-requisitos/etapa'], navigationExtras);
   }
 
   rechazarVersion(motivoRechazo: string, id: number,indice: number): void {

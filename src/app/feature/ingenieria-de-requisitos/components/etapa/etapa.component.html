@@ -25,7 +25,7 @@
             <td class="table-body align-middle">{{obtenerEstadoDeLaVersion(version?.esFinal)}}</td>
             <td class="table-body align-middle">
               <button (click)="abrirRequisitos(version?.id)" class="btn btn-watch-requeriments btn-success mt-3">Ver Requisitos</button>
-              <button *ngIf="puedeRechazarVersion && !version?.estaRechazado" class="btn btn-success mt-3" data-bs-toggle="modal"
+              <button *ngIf="puedeRechazarVersion && !version?.estaRechazada" class="btn btn-success mt-3" data-bs-toggle="modal"
                 [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(version?.id)">
                 Rechazar Versión
 
@@ -66,7 +66,7 @@
     </div>
   </section>
   <section class="approvals text-center" *ngIf="puedeAprobarEtapa">
-    <button *ngIf="puedeAprobarEtapa && tieneVersiones" (click)="aprobarEtapa(etapaResumen?.id)" class="btn btn-success mt-3">
+    <button *ngIf="puedeAprobarEtapa && tieneVersiones && !etapaResumen?.completada" (click)="aprobarEtapa(etapaResumen?.id)" class="btn btn-success mt-3">
       Aprobar Etapa
 
       <div *ngIf="estaCargandoAprobarEtapa" class="spinner-border" role="status">

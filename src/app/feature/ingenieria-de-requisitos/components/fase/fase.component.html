@@ -1,14 +1,11 @@
 <div class="card">
-  <div class="card-header">
-    <b>Fase:</b> {{fase?.nombre}}
-  </div>
+  <div class="card-header"><b>Fase:</b> {{ fase?.nombre }}</div>
   <div class="card-body">
-    <p class="card-text">
-      <b>Descripción:</b> {{fase?.descripcion}}
-    </p>
+    <p class="card-text"><b>Descripción:</b> {{ fase?.descripcion }}</p>
   </div>
   <div class="card-footer">
-    <h4>Etapas de la Fase</h4>
+    <div *ngIf="!esEtapaDefinitiva()">
+      <h4>Etapas de la Fase</h4>
       <div class="table-responsive">
         <table class="table align-middle table-bordered">
           <thead>
@@ -19,12 +16,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let etapa of fase?.etapas | paginate: { itemsPerPage: 10, currentPage: p }">
-              <td class="table-body align-middle">{{etapa?.nombre}}</td>
+            <tr
+              *ngFor="let etapa of fase?.etapas | paginate : { itemsPerPage: 10, currentPage: p }">
+              <td class="table-body align-middle">{{ etapa?.nombre }}</td>
               <td class="table-body align-middle">
-                <button type="submit" class="btn btn-success mt-3"
+                <button
+                  type="submit"
+                  class="btn btn-success mt-3"
                   data-bs-toggle="modal"
-                  [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(etapa?.id)"
+                  [attr.data-bs-target]="
+                    '#' + obtenerIdModalDescripcion(etapa?.id)"
                   data-bs-dismiss="modal">
                   Ver Descripción
                 </button>
@@ -35,13 +36,43 @@
                 </app-modal-descripcion>
               </td>
               <td class="table-body align-middle">
-                <button (click)="abrirEtapa(etapa?.id)" class="btn btn-watch-project btn-success mt-3">Ver Etapa</button>
+                <button
+                  (click)="abrirEtapa(etapa?.id)"
+                  class="btn btn-watch-project btn-success mt-3">
+                  Ver Etapa
+                </button>
               </td>
             </tr>
           </tbody>
         </table>
-        <pagination-controls previousLabel="Anterior"
-      nextLabel="Siguiente" class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
+          class="my-pagination"
+          (pageChange)="p = $event"
+        ></pagination-controls>
       </div>
+    </div>
+    <div *ngIf="esEtapaDefinitiva()">
+      <h2>Documentos</h2>
+    <div class="table-responsive">
+      <table class="table align-middle table-striped">
+        <thead>
+          <tr>
+            <th>Nombre del Archivo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let file of files" >
+            <td class="table-body align-middle">{{file?.nombre}}</td>
+            <td class="table-body align-middle">
+              <button class="btn btn-success" (click)="downloadFile(file?.nombre)">Ver Documento</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
   </div>
 </div>
