@@ -13,6 +13,7 @@ export class ContratacionesComponent implements OnInit {
   estaCargandoGuardarContrato = false;
   mensajeError = '';
   contrato;
+  p = 1;
 
   constructor(private router: Router, private admistradorService: AdministradorService) { }
 
@@ -87,7 +88,6 @@ export class ContratacionesComponent implements OnInit {
       this.mensajeError = error?.error?.mensaje;
     });
   }
-
 
   abrirPerfilProyecto(id): void {
     const navigationExtras: NavigationExtras = {

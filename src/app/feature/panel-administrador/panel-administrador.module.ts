@@ -12,6 +12,7 @@ import { RolesComponent } from './components/roles/roles.component';
 import { PostulacionesComponent } from './components/postulaciones/postulaciones.component';
 import { PostulacionesProyectoComponent } from './components/postulaciones-proyecto/postulaciones-proyecto.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HttpClientModule,
     SharedModule,
     PanelAdministradorRoutingModule,
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [AdministradorService, DatePipe]
 })

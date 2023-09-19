@@ -11,6 +11,7 @@ import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesid
 export class PostulacionesComponent implements OnInit {
   necesidadesResumen: NecesidadResumen[] = [];
   hayProyectosNegociados = false;
+  p = 1;
 
   constructor(private administradorService: AdministradorService, private router: Router) { }
 

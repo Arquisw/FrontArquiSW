@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let postulacion of postulacionesResumen; let i = index ">
+        <tr *ngFor="let postulacion of postulacionesResumen | paginate : { itemsPerPage: 10, currentPage: p }; let i = index ">
           <td class="table-body align-middle mark">{{postulacion?.nombreDelUsuario}}</td>
           <td class="table-body align-middle mark">{{postulacion?.correoDelUsuario}}</td>
           <td class="table-body align-middle mark">
@@ -41,6 +41,12 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+      class="my-pagination"
+      (pageChange)="p = $event">
+    </pagination-controls>
   </div>
 </section>
 <div class="modal fade" id="select" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -17,7 +17,7 @@ export class PostulacionesProyectoComponent implements OnInit {
   proyectoId = 0;
   hayUsuariosPostulados = false;
   estaCargandoSeleccionar = false;
-  estaCargandoDeclinar : boolean[] = []; ;
+  estaCargandoDeclinar: boolean[] = [];;
   postulacionesResumen: PostulacionResumen[] = [];
   postulacionActual: PostulacionResumen;
   proyecto: ProyectoResumen;
@@ -25,11 +25,12 @@ export class PostulacionesProyectoComponent implements OnInit {
   rolesMapa: Map<string, string> = new Map();
   seleccionError = false;
   mensajeError = '';
-   rolesDisponibles = [];
+  rolesDisponibles = [];
   rolesSeleccionados = [];
   dropdownSettings = {};
+  p = 1;
 
-  constructor(private router: Router, private administradorService: AdministradorService) { 
+  constructor(private router: Router, private administradorService: AdministradorService) {
     this.postulacionesResumen.forEach(() => this.estaCargandoDeclinar.push(false));
 
   }
@@ -105,10 +106,10 @@ export class PostulacionesProyectoComponent implements OnInit {
     this.codigoRolesSeleccionados = [];
     this.postulacionActual = this.postulacionesResumen.find(postulacion => postulacion.id === id);
     this.codigoRolesSeleccionados = this.postulacionActual.roles;
-    
+
     this.codigoRolesSeleccionados.forEach(codigoRol => {
       const rolEncontrado = this.rolesSeleccionados.find(item => item.rolCodigo === codigoRol);
-      if(!rolEncontrado){
+      if (!rolEncontrado) {
         this.rolesSeleccionados = this.rolesSeleccionados.concat({ rolCodigo: codigoRol, rol: this.rolesMapa.get(codigoRol) });
       }
     });
@@ -132,7 +133,7 @@ export class PostulacionesProyectoComponent implements OnInit {
     this.estaCargandoSeleccionar = true;
 
     if (this.rolesSeleccionados.length > 0) {
-      this.codigoRolesSeleccionados=[];
+      this.codigoRolesSeleccionados = [];
       this.rolesSeleccionados.forEach(rol => {
         this.codigoRolesSeleccionados.push(rol.rolCodigo)
       });
@@ -154,7 +155,7 @@ export class PostulacionesProyectoComponent implements OnInit {
     }
   }
 
-  onDeclineSelect(motivoDeclinacion: string, id: number,index:number): void {
+  onDeclineSelect(motivoDeclinacion: string, id: number, index: number): void {
     this.estaCargandoDeclinar[index] = true;
     const motivoRechazo = new MotivoRechazoPostulacion(motivoDeclinacion);
 
@@ -170,5 +171,5 @@ export class PostulacionesProyectoComponent implements OnInit {
     return 'rechazoModal' + id;
   }
 
-  
+
 }

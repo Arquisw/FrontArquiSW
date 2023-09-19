@@ -34,6 +34,7 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   rolesSeleccionados = [];
   rolesDeSeleccionados = [];
   dropdownSettings = {};
+  p = 1;
 
   constructor(private proyectosService: ProyectosService, private router: Router) { }
 

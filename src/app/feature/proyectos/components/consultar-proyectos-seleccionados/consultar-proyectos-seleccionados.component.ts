@@ -25,6 +25,7 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   proyectoId = 0;
   necesidadActualResumen: NecesidadResumen;
   necesidadActualId = 0;
+  p = 1;
 
   constructor(private proyectosService: ProyectosService, private router: Router) {}
 

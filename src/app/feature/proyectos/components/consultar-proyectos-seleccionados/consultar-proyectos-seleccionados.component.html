@@ -49,7 +49,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let proyecto of proyectosResumen">
+        <tr *ngFor="let proyecto of proyectosResumen | paginate : { itemsPerPage: 10, currentPage: p }">
           <td class="table-body align-middle">{{proyecto?.nombre}}</td>
           <td class="table-body align-middle">
             <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(proyecto?.id)"
@@ -69,5 +69,11 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+      class="my-pagination"
+      (pageChange)="p = $event">
+    </pagination-controls>
   </div>
 </section>

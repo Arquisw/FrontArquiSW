@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let necesidad of necesidadesResumen">
+        <tr *ngFor="let necesidad of necesidadesResumen | paginate : { itemsPerPage: 10, currentPage: p }">
           <td class="table-body align-middle mark">{{necesidad?.proyecto?.nombre}}</td>
           <td class="table-body align-middle mark">
             <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(necesidad?.id)"
@@ -30,5 +30,11 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+      class="my-pagination"
+      (pageChange)="p = $event">
+    </pagination-controls>
   </div>
 </section>

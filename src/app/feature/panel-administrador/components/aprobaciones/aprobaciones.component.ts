@@ -13,6 +13,7 @@ export class AprobacionesComponent implements  OnInit{
   hayProyectosPorAprobar = false;
   estaCargandoAprobarNecesidad = false;
   estaCargandoDeclinarNecesidad = false;
+  p = 1;
 
   mensajeAsociacion;
   registroError;

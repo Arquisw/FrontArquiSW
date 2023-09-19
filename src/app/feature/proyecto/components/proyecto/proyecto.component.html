@@ -24,7 +24,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let seleccion of seleccionesResumen">
+          <tr *ngFor="let seleccion of seleccionesResumen | paginate : { itemsPerPage: 10, currentPage: p }">
             <td class="table-body align-middle">{{seleccion?.nombreDelUsuario}}</td>
             <td class="table-body align-middle">
               <p *ngFor="let rol of seleccion?.roles">{{obtenerNombreDelRol(rol)}}</p>
@@ -35,6 +35,12 @@
           </tr>
         </tbody>
       </table>
+      <pagination-controls
+        previousLabel="Anterior"
+        nextLabel="Siguiente"
+        class="my-pagination"
+        (pageChange)="p = $event">
+      </pagination-controls>
     </div>
   </section>
   <section *ngIf="usuarioActualPuedeVerElMenuDeAprobacion()" class="services-section container text-center">

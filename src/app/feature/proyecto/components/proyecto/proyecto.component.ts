@@ -42,6 +42,7 @@ export class ProyectoComponent implements OnInit {
   puedeVerContrato = false;
   rolesMapa: Map<string, string> = new Map();
   authorities: string[] = [];
+  p = 1;
 
   constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private router: Router, private storageService: StorageService) {}
 

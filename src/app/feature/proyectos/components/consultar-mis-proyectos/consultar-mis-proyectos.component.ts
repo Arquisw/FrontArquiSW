@@ -34,23 +34,20 @@ export class ConsultarMisProyectosComponent implements OnInit {
   tieneNecesidades = false;
   actualizacionError = false;
   eliminacionError = false;
-  estaCargandoEliminar : boolean[] = []; 
+  estaCargandoEliminar : boolean[] = [];
   estaCargandoGuardar = false;
   estaCargandoActualizar = false;
   files = [];
-  p:number = 1;
+  p = 1;
   tiposDisponibles = [];
   tiposSeleccionados = [];
   dropdownSettings = {};
 
-
-  constructor(
-    private storage: AngularFireStorage,
-    private proyectosService: ProyectosService,
-    private router: Router) {
-      this.necesidades.forEach(() => this.estaCargandoEliminar.push(false));
-
-     }
+  constructor(private storage: AngularFireStorage,
+              private proyectosService: ProyectosService,
+              private router: Router) {
+    this.necesidades.forEach(() => this.estaCargandoEliminar.push(false));
+  }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -225,7 +222,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
       const tiposConsultoria: TipoConsultoria[] = [];
 
       this.tiposSeleccionados.forEach(tipoConsultoria => {
-        
+
         const tipoConsultoriaModel = new TipoConsultoria(tipoConsultoria.tipo);
         tiposConsultoria.push(tipoConsultoriaModel);
       });

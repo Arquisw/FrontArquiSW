@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let necesidad of necesidadAprobadas">
+        <tr *ngFor="let necesidad of necesidadAprobadas | paginate : { itemsPerPage: 10, currentPage: p }">
           <td>{{necesidad?.proyecto.nombre}}</td>
           <td>
             <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModal(necesidad?.id)">Ver Descripción</button>
@@ -46,5 +46,11 @@
         </tr>
       </tbody>
     </table>
+    <pagination-controls
+      previousLabel="Anterior"
+      nextLabel="Siguiente"
+      class="my-pagination"
+      (pageChange)="p = $event">
+    </pagination-controls>
   </div>
 
