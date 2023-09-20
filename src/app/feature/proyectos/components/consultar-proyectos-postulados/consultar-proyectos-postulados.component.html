@@ -1,13 +1,13 @@
 <section class="title">
   <h1>Proyectos Postulados</h1>
 </section>
-<section class="postulated-projects">
+<section   class="postulated-projects">
   <p *ngIf="!estaPostulado">No has postulado a ningun proyecto actualmente...</p>
-  <div class="card-container" *ngIf="estaPostulado">
-    <div class="card">
+  <div  class="card-container" *ngIf="estaPostulado">
+    <div  class="card">
       <h4 class="card-header">{{proyectoResumen?.nombre}}</h4>
-      <div class="table-responsive">
-        <table class="table align-middle table-bordered">
+      <div  class="table-responsive">
+        <table  class="table align-middle table-bordered">
           <thead>
             <tr>
               <th class="table-title" scope="col">Estado</th>
@@ -28,7 +28,7 @@
           </tbody>
         </table>
       </div>
-      <div class="card-body">
+      <div  class="card-body">
         <h5 class="card-title">Descripción</h5>
         <p class="card-text">{{proyectoResumen?.descripcion}}</p>
         <div class="buttons-container">
@@ -39,9 +39,9 @@
       </div>
     </div>
   </div>
-  <div class="table-responsive" *ngIf="tieneMasDeUnaPostulacion">
+  <div  class="table-responsive" *ngIf="tieneMasDeUnaPostulacion">
     <H2>Postulaciones Rechazadas</H2>
-    <table class="table align-middle table-striped rejected-table">
+    <table  class="table align-middle table-striped rejected-table">
       <thead>
         <tr>
           <th class="table-title" scope="col">Nombre</th>
@@ -58,8 +58,8 @@
             <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal"
               [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(proyecto?.id)" data-bs-dismiss="modal">Ver
               Descripción</button>
-            <app-modal-descripcion [modalId]="obtenerIdModalDescripcion(proyecto?.id)" [titulo]="'Descripción'"
-              [descripcion]="proyecto.descripcion"></app-modal-descripcion>
+            <app-modal-descripcion *ngIf="proyecto?.descripcion" [modalId]="obtenerIdModalDescripcion(proyecto?.id)"
+              [titulo]="'Descripción'" [descripcion]="proyecto.descripcion"></app-modal-descripcion>
           </td>
           <td class="table-body align-middle">
             <p *ngFor="let tipoConsultoria of proyecto?.tiposConsultoria">{{tipoConsultoria?.nombre}}</p>
@@ -68,12 +68,11 @@
           <td class="table-body align-middle">
             <button (click)="abrirPerfilProyecto(proyecto?.id)" class="btn btn-watch-project btn-success mt-3">Ver
               Proyecto</button>
-            <button *ngIf="tieneMotivoRechazo" type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalMotivoRechazo(proyecto?.id)"
-              data-bs-dismiss="modal">Ver Motivo del Rechazo</button>
-            <app-modal-descripcion
+            <button *ngIf="tieneMotivoRechazo" type="submit" class="btn btn-success mt-3" data-bs-toggle="modal"
+              [attr.data-bs-target]="'#'+ obtenerIdModalMotivoRechazo(proyecto?.id)" data-bs-dismiss="modal">Ver Motivo del Rechazo</button>
+            <app-modal-descripcion *ngIf="tieneMotivoRechazo && proyecto?.id"
               [modalId]="obtenerIdModalMotivoRechazo(proyecto?.id)"
-              [descripcion]="obtenerMotivoDeRechazo(proyecto?.id)"
-              [titulo]="'Motivo del Rechazo'"></app-modal-descripcion>
+              [descripcion]="obtenerMotivoDeRechazo(proyecto?.id)" [titulo]="'Motivo del Rechazo'"></app-modal-descripcion>
           </td>
         </tr>
       </tbody>
