@@ -18,7 +18,7 @@
             <th class="table-title" scope="col">Acciones</th>
           </tr>
         </thead>
-        <tbody *ngFor="let version of versionesResumen| paginate: { itemsPerPage: 10, currentPage: p }; let i = index ">
+        <tbody *ngFor="let version of versionesResumen| paginate: { itemsPerPage: 10, currentPage: p }; let i = index">
           <tr>
             <td class="table-body align-middle">{{version?.id}}</td>
             <td class="table-body align-middle">{{version?.fecha}}</td>
@@ -44,6 +44,15 @@
       </table>
       <pagination-controls previousLabel="Anterior"
       nextLabel="Siguiente" class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+      <div class="container-fluid h-100">
+        <div class="row w-100 align-items-center">
+          <div class="col text-center">
+            <div *ngIf="rechazarVersionError" class="alert alert-danger" role="alert">
+              {{mensajeError}}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="create-first-version text-center" *ngIf="!tieneVersiones">
       <p>No hay aun versiones de los requisitos. El o los miembros del equipo con el rol Ingeniería pueden dar inicio a la versión...</p>

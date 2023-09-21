@@ -11,7 +11,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let necesidad of necesidadAprobar | paginate : { itemsPerPage: 10, currentPage: p }">
+      <tr *ngFor="let necesidad of necesidadAprobar | paginate : { itemsPerPage: 10, currentPage: p }; let i = index">
         <td>{{necesidad?.proyecto.nombre}}</td>
         <td>
           <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModal(necesidad?.id)">Ver Descripción</button>
@@ -26,10 +26,10 @@
         </td>
         <td>
           <button class="btn btn-watch-project btn-success" (click)="abrirPerfilProyecto(necesidad?.id)">Ver Proyecto</button>
-          <button class="btn btn-aprove btn-success" (click)="AprobarNecesidad(necesidad?.id)">
+          <button class="btn btn-aprove btn-success" (click)="AprobarNecesidad(necesidad?.id, i)">
             Aprobar
 
-            <div *ngIf="estaCargandoAprobarNecesidad" class="spinner-border" role="status">
+            <div *ngIf="estaCargandoAprobarNecesidad[i]" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </button>
@@ -49,7 +49,7 @@
       </tr>
     </tbody>
   </table>
-  <pagination-controls
+  <pagination-controls *ngIf="hayProyectosPorAprobar"
     previousLabel="Anterior"
     nextLabel="Siguiente"
     class="my-pagination"

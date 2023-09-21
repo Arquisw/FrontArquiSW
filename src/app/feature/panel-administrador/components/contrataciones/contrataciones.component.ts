@@ -10,7 +10,7 @@ import { AdministradorService } from '../../shared/service/administrador.service
 export class ContratacionesComponent implements OnInit {
   necesidadAprobadas: any[] = [];
   hayNecesidadesPorConcretar = false;
-  estaCargandoGuardarContrato = false;
+  estaCargandoGuardarContrato: boolean[] = [];
   mensajeError = '';
   contrato;
   p = 1;
@@ -45,8 +45,8 @@ export class ContratacionesComponent implements OnInit {
     });
   }
 
-  recibirUrlContrato(valor, necesidadId: number): void {
-    this.estaCargandoGuardarContrato = true;
+  recibirUrlContrato(valor, necesidadId: number, indice: number): void {
+    this.estaCargandoGuardarContrato[indice] = true;
 
     this.consultaContrato(necesidadId);
 
@@ -55,9 +55,9 @@ export class ContratacionesComponent implements OnInit {
     };
 
     if (this.contrato === null) {
-      this.guardarContrato(necesidadId, contratoAlmacenar);
+      this.guardarContrato(necesidadId, contratoAlmacenar, indice);
     } else {
-      this.actualizarContrato(necesidadId, contratoAlmacenar);
+      this.actualizarContrato(necesidadId, contratoAlmacenar, indice);
     }
   }
 
@@ -71,20 +71,20 @@ export class ContratacionesComponent implements OnInit {
     });
   }
 
-  guardarContrato(necesidadId: number, contrato): void {
+  guardarContrato(necesidadId: number, contrato, indice: number): void {
     this.admistradorService.guardarContrato(necesidadId, contrato).subscribe(() => {
       window.location.reload();
     }, (error) => {
-      this.estaCargandoGuardarContrato = false;
+      this.estaCargandoGuardarContrato[indice] = false;
       this.mensajeError = error?.error?.mensaje;
     });
   }
 
-  actualizarContrato(necesidadId: number, contrato): void {
+  actualizarContrato(necesidadId: number, contrato, indice: number): void {
     this.admistradorService.actualizarContrato(necesidadId, contrato).subscribe(() => {
       window.location.reload();
     }, (error) => {
-      this.estaCargandoGuardarContrato = false;
+      this.estaCargandoGuardarContrato[indice] = false;
       this.mensajeError = error?.error?.mensaje;
     });
   }

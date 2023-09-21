@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let necesidad of necesidadAprobadas | paginate : { itemsPerPage: 10, currentPage: p }">
+        <tr *ngFor="let necesidad of necesidadAprobadas | paginate : { itemsPerPage: 10, currentPage: p }; let i = index">
           <td>{{necesidad?.proyecto.nombre}}</td>
           <td>
             <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModal(necesidad?.id)">Ver Descripción</button>
@@ -32,7 +32,7 @@
             data-bs-dismiss="modal">
             Guardar ó Actualizar contrato
 
-            <div *ngIf="estaCargandoGuardarContrato" class="spinner-border" role="status">
+            <div *ngIf="estaCargandoGuardarContrato[i]" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
             </div>
           </button>
@@ -40,7 +40,7 @@
               [modalId]="obtnerIdModalCarga(necesidad?.id)"
               [titulo]="'Guardar ó Actualizar contrato del proyecto'"
               [objeto]="necesidad"
-              (enviarValor)="recibirUrlContrato($event, necesidad?.id)">
+              (enviarValor)="recibirUrlContrato($event, necesidad?.id, i)">
           </app-modal-cargar-pdf>
           </td>
         </tr>

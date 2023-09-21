@@ -26,6 +26,7 @@ export class EtapaComponent implements OnInit {
   tieneVersiones = false;
   generarVersionInicialError = false;
   aprobarEtapaError = false;
+  rechazarVersionError = false;
   estaCargandoIniciarPrimeraVersion = false;
   estaCargandoAprobarEtapa = false;
   mensajeError = '';
@@ -206,8 +207,10 @@ export class EtapaComponent implements OnInit {
 
     this.ingenieriaDeRequisitosService.rechazarVersionPorId(motivoRechazoVersion, id).subscribe(() => {
       window.location.reload();
-    }, () => {
+    }, (error) => {
       this.estaCargandoRechazarVersion[indice]  = false;
+      this.rechazarVersionError = true;
+      this.mensajeError = error?.error?.mensaje;
     });
   }
 

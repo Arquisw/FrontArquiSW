@@ -25,6 +25,7 @@ export class VersionComponent implements OnInit {
   guardadoError = false;
   estaCargandoGenerarVersionFinal = false;
   estaCargandoGuardarRequisito = false;
+  generarVersionFinalError = false;
   mensajeError = '';
   guardarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
@@ -120,8 +121,10 @@ export class VersionComponent implements OnInit {
 
     this.ingenieriaDeRequisitosService.generarVersionFinal(id).subscribe(() => {
       window.location.reload();
-    }, () => {
+    }, (error) => {
       this.estaCargandoGenerarVersionFinal = false;
+      this.generarVersionFinalError = true;
+      this.mensajeError = error?.error?.mensaje;
     });
   }
 }

@@ -26,6 +26,15 @@
       </button>
     </div>
   </section>
+  <div class="container-fluid h-100">
+    <div class="row w-100 align-items-center">
+      <div class="col text-center">
+        <div *ngIf="generarVersionFinalError" class="alert alert-danger" role="alert">
+          {{mensajeError}}
+        </div>
+      </div>
+    </div>
+  </div>
   <section class="requeriments">
     <div class="requeriments-container">
       <div class="container">

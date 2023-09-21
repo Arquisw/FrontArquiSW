@@ -11,7 +11,7 @@ export class AprobacionesComponent implements  OnInit{
   necesidadAprobar: any[] = [];
   mensajeError= '';
   hayProyectosPorAprobar = false;
-  estaCargandoAprobarNecesidad = false;
+  estaCargandoAprobarNecesidad: boolean[] = [];
   estaCargandoDeclinarNecesidad = false;
   p = 1;
 
@@ -44,14 +44,14 @@ export class AprobacionesComponent implements  OnInit{
     });
   }
 
-  AprobarNecesidad(id: number): void {
-    this.estaCargandoAprobarNecesidad = true;
+  AprobarNecesidad(id: number, indice: number): void {
+    this.estaCargandoAprobarNecesidad[indice] = true;
 
     this.admistradorService.aprobarNecesidad(id).subscribe(() => {
       window.location.reload();
     },
     (error) => {
-      this.estaCargandoAprobarNecesidad = false;
+      this.estaCargandoAprobarNecesidad[indice] = false;
       this.mensajeError=error.message;
     });
   }
