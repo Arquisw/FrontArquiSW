@@ -77,6 +77,11 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
         this.proyectosResumen.push(unProyecto);
       } else {
         this.seleccionResumen = seleccion;
+        this.proyectoResumen = unProyecto;
+
+        this.seleccionResumen.roles.forEach(rol => {
+          this.rolesSeleccionados.push(this.roles.get(rol));
+        });
       }
     });
   }
