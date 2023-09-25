@@ -10,8 +10,6 @@ import { IngenieriaDeRequisitosRespuesta } from '../model/ingenieria-de-requisit
 import { Requisito } from '../model/requisito.model';
 import { RequisitoResumen } from '../model/requisito-resumen.module';
 import { MotivoRechazoVersion } from '../model/motivo-rechazo-version.module';
-import { RequisitosFinales } from '../model/requisitos-finales.module';
-import { RequisitosFinalesResumen } from '../model/requisitos-finales-resumen.module';
 
 @Injectable()
 export class IngenieriaDeRequisitosService {
@@ -25,7 +23,6 @@ export class IngenieriaDeRequisitosService {
   private readonly VERSION_ENDPOINT: string = '/version';
   private readonly ETAPA_ENDPOINT: string = '/etapa';
   private readonly RECHAZAR_ENDPOINT: string = '/rechazar';
-  private readonly FINALES_ENDPOINT: string = '/finales';
 
   constructor(private httpService: HttpService) { }
 
@@ -92,15 +89,5 @@ export class IngenieriaDeRequisitosService {
   public consultarRequisitosPorVersionId(id: number): Observable<RequisitoResumen[]>
   {
     return this.httpService.doGetById<RequisitoResumen[]>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSION_ENDPOINT}/`, id);
-  }
-
-  public guardarRequisitosFinales(requisitosFinales: RequisitosFinales , id: number): Observable<IngenieriaDeRequisitosRespuesta<number>>
-  {
-    return this.httpService.doPost<RequisitosFinales, IngenieriaDeRequisitosRespuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}/${this.FINALES_ENDPOINT}/${id}`, requisitosFinales);
-  }
-
-  public consultarRequisitosFinalesPorEtapaID(id: number): Observable<RequisitosFinalesResumen>
-  {
-    return this.httpService.doGetById<RequisitosFinalesResumen>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.FINALES_ENDPOINT}/`, id);
   }
 }

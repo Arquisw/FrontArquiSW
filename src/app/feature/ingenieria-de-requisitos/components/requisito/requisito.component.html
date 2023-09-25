@@ -7,13 +7,20 @@
       <b>Tipo de Requisito:</b> {{requisito?.tipoRequisito?.nombre}}
     </p>
     <p class="card-text">
-      <b>Descripción:</b> 
+      <b>Descripción:</b>
       <ng-container *ngIf="requisito?.descripcion.length <= 40; else readMore">
         {{ requisito?.descripcion }}
       </ng-container>
       <ng-template #readMore>
         {{ requisito?.descripcion.substr(0, 60) }}
-        <a class="view-more-link" [attr.data-bs-target]="'#' + descripcionModalId" data-bs-toggle="modal" data-bs-toggle="modal" (click)="abrirModalRequisito()">... ver mas</a>
+        <a class="view-more-link" data-bs-toggle="modal"
+        [attr.data-bs-target]="'#' + obtenerIdModalDescripcion(requisito?.id)"
+        data-bs-dismiss="modal">... ver mas</a>
+        <app-modal-descripcion
+          [modalId]="obtenerIdModalDescripcion(requisito?.id)"
+          [titulo]="'Descripción'"
+          [descripcion]="requisito?.descripcion">
+        </app-modal-descripcion>
       </ng-template>
     </p>
   </div>
@@ -69,34 +76,6 @@
             </div>
           </div>
         </div>
-        <div class="container-fluid h-100">
-          <div class="row w-100 align-items-center">
-            <div class="col text-center">
-              <div *ngIf="actualizacionError" class="alert alert-danger" role="alert">
-                {{mensajeError}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div  class="modal fade" [id]="descripcionModalId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Requisito</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div>
-          {{requisito?.descripcion}}
-        </div>
-      </div>
-      <div class="modal-footer">
         <div class="container-fluid h-100">
           <div class="row w-100 align-items-center">
             <div class="col text-center">

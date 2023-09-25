@@ -9,7 +9,6 @@ import { ViewportScroller } from '@angular/common';
   styleUrls: ['./perfil.component.scss']
 })
 export class PerfilComponent implements OnInit {
-
   usuarioId = 0;
   usuario;
   mensajeError= '';

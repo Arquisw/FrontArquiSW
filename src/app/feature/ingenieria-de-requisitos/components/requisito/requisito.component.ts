@@ -27,7 +27,7 @@ export class RequisitoComponent implements OnInit {
   descripcionModalId: string;
 
   constructor(private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {
-    
+
   }
 
   ngOnInit(): void {
@@ -35,10 +35,7 @@ export class RequisitoComponent implements OnInit {
     this.inicializarFormulario();
     this.modalId = 'actualizarRequisitoModal_' + this.requisito?.id;
     this.descripcionModalId = 'descripcion' + this.requisito?.id;
-
   }
-  
- 
 
   filtrarMenu(): void {
     this.authorities.forEach(authority => {
@@ -59,9 +56,9 @@ export class RequisitoComponent implements OnInit {
   abrirModalActualizarRequisito(): void {
     this.modalId = 'actualizarRequisitoModal_' + this.requisito?.id;
     const modalElement = document.getElementById(this.modalId);
-    this.llenarForm()
+    this.llenarForm();
     if (modalElement) {
-      modalElement.classList.add('show'); 
+      modalElement.classList.add('show');
     }
   }
 
@@ -69,11 +66,11 @@ export class RequisitoComponent implements OnInit {
     this.descripcionModalId = 'descripcion' + this.requisito?.id;
     const modalElement = document.getElementById(this.descripcionModalId);
     if (modalElement) {
-      modalElement.classList.add('show'); 
+      modalElement.classList.add('show');
     }
   }
 
-  private llenarForm(): void {
+  llenarForm(): void {
     this.actualizarRequisitoForm.patchValue({
       nombreRequisitoActualizar: this.requisito.nombre,
       descripcionRequisitoActualizar: this.requisito.descripcion,
@@ -104,5 +101,9 @@ export class RequisitoComponent implements OnInit {
     }, () => {
       this.estaCargandoEliminacion = false;
     });
+  }
+
+  obtenerIdModalDescripcion(id: number): string {
+    return 'descripcionModal' + id;
   }
 }
