@@ -24,8 +24,6 @@ export class ModalCargarPdfComponent {
     this.archivo = event.target.files[0];
     this.selectedFileName = this.archivo ?  this.archivo.name : 'Seleccionar archivo';
   }
-  
-
 
   uploadFile() {
     if (this.archivo) {
