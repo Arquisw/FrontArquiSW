@@ -96,7 +96,7 @@ export class VersionComponent implements OnInit {
   }
 
   inicializarPuedeCrearRequisito(): void {
-    this.puedeCrearRequisito = this.versionResumen.estaRechazada || this.versionResumen.esFinal;
+    this.puedeCrearRequisito = this.versionResumen?.estaRechazada || this.versionResumen?.esFinal;
   }
 
   abrirModalCrearRequisito(id: number): void {
