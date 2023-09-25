@@ -27,7 +27,7 @@ export class ConsultarProyectosComponent implements OnInit {
   hayNecesidades = false;
   estaCargandoPostulacion = false;
   authorities: string[] = [];
-  p:number = 1;
+  p = 1;
   rolesDisponibles = [];
   rolesSeleccionados = [];
   dropdownSettings = {};
@@ -65,9 +65,9 @@ export class ConsultarProyectosComponent implements OnInit {
   }
 
   filtrarBotonPostulacion(): void {
-    
+
     this.authorities.forEach(authority => {
-      
+
       if (authority === 'ROLE_ASOCIACION') {
         this.mostrarBotonPostulacion = false;
       }
@@ -129,7 +129,7 @@ export class ConsultarProyectosComponent implements OnInit {
     if(this.rolesSeleccionados.length > 0) {
       this.codigoRolesSeleccionados =[];
       this.rolesSeleccionados.forEach(rol => {
-        this.codigoRolesSeleccionados.push(rol.rolCodigo)
+        this.codigoRolesSeleccionados.push(rol.rolCodigo);
       });
       const postulacion = new Postulacion(this.codigoRolesSeleccionados, this.proyectoActualId, this.usuarioId);
 

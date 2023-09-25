@@ -12,30 +12,37 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   proyectoResumen: ProyectoResumen;
-  proyectosResumen: ProyectoResumen[];
+  proyectosResumen: ProyectoResumen[] = [];
   seleccionResumen: SeleccionResumen;
   seleccionesResumen: SeleccionResumen [] = [];
   necesidadResumen: NecesidadResumen;
   rolesSeleccionados: string[] = [];
   codigoRolesSeleccionados: string[] = [];
-  tieneMasDeUnaSeleccion = false;
+  tieneProyectosFinalizados = false;
   roles: Map<string, string> = new Map();
   estaSeleccionado = false;
   usuarioId = 0;
   proyectoId = 0;
   necesidadActualResumen: NecesidadResumen;
   necesidadActualId = 0;
+  authorities: string[] = [];
   p = 1;
 
   constructor(private proyectosService: ProyectosService, private router: Router) {}
 
   ngOnInit(): void {
-    const token = window.sessionStorage.getItem('Authorization');
-    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-    this.usuarioId = tokenPayload.id;
+    this.obtenerAuthorities();
 
     this.cargarMapaDeRoles();
     this.consultarSelecciones();
+    this.filtrarMenu();
+  }
+
+  obtenerAuthorities(): void {
+    const token = window.sessionStorage.getItem('Authorization');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+    this.usuarioId = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
   }
 
   cargarMapaDeRoles(): void {
@@ -54,62 +61,48 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
       this.seleccionesResumen = response;
 
       if(this.seleccionesResumen.length > 0) {
-        if(this.seleccionesResumen.length > 1) {
-          this.tieneMasDeUnaSeleccion = true;
-        }
-
-        this.seleccionesResumen.slice(1).forEach(seleccion => {
-          this.obtenerProyecto(seleccion.proyectoID);
+        this.seleccionesResumen.forEach(seleccion => {
+          this.obtenerProyecto(seleccion.proyectoID, seleccion);
         });
-
-        this.seleccionResumen = this.seleccionesResumen[0];
-
-        this.seleccionResumen.roles.forEach(rol => {
-          this.rolesSeleccionados.push(this.roles.get(rol));
-        });
-
-        this.estaSeleccionado = true;
-        this.consultarProyecto();
-      } else {
-        this.estaSeleccionado = false;
       }
     });
   }
 
-  obtenerProyecto(id: number): void {
+  obtenerProyecto(id: number, seleccion: SeleccionResumen): void {
     this.proyectosService.consultarProyectoPorId(id).subscribe((response) => {
-      this.proyectosResumen.push(response);
+      const unProyecto = response;
 
-      this.consultarNecesidad();
-    });
-  }
-
-  consultarProyecto(): void {
-    this.proyectosService.consultarProyectoPorId(this.seleccionResumen.proyectoID).subscribe((response) => {
-
-      this.proyectoResumen = response;
-
-      this.consultarNecesidad();
-    });
-  }
-
-  consultarNecesidad(): void {
-    this.proyectosService.consultarNecesidadPorProyectoId(this.proyectoResumen.id).subscribe((response) => {
-      this.necesidadResumen = response;
-    });
-  }
-
-  abrirPerfilProyecto(): void {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        id: this.necesidadResumen.id
+      if(unProyecto?.estado?.nombre === 'Finalizado') {
+        this.tieneProyectosFinalizados = true;
+        this.proyectosResumen.push(unProyecto);
+      } else {
+        this.seleccionResumen = seleccion;
       }
-    };
+    });
+  }
 
-    this.router.navigate(['/proyecto'], navigationExtras);
+  abrirPerfilProyecto(id: number): void {
+    this.proyectosService.consultarNecesidadPorProyectoId(id).subscribe((response) => {
+      const navigationExtras: NavigationExtras = {
+        state: {
+          id: response?.id
+        }
+      };
+
+      this.router.navigate(['/proyecto'], navigationExtras);
+    });
+
   }
 
   obtenerIdModalDescripcion(id: number): string {
     return 'descripcionModal' + id;
+  }
+
+  filtrarMenu(): void {
+    this.authorities.forEach(authority => {
+      if (authority === 'ROLE_SELECCIONADO') {
+        this.estaSeleccionado = true;
+      }
+    });
   }
 }

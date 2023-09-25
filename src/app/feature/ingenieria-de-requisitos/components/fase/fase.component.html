@@ -17,7 +17,7 @@
           </thead>
           <tbody>
             <tr
-              *ngFor="let etapa of fase?.etapas | paginate : { itemsPerPage: 10, currentPage: p }">
+              *ngFor="let etapa of fase?.etapas">
               <td class="table-body align-middle">{{ etapa?.nombre }}</td>
               <td class="table-body align-middle">
                 <button
@@ -45,12 +45,6 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls
-          previousLabel="Anterior"
-          nextLabel="Siguiente"
-          class="my-pagination"
-          (pageChange)="p = $event"
-        ></pagination-controls>
       </div>
     </div>
     <div *ngIf="esEtapaDefinitiva()">

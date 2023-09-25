@@ -178,15 +178,15 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
     this.estaCargandoPostulacion = true;
 
     if (this.rolesDeSeleccionados.length > 0) {
-      this.codigoRolesSeleccionados =[];
+      this.codigoRolesSeleccionados = [];
+
       this.rolesDeSeleccionados.forEach(rol => {
-        this.codigoRolesSeleccionados.push(rol.rolCodigo)
+        this.codigoRolesSeleccionados.push(rol.rolCodigo);
       });
-      console.log(this.codigoRolesSeleccionados)
+
       const postulacion = new Postulacion(this.codigoRolesSeleccionados, this.postulacionResumen.proyectoID, this.postulacionResumen.usuarioID);
 
-      this.proyectosService.actualizarPostulacion(postulacion, this.postulacionResumen.id).subscribe((response) => {
-        console.log('Data:', response);
+      this.proyectosService.actualizarPostulacion(postulacion, this.postulacionResumen.id).subscribe(() => {
         this.loginModal?.hide();
         window.location.reload();
       }, (error) => {

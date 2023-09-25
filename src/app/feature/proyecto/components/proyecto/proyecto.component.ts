@@ -169,13 +169,9 @@ export class ProyectoComponent implements OnInit {
   }
 
   validarSiUsuarioActualEstaSeleccionado(): void {
-    this.authorities.forEach(authority => {
-      if (authority === 'ROLE_SELECCIONADO') {
-        this.seleccionesResumen.forEach(seleccion => {
-          if(seleccion.usuarioID === this.usuarioId) {
-            this.usuarioActualEstaSeleccionado = true;
-          }
-        });
+    this.seleccionesResumen.forEach(seleccion => {
+      if(seleccion.usuarioID === this.usuarioId) {
+        this.usuarioActualEstaSeleccionado = true;
       }
     });
   }

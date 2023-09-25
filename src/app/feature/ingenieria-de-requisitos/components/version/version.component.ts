@@ -26,6 +26,7 @@ export class VersionComponent implements OnInit {
   estaCargandoGenerarVersionFinal = false;
   estaCargandoGuardarRequisito = false;
   generarVersionFinalError = false;
+  puedeCrearRequisito = false;
   mensajeError = '';
   guardarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
@@ -41,7 +42,10 @@ export class VersionComponent implements OnInit {
     this.consultarVersionPorId(this.versionId);
     this.consultarRequisitosPorVersionId(this.versionId);
     this.inicializarFormulario();
+    this.inicializarPuedeCrearRequisito();
   }
+
+
 
   posicionarPaginaAlInicio(): void {
     this.viewportScroller.scrollToPosition([0, 0]);
@@ -89,6 +93,10 @@ export class VersionComponent implements OnInit {
       descripcionRequisito: new FormControl(''),
       tipoRequisito: new FormControl('')
     });
+  }
+
+  inicializarPuedeCrearRequisito(): void {
+    this.puedeCrearRequisito = this.versionResumen.estaRechazada || this.versionResumen.esFinal;
   }
 
   abrirModalCrearRequisito(id: number): void {

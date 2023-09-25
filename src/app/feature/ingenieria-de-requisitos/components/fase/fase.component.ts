@@ -12,10 +12,10 @@ export class FaseComponent implements OnInit {
   @Input() fase: FaseResumen;
   urlArchivo = '';
   files = [];
-  p = 1;
 
-  constructor(private router: Router, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) { }
-
+  constructor(private router: Router,
+              private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) { }
+              
   ngOnInit(): void {
     if(this.fase?.nombre === 'Cierre') {
       this.consultarRequisitosDefinitivosPorEtapaId(this.fase?.etapas[0]?.id);
