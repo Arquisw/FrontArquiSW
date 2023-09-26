@@ -1,0 +1,59 @@
+<header class="header-content">
+  <section class="information">
+    <h1>Activar Cuenta</h1>
+  </section>
+</header>
+<main>
+  <section class="activate-account card card-container">
+    <p>Tu correo es {{correo}}, donde será enviado el codigo para activar la cuenta.</p>
+    <div class="container-fluid h-100">
+      <div class="row w-100 align-items-center">
+        <div class="col text-center">
+          <button type="submit" class="btn btn-success mt-3"
+            (click)="onClickIniciarActivacionCuenta()">
+            Enviar Codigo
+
+            <div *ngIf="estaCargandoIniciarActivacionCuenta" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="IniciarActivacionCuentaError" class="alert alert-danger" role="alert">
+      {{mensajeError}}
+    </div>
+  </section>
+  <Section class="activate-account card card-container" *ngIf="codigoEnviado && !codigoValido">
+    <h1>Validar código</h1>
+    <div class="retrieve-password card-body">
+      <form [formGroup]="activarCuentaForm">
+        <div class="alert alert-success" role="alert">
+          {{mensajeCodigoEnviado}}
+        </div>
+        <div class="form-floating mb-3">
+          <input type="text" class="form-control" id="codigoActivarCuenta"
+            placeholder="aaa0a0" formControlName="codigoActivarCuenta" required>
+          <label for="floatingInput">Codigo</label>
+        </div>
+        <div class="container-fluid h-100">
+          <div class="row w-100 align-items-center">
+            <div class="col text-center">
+              <button type="submit" class="btn btn-success mt-3"
+                (click)="onClickActivarCuenta()">
+                Activar Cuenta
+
+                <div *ngIf="estaCargandoActivarCuenta" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="activarCuentaError" class="alert alert-danger" role="alert">
+          {{mensajeError}}
+        </div>
+      </form>
+    </div>
+  </Section>
+</main>

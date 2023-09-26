@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpHeaders, HttpEvent, HttpResponse } from '@angular/common/http';
 import {  tap } from 'rxjs/operators';
-import { Usuario } from '@core/modelo/usuario.modelo';
+import { Usuario } from '@core/model/usuario.modelo';
 
 const UNAUTHORIZED = 401;
 
@@ -18,18 +18,18 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     if(this.user && this.user.clave && this.user.correo) {
       httpHeaders = httpHeaders.append('Authorization', 'Basic ' + window.btoa(this.user.correo + ':' + this.user.clave));
-      
+
     }else {
       const authorization = sessionStorage.getItem('Authorization');
       if(authorization){
-        httpHeaders = httpHeaders.append('Authorization', authorization); 
+        httpHeaders = httpHeaders.append('Authorization', authorization);
       }
     }
     this.user=null;
     sessionStorage.removeItem('userdetails');
     const xsrf = sessionStorage.getItem('XSRF-TOKEN');
     if(xsrf) {
-      httpHeaders = httpHeaders.append('X-XSRF-TOKEN', xsrf);  
+      httpHeaders = httpHeaders.append('X-XSRF-TOKEN', xsrf);
     }
     httpHeaders = httpHeaders.append('X-Requested-With', 'XMLHttpRequest');
     const xhr = req.clone({

@@ -1,8 +1,8 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
-import { MenuItem } from '@core/modelo/menu-item';
-import { Usuario } from '@core/modelo/usuario.modelo';
+import { MenuItem } from '@core/model/menu-item';
+import { Usuario } from '@core/model/usuario.modelo';
 import { AsociacionService } from '@core/services/asociacion.service';
 import { GestionUsuarioService } from '@core/services/login.service';
 import Modal from 'bootstrap/js/dist/modal';

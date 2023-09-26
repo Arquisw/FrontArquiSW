@@ -6,17 +6,18 @@ import { ModalCargarPdfComponent } from './components/modal-cargar-pdf/modal-car
 import { ModalDescripcionComponent } from './components/modal-descripcion/modal-descripcion.component';
 import { ModalConfirmacionComponent } from './components/modal-confirmacion/modal-confirmacion.component';
 import { ModalRechazoComponent } from './components/modal-rechazo/modal-rechazo.component';
-
-
+import { BannerActivarCuentaComponent } from './components/banner-activar-cuenta/banner-activar-cuenta.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     ModalCargarPdfComponent,
     ModalDescripcionComponent,
     ModalConfirmacionComponent,
-    ModalRechazoComponent
+    ModalRechazoComponent,
+    BannerActivarCuentaComponent
   ],
-  imports: [ReactiveFormsModule, FormsModule],
+  imports: [ReactiveFormsModule, RouterModule, FormsModule],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -25,7 +26,8 @@ import { ModalRechazoComponent } from './components/modal-rechazo/modal-rechazo.
     ModalCargarPdfComponent,
     ModalDescripcionComponent,
     ModalConfirmacionComponent,
-    ModalRechazoComponent
+    ModalRechazoComponent,
+    BannerActivarCuentaComponent
   ]
 })
 export class SharedModule { }

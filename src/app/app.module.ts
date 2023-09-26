@@ -18,6 +18,8 @@ import { ProyectosModule } from './feature/proyectos/proyectos.module';
 import { ProyectoModule } from './feature/proyecto/proyecto.module';
 import { PanelAdministradorModule } from './feature/panel-administrador/panel-administrador.module';
 import { IngenieriaDeRequisitosModule } from './feature/ingenieria-de-requisitos/ingenieria-de-requisitos.module';
+import { SharedModule } from '@shared/shared.module';
+import { ActivarCuentaModule } from './feature/activar-cuenta/activar-cuenta.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { IngenieriaDeRequisitosModule } from './feature/ingenieria-de-requisitos
     ProyectoModule,
     RecuperarClaveModule,
     PanelAdministradorModule,
-    IngenieriaDeRequisitosModule
+    IngenieriaDeRequisitosModule,
+    SharedModule,
+    ActivarCuentaModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent],

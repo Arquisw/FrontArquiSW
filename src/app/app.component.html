@@ -1,3 +1,6 @@
-<app-navbar [items]='menuItems'></app-navbar>
+<div class="grid-container">
+  <app-navbar [items]='menuItems'></app-navbar>
+  <app-banner-activar-cuenta *ngIf="inicioSesion && noTieneCuentaActiva"></app-banner-activar-cuenta>
+</div>
 <router-outlet></router-outlet>
 <app-footer></app-footer>

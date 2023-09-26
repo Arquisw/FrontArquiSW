@@ -1,0 +1,105 @@
+.header-content
+{
+  background-image: url('../../../../../assets/images/Fondo.png');
+  height: 100vh;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.information
+{
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 80vh;
+  max-width: 70vw;
+}
+
+.information h1
+{
+  color: var(--just-white);
+  font-size: 5rem;
+}
+
+.card-container {
+  max-width: 500px;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.card
+{
+  transition: all 0.2s ease;
+  background-color: var(--background-color);
+  border-color: var(--just-white);
+}
+
+.card-body
+{
+  vertical-align: middle;
+  color: var(--just-white);
+}
+
+.activate-account {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.activate-account p {
+  color: var(--just-white);
+  font-size: 1.6rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.activate-account h1 {
+  color: var(--just-white);
+  font-size: 2.2rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.btn
+{
+  font-size: 1.6rem;
+  background-color: var(--uco-green);
+}
+
+.form-control:not(:placeholder-shown) {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control:placeholder-shown {
+  padding-top: 3rem;
+  padding-bottom: 1.5rem;
+  background-color: var(--background-clear-color);
+  color: var(--black);
+}
+
+.form-control {
+  font-size: 1.4rem;
+}
+
+.form-floating label {
+  font-size: 1.4rem;
+}
+
+input {
+  background-color: var(--background-clear-color);
+  color: var(--black);
+  border-color: var(--black);
+}
+
+label {
+  color: var(--black);
+}
+
+.alert {
+  margin-top: 10px;
+}
