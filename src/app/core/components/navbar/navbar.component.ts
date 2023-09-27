@@ -262,8 +262,10 @@ export class NavbarComponent implements OnInit {
   openLogOut(): void {
     this.standarItems = this.principalItems.filter((item) => item.nombre !== 'Proyectos');
     this.inicioSesion = false;
-    this.router.navigate(['/inicio']);
     window.sessionStorage.removeItem('Authorization');
+    this.router.navigate(['/inicio']).then(() => {
+      window.location.reload();
+    });
   }
 
   cerrarMenuDeplegable(): void {
