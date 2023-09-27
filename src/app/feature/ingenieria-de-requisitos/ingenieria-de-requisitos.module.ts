@@ -10,7 +10,7 @@ import { EtapaComponent } from './components/etapa/etapa.component';
 import { VersionComponent } from './components/version/version.component';
 import { RequisitoComponent } from './components/requisito/requisito.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PdfMakeService } from './shared/service/pdf-make.service';
+import { PdfMakeService } from '../../shared/service/pdf-make/pdf-make.service';
 
 @NgModule({
   declarations: [

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import Modal from 'bootstrap/js/dist/modal';
 import { ProyectosService } from '../../shared/service/proyectos.service';
-import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
+import { NecesidadResumen } from '../../../../shared/model/proyecto/necesidad-resumen.model';
 import { Postulacion } from '../../shared/model/postulacion.model';
 import { PostulacionResumen } from '../../shared/model/postulacion-resumen.model';
 import { Router, NavigationExtras } from '@angular/router';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 
 @Component({
   selector: 'app-consultar-proyectos',
@@ -32,7 +33,7 @@ export class ConsultarProyectosComponent implements OnInit {
   rolesSeleccionados = [];
   dropdownSettings = {};
 
-  constructor(private proyectosService: ProyectosService, private router: Router) { }
+  constructor(private proyectosService: ProyectosService, private proyectoService: ProyectoService, private router: Router) { }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -101,7 +102,7 @@ export class ConsultarProyectosComponent implements OnInit {
   }
 
   consultarProyectosNegociados(): void {
-    this.proyectosService.consultarProyectosNegociados().subscribe((response) => {
+    this.proyectoService.consultarProyectosNegociados().subscribe((response) => {
       this.necesidades = response;
 
       if (this.necesidades.length > 0) {

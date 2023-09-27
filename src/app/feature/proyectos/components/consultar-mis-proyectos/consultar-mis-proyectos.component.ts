@@ -7,8 +7,10 @@ import { Requerimientos } from '../../shared/model/requerimientos.model';
 import { Proyecto } from '../../shared/model/proyecto.model';
 import { TipoConsultoria } from '../../shared/model/tipo-consultoria.model';
 import { ProyectosService } from '../../shared/service/proyectos.service';
-import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
+import { NecesidadResumen } from '../../../../shared/model/proyecto/necesidad-resumen.model';
 import { NavigationExtras, Router } from '@angular/router';
+import { AsociacionService } from '@shared/service/asociacion/asociacion.service';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 
 @Component({
   selector: 'app-consultar-mis-proyectos',
@@ -34,7 +36,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   tieneNecesidades = false;
   actualizacionError = false;
   eliminacionError = false;
-  estaCargandoEliminar : boolean[] = [];
+  estaCargandoEliminar: boolean[] = [];
   estaCargandoGuardar = false;
   estaCargandoActualizar = false;
   files = [];
@@ -45,6 +47,8 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
   constructor(private storage: AngularFireStorage,
               private proyectosService: ProyectosService,
+              private asociacionService: AsociacionService,
+              private proyectoService: ProyectoService,
               private router: Router) {
     this.necesidades.forEach(() => this.estaCargandoEliminar.push(false));
   }
@@ -166,7 +170,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   consultarAsociacion(usuarioId: number): void {
-    this.proyectosService.consultarAsociacionPorId(usuarioId).subscribe((response) => {
+    this.asociacionService.consultarAsociacionPorUsuarioId(usuarioId).subscribe((response) => {
       this.asociacionId = response.id;
       this.consultarNecesidades(this.asociacionId);
     });
@@ -194,7 +198,6 @@ export class ConsultarMisProyectosComponent implements OnInit {
     this.tiposSeleccionados = [];
     this.necesidad = this.necesidades.find(item => item?.id === id);
     this.necesidadId = this.necesidad.id;
-    console.log(this.necesidad)
     this.necesidad.proyecto.tiposConsultoria.forEach(tipoConsultoria => {
       const tipoEncontrado = this.tiposSeleccionados.find(item => item.tipoCodigo === tipoConsultoria.nombre);
       if(!tipoEncontrado){
@@ -206,7 +209,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   consultarRequerimientos(): void {
-    this.proyectosService.consultarRequerimientosPorNecesidadId(this.necesidadId).subscribe((response) => {
+    this.proyectoService.consultarRequerimientosPorNecesidadId(this.necesidadId).subscribe((response) => {
       this.urlArchivo = response?.rutaArchivo;
     });
   }
@@ -273,11 +276,10 @@ export class ConsultarMisProyectosComponent implements OnInit {
     });
   }
 
-  onEliminar(id: number, indice:number): void {
+  onEliminar(id: number, indice: number): void {
     this.estaCargandoEliminar[indice] = true;
 
-    this.proyectosService.eliminar(id).subscribe((response) => {
-      console.log('Data:', response);
+    this.proyectosService.eliminar(id).subscribe(() => {
       this.router.navigate(['/proyectos/']);
     }, (error) => {
       this.estaCargandoEliminar[indice]  = false;
@@ -310,5 +312,4 @@ export class ConsultarMisProyectosComponent implements OnInit {
   obtenerIdModalMotivoRechazo(id: number): string {
     return 'motivoRechazoModal' + id;
   }
-
 }

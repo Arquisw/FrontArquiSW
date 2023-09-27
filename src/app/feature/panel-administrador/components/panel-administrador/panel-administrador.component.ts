@@ -1,6 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '@core/model/menu-item';
+import { MenuItem } from '@core/model/menu-item.model';
 
 @Component({
   selector: 'app-panel-administrador',

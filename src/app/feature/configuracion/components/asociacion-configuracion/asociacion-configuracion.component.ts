@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AsociacionResumen } from '../../shared/model/asociacion-resumen.model';
+import { AsociacionResumen } from '../../../../shared/model/asociacion/asociacion-resumen.model';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
-import { Asociacion } from '../../shared/model/asociacion.model';
+import { AsociacionService } from '@shared/service/asociacion/asociacion.service';
+import { Asociacion } from '@shared/model/asociacion/asociacion.model';
 
 @Component({
   selector: 'app-asociacion-configuracion',
@@ -23,7 +24,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
   mensajeActualizacion= '';
   usuarioId = 0;
 
-  constructor(private configuracionService: ConfiguracionService, private router: Router) {}
+  constructor(private configuracionService: ConfiguracionService, private asociacionService: AsociacionService, private router: Router) {}
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -31,7 +32,19 @@ export class AsociacionConfiguracionComponent implements OnInit {
     this.usuarioId = tokenPayload.id;
 
     this.consultarAsociacion();
+    this.inicializarFormulario();
+  }
 
+  consultarAsociacion(): void {
+    this.asociacionService.consultarAsociacionPorUsuarioId(this.usuarioId).subscribe((response) => {
+      this.asociacionResumen = response;
+    },
+    (error) => {
+      this.mensajeError = error.message;
+    });
+  }
+
+  inicializarFormulario(): void {
     this.actualizacionForm = new FormGroup({
       nombreActualizacion: new FormControl(''),
       nitActualizacion: new FormControl(''),
@@ -66,15 +79,6 @@ export class AsociacionConfiguracionComponent implements OnInit {
       this.estaCargandoEliminacion = false;
       this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
-    });
-  }
-
-  consultarAsociacion(): void {
-    this.configuracionService.consultarAsociacionPorId(this.usuarioId).subscribe((response) => {
-      this.asociacionResumen = response;
-    },
-    (error) => {
-      this.mensajeError = error.message;
     });
   }
 }

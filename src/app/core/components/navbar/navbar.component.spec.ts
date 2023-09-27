@@ -1,7 +1,7 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavbarComponent } from './navbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 describe('NavbarComponent', () => {

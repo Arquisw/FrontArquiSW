@@ -45,8 +45,6 @@ export class VersionComponent implements OnInit {
     this.inicializarPuedeCrearRequisito();
   }
 
-
-
   posicionarPaginaAlInicio(): void {
     this.viewportScroller.scrollToPosition([0, 0]);
   }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AdministradorService } from '../../shared/service/administrador.service';
+import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
+import { MotivoRechazoNecesidad } from '../../shared/model/motivo-rechazo-necesidad.model';
 
 @Component({
   selector: 'app-aprobaciones',
@@ -8,13 +10,12 @@ import { AdministradorService } from '../../shared/service/administrador.service
   styleUrls: ['./aprobaciones.component.scss']
 })
 export class AprobacionesComponent implements  OnInit{
-  necesidadAprobar: any[] = [];
-  mensajeError= '';
+  necesidadesAprobar: NecesidadResumen[] = [];
+  mensajeError = '';
   hayProyectosPorAprobar = false;
   estaCargandoAprobarNecesidad: boolean[] = [];
   estaCargandoDeclinarNecesidad = false;
   p = 1;
-
   mensajeAsociacion;
   registroError;
 
@@ -33,12 +34,10 @@ export class AprobacionesComponent implements  OnInit{
   }
 
   consultaAprobaciones(): void {
-    this.necesidadAprobar= [];
-    let petecionAprobar;
     this.admistradorService.consultarNecesidadesPendienteAprobacion().subscribe((response) => {
-      petecionAprobar = response;
-      this.necesidadAprobar = petecionAprobar;
-      if(this.necesidadAprobar.length > 0) {
+      this.necesidadesAprobar = response;
+
+      if(this.necesidadesAprobar.length > 0) {
         this.hayProyectosPorAprobar = true;
       }
     });
@@ -49,8 +48,7 @@ export class AprobacionesComponent implements  OnInit{
 
     this.admistradorService.aprobarNecesidad(id).subscribe(() => {
       window.location.reload();
-    },
-    (error) => {
+    }, (error) => {
       this.estaCargandoAprobarNecesidad[indice] = false;
       this.mensajeError=error.message;
     });
@@ -59,14 +57,11 @@ export class AprobacionesComponent implements  OnInit{
   declinarNecesidad(motivoDeclinada: string, id: number): void {
     this.estaCargandoDeclinarNecesidad = true;
 
-    const razonRechazo = {
-      motivoRechazo: motivoDeclinada
-    };
+    const razonRechazo = new MotivoRechazoNecesidad(motivoDeclinada);
 
     this.admistradorService.declinarNecesidad(id, razonRechazo).subscribe(() => {
       window.location.reload();
-    },
-    (error) => {
+    }, (error) => {
       this.estaCargandoDeclinarNecesidad = false;
       this.mensajeError=error.message;
     });
@@ -81,5 +76,4 @@ export class AprobacionesComponent implements  OnInit{
     };
     this.router.navigate(['/proyecto'], navigationExtras);
   }
-
 }

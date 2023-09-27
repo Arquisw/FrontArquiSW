@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { ProyectoService } from '../../shared/service/proyecto.service';
-import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
+import { ProyectoEspecificoService } from '../../shared/service/proyecto-especifico.service';
+import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
 import { SeleccionResumen } from 'src/app/feature/proyectos/shared/model/seleccion-resumen.model';
-import { StorageService } from '@shared/service/storage-service/storage.service';
-import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
+import { StorageService } from '@shared/service/storage/storage.service';
+import { RequerimientosResumen } from '@shared/model/proyecto/requerimientos-resumen.model';
 import { ViewportScroller } from '@angular/common';
 import { PropetarioProyecto } from '../../shared/model/propetario-proyecto.model';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 
 @Component({
   selector: 'app-proyecto',
@@ -44,7 +45,10 @@ export class ProyectoComponent implements OnInit {
   authorities: string[] = [];
   p = 1;
 
-  constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private router: Router, private storageService: StorageService) {}
+  constructor(private viewportScroller: ViewportScroller,
+              private proyectoEspecificoService: ProyectoEspecificoService,
+              private proyectoService: ProyectoService,
+              private router: Router, private storageService: StorageService) {}
 
   ngOnInit(): void {
     this.posicionarPaginaAlInicio();
@@ -111,7 +115,7 @@ export class ProyectoComponent implements OnInit {
   consultarSiUsuarioActualEsPropetarioDelProyecto(): void {
     const propetarioProyecto = new PropetarioProyecto(this.necesidadId, this.usuarioId);
 
-    this.proyectoService.esPropetarioDelProyecto(propetarioProyecto).subscribe((response) => {
+    this.proyectoEspecificoService.esPropetarioDelProyecto(propetarioProyecto).subscribe((response) => {
       if(response.valor) {
         this.usuarioActualEsDuenoDelProyecto = true;
         this.puedeVerContrato = true;
@@ -155,7 +159,7 @@ export class ProyectoComponent implements OnInit {
   }
 
   consultarSeleccionesPorId(): void {
-    this.proyectoService.consultarSeleccionesPorProyectoId(this.proyectoId).subscribe((response) => {
+    this.proyectoEspecificoService.consultarSeleccionesPorProyectoId(this.proyectoId).subscribe((response) => {
       response.forEach(seleccion => {
         this.seleccionesResumen.push(seleccion);
       });
@@ -177,7 +181,7 @@ export class ProyectoComponent implements OnInit {
   }
 
   consultarContratoPorId(): void {
-    this.proyectoService.consultarContratoPorNecesidadId(this.necesidadResumen.id).subscribe((response) => {
+    this.proyectoEspecificoService.consultarContratoPorNecesidadId(this.necesidadResumen.id).subscribe((response) => {
       this.urlContrato = response?.rutaArchivo;
       this.tieneContrato = true;
     }, (error) => {
@@ -241,7 +245,7 @@ export class ProyectoComponent implements OnInit {
   aprobarProyectoPorRolIngenieria(): void {
     this.estaCargandoAprobarProyectoPorRolIngenieria = true;
 
-    this.proyectoService.aprobarProyectoPorRolIngenieria(this.necesidadResumen.proyecto.id).subscribe(() => {
+    this.proyectoEspecificoService.aprobarProyectoPorRolIngenieria(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
       this.estaCargandoAprobarProyectoPorRolIngenieria = false;
@@ -253,7 +257,7 @@ export class ProyectoComponent implements OnInit {
   aprobarProyectoRolLiderDeEquipo(): void {
     this.estaCargandoAprobarProyectoPorRolLiderDeEquipo = true;
 
-    this.proyectoService.aprobarProyectoPorRolLiderDeEquipo(this.necesidadResumen.proyecto.id).subscribe(() => {
+    this.proyectoEspecificoService.aprobarProyectoPorRolLiderDeEquipo(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
       this.estaCargandoAprobarProyectoPorRolLiderDeEquipo = false;
@@ -265,7 +269,7 @@ export class ProyectoComponent implements OnInit {
   aprobarProyectoPorRolDirectorDeProyecto(): void {
     this.estaCargandoAprobarProyectoPorRolDirectorDeProyecto = true;
 
-    this.proyectoService.aprobarProyectoPorRolDirectorDeProyecto(this.necesidadResumen.proyecto.id).subscribe(() => {
+    this.proyectoEspecificoService.aprobarProyectoPorRolDirectorDeProyecto(this.necesidadResumen.proyecto.id).subscribe(() => {
       window.location.reload();
     }, (error) => {
       this.estaCargandoAprobarProyectoPorRolDirectorDeProyecto = false;

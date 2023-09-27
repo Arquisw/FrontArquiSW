@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
-import { PersonaResumen } from '../../shared/model/persona-resumen.model';
-import { AsociacionResumen } from '../../shared/model/asociacion-resumen.model';
+import { AsociacionResumen } from '../../../../shared/model/asociacion/asociacion-resumen.model';
 import { Persona } from '../../shared/model/persona.model';
 import { Clave } from '../../shared/model/clave.model';
+import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
+import { UsuarioService } from '@shared/service/usuario/usuario.service';
 
 @Component({
   selector: 'app-usuario-configuracion',
@@ -27,7 +28,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
   mensajeActualizacion= '';
   usuarioId = 0;
 
-  constructor(private configuracionService: ConfiguracionService, private router: Router) {}
+  constructor(private configuracionService: ConfiguracionService, private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -35,7 +36,19 @@ export class UsuarioConfiguracionComponent implements OnInit {
     this.usuarioId = tokenPayload.id;
 
     this.consultarUsuario();
+    this.inicializarFormularios();
+  }
 
+  consultarUsuario(): void {
+    this.usuarioService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
+      this.personaResumen = response;
+    },
+    (error) => {
+      this.mensajeError = error.message;
+    });
+  }
+
+  inicializarFormularios(): void {
     this.actualizacionForm = new FormGroup({
       nombreActualizacion: new FormControl(''),
       apellidosActualizacion: new FormControl(''),
@@ -97,15 +110,6 @@ export class UsuarioConfiguracionComponent implements OnInit {
       this.estaCargandoEliminacion = false;
       this.eliminacionError = true;
       this.mensajeError = error?.error?.mensaje;
-    });
-  }
-
-  consultarUsuario(): void {
-    this.configuracionService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
-      this.personaResumen = response;
-    },
-    (error) => {
-      this.mensajeError = error.message;
     });
   }
 }
