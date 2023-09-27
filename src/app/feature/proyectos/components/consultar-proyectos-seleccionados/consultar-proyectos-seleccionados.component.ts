@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
-import { ProyectoResumen } from '../../shared/model/proyecto-resumen.model';
+import { NecesidadResumen } from '../../../../shared/model/proyecto/necesidad-resumen.model';
 import { SeleccionResumen } from '../../shared/model/seleccion-resumen.model';
 import { ProyectosService } from '../../shared/service/proyectos.service';
 import { NavigationExtras, Router } from '@angular/router';
+import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 
 @Component({
   selector: 'app-consultar-proyectos-seleccionados',
@@ -28,7 +29,7 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   authorities: string[] = [];
   p = 1;
 
-  constructor(private proyectosService: ProyectosService, private router: Router) {}
+  constructor(private proyectosService: ProyectosService, private proyectoService: ProyectoService, private router: Router) {}
 
   ngOnInit(): void {
     this.obtenerAuthorities();
@@ -69,7 +70,7 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   }
 
   obtenerProyecto(id: number, seleccion: SeleccionResumen): void {
-    this.proyectosService.consultarProyectoPorId(id).subscribe((response) => {
+    this.proyectoService.consultarProyectoPorId(id).subscribe((response) => {
       const unProyecto = response;
 
       if(unProyecto?.estado?.nombre === 'Finalizado') {

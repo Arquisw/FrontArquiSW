@@ -1,8 +1,9 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-de-requisitos.service';
-import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
 import { FaseResumen } from '../../shared/model/fase-resumen.module';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
+import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
 
 @Component({
   selector: 'app-ingenieria-de-requisitos',
@@ -15,7 +16,7 @@ export class IngenieriaDeRequisitosComponent implements OnInit {
   fasesResumen: FaseResumen[] = [];
   inicioElProcesoDeConsultoria = false;
 
-  constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) { }
+  constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) { }
 
   ngOnInit(): void {
     this.posicionarPaginaAlInicio();
@@ -32,7 +33,7 @@ export class IngenieriaDeRequisitosComponent implements OnInit {
   }
 
   consultarProyectoPorId(id: number): void {
-    this.ingenieriaDeRequisitosService.consultarProyectoPorId(id).subscribe((response) => {
+    this.proyectoService.consultarProyectoPorId(id).subscribe((response) => {
       this.proyectoResumen = response;
 
       this.evaluarSiInicioElProcesoDeConsultoria();
@@ -50,7 +51,7 @@ export class IngenieriaDeRequisitosComponent implements OnInit {
   consultarFasesDelProyecto(id: number): void {
     this.ingenieriaDeRequisitosService.consultarFasesPorProyectoPorId(id).subscribe((response) => {
       this.fasesResumen = response;
-      
+
       if(this.fasesResumen.length > 0) {
         this.inicioElProcesoDeConsultoria = true;
       }

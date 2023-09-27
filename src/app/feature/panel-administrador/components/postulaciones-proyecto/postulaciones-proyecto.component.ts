@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PostulacionResumen } from 'src/app/feature/proyectos/shared/model/postulacion-resumen.model';
-import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
 import { AdministradorService } from '../../shared/service/administrador.service';
 import { NavigationExtras, Router } from '@angular/router';
 import Modal from 'bootstrap/js/dist/modal';
 import { Seleccion } from '../../shared/model/seleccion.model';
-import { MotivoRechazoPostulacion } from '../../shared/model/motivo-rechazo-postulacion.module';
+import { MotivoRechazoPostulacion } from '../../shared/model/motivo-rechazo-postulacion.model';
+import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 
 @Component({
   selector: 'app-postulaciones-proyecto',
@@ -17,7 +18,7 @@ export class PostulacionesProyectoComponent implements OnInit {
   proyectoId = 0;
   hayUsuariosPostulados = false;
   estaCargandoSeleccionar = false;
-  estaCargandoDeclinar: boolean[] = [];;
+  estaCargandoDeclinar: boolean[] = [];
   postulacionesResumen: PostulacionResumen[] = [];
   postulacionActual: PostulacionResumen;
   proyecto: ProyectoResumen;
@@ -30,7 +31,9 @@ export class PostulacionesProyectoComponent implements OnInit {
   dropdownSettings = {};
   p = 1;
 
-  constructor(private router: Router, private administradorService: AdministradorService) {
+  constructor(private router: Router,
+              private administradorService: AdministradorService,
+              private proyectoService: ProyectoService) {
     this.postulacionesResumen.forEach(() => this.estaCargandoDeclinar.push(false));
 
   }
@@ -73,7 +76,7 @@ export class PostulacionesProyectoComponent implements OnInit {
   }
 
   consultarProyectoPorId(): void {
-    this.administradorService.consultarProyectoPorId(this.proyectoId).subscribe((response) => {
+    this.proyectoService.consultarProyectoPorId(this.proyectoId).subscribe((response) => {
       this.proyecto = response;
     });
   }
@@ -127,15 +130,13 @@ export class PostulacionesProyectoComponent implements OnInit {
     window.location.reload();
   }
 
-
-
   onClickSelect(id: number): void {
     this.estaCargandoSeleccionar = true;
 
     if (this.rolesSeleccionados.length > 0) {
       this.codigoRolesSeleccionados = [];
       this.rolesSeleccionados.forEach(rol => {
-        this.codigoRolesSeleccionados.push(rol.rolCodigo)
+        this.codigoRolesSeleccionados.push(rol.rolCodigo);
       });
       const postulacion = new Seleccion(this.codigoRolesSeleccionados);
 
@@ -170,6 +171,4 @@ export class PostulacionesProyectoComponent implements OnInit {
   obtenerIdModalRechazo(id: number): string {
     return 'rechazoModal' + id;
   }
-
-
 }

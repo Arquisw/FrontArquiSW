@@ -9,8 +9,8 @@ import { FundamentacionComponent } from './feature/fundamentacion/fundamentacion
 import { AcercanosotrosComponent } from './feature/acercanosotros/acercanosotros.component';
 import { PresentacionComponent } from './feature/presentacion/presentacion.component';
 import { ConfiguracionModule } from './feature/configuracion/configuracion.module';
-import { PerfilModule } from './feature/perfil/perfil.module';
-import { AsociacionModule } from './feature/asociacion/asociacion.module';
+import { PerfilUsuarioModule } from './feature/perfil-usuario/perfil-usuario.module';
+import { PerfilAsociacionModule } from './feature/perfil-asociacion/perfil-asociacion.module';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
 import { RecuperarClaveModule } from './feature/recuperar-clave/recuperar-clave.module';
@@ -34,8 +34,8 @@ import { ActivarCuentaModule } from './feature/activar-cuenta/activar-cuenta.mod
     BrowserModule,
     AppRoutingModule,
     CoreModule,
-    PerfilModule,
-    AsociacionModule,
+    PerfilUsuarioModule,
+    PerfilAsociacionModule,
     ConfiguracionModule,
     ProyectosModule,
     ProyectoModule,

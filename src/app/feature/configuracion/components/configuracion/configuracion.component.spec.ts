@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfiguracionComponent } from './configuracion.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 
 class ActivatedRouteStub {
@@ -11,7 +11,7 @@ class ActivatedRouteStub {
     paramMap: {
       get: (param: string) => {
         if (param === 'id') {
-          return '123'; 
+          return '123';
         }
       }
     }

@@ -1,27 +1,21 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { Requerimientos } from '../model/requerimientos.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { NecesidadResumen } from '../model/necesidad-resumen.model';
-import { ProyectoResumen } from '../model/proyecto-resumen.model';
-import { ProyectoRespuesta } from '../model/proyecto-respuesta.model';
-import { AsociacionResumen } from 'src/app/feature/configuracion/shared/model/asociacion-resumen.model';
+import { NecesidadResumen } from '../../../../shared/model/proyecto/necesidad-resumen.model';
 import { Postulacion } from '../model/postulacion.model';
 import { PostulacionResumen } from '../model/postulacion-resumen.model';
 import { SeleccionResumen } from '../model/seleccion-resumen.model';
 import { Proyecto } from '../model/proyecto.model';
-import { RequerimientosResumen } from '../model/requerimientos-resumen.model';
+import { Respuesta } from '@shared/model/respuesta/respuesta.model';
 
 @Injectable()
 export class ProyectosService {
   private readonly NECESIDADES_ENDPOINT: string = '/necesidades';
   private readonly REQUERIMIENTOS_ENDPOINT: string = '/requerimientos';
   private readonly ASOCIACION_ENDPOINT: string = '/asociacion';
-  private readonly PROYECTOS_ENDPOINT: string = '/proyectos';
   private readonly PROYECTO_ENDPOINT: string = '/proyecto';
-  private readonly NEGOCICADOS_ENDPOINT: string = '/negociados';
-  private readonly ASOCIACIONES_ENDPOINT: string = '/asociaciones';
   private readonly POSTULACIONES_ENDPOINT: string = '/postulaciones';
   private readonly POSTULACION_ENDPOINT: string = '/postulacion';
   private readonly SELECCIONES_ENDPOINT: string = '/selecciones';
@@ -30,34 +24,29 @@ export class ProyectosService {
 
   constructor(private httpService: HttpService) { }
 
-  public guardar(proyecto: Proyecto , id: number): Observable<ProyectoRespuesta<number>>
+  public guardar(proyecto: Proyecto , id: number): Observable<Respuesta<number>>
   {
-    return this.httpService.doPost<Proyecto, ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/${id}`, proyecto);
+    return this.httpService.doPost<Proyecto, Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/${id}`, proyecto);
   }
 
-  public guardarRequerimientos(requerimientos: Requerimientos, id: number): Observable<ProyectoRespuesta<number>>
+  public guardarRequerimientos(requerimientos: Requerimientos, id: number): Observable<Respuesta<number>>
   {
-    return this.httpService.doPost<Requerimientos, ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.REQUERIMIENTOS_ENDPOINT}/${id}`, requerimientos);
+    return this.httpService.doPost<Requerimientos, Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.REQUERIMIENTOS_ENDPOINT}/${id}`, requerimientos);
   }
 
-  public actualizar(proyecto: Proyecto, id: number): Observable<ProyectoRespuesta<number>>
+  public actualizar(proyecto: Proyecto, id: number): Observable<Respuesta<number>>
   {
-    return this.httpService.doPut<Proyecto, ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/${id}`, proyecto);
+    return this.httpService.doPut<Proyecto, Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/${id}`, proyecto);
   }
 
-  public actualizarRequerimientos(requerimientos: Requerimientos, id: number): Observable<ProyectoRespuesta<number>>
+  public actualizarRequerimientos(requerimientos: Requerimientos, id: number): Observable<Respuesta<number>>
   {
-    return this.httpService.doPut<Requerimientos, ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.REQUERIMIENTOS_ENDPOINT}/${id}`, requerimientos);
+    return this.httpService.doPut<Requerimientos, Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.REQUERIMIENTOS_ENDPOINT}/${id}`, requerimientos);
   }
 
-  public eliminar(id: number): Observable<ProyectoRespuesta<number>>
+  public eliminar(id: number): Observable<Respuesta<number>>
   {
-    return this.httpService.doDelete<ProyectoRespuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/${id}`);
-  }
-
-  public consultarNecesidadPorId(id: number): Observable<NecesidadResumen>
-  {
-    return this.httpService.doGetById<NecesidadResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/`, id);
+    return this.httpService.doDelete<Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}/${id}`);
   }
 
   public consultarNecesidadesPorAsociacionId(id: number): Observable<NecesidadResumen[]>
@@ -65,34 +54,14 @@ export class ProyectosService {
     return this.httpService.doGetById<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ASOCIACION_ENDPOINT}/`, id);
   }
 
-  public consultarProyectoPorId(id: number): Observable<ProyectoResumen>
+  public guardarPostulacion(postulacion: Postulacion): Observable<Respuesta<number>>
   {
-    return this.httpService.doGetById<ProyectoResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}/`, id);
+    return this.httpService.doPost<Postulacion, Respuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}`, postulacion);
   }
 
-  public consultarRequerimientosPorNecesidadId(id: number): Observable<RequerimientosResumen>
+  public actualizarPostulacion(postulacion: Postulacion, id: number): Observable<Respuesta<number>>
   {
-    return this.httpService.doGetById<RequerimientosResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.REQUERIMIENTOS_ENDPOINT}/`, id);
-  }
-
-  public consultarProyectosNegociados(): Observable<NecesidadResumen[]>
-  {
-    return this.httpService.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}${this.NEGOCICADOS_ENDPOINT}`);
-  }
-
-  public consultarAsociacionPorId(id: number): Observable<AsociacionResumen>
-  {
-    return this.httpService.doGetById<AsociacionResumen>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}/`, id);
-  }
-
-  public guardarPostulacion(postulacion: Postulacion): Observable<ProyectoRespuesta<number>>
-  {
-    return this.httpService.doPost<Postulacion, ProyectoRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}`, postulacion);
-  }
-
-  public actualizarPostulacion(postulacion: Postulacion, id: number): Observable<ProyectoRespuesta<number>>
-  {
-    return this.httpService.doPut<Postulacion, ProyectoRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}/${id}`, postulacion);
+    return this.httpService.doPut<Postulacion, Respuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}/${id}`, postulacion);
   }
 
   public consultarPostulacionesPorUsuarioId(id: number): Observable<PostulacionResumen[]>
