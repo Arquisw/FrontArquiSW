@@ -11,8 +11,8 @@ import { ManejadorError } from './interceptor/manejador-error';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
-import { AsociacionModule } from '../feature/asociacion/asociacion.module';
-import { PerfilModule } from '../feature/perfil/perfil.module';
+import { PerfilAsociacionModule } from '../feature/perfil-asociacion/perfil-asociacion.module';
+import { PerfilUsuarioModule } from '../feature/perfil-usuario/perfil-usuario.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +24,8 @@ import { PerfilModule } from '../feature/perfil/perfil.module';
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AsociacionModule,
-    PerfilModule
+    PerfilAsociacionModule,
+    PerfilUsuarioModule
   ],
   exports: [
     NavbarComponent,

@@ -4,7 +4,7 @@ import { ProyectoComponent } from './components/proyecto/proyecto.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
-import { ProyectoService } from './shared/service/proyecto.service';
+import { ProyectoEspecificoService } from './shared/service/proyecto-especifico.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
@@ -16,6 +16,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SharedModule,
     NgxPaginationModule
   ],
-  providers: [ProyectoService]
+  providers: [ProyectoEspecificoService]
 })
 export class ProyectoModule { }

@@ -3,9 +3,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { NavigationExtras, Router } from '@angular/router';
 import { Login } from '@core/model/login.model';
 import { MenuItem } from '@core/model/menu-item.model';
-import { Usuario } from '@shared/model/usuario/usuario.model';
-import { AsociacionService } from '@shared/service/asociacion/asociacion.service';
-import { LoginService } from '@core/service/login/login.service';
+import { Usuario } from '@core/model/usuario.model';
+import { CoreService } from '@core/service/core.service';
 import Modal from 'bootstrap/js/dist/modal';
 import { UsuarioService } from '@shared/service/usuario/usuario.service';
 import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
@@ -51,8 +50,7 @@ export class NavbarComponent implements OnInit {
   wdw = window;
 
   constructor(private formBuilder: FormBuilder,
-              private loginService: LoginService,
-              private asociacionService: AsociacionService,
+              private coreService: CoreService,
               private usuarioService: UsuarioService,
               private router: Router,
               private elementRef: ElementRef) { }
@@ -190,7 +188,7 @@ export class NavbarComponent implements OnInit {
 
     const login: Login= new Login(this.loginForm.get('correoLogin').value, this.loginForm.get('claveLogin').value);
 
-    this.loginService.validarLogin(login).subscribe((response) => {
+    this.coreService.validarLogin(login).subscribe((response) => {
       this.id = response?.valor;
       this.consultarPersona();
       this.standarItems = this.principalItems;
@@ -213,7 +211,7 @@ export class NavbarComponent implements OnInit {
     const usuario: Usuario = new Usuario(this.registroForm.get('nombreRegistro')?.value, this.registroForm.get('apellidosRegistro')?.value, this.registroForm.get('correoRegistro')?.value, this.registroForm.get('claveRegistro')?.value);
 
     if(this.registroForm.get('claveRegistro')?.value===this.registroForm.get('confirmarClaveRegistro')?.value){
-      this.usuarioService.registrarUsuario(usuario).subscribe(() => {
+      this.coreService.registrarUsuario(usuario).subscribe(() => {
         this.estaCargandoRegistro = false;
         this.registroExitoso= true;
       },
@@ -235,7 +233,7 @@ export class NavbarComponent implements OnInit {
   }
 
   consultarPersona(): void {
-    this.usuarioService.consultarPersona(this.id).subscribe((response) => {
+    this.usuarioService.consultarPersonaPorId(this.id).subscribe((response) => {
       this.persona = response;
     },
     (error) => {
@@ -249,7 +247,7 @@ export class NavbarComponent implements OnInit {
 
     const asociacion = new Asociacion(this.registroAsociacionForm.get('nombreAsociacion').value, this.registroAsociacionForm.get('nit').value, this.registroAsociacionForm.get('numeroContacto').value);
 
-    this.asociacionService.registrarAsociacion(asociacion, this.id).subscribe(() => {
+    this.coreService.registrarAsociacion(asociacion, this.id).subscribe(() => {
       this.estaCargandoRegistroAsociacion = false;
       this.registroAsociacionForm.reset();
       this.registroExitoso= true;

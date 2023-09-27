@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { AdministradorService } from '../../shared/service/administrador.service';
+import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
+import { Contrato } from '../../shared/model/contrato.model';
 
 @Component({
   selector: 'app-contrataciones',
@@ -8,7 +10,7 @@ import { AdministradorService } from '../../shared/service/administrador.service
   styleUrls: ['./contrataciones.component.scss']
 })
 export class ContratacionesComponent implements OnInit {
-  necesidadAprobadas: any[] = [];
+  necesidadesAprobadas: NecesidadResumen[] = [];
   hayNecesidadesPorConcretar = false;
   estaCargandoGuardarContrato: boolean[] = [];
   mensajeError = '';
@@ -30,14 +32,10 @@ export class ContratacionesComponent implements OnInit {
   }
 
   consultaAprobaciones(): void {
-    this.necesidadAprobadas = [];
-    let petecionAprobar;
-
     this.admistradorService.consultarNecesidadesAprobadas().subscribe((response) => {
-      petecionAprobar = response;
-      this.necesidadAprobadas = petecionAprobar;
+      this.necesidadesAprobadas = response;
 
-      if (this.necesidadAprobadas.length > 0) {
+      if (this.necesidadesAprobadas.length > 0) {
         this.hayNecesidadesPorConcretar = true;
       }
     }, (error) => {
@@ -50,10 +48,8 @@ export class ContratacionesComponent implements OnInit {
 
     this.consultaContrato(necesidadId);
 
-    const contratoAlmacenar = {
-      rutaArchivo: valor
-    };
-
+    const contratoAlmacenar = new Contrato(valor);
+    
     if (this.contrato === null) {
       this.guardarContrato(necesidadId, contratoAlmacenar, indice);
     } else {

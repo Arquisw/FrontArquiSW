@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Observable, map } from 'rxjs';
-import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
+import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
 @Injectable({
   providedIn: 'root'
 })

@@ -2,9 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FaseResumen } from '../../shared/model/fase-resumen.module';
 import { Router, NavigationExtras } from '@angular/router';
 import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-de-requisitos.service';
-import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
 import { PdfMakeService } from '../../../../shared/service/pdf-make/pdf-make.service';
 import { RequisitoResumen } from '../../shared/model/requisito-resumen.module';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
+import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
 
 @Component({
   selector: 'app-fase',
@@ -20,6 +21,7 @@ export class FaseComponent implements OnInit {
   files = [];
 
   constructor(private router: Router,
+              private proyectoService: ProyectoService,
               private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService,
               private pdfMakeService: PdfMakeService) { }
 
@@ -49,7 +51,7 @@ export class FaseComponent implements OnInit {
   }
 
   consultarProyectoPorId(id: number): void {
-    this.ingenieriaDeRequisitosService.consultarProyectoPorId(id).subscribe((response) => {
+    this.proyectoService.consultarProyectoPorId(id).subscribe((response) => {
       this.proyectoResumen = response;
 
       this.consultarVersionEtapaDefinitiva(this.fase?.etapas[0]?.id);

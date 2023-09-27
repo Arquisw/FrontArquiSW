@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AdministradorService } from 'src/app/feature/panel-administrador/shared/service/administrador.service';
-import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
+import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
 
 @Component({
   selector: 'app-postulaciones',

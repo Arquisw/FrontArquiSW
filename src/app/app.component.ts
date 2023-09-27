@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   consultarUsuarioConCorreo(correo: string): void {
-    this.usuarioService.consultarUsuario(correo).subscribe((response: UsuarioResumen) => {
+    this.usuarioService.consultarUsuarioPorCorreo(correo).subscribe((response: UsuarioResumen) => {
       if(!response.activado) {
         this.noTieneCuentaActiva = true;
       } else {

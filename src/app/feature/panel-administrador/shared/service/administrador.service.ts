@@ -4,17 +4,23 @@ import { environment } from 'src/environments/environment';
 import { RolResumen } from '../model/rol-resumen.model';
 import { Observable } from 'rxjs';
 import { Rol } from '../model/rol.model';
-import { PanelAdministradorRespuesta } from '../model/panel-administrador-respuesta.model';
-import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
+import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
 import { PostulacionResumen } from 'src/app/feature/proyectos/shared/model/postulacion-resumen.model';
-import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
 import { Seleccion } from '../model/seleccion.model';
-import { MotivoRechazoPostulacion } from '../model/motivo-rechazo-postulacion.module';
+import { MotivoRechazoPostulacion } from '../model/motivo-rechazo-postulacion.model';
+import { Respuesta } from '@shared/model/respuesta/respuesta.model';
+import { PeticionEliminacionPersonaResumen } from '../model/peticion-eliminacion-persona-resumen.model';
+import { PeticionEliminacionAsociacionResumen } from '../model/peticion-eliminacion-asociacion-resumen.model';
+import { PeticionEliminacionNecesidadResumen } from '../model/peticion-eliminacion-necesidad-resumen.model';
+import { MotivoRechazoNecesidad } from '../model/motivo-rechazo-necesidad.model';
+import { ContratoResumen } from '@shared/model/proyecto/contrato-resumen-model';
+import { Contrato } from '../model/contrato.model';
 
 @Injectable()
 
 export class AdministradorService {
   private readonly USUARIOS_ENDPOINT: string = '/usuarios';
+  private readonly ASOCIACIONES_ENDPOINT: string = '/asociaciones';
   private readonly ROLES_ENDPOINT: string = '/roles';
   private readonly NECESIDADES_ENDPOINT: string = '/necesidades';
   private readonly PROYECTOS_ENDPOINT: string = '/proyectos';
@@ -22,53 +28,43 @@ export class AdministradorService {
   private readonly POSTULACIONES_ENDPOINT: string = '/postulaciones';
   private readonly ADMINISTRADOR_ENDPOINT: string = '/administrador';
   private readonly SELECCIONAR_ENDPOINT: string = '/seleccionar';
+  private readonly APROBAR_ENDPOINT: string = '/aprobar';
+  private readonly CONTRATOS_ENDPOINT: string = '/contratos';
   private readonly RECHAZAR_ENDPOINT: string = '/rechazar';
   private readonly PROYECTO_ENDPOINT: string = '/proyecto';
 
   constructor(private http: HttpService) { }
 
-  consultarPeticionesUsuariosEliminar() {
-    return this.http.doGet(environment.endpoint +'/usuarios/administrador');
+  consultarPeticionesUsuariosEliminar(): Observable<PeticionEliminacionPersonaResumen[]> {
+    return this.http.doGet<PeticionEliminacionPersonaResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`);
   }
 
-  consultarPeticionesAsociacionAEliminar() {
-    return this.http.doGet(environment.endpoint +'/asociaciones/administrador');
+  consultarPeticionesAsociacionAEliminar(): Observable<PeticionEliminacionAsociacionResumen[]> {
+    return this.http.doGet<PeticionEliminacionAsociacionResumen[]>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`);
   }
 
-  consultarPeticionesNecesidadAEliminar() {
-    return this.http.doGet(environment.endpoint +'/necesidades/administrador');
+  consultarPeticionesNecesidadAEliminar(): Observable<PeticionEliminacionNecesidadResumen[]> {
+    return this.http.doGet<PeticionEliminacionNecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`);
   }
 
-  consultarPersonaParaEliminar(id: number) {
-    return this.http.doGet(environment.endpoint +'/usuarios/'+ id);
+  consultarNecesidadesPendienteAprobacion(): Observable<NecesidadResumen[]> {
+    return this.http.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}`);
   }
 
-  consultarAsociacionParaEliminar(id: number) {
-    return this.http.doGet(environment.endpoint +'/asociaciones/asociacion/'+ id);
+  consultarNecesidadesAprobadas(): Observable<NecesidadResumen[]> {
+    return this.http.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}`);
   }
 
-  consultarNecesidadParaEliminar(id: number) {
-    return this.http.doGet(environment.endpoint +'/necesidades/'+ id);
+  eliminarAsociacion(id: number): Observable<Respuesta<number>> {
+    return this.http.doDelete<Respuesta<number>>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${id}`);
   }
 
-  consultarNecesidadesPendienteAprobacion() {
-    return this.http.doGet(environment.endpoint +'/necesidades');
+  eliminarPersona(id: number): Observable<Respuesta<number>> {
+    return this.http.doDelete<Respuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${id}`);
   }
 
-  consultarNecesidadesAprobadas() {
-    return this.http.doGet(environment.endpoint +'/necesidades/proyectos');
-  }
-
-  eliminarAsociacion(id: number) {
-    return this.http.doDelete(environment.endpoint +'/asociaciones/administrador/'+ id);
-  }
-
-  eliminarPersona(id: number) {
-    return this.http.doDelete(environment.endpoint +'/usuarios/administrador/'+ id);
-  }
-
-  eliminarProyecto(id: number) {
-    return this.http.doDelete(environment.endpoint +'/necesidades/administrador/'+ id);
+  eliminarProyecto(id: number): Observable<Respuesta<number>> {
+    return this.http.doDelete<Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${id}`);
   }
 
   public consultarRoles(): Observable<RolResumen[]>
@@ -76,9 +72,9 @@ export class AdministradorService {
     return this.http.doGet<RolResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ROLES_ENDPOINT}`);
   }
 
-  public actualizarRol(rol: Rol, id: number): Observable<PanelAdministradorRespuesta<number>>
+  public actualizarRol(rol: Rol, id: number): Observable<Respuesta<number>>
   {
-    return this.http.doPut<Rol, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ROLES_ENDPOINT}/${id}`, rol);
+    return this.http.doPut<Rol, Respuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ROLES_ENDPOINT}/${id}`, rol);
   }
 
   public consultarProyectosNegociados(): Observable<NecesidadResumen[]>
@@ -91,40 +87,33 @@ export class AdministradorService {
     return this.http.doGetById<PostulacionResumen[]>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.PROYECTO_ENDPOINT}/`, id);
   }
 
-  public consultarProyectoPorId(id: number): Observable<ProyectoResumen>
+  public seleccionarUsuario(seleccion: Seleccion, id: number): Observable<Respuesta<number>>
   {
-    return this.http.doGetById<ProyectoResumen>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}/`, id);
+    return this.http.doPut<Seleccion, Respuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.SELECCIONAR_ENDPOINT}/${id}`, seleccion);
   }
 
-  public seleccionarUsuario(seleccion: Seleccion, id: number): Observable<PanelAdministradorRespuesta<number>>
+  public rechazarUsuario(motivoRechazo: MotivoRechazoPostulacion, id: number): Observable<Respuesta<number>>
   {
-    return this.http.doPut<Seleccion, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.SELECCIONAR_ENDPOINT}/${id}`, seleccion);
+    return this.http.doPut<MotivoRechazoPostulacion, Respuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.RECHAZAR_ENDPOINT}/${id}`, motivoRechazo);
   }
 
-  public rechazarUsuario(motivoRechazo: MotivoRechazoPostulacion, id: number): Observable<PanelAdministradorRespuesta<number>>
-  {
-    return this.http.doPut<MotivoRechazoPostulacion, PanelAdministradorRespuesta<number>>(`${environment.endpoint}${this.POSTULACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.RECHAZAR_ENDPOINT}/${id}`, motivoRechazo);
+  aprobarNecesidad(id: number): Observable<Respuesta<number>> {
+    return this.http.doGet<Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.APROBAR_ENDPOINT}${id}`);
   }
 
-  aprobarNecesidad(id: number) {
-    return this.http.doGet(environment.endpoint +'/necesidades/administrador/aprobar/'+ id);
+  declinarNecesidad(id: number, razonRechazo: MotivoRechazoNecesidad): Observable<Respuesta<number>> {
+    return this.http.doPut<MotivoRechazoNecesidad, Respuesta<number>>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}${this.RECHAZAR_ENDPOINT}${id}`, razonRechazo);
   }
 
-  declinarNecesidad(id: number, razonRechazo) {
-    return this.http.doPut(environment.endpoint +'/necesidades/administrador/rechazar/'+ id, razonRechazo);
+  consultarContrato(id: number): Observable<ContratoResumen> {
+    return this.http.doGet<ContratoResumen>(`${environment.endpoint}${this.CONTRATOS_ENDPOINT}${id}`);
   }
 
-  consultarContrato(id: number) {
-    return this.http.doGet(environment.endpoint +'/contratos/'+ id);
+  guardarContrato(id: number, contrato: Contrato): Observable<Respuesta<number>> {
+    return this.http.doPost<Contrato, Respuesta<number>>(`${environment.endpoint}${this.CONTRATOS_ENDPOINT}${id}`, contrato);
   }
 
-  guardarContrato(id: number, contrato) {
-    return this.http.doPost(environment.endpoint +'/contratos/'+ id, contrato);
+  actualizarContrato(id: number, contrato: Contrato): Observable<Respuesta<number>> {
+    return this.http.doPut<Contrato, Respuesta<number>>(`${environment.endpoint}${this.CONTRATOS_ENDPOINT}${id}`, contrato);
   }
-
-  actualizarContrato(id: number, contrato) {
-    return this.http.doPut(environment.endpoint +'/contratos/'+ id, contrato);
-  }
-
-
 }

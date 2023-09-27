@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '@core/service/http.service';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ActivarCuentaRespuesta } from '../model/activar-cuenta-respuesta.model';
 import { ActivarCuenta } from '../model/activar-cuenta.model';
+import { Respuesta } from '@shared/model/respuesta/respuesta.model';
 
 @Injectable()
 export class ActivarCuentaService {
@@ -13,13 +13,13 @@ export class ActivarCuentaService {
 
   constructor(private http: HttpService) { }
 
-  public iniciarActivacionCuenta(correo: string): Observable<ActivarCuentaRespuesta<number>>
+  public iniciarActivacionCuenta(correo: string): Observable<Respuesta<number>>
   {
-    return this.http.doPostWithOutBody<ActivarCuentaRespuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ACTIVACION_ENDPOINT}/`, correo);
+    return this.http.doPostWithOutBody<Respuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ACTIVACION_ENDPOINT}/`, correo);
   }
 
-  public activarCuenta(activarCuenta: ActivarCuenta , correo: string): Observable<ActivarCuentaRespuesta<number>>
+  public activarCuenta(activarCuenta: ActivarCuenta , correo: string): Observable<Respuesta<number>>
   {
-    return this.http.doPut<ActivarCuenta, ActivarCuentaRespuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ACTIVACION_ENDPOINT}${this.ACTIVAR_ENDPOINT}/${correo}`, activarCuenta);
+    return this.http.doPut<ActivarCuenta, Respuesta<number>>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ACTIVACION_ENDPOINT}${this.ACTIVAR_ENDPOINT}/${correo}`, activarCuenta);
   }
 }

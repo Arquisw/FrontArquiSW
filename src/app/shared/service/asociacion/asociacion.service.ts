@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { HttpService } from '../../../core/service/http.service';
-import { Asociacion } from '@shared/model/asociacion/asociacion.model';
-import { Respuesta } from '@shared/model/respuesta/respuesta.model';
+import { AsociacionResumen } from '@shared/model/asociacion/asociacion-resumen.model';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AsociacionService {
-  private readonly ASOCIACION_ENDPOINT: string = '/asociaciones';
+  private readonly ASOCIACIONES_ENDPOINT: string = '/asociaciones';
+  private readonly ASOCIACION_ENDPOINT: string = '/asociacion';
 
   constructor(private http: HttpService) { }
 
-  registrarAsociacion(asociacion: Asociacion, id: number): Observable<Respuesta<number>> {
-    return this.http.doPost<Asociacion, Respuesta<number>>(`${environment.endpoint}${this.ASOCIACION_ENDPOINT}/${id}`, asociacion);
+  public consultarAsociacionPorUsuarioId(id: number): Observable<AsociacionResumen> {
+    return this.http.doGetById<AsociacionResumen>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}/`, id);
+  }
+
+  consultarAsociacionPorId(id: number): Observable<AsociacionResumen> {
+    return this.http.doGetById<AsociacionResumen>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}${this.ASOCIACION_ENDPOINT}/`, id);
   }
 }

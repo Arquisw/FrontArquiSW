@@ -13,13 +13,17 @@ export class ConfiguracionComponent implements OnInit {
   constructor(private viewportScroller: ViewportScroller) {}
 
   ngOnInit(): void {
+    this.posicionarPaginaAlInicio();
+
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.authorities = tokenPayload.authorities.split(',');
 
-    this.viewportScroller.scrollToPosition([0, 0]);
-
     this.filtrarMenu();
+  }
+
+  posicionarPaginaAlInicio(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
 
   filtrarMenu(): void {

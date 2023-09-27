@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import Modal from 'bootstrap/js/dist/modal';
-import { ProyectoResumen } from '../../shared/model/proyecto-resumen.model';
 import { PostulacionResumen } from '../../shared/model/postulacion-resumen.model';
 import { ProyectosService } from '../../shared/service/proyectos.service';
 import { Postulacion } from '../../shared/model/postulacion.model';
-import { NecesidadResumen } from '../../shared/model/necesidad-resumen.model';
+import { NecesidadResumen } from '../../../../shared/model/proyecto/necesidad-resumen.model';
 import { NavigationExtras, Router } from '@angular/router';
+import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
+import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 
 @Component({
   selector: 'app-consultar-proyectos-postulados',
@@ -36,7 +37,7 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   dropdownSettings = {};
   p = 1;
 
-  constructor(private proyectosService: ProyectosService, private router: Router) { }
+  constructor(private proyectosService: ProyectosService, private proyectoService: ProyectoService, private router: Router) { }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
@@ -137,7 +138,7 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
 
   obtenerProyectos(): void {
     this.proyectosPostulacionesRechazadas.forEach(id => {
-      this.proyectosService.consultarProyectoPorId(id).subscribe((response) => {
+      this.proyectoService.consultarProyectoPorId(id).subscribe((response) => {
         const unProyecto = response;
 
         if(unProyecto !== null || unProyecto != undefined) {
@@ -148,7 +149,7 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   }
 
   consultarProyecto(): void {
-    this.proyectosService.consultarProyectoPorId(this.postulacionResumen?.proyectoID).subscribe((response) => {
+    this.proyectoService.consultarProyectoPorId(this.postulacionResumen?.proyectoID).subscribe((response) => {
       this.proyectoResumen = response;
 
       this.consultarNecesidad();
