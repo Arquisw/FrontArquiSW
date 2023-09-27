@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { PerfilService } from './perfil.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 
 describe('PerfilService', () => {
   let service: PerfilService;

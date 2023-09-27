@@ -6,16 +6,18 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './interceptor/token-interceptor';
 import { AuthInterceptor } from './interceptor/auth-interceptor';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HttpService } from './services/http.service';
+import { HttpService } from './service/http.service';
 import { ManejadorError } from './interceptor/manejador-error';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { AsociacionModule } from '../feature/asociacion/asociacion.module';
 import { PerfilModule } from '../feature/perfil/perfil.module';
+import { LoginModalComponent } from './components/login-modal/login-modal.component';
+import { RegistrarseModalComponent } from './components/registrarse-modal/registrarse-modal.component';
 
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent],
+  declarations: [NavbarComponent, FooterComponent, LoginModalComponent, RegistrarseModalComponent],
   imports: [
     CommonModule,
     RouterModule,

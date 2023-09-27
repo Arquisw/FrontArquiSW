@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { AsociacionService } from './asociacion.service';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('AsociacionService', () => {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '@core/model/menu-item';
-import { UsuarioResumen } from '@core/model/usuario-resumen.model';
-import { GestionUsuarioService } from '@core/services/login.service';
-
+import { MenuItem } from '@core/model/menu-item.model';
+import { UsuarioResumen } from '@shared/model/usuario/usuario-resumen.model';
+import { UsuarioService } from '@shared/service/usuario/usuario.service';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +26,7 @@ export class AppComponent implements OnInit {
     { url: '/recuperar-clave', nombre: 'Recuperar Clave' },
   ];
 
-  constructor(private gestionUsuarioService: GestionUsuarioService) {}
+  constructor(private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
     this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
@@ -43,7 +42,7 @@ export class AppComponent implements OnInit {
   }
 
   consultarUsuarioConCorreo(correo: string): void {
-    this.gestionUsuarioService.consultarUsuario(correo).subscribe((response: UsuarioResumen) => {
+    this.usuarioService.consultarUsuario(correo).subscribe((response: UsuarioResumen) => {
       if(!response.activado) {
         this.noTieneCuentaActiva = true;
       } else {

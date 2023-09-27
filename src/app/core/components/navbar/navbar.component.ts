@@ -1,11 +1,13 @@
 import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
-import { MenuItem } from '@core/model/menu-item';
-import { Usuario } from '@core/model/usuario.modelo';
-import { AsociacionService } from '@core/services/asociacion.service';
-import { GestionUsuarioService } from '@core/services/login.service';
+import { Login } from '@core/model/login.model';
+import { MenuItem } from '@core/model/menu-item.model';
+import { Usuario } from '@shared/model/usuario/usuario.model';
+import { AsociacionService } from '@shared/service/asociacion/asociacion.service';
+import { LoginService } from '@core/service/login/login.service';
 import Modal from 'bootstrap/js/dist/modal';
+import { UsuarioService } from '@shared/service/usuario/usuario.service';
 
 @Component({
   selector: 'app-navbar',
@@ -23,8 +25,8 @@ export class NavbarComponent implements OnInit {
   loginModal: Modal| undefined;
   registroAsociacion: Modal| undefined;
   loginError = false;
-  registroError= false;
-  registroExitoso= false;
+  registroError = false;
+  registroExitoso = false;
   inicioSesion = false;
   estaAbierto = false;
   administrador = false;
@@ -36,20 +38,21 @@ export class NavbarComponent implements OnInit {
   estaCargandoLogin = false;
   estaCargandoRegistro = false;
   estaCargandoRegistroAsociacion = false;
-  mensajeError= '';
+  mensajeError = '';
   id = 0;
   usuarioId;
   persona;
-  mensajeRegistro= 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
-  mensajeAsociacion= 'Se ha registrado la Asociacion exitosamente';
+  mensajeRegistro = 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
+  mensajeAsociacion = 'Se ha registrado la Asociacion exitosamente';
   loginForm: FormGroup;
   registroForm: FormGroup;
   registroAsociacionForm: FormGroup;
   wdw = window;
 
   constructor(private formBuilder: FormBuilder,
-              private servicioGestionusuario: GestionUsuarioService,
-              private asociasociacionService: AsociacionService,
+              private loginService: LoginService,
+              private asociacionService: AsociacionService,
+              private usuarioService: UsuarioService,
               private router: Router,
               private elementRef: ElementRef)  { }
 
@@ -170,8 +173,8 @@ export class NavbarComponent implements OnInit {
     this.estaCargandoLogin = true;
     this.loginError = false;
     window.sessionStorage.setItem('userdetails',JSON.stringify({...this.loginForm.value}));
-    const usuario: Usuario= new Usuario(0,'','',this.loginForm.get('correoLogin').value,this.loginForm.get('claveLogin').value);
-    this.servicioGestionusuario.validarLogin(usuario).subscribe((response) => {
+    const login: Login= new Login(this.loginForm.get('correoLogin').value, this.loginForm.get('claveLogin').value);
+    this.loginService.validarLogin(login).subscribe((response) => {
       this.usuarioId = response;
       this.id = this.usuarioId.valor;
       this.consultarPersona();
@@ -191,9 +194,11 @@ export class NavbarComponent implements OnInit {
   onClickRegister(): void {
     this.estaCargandoRegistro = true;
     this.registroError= false;
-    const usuario: Usuario= new Usuario(0,this.registroForm.get('nombreRegistro')?.value,this.registroForm.get('apellidosRegistro')?.value,this.registroForm.get('correoRegistro')?.value,this.registroForm.get('claveRegistro')?.value);
+
+    const usuario: Usuario = new Usuario(this.registroForm.get('nombreRegistro')?.value, this.registroForm.get('apellidosRegistro')?.value, this.registroForm.get('correoRegistro')?.value, this.registroForm.get('claveRegistro')?.value);
+
     if(this.registroForm.get('claveRegistro')?.value===this.registroForm.get('confirmarClaveRegistro')?.value){
-      this.servicioGestionusuario.registrarUsuario(usuario).subscribe(() => {
+      this.usuarioService.registrarUsuario(usuario).subscribe(() => {
         this.estaCargandoRegistro = false;
         this.registroExitoso= true;
       },
@@ -215,7 +220,7 @@ export class NavbarComponent implements OnInit {
   }
 
   consultarPersona(): void {
-    this.servicioGestionusuario.consultarPersona(this.id).subscribe((response) => {
+    this.usuarioService.consultarPersona(this.id).subscribe((response) => {
       this.persona = response;
     },
     (error) => {
@@ -233,7 +238,7 @@ export class NavbarComponent implements OnInit {
       numeroContacto: this.registroAsociacionForm.get('numeroContacto').value
     };
 
-    this.asociasociacionService.registrarAsociacion(asociacion, this.id).subscribe(() => {
+    this.asociacionService.registrarAsociacion(asociacion, this.id).subscribe(() => {
       this.estaCargandoRegistroAsociacion = false;
       this.registroAsociacionForm.reset();
       this.registroExitoso= true;

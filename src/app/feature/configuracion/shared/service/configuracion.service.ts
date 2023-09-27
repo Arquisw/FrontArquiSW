@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { PersonaResumen } from '../model/persona-resumen.model';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { Persona } from '../model/persona.model';
 import { Asociacion } from '../model/asociacion.model';
 import { AsociacionResumen } from '../model/asociacion-resumen.model';

@@ -3,7 +3,7 @@ import { FaseResumen } from '../../shared/model/fase-resumen.module';
 import { Router, NavigationExtras } from '@angular/router';
 import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-de-requisitos.service';
 import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
-import { PdfMakeService } from '../../shared/service/pdf-make.service';
+import { PdfMakeService } from '../../../../shared/service/pdf-make/pdf-make.service';
 import { RequisitoResumen } from '../../shared/model/requisito-resumen.module';
 
 @Component({

@@ -3,7 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ProyectoService } from '../../shared/service/proyecto.service';
 import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
 import { SeleccionResumen } from 'src/app/feature/proyectos/shared/model/seleccion-resumen.model';
-import { StorageService } from '@shared/service/storage-service/storage.service';
+import { StorageService } from '@shared/service/storage/storage.service';
 import { RequerimientosResumen } from 'src/app/feature/proyectos/shared/model/requerimientos-resumen.model';
 import { ViewportScroller } from '@angular/common';
 import { PropetarioProyecto } from '../../shared/model/propetario-proyecto.model';

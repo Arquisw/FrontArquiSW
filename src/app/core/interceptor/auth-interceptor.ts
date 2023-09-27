@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse, HttpHeaders, HttpEvent, HttpResponse } from '@angular/common/http';
 import {  tap } from 'rxjs/operators';
-import { Usuario } from '@core/model/usuario.modelo';
+import { Usuario } from '@shared/model/usuario/usuario.model';
 
 const UNAUTHORIZED = 401;
 

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AsociacionComponent } from './asociacion.component';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AsociacionService } from '../../shared/service/asociacion.service';
 import { ActivatedRoute } from '@angular/router';

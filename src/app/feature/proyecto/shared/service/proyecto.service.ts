@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { Observable } from 'rxjs';
 import { NecesidadResumen } from 'src/app/feature/proyectos/shared/model/necesidad-resumen.model';
 import { SeleccionResumen } from 'src/app/feature/proyectos/shared/model/seleccion-resumen.model';

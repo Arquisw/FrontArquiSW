@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpService } from '@core/services/http.service';
+import { HttpService } from '@core/service/http.service';
 import { Observable } from 'rxjs';
 import { ProyectoResumen } from 'src/app/feature/proyectos/shared/model/proyecto-resumen.model';
 import { environment } from 'src/environments/environment';

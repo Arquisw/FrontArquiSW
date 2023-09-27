@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PerfilService } from '../../shared/service/perfil.service';
-import { StorageService } from '@shared/service/storage-service/storage.service';
+import { StorageService } from '@shared/service/storage/storage.service';
 import { ViewportScroller } from '@angular/common';
 
 @Component({

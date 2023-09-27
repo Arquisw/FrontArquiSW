@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { GestionUsuarioService } from './login.service';
+import { LoginService } from './login.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpService } from './http.service';
 
 describe('LoginService', () => {
-  let service: GestionUsuarioService;
+  let service: LoginService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [GestionUsuarioService, HttpService],
+      providers: [LoginService, HttpService],
     });
-    service = TestBed.inject(GestionUsuarioService);
+    service = TestBed.inject(LoginService);
     httpMock = TestBed.inject(HttpTestingController);
   });
 

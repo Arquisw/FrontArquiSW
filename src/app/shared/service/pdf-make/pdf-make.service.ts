@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { RequisitoResumen } from '../model/requisito-resumen.module';
+import { RequisitoResumen } from '../../../feature/ingenieria-de-requisitos/shared/model/requisito-resumen.module';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Injectable()

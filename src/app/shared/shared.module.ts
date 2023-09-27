@@ -8,6 +8,10 @@ import { ModalConfirmacionComponent } from './components/modal-confirmacion/moda
 import { ModalRechazoComponent } from './components/modal-rechazo/modal-rechazo.component';
 import { BannerActivarCuentaComponent } from './components/banner-activar-cuenta/banner-activar-cuenta.component';
 import { RouterModule } from '@angular/router';
+import { AsociacionService } from './service/asociacion/asociacion.service';
+import { StorageService } from './service/storage/storage.service';
+import { UsuarioService } from './service/usuario/usuario.service';
+import { ProyectoService } from './service/proyecto/proyecto.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { RouterModule } from '@angular/router';
     ModalRechazoComponent,
     BannerActivarCuentaComponent
   ],
-  imports: [ReactiveFormsModule, RouterModule, FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    RouterModule,
+    FormsModule
+  ],
   exports: [
     CommonModule,
     HttpClientModule,
@@ -28,6 +36,12 @@ import { RouterModule } from '@angular/router';
     ModalConfirmacionComponent,
     ModalRechazoComponent,
     BannerActivarCuentaComponent
+  ],
+  providers: [
+    AsociacionService,
+    StorageService,
+    UsuarioService,
+    ProyectoService
   ]
 })
 export class SharedModule { }
