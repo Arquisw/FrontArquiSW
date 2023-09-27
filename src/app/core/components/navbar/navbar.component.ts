@@ -8,6 +8,8 @@ import { AsociacionService } from '@shared/service/asociacion/asociacion.service
 import { LoginService } from '@core/service/login/login.service';
 import Modal from 'bootstrap/js/dist/modal';
 import { UsuarioService } from '@shared/service/usuario/usuario.service';
+import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
+import { Asociacion } from '@shared/model/asociacion/asociacion.model';
 
 @Component({
   selector: 'app-navbar',
@@ -40,8 +42,7 @@ export class NavbarComponent implements OnInit {
   estaCargandoRegistroAsociacion = false;
   mensajeError = '';
   id = 0;
-  usuarioId;
-  persona;
+  persona: PersonaResumen;
   mensajeRegistro = 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
   mensajeAsociacion = 'Se ha registrado la Asociacion exitosamente';
   loginForm: FormGroup;
@@ -54,7 +55,7 @@ export class NavbarComponent implements OnInit {
               private asociacionService: AsociacionService,
               private usuarioService: UsuarioService,
               private router: Router,
-              private elementRef: ElementRef)  { }
+              private elementRef: ElementRef) { }
 
   @HostListener('document:click', ['$event'])
   cerrarMenu(event: MouseEvent) {
@@ -65,44 +66,37 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.inicializarMenu();
+    this.inicializarInicioSesion();
+    this.inicializarFormularios();
+  }
+
+  inicializarMenu(): void {
     this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave' &&  item.nombre !== 'panel-administrador'));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
     this.recuperarClaveMenu = this.items?.find(item => item.nombre === 'Recuperar Clave');
+  }
+
+  inicializarInicioSesion(): void {
     this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
 
     if(this.inicioSesion) {
       this.standarItems = this.principalItems;
 
-      const token = window.sessionStorage.getItem('Authorization');
-      const tokenPayload = JSON.parse(atob(token.split('.')[1]));
-
-      this.id = tokenPayload.id;
-      this.authorities = tokenPayload.authorities.split(',');
-
+      this.inicializarParametrosDelToken();
       this.filtrarMenu();
       this.consultarPersona();
     } else {
       this.standarItems = this.principalItems.filter((item) => item.nombre !== 'Proyectos');
     }
+  }
 
-    this.loginForm = new FormGroup({
-      correoLogin: new FormControl(''),
-      claveLogin: new FormControl('')
-    });
+  inicializarParametrosDelToken(): void {
+    const token = window.sessionStorage.getItem('Authorization');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
 
-    this.registroForm = new FormGroup({
-      nombreRegistro: new FormControl(''),
-      apellidosRegistro: new FormControl(''),
-      correoRegistro: new FormControl(''),
-      claveRegistro: new FormControl(''),
-      confirmarClaveRegistro: new FormControl('')
-    });
-
-    this.registroAsociacionForm = this.formBuilder.group({
-      nombreAsociacion: [null, Validators.required],
-      nit: [null, Validators.required],
-      numeroContacto: [null, Validators.required]
-    });
+    this.id = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
   }
 
   filtrarMenu(): void {
@@ -122,6 +116,27 @@ export class NavbarComponent implements OnInit {
       if (authority === 'ROLE_SELECCION') {
         this.estaSeleccionado = true;
       }
+    });
+  }
+
+  inicializarFormularios(): void {
+    this.loginForm = new FormGroup({
+      correoLogin: new FormControl(''),
+      claveLogin: new FormControl('')
+    });
+
+    this.registroForm = new FormGroup({
+      nombreRegistro: new FormControl(''),
+      apellidosRegistro: new FormControl(''),
+      correoRegistro: new FormControl(''),
+      claveRegistro: new FormControl(''),
+      confirmarClaveRegistro: new FormControl('')
+    });
+
+    this.registroAsociacionForm = this.formBuilder.group({
+      nombreAsociacion: [null, Validators.required],
+      nit: [null, Validators.required],
+      numeroContacto: [null, Validators.required]
     });
   }
 
@@ -172,11 +187,11 @@ export class NavbarComponent implements OnInit {
   onLogin(): void {
     this.estaCargandoLogin = true;
     this.loginError = false;
-    window.sessionStorage.setItem('userdetails',JSON.stringify({...this.loginForm.value}));
+
     const login: Login= new Login(this.loginForm.get('correoLogin').value, this.loginForm.get('claveLogin').value);
+
     this.loginService.validarLogin(login).subscribe((response) => {
-      this.usuarioId = response;
-      this.id = this.usuarioId.valor;
+      this.id = response?.valor;
       this.consultarPersona();
       this.standarItems = this.principalItems;
       this.inicioSesion = window.sessionStorage.getItem('Authorization') != null;
@@ -185,7 +200,7 @@ export class NavbarComponent implements OnInit {
     },
     (error) => {
       this.estaCargandoLogin = false;
-      this.mensajeError= error.error;
+      this.mensajeError= error?.error;
       this.loginError=true;
       this.loginError=true;
     });
@@ -224,7 +239,7 @@ export class NavbarComponent implements OnInit {
       this.persona = response;
     },
     (error) => {
-      this.mensajeError=error.message;
+      this.mensajeError = error.message;
       this.inicioSesion = false;
     });
   }
@@ -232,11 +247,7 @@ export class NavbarComponent implements OnInit {
   registrarAsociacion(): void {
     this.estaCargandoRegistroAsociacion = true;
 
-    const asociacion = {
-      nombre: this.registroAsociacionForm.get('nombreAsociacion').value,
-      nit: this.registroAsociacionForm.get('nit').value,
-      numeroContacto: this.registroAsociacionForm.get('numeroContacto').value
-    };
+    const asociacion = new Asociacion(this.registroAsociacionForm.get('nombreAsociacion').value, this.registroAsociacionForm.get('nit').value, this.registroAsociacionForm.get('numeroContacto').value);
 
     this.asociacionService.registrarAsociacion(asociacion, this.id).subscribe(() => {
       this.estaCargandoRegistroAsociacion = false;

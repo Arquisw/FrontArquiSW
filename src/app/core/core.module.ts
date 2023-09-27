@@ -13,11 +13,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { AsociacionModule } from '../feature/asociacion/asociacion.module';
 import { PerfilModule } from '../feature/perfil/perfil.module';
-import { LoginModalComponent } from './components/login-modal/login-modal.component';
-import { RegistrarseModalComponent } from './components/registrarse-modal/registrarse-modal.component';
 
 @NgModule({
-  declarations: [NavbarComponent, FooterComponent, LoginModalComponent, RegistrarseModalComponent],
+  declarations: [
+    NavbarComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
@@ -26,13 +27,26 @@ import { RegistrarseModalComponent } from './components/registrarse-modal/regist
     AsociacionModule,
     PerfilModule
   ],
-  exports: [NavbarComponent, FooterComponent],
+  exports: [
+    NavbarComponent,
+    FooterComponent],
   providers: [
     HttpService,
     SecurityGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: ManejadorError }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
+    {
+      provide: ErrorHandler,
+      useClass: ManejadorError
+    }
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
