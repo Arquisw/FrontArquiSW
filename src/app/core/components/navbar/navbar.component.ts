@@ -204,6 +204,10 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  cerrarRegistrarAsociacion(): void {
+    location.reload();
+  }
+
   onClickRegister(): void {
     this.estaCargandoRegistro = true;
     this.registroError= false;
