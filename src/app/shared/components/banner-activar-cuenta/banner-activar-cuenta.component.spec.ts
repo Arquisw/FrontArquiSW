@@ -10,7 +10,7 @@ describe('BannerActivarCuentaComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ BannerActivarCuentaComponent ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(BannerActivarCuentaComponent);
     component = fixture.componentInstance;
