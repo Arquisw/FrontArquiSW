@@ -1,18 +1,9 @@
-/* Estilos para el grid-container */
 .grid-container {
   display: grid;
-  grid-template-rows: auto auto 1fr; /* Banner, Navbar, y contenido principal */
-  grid-row-gap: 20px; /* Espacio entre el banner y el navbar */
+  grid-template-rows: auto auto 1fr;
+  grid-row-gap: 20px;
 }
 
-/* Estilos para el banner */
-/* Estilos para el navbar */
 app-navbar {
-  /* Ajusta la altura de acuerdo a tus necesidades */
-  height: 50px;
-}
-
-/* Estilos para el contenido principal (router-outlet) */
-router-outlet {
-  /* Puedes aplicar estilos adicionales según tus necesidades */
+  height: 4.7vh;
 }

@@ -9,10 +9,10 @@ import { MenuItem } from '@core/model/menu-item.model';
 })
 export class PanelAdministradorComponent implements OnInit {
   public menuItems: MenuItem[] = [
-    { url: './eliminaciones', nombre: 'Administrar Eliminaciones' },
+    { url: './eliminaciones', nombre: 'Administrar eliminaciones' },
     { url: './aprobaciones', nombre: 'Aprobaciones' },
     { url: './contrataciones', nombre: 'Contrataciones' },
-    { url: './roles', nombre: 'Roles y Permisos' },
+    { url: './roles', nombre: 'Roles y permisos' },
     { url: './postulaciones', nombre: 'Postulaciones' }
   ];
 

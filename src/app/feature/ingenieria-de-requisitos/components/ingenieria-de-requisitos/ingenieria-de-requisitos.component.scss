@@ -1,7 +1,5 @@
 .header-content
 {
-  background-image: url('../../../../../assets/images/Fondo_Ingenieria_Requisitos.png');
-  height: 100vh;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -14,7 +12,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 80vh;
   max-width: 70vw;
 }
 
@@ -22,6 +19,15 @@
 {
   color: var(--just-white);
   font-size: 5rem;
+}
+
+main {
+  min-height: 69.4vh;
+}
+
+section h2 {
+  color: var(--just-white);
+  font-size: 2.5rem;
 }
 
 .no-process-started-message p {

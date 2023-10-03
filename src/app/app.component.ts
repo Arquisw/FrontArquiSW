@@ -16,14 +16,15 @@ export class AppComponent implements OnInit {
 
   public menuItems: MenuItem[] = [
     { url: '/inicio', nombre: 'Inicio' },
-    { url: '/fundamentacion', nombre: 'Fundamentacion' },
-    { url: '/presentacion', nombre: 'Presentacion' },
-    { url: '/acerca-de-nosotros', nombre: 'Acerca de Nosotros' },
+    { url: '/fundamentacion', nombre: 'Fundamentación' },
+    { url: '/presentacion', nombre: 'Presentación' },
+    { url: '/acerca-de-nosotros', nombre: 'Acerca de nosotros' },
     { url: '/proyectos', nombre: 'Proyectos' },
-    { url: '/asociacion', nombre: 'Mi asociación' },
-    { url: '/perfil', nombre: 'Mi Perfil' },
+    { url: '/asociacion', nombre: 'Mi empresa o asociación' },
+    { url: '/perfil', nombre: 'Mi perfil' },
     { url: '/configuracion', nombre: 'Configuración' },
-    { url: '/recuperar-clave', nombre: 'Recuperar Clave' },
+    { url: '/recuperar-clave', nombre: 'Recuperar clave' },
+    { url: '/panel-administrador', nombre: 'Panel de administrador' },
   ];
 
   constructor(private usuarioService: UsuarioService) {}

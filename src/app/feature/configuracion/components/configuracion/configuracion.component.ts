@@ -1,5 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from '@core/model/menu-item.model';
 
 @Component({
   selector: 'app-configuracion',
@@ -9,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class ConfiguracionComponent implements OnInit {
   tieneAsociacion = false;
   authorities: string[] = [];
+  miCuentaMenu: MenuItem = { url: './usuario', nombre: 'Mi cuenta' };
+  miAsociacionMenu: MenuItem = { url: './asociacion', nombre: 'Mi empresa o asociación' };
 
   constructor(private viewportScroller: ViewportScroller) {}
 

@@ -26,9 +26,9 @@ export class AdministrarEliminacionesComponent implements OnInit {
   estaCargandoEliminarUsuario: boolean[] = [];
   estaCargandoEliminarAsociacion: boolean[] = [];
   estaCargandoEliminarProyecto: boolean[] = [];
-  mensajeEliminarProyecto = '¿Estás seguro de desea eliminar el proyecto?';
-  mensajeEliminarAsociacion = '¿Estás seguro de desea eliminar la Asociacion?';
-  mensajeEliminarUsuario = '¿Estás seguro de desea eliminar el usuario?';
+  mensajeEliminarProyecto = '¿Estás seguro desea eliminar el proyecto?';
+  mensajeEliminarAsociacion = '¿Estás seguro desea eliminar la asociación?';
+  mensajeEliminarUsuario = '¿Estás seguro desea eliminar el usuario?';
   mensajeError = '';
   p1 = 1;
   p2 = 1;
@@ -205,6 +205,7 @@ export class AdministrarEliminacionesComponent implements OnInit {
         proyecto: false,
       },
     };
+    
     this.router.navigate(['/proyecto'], navigationExtras);
   }
 

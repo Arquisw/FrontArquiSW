@@ -2,7 +2,7 @@
   <h1>Mi Proyecto Actual</h1>
 </section>
 <section class="postulated-projects">
-  <p *ngIf="!estaSeleccionado">No has sido seleccionado en ningun proyecto actualmente...</p>
+  <p *ngIf="!estaSeleccionado">No has sido seleccionado en ningún proyecto actualmente...</p>
   <div class="card-container" *ngIf="estaSeleccionado">
     <div class="card">
       <h4 class="card-header">{{proyectoResumen?.nombre}}</h4>
@@ -11,8 +11,8 @@
           <thead>
             <tr>
               <th class="table-title" scope="col">Estado</th>
-              <th class="table-title" scope="col">Tipos de Consultoría</th>
-              <th class="table-title" scope="col">Roles que Desempeño</th>
+              <th class="table-title" scope="col">Tipos de consultoría</th>
+              <th class="table-title" scope="col">Roles que desempeñó</th>
             </tr>
           </thead>
           <tbody>
@@ -43,8 +43,8 @@
         <tr>
           <th class="table-title" scope="col">Nombre</th>
           <th class="table-title" scope="col">Descripción</th>
-          <th class="table-title" scope="col">Tipos de Consultoria</th>
-          <th class="table-title" scope="col">Estado del Proyecto</th>
+          <th class="table-title" scope="col">Tipos de consultoría</th>
+          <th class="table-title" scope="col">Estado del proyecto</th>
           <th class="table-title" scope="col">Acciones</th>
         </tr>
       </thead>
@@ -53,7 +53,7 @@
           <td class="table-body align-middle">{{proyecto?.nombre}}</td>
           <td class="table-body align-middle">
             <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(proyecto?.id)"
-              data-bs-dismiss="modal">Ver Descripción</button>
+              data-bs-dismiss="modal">Ver descripción</button>
             <app-modal-descripcion
             [modalId]="obtenerIdModalDescripcion(proyecto?.id)"
             [titulo]="'Descripción'"

@@ -14,7 +14,7 @@ export class PerfilUsuarioComponent implements OnInit {
   usuarioId = 0;
   usuario: PersonaResumen;
   mensajeError= '';
-  titulo = 'Guardar ó Actualizar Hoja de vida';
+  titulo = 'Guardar o actualizar hoja de vida';
   urlArchivo;
   hojaDeVida;
   urlDescarga;

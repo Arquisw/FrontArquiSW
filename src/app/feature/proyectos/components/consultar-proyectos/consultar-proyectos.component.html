@@ -1,20 +1,19 @@
 <section class="projects">
-  <h1>Proyectos</h1>
   <div class="search-input">
       <div class="form-floating mb-3">
           <input type="text" class="form-control" placeholder="Buscar..." [(ngModel)]="filterTerm">
           <label for="floatingInput">Buscar...</label>
       </div>
   </div>
-  <p *ngIf="!hayNecesidades">Aun no hay proyectos disponibles para postularse en la platafoma...</p>
+  <p *ngIf="!hayNecesidades">Aún no hay proyectos disponibles para postularse en la plataforma...</p>
   <div class="table-responsive" *ngIf="hayNecesidades">
     <table class="table align-middle table-striped">
       <thead>
         <tr>
           <th class="table-title" scope="col">Nombre</th>
           <th class="table-title" scope="col">Descripción</th>
-          <th class="table-title" scope="col">Tipos de Consultoria</th>
-          <th class="table-title" scope="col">Estado del Proyecto</th>
+          <th class="table-title" scope="col">Tipos de consultoría</th>
+          <th class="table-title" scope="col">Estado del proyecto</th>
           <th class="table-title" scope="col">Acciones</th>
         </tr>
       </thead>
@@ -23,7 +22,7 @@
           <td class="table-body align-middle">{{necesidad?.proyecto?.nombre}}</td>
           <td class="table-body align-middle">
             <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtenerIdModalDescripcion(necesidad?.id)"
-              data-bs-dismiss="modal">Ver Descripción</button>
+              data-bs-dismiss="modal">Ver descripción</button>
             <app-modal-descripcion
             [modalId]="obtenerIdModalDescripcion(necesidad?.id)"
             [titulo]="'Descripción'"
@@ -34,8 +33,9 @@
           </td>
           <td class="table-body align-middle">{{necesidad?.proyecto?.estado?.nombre}}</td>
           <td class="table-body align-middle">
-            <button (click)="abrirPerfilProyecto(necesidad?.id)" class="btn btn-watch-project btn-success mt-3">Ver
-              Proyecto</button>
+            <button (click)="abrirPerfilProyecto(necesidad?.id)" class="btn btn-watch-project btn-success mt-3">
+              Ver proyecto
+            </button>
             <button *ngIf="mostrarBotonPostulacion" class="btn btn-success mt-3" (click)="openPostularse(necesidad?.proyecto?.id)">Postularse</button>
           </td>
         </tr>
@@ -49,13 +49,12 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Postularse al Proyecto</h5>
+        <h5 class="modal-title">Postularse al proyecto</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="dropdown-container">
-          <label class="titulo mt-3 mb-3" for="dropdown"> ¿A cúal o cuales roles quieres postular?</label>
-
+          <label class="titulo mt-3 mb-3" for="dropdown">¿A cuál o cuáles roles quieres postular?</label>
           <div class="dropdown-content">
             <ng-multiselect-dropdown
               class="drop"

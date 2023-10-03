@@ -1,23 +1,19 @@
-<header class="header-content">
-  <section class="information">
-    <h1>Configuración</h1>
-  </section>
-</header>
 <main>
   <section class="nav-container">
     <div class="container-fluid nav">
       <div class="row">
         <div class="left-navbar col-sm-auto sticky-top">
           <div class="d-flex flex-sm-column">
-            <a routerLink="./usuario" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miCuenta" routerLinkActive="active-link">
-              Mi Cuenta
+            <a routerLink="{{miCuentaMenu?.url}}" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miCuenta" routerLinkActive="active-link">
+              {{miCuentaMenu?.nombre}}
             </a>
-            <a routerLink="./asociacion" *ngIf="tieneAsociacion" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miAsociacion" routerLinkActive="active-link">
-              Mi Empresa o Asociación
+            <a routerLink="{{miAsociacionMenu?.url}}" *ngIf="tieneAsociacion" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miAsociacion" routerLinkActive="active-link">
+              {{miAsociacionMenu?.nombre}}
             </a>
           </div>
         </div>
         <div class="col-sm  vw-100">
+          <h1>Configuración</h1>
           <router-outlet></router-outlet>
         </div>
       </div>

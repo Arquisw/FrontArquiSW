@@ -1,4 +1,5 @@
 .my-projects {
+  margin-top: 15px;
   padding: 15px;
   display: flex;
   flex-direction: column;
@@ -6,7 +7,7 @@
 
 .my-projects h1 {
   color: var(--just-white);
-  font-size: 3rem;
+  font-size: 2.5rem;
   border-bottom: 1px solid var(--grey);
 }
 

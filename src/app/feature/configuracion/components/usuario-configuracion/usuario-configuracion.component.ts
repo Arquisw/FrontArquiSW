@@ -96,7 +96,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
     } else {
       this.estaCargandoActualizacionClave = false;
       this.actualizacionClaveError = true;
-      this.mensajeError= 'Las contraseñas no coinciden';
+      this.mensajeError= 'Las contraseñas no coinciden.';
     }
   }
 
