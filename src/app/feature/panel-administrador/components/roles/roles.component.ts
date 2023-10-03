@@ -3,6 +3,7 @@ import { RolResumen } from '../../shared/model/rol-resumen.model';
 import Modal from 'bootstrap/js/dist/modal';
 import { AdministradorService } from '../../shared/service/administrador.service';
 import { Rol } from '../../shared/model/rol.model';
+import { RolesService } from '@shared/service/roles/roles.service';
 
 @Component({
   selector: 'app-roles',
@@ -13,7 +14,6 @@ export class RolesComponent implements OnInit {
   loginModal: Modal | undefined;
   rolesResumen: RolResumen[] = [];
   rolActual: RolResumen;
-  rolesMapa: Map<string, string> = new Map();
   actualizarActual = false;
   eliminarActual = false;
   escribirActual = false;
@@ -22,22 +22,11 @@ export class RolesComponent implements OnInit {
   mensajeError = false;
   estaCargandoActualizar = false;
 
-  constructor(private administradorService: AdministradorService) { }
+  constructor(private administradorService: AdministradorService,
+              private rolesService: RolesService) { }
 
   ngOnInit(): void {
-    this.cargarMapa();
     this.consultarRoles();
-  }
-
-  cargarMapa(): void {
-    this.rolesMapa.set('ROLE_DIRECTOR_PROYECTO', 'Director de Proyecto');
-    this.rolesMapa.set('ROLE_PARTE_INTERESADA', 'Parte Interesada');
-    this.rolesMapa.set('ROLE_EQUIPO_DESARROLLO', 'Equipo de Desarrollo');
-    this.rolesMapa.set('ROLE_INGENIERIA', 'Ingeniería');
-    this.rolesMapa.set('ROLE_ARQUITECTURA', 'Arquitectura');
-    this.rolesMapa.set('ROLE_ANALISTA', 'Analista');
-    this.rolesMapa.set('ROLE_LIDER_DE_EQUIPO', 'Lider de Equipo');
-    this.rolesMapa.set('ROLE_PATROCINADOR', 'Patrocinador');
   }
 
   consultarRoles(): void {
@@ -93,7 +82,7 @@ export class RolesComponent implements OnInit {
   }
 
   obtenerNombreDelRol(clave: string): string {
-    return this.rolesMapa.get(clave);
+    return this.rolesService.obtenerNombreDelRol(clave);
   }
 
   obtenerMarca(estado: boolean): string {

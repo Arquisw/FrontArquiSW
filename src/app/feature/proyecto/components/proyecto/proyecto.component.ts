@@ -8,6 +8,7 @@ import { RequerimientosResumen } from '@shared/model/proyecto/requerimientos-res
 import { ViewportScroller } from '@angular/common';
 import { PropetarioProyecto } from '../../shared/model/propetario-proyecto.model';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
+import { RolesService } from '@shared/service/roles/roles.service';
 
 @Component({
   selector: 'app-proyecto',
@@ -41,14 +42,14 @@ export class ProyectoComponent implements OnInit {
   estaCargandoAprobarProyectoPorRolLiderDeEquipo = false;
   estaCargandoAprobarProyectoPorRolDirectorDeProyecto = false;
   puedeVerContrato = false;
-  rolesMapa: Map<string, string> = new Map();
   authorities: string[] = [];
   p = 1;
 
   constructor(private viewportScroller: ViewportScroller,
               private proyectoEspecificoService: ProyectoEspecificoService,
               private proyectoService: ProyectoService,
-              private router: Router, private storageService: StorageService) {}
+              private router: Router, private storageService: StorageService,
+              private rolesService: RolesService) {}
 
   ngOnInit(): void {
     this.posicionarPaginaAlInicio();
@@ -56,7 +57,6 @@ export class ProyectoComponent implements OnInit {
     const params = history.state;
     this.necesidadId = params.id;
 
-    this.cargarMapa();
     this.consultarNecesidadPorId();
     this.obtenerAuthorities();
     this.filtrarMenu();
@@ -66,19 +66,8 @@ export class ProyectoComponent implements OnInit {
     this.viewportScroller.scrollToPosition([0, 0]);
   }
 
-  cargarMapa(): void {
-    this.rolesMapa.set('ROLE_DIRECTOR_PROYECTO', 'Director de Proyecto');
-    this.rolesMapa.set('ROLE_PARTE_INTERESADA', 'Parte Interesada');
-    this.rolesMapa.set('ROLE_EQUIPO_DESARROLLO', 'Equipo de Desarrollo');
-    this.rolesMapa.set('ROLE_INGENIERIA', 'Ingeniería');
-    this.rolesMapa.set('ROLE_ARQUITECTURA', 'Arquitectura');
-    this.rolesMapa.set('ROLE_ANALISTA', 'Analista');
-    this.rolesMapa.set('ROLE_LIDER_DE_EQUIPO', 'Lider de Equipo');
-    this.rolesMapa.set('ROLE_PATROCINADOR', 'Patrocinador');
-  }
-
   obtenerNombreDelRol(clave: string): string {
-    return this.rolesMapa.get(clave);
+    return this.rolesService.obtenerNombreDelRol(clave);
   }
 
   obtenerAuthorities(): void {

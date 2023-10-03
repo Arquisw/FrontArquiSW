@@ -71,7 +71,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
     });
 
     this.tiposDisponibles = [
-      { tipoCodigo: 'Ingenieria de Requisitos', tipo: 'Ingenieria de Requisitos' },
+      { tipoCodigo: 'Ingeniería de requisitos', tipo: 'Ingeniería de requisitos' },
       { tipoCodigo: 'SQA', tipo: 'SQA' },
       { tipoCodigo: 'SQC', tipo: 'SQC' }
     ];

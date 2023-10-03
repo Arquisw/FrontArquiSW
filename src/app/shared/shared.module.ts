@@ -12,6 +12,7 @@ import { AsociacionService } from './service/asociacion/asociacion.service';
 import { StorageService } from './service/storage/storage.service';
 import { UsuarioService } from './service/usuario/usuario.service';
 import { ProyectoService } from './service/proyecto/proyecto.service';
+import { RolesService } from './service/roles/roles.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ProyectoService } from './service/proyecto/proyecto.service';
     AsociacionService,
     StorageService,
     UsuarioService,
-    ProyectoService
+    ProyectoService,
+    RolesService
   ]
 })
 export class SharedModule { }

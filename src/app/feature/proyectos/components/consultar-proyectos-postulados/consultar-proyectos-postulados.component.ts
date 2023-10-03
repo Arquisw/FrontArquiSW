@@ -7,6 +7,7 @@ import { NecesidadResumen } from '../../../../shared/model/proyecto/necesidad-re
 import { NavigationExtras, Router } from '@angular/router';
 import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
+import { RolesService } from '@shared/service/roles/roles.service';
 
 @Component({
   selector: 'app-consultar-proyectos-postulados',
@@ -22,7 +23,6 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   proyectosPostulacionesRechazadas: number[] = [];
   necesidadResumen: NecesidadResumen;
   codigoRolesSeleccionados: string[] = [];
-  roles: Map<string, string> = new Map();
   estaPostulado = false;
   postulacionError = false;
   tieneMasDeUnaPostulacion = false;
@@ -37,26 +37,29 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
   dropdownSettings = {};
   p = 1;
 
-  constructor(private proyectosService: ProyectosService, private proyectoService: ProyectoService, private router: Router) { }
+  constructor(private proyectosService: ProyectosService,
+              private proyectoService: ProyectoService,
+              private router: Router,
+              private rolesService: RolesService) { }
 
   ngOnInit(): void {
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;
 
-    this.cargarMapaDeRoles();
     this.consultarPostulaciones();
 
     this.rolesDisponibles = [
-      { rolCodigo: 'ROLE_DIRECTOR_PROYECTO', rol: 'Director de Proyecto' },
-      { rolCodigo: 'ROLE_PARTE_INTERESADA', rol: 'Parte Interesada' },
-      { rolCodigo: 'ROLE_EQUIPO_DESARROLLO', rol: 'Equipo de Desarrollo' },
-      { rolCodigo: 'ROLE_INGENIERIA', rol: 'Ingeniería' },
-      { rolCodigo: 'ROLE_ARQUITECTURA', rol: 'Arquitectura' },
-      { rolCodigo: 'ROLE_ANALISTA', rol: 'Analista' },
-      { rolCodigo: 'ROLE_LIDER_DE_EQUIPO', rol: 'Lider de Equipo' },
-      { rolCodigo: 'ROLE_PATROCINADOR', rol: 'Patrocinador' }
+      { rolCodigo: 'ROLE_DIRECTOR_PROYECTO', rol: this.rolesService.obtenerNombreDelRol('ROLE_DIRECTOR_PROYECTO') },
+      { rolCodigo: 'ROLE_PARTE_INTERESADA', rol: this.rolesService.obtenerNombreDelRol('ROLE_PARTE_INTERESADA') },
+      { rolCodigo: 'ROLE_EQUIPO_DESARROLLO', rol: this.rolesService.obtenerNombreDelRol('ROLE_EQUIPO_DESARROLLO') },
+      { rolCodigo: 'ROLE_INGENIERIA', rol: this.rolesService.obtenerNombreDelRol('ROLE_INGENIERIA') },
+      { rolCodigo: 'ROLE_ARQUITECTURA', rol: this.rolesService.obtenerNombreDelRol('ROLE_ARQUITECTURA') },
+      { rolCodigo: 'ROLE_ANALISTA', rol: this.rolesService.obtenerNombreDelRol('ROLE_ANALISTA') },
+      { rolCodigo: 'ROLE_LIDER_DE_EQUIPO', rol: this.rolesService.obtenerNombreDelRol('ROLE_LIDER_DE_EQUIPO') },
+      { rolCodigo: 'ROLE_PATROCINADOR', rol: this.rolesService.obtenerNombreDelRol('ROLE_PATROCINADOR') }
     ];
+
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'rolCodigo',
@@ -64,17 +67,6 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
       allowSearchFilter: false,
       enableCheckAll: false
     };
-  }
-
-  cargarMapaDeRoles(): void {
-    this.roles.set('ROLE_DIRECTOR_PROYECTO', 'Director de Proyecto');
-    this.roles.set('ROLE_PARTE_INTERESADA', 'Parte Interesada');
-    this.roles.set('ROLE_EQUIPO_DESARROLLO', 'Equipo de Desarrollo');
-    this.roles.set('ROLE_INGENIERIA', 'Ingenieria');
-    this.roles.set('ROLE_ARQUITECTURA', 'Arquitectura');
-    this.roles.set('ROLE_ANALISTA', 'Analista');
-    this.roles.set('ROLE_LIDER_DE_EQUIPO', 'Lider del Equipo');
-    this.roles.set('ROLE_PATROCINADOR', 'Patrocinador');
   }
 
   openActualizarPostulacionModal(): void {
@@ -116,10 +108,10 @@ export class ConsultarProyectosPostuladosComponent implements OnInit {
 
         if(this.postulacionResumen !== null) {
           this.postulacionResumen.roles.forEach(codigoRol => {
-            this.rolesSeleccionados.push(this.roles.get(codigoRol));
+            this.rolesSeleccionados.push(this.rolesService.obtenerNombreDelRol(codigoRol));
             const rolEncontrado = this.rolesDeSeleccionados.find(item => item.rolCodigo === codigoRol);
             if(!rolEncontrado){
-              this.rolesDeSeleccionados = this.rolesDeSeleccionados.concat({ rolCodigo: codigoRol, rol: this.roles.get(codigoRol) });
+              this.rolesDeSeleccionados = this.rolesDeSeleccionados.concat({ rolCodigo: codigoRol, rol: this.rolesService.obtenerNombreDelRol(codigoRol) });
             }
           });
           this.consultarProyecto();

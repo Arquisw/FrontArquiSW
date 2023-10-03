@@ -5,6 +5,7 @@ import { ProyectosService } from '../../shared/service/proyectos.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
+import { RolesService } from '@shared/service/roles/roles.service';
 
 @Component({
   selector: 'app-consultar-proyectos-seleccionados',
@@ -20,7 +21,6 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   rolesSeleccionados: string[] = [];
   codigoRolesSeleccionados: string[] = [];
   tieneProyectosFinalizados = false;
-  roles: Map<string, string> = new Map();
   estaSeleccionado = false;
   usuarioId = 0;
   proyectoId = 0;
@@ -29,12 +29,14 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   authorities: string[] = [];
   p = 1;
 
-  constructor(private proyectosService: ProyectosService, private proyectoService: ProyectoService, private router: Router) {}
+  constructor(private proyectosService: ProyectosService,
+              private proyectoService: ProyectoService,
+              private router: Router,
+              private rolesService: RolesService) {}
 
   ngOnInit(): void {
     this.obtenerAuthorities();
 
-    this.cargarMapaDeRoles();
     this.consultarSelecciones();
     this.filtrarMenu();
   }
@@ -44,17 +46,6 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;
     this.authorities = tokenPayload.authorities.split(',');
-  }
-
-  cargarMapaDeRoles(): void {
-    this.roles.set('ROLE_DIRECTOR_PROYECTO', 'Director de Proyecto');
-    this.roles.set('ROLE_PARTE_INTERESADA', 'Parte Interesada');
-    this.roles.set('ROLE_EQUIPO_DESARROLLO', 'Equipo de Desarrollo');
-    this.roles.set('ROLE_INGENIERIA', 'Ingenieria');
-    this.roles.set('ROLE_ARQUITECTURA', 'Arquitectura');
-    this.roles.set('ROLE_ANALISTA', 'Analista');
-    this.roles.set('ROLE_LIDER_DE_EQUIPO', 'Lider del Equipo');
-    this.roles.set('ROLE_PATROCINADOR', 'Patrocinador');
   }
 
   consultarSelecciones(): void {
@@ -81,7 +72,7 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
         this.proyectoResumen = unProyecto;
 
         this.seleccionResumen.roles.forEach(rol => {
-          this.rolesSeleccionados.push(this.roles.get(rol));
+          this.rolesSeleccionados.push(this.rolesService.obtenerNombreDelRol(rol));
         });
       }
     });
