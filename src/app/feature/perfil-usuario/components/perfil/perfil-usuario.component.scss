@@ -1,22 +1,24 @@
-.header-content {
+.header-content{
   background-image: url('/assets/images/Fondo.png');
-  height: 100vh;
+  height: 88.7vh;
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
 }
 
-.information {
+.information
+{
   padding: 15px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  height: 100vh;
+  height: 80vh;
   max-width: 70vw;
 }
 
-.information h1 {
+.information h1
+{
   color: var(--just-white);
   font-size: 5rem;
 }

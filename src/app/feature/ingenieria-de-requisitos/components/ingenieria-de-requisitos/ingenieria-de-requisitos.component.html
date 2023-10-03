@@ -1,13 +1,14 @@
 <header class="header-content">
   <section class="information">
-    <h1>Proceso de Ingeniería de Requisitos</h1>
+    <h1>Proceso de ingeniería de requisitos</h1>
   </section>
 </header>
 <main>
   <section class="no-process-started-message" *ngIf="!inicioElProcesoDeConsultoria">
-    <p>El proceso de consultoria de Ingeniería de Requisitos necesita la aprobación de los miembros del equipo con los roles Ingeniería, Lider de Equipo y Director de Proyecto respectivamente para iniciar con el proceso...</p>
+    <p>El proceso de consultoría de ingeniería de requisitos necesita la aprobación de los miembros del equipo con los roles ingeniería, líder de equipo y director de proyecto respectivamente, para iniciar con el proceso...</p>
   </section>
   <section class="phases" *ngIf="inicioElProcesoDeConsultoria">
+    <h2>Fases</h2>
     <div class="phases-container">
       <div class="container">
         <div class="row" *ngFor="let fase of fasesResumen">

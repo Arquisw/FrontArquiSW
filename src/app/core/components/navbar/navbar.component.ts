@@ -20,6 +20,10 @@ export class NavbarComponent implements OnInit {
 
   configuracionMenu: MenuItem;
   recuperarClaveMenu: MenuItem;
+  panelAdministradorMenu: MenuItem;
+  inicioMenu: MenuItem;
+  miPerfilMenu: MenuItem;
+  miAsociacionMenu: MenuItem;
   principalItems: MenuItem[];
   standarItems: MenuItem[];
   itemsPreLogin: MenuItem[];
@@ -42,8 +46,9 @@ export class NavbarComponent implements OnInit {
   mensajeError = '';
   id = 0;
   persona: PersonaResumen;
-  mensajeRegistro = 'Se ha registrado la cuenta exitosamente, debe logearse para ingresar';
-  mensajeAsociacion = 'Se ha registrado la Asociacion exitosamente';
+  mensajeRegistro = 'Se ha registrado la cuenta exitosamente. Debe iniciar sesión para ingresar.';
+  mensajeAsociacion = 'Se ha registrado la asociación exitosamente.';
+  registrarEmpresaOAsociacionOpcion = 'Registrar empresa o asociación';
   loginForm: FormGroup;
   registroForm: FormGroup;
   registroAsociacionForm: FormGroup;
@@ -70,9 +75,13 @@ export class NavbarComponent implements OnInit {
   }
 
   inicializarMenu(): void {
-    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi asociación' && item.nombre !== 'Mi Perfil' && item.nombre !== 'Recuperar Clave' &&  item.nombre !== 'panel-administrador'));
+    this.principalItems = this.items?.filter(item => (item.nombre !== 'Configuración' && item.nombre !== 'Mi empresa o asociación' && item.nombre !== 'Mi perfil' && item.nombre !== 'Recuperar clave' &&  item.nombre !== 'Panel de administrador'));
     this.configuracionMenu = this.items?.find(item => item.nombre === 'Configuración');
-    this.recuperarClaveMenu = this.items?.find(item => item.nombre === 'Recuperar Clave');
+    this.recuperarClaveMenu = this.items?.find(item => item.nombre === 'Recuperar clave');
+    this.panelAdministradorMenu = this.items?.find(item => item.nombre === 'Panel de administrador');
+    this.miPerfilMenu = this.items?.find(item => item.nombre === 'Mi perfil');
+    this.miAsociacionMenu = this.items?.find(item => item.nombre === 'Mi empresa o asociación');
+    this.inicioMenu = this.items?.find(item => item.nombre === 'Inicio');
   }
 
   inicializarInicioSesion(): void {
@@ -147,7 +156,7 @@ export class NavbarComponent implements OnInit {
     };
 
     this.cerrarMenuDeplegable();
-    this.router.navigate(['/perfil'], navigationExtras);
+    this.router.navigate([this.miPerfilMenu?.url], navigationExtras);
   }
 
   abrirAsociacion(): void {
@@ -159,7 +168,7 @@ export class NavbarComponent implements OnInit {
     };
 
     this.cerrarMenuDeplegable();
-    this.router.navigate(['/asociacion'], navigationExtras);
+    this.router.navigate([this.miAsociacionMenu?.url], navigationExtras);
   }
 
   open(): void {
@@ -228,7 +237,7 @@ export class NavbarComponent implements OnInit {
     else{
       this.estaCargandoRegistro = false;
       this.registroError= true;
-      this.mensajeError= 'Las contraseñas no coinciden';
+      this.mensajeError= 'Las contraseñas no coinciden.';
     }
   }
 
@@ -267,7 +276,7 @@ export class NavbarComponent implements OnInit {
     this.standarItems = this.principalItems.filter((item) => item.nombre !== 'Proyectos');
     this.inicioSesion = false;
     window.sessionStorage.removeItem('Authorization');
-    this.router.navigate(['/inicio']).then(() => {
+    this.router.navigate([this.inicioMenu.url]).then(() => {
       window.location.reload();
     });
   }

@@ -1,50 +1,58 @@
 <header class="header-content">
   <section class="information">
     <h1>
-      Version # {{versionResumen?.id}} <span *ngIf="versionResumen?.esFinal">- FINAL</span>
-
-
+      Versión # {{versionResumen?.id}} <span *ngIf="versionResumen?.esFinal">- FINAL</span>
     </h1>
     <p>{{versionResumen?.fecha}}</p>
     <p *ngIf="versionResumen?.estaRechazada">
-      <b>Motivo del Rechazo:</b> {{versionResumen?.motivoRechazo}}
+      <b>Motivo del rechazo:</b> {{versionResumen?.motivoRechazo}}
     </p>
   </section>
 </header>
-<main>
-  <section class="buttons-section d-flex justify-content-between">
-    <div class="button-container">
-      <button [disabled]="!puedeGestionarRequisito || versionResumen?.estaRechazada || versionResumen?.esFinal" (click)="abrirModalCrearRequisito(versionResumen?.id)" class="btn btn-create-requeriment btn-success mt-3">Crear Nuevo Requisito</button>
-    </div>
-    <div class="button-container">
-      <button [disabled]="!puedeGenerarVersionFinal || versionResumen?.estaRechazada || versionResumen?.esFinal" (click)="generarVersionFinal(versionResumen?.id)" class="btn btn-generate-final-version btn-success mt-3">
-        Generar Versión Final
+<main class="main-section">
+  <section>
+    <div class="buttons-section d-flex justify-content-between">
+      <div class="button-container">
+        <button [disabled]="!puedeGestionarRequisito || versionResumen?.estaRechazada || versionResumen?.esFinal" (click)="abrirModalCrearRequisito(versionResumen?.id)" class="btn btn-create-requeriment btn-success mt-3">
+          Crear nuevo requisito
+        </button>
+      </div>
+      <div class="button-container">
+        <button [disabled]="!puedeGenerarVersionFinal || versionResumen?.estaRechazada || versionResumen?.esFinal" (click)="generarVersionFinal(versionResumen?.id)" class="btn btn-generate-final-version btn-success mt-3">
+          Generar versión final
 
-        <div *ngIf="estaCargandoGenerarVersionFinal" class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-      </button>
+          <div *ngIf="estaCargandoGenerarVersionFinal" class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </button>
+      </div>
     </div>
-  </section>
-  <div class="container-fluid h-100">
-    <div class="row w-100 align-items-center">
-      <div class="col text-center">
-        <div *ngIf="generarVersionFinalError" class="alert alert-danger" role="alert">
-          {{mensajeError}}
+    <div class="container-fluid h-100">
+      <div class="row w-100 align-items-center">
+        <div class="col text-center">
+          <div *ngIf="generarVersionFinalError" class="alert alert-danger" role="alert">
+            {{mensajeError}}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
   <section class="requeriments">
     <div class="requeriments-container">
       <div class="container">
         <div class="row">
-          <ng-container *ngFor="let requisito of requisitosResumen; let i = index;">
+          <ng-container *ngFor="let requisito of requisitosResumen | paginate : { itemsPerPage: 20, currentPage: p }; let i = index">
             <div class="col-6">
               <app-requisito [requisito]="requisito" [authorities]="authorities"></app-requisito>
             </div>
           </ng-container>
         </div>
+        <pagination-controls
+          previousLabel="Anterior"
+          nextLabel="Siguiente"
+          class="my-pagination"
+          (pageChange)="p = $event">
+        </pagination-controls>
       </div>
     </div>
   </section>
@@ -53,7 +61,7 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Crear un Nuevo Requisito</h5>
+        <h5 class="modal-title">Crear nuevo requisito</h5>
         <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -61,12 +69,12 @@
           <div class="form-floating mb-3">
             <input type="text" class="form-control" id="nombreRequisito" placeholder="nombre"
               formControlName="nombreRequisito" required>
-            <label for="floatingInput">Nombre del Requisito</label>
+            <label for="floatingInput">Nombre del requisito</label>
           </div>
           <div class="form-floating mb-3">
             <textarea type="text" class="description-requeriment form-control" id="descripcionRequisito"
               placeholder="descripcion" formControlName="descripcionRequisito" required></textarea>
-            <label for="floatingInput">Descripción del Requisito</label>
+            <label for="floatingInput">Descripción del requisito</label>
           </div>
           <select class="form-select" aria-label="Default select example" formControlName="tipoRequisito">
             <option selected>{{seleccionarMensaje}}</option>
@@ -80,7 +88,7 @@
           <div class="row w-100 align-items-center">
             <div class="col text-center">
               <button type="submit" class="btn btn-success mt-3" (click)="onClickGuardarRequisito()">
-                Guardar Requisito
+                Guardar requisito
 
                 <div *ngIf="estaCargandoGuardarRequisito" class="spinner-border" role="status">
                   <span class="visually-hidden">Loading...</span>

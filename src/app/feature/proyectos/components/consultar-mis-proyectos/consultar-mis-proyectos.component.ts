@@ -26,7 +26,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
   tiposConsultoriaSeleccionados: string[] = [];
   guardadoError = false;
   mensajeError = '';
-  selectedFileName = 'Seleccionar Archivo';
+  selectedFileName = 'Seleccionar archivo';
   urlArchivo: string;
   archivo: File;
   nombreProyecto = '';
@@ -126,7 +126,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
       });
     } else {
       this.estaCargandoGuardar = false;
-      this.mensajeError = 'Debes seleccionar por lo menos un servicio de consultoria';
+      this.mensajeError = 'Debes seleccionar por lo menos un servicio de consultoría';
     }
   }
 
@@ -161,7 +161,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
 
   onFileSelected(event: any) {
     this.archivo = event.target.files[0];
-    this.selectedFileName = this.archivo ? this.archivo.name : 'Seleccionar Archivo';
+    this.selectedFileName = this.archivo ? this.archivo.name : 'Seleccionar archivo';
   }
 
   onFileSelectedToUpdate(event: any) {
@@ -240,7 +240,7 @@ export class ConsultarMisProyectosComponent implements OnInit {
       });
     } else {
       this.estaCargandoActualizar = false;
-      this.mensajeError = 'Debes seleccionar por lo menos un servicio de consultoria';
+      this.mensajeError = 'Debes seleccionar por lo menos un servicio de consultoría';
     }
   }
 

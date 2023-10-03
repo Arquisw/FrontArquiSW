@@ -40,7 +40,7 @@ export class ActivarCuentaComponent implements OnInit {
     this.activarCuentaService.iniciarActivacionCuenta(this.correo).subscribe(() => {
       this.estaCargandoIniciarActivacionCuenta = false;
       this.codigoEnviado = true;
-      this.mensajeCodigoEnviado = 'Se ha enviado un codigo al correo: ' + this.correo;
+      this.mensajeCodigoEnviado = 'Se ha enviado un código al correo: ' + this.correo;
     },
     (error) => {
       this.estaCargandoIniciarActivacionCuenta = false;

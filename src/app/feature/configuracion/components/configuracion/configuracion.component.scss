@@ -1,27 +1,12 @@
-.header-content
-{
-  background-image: url('../../../../../assets/images/Fondo.png');
-  height: 100vh;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+main {
+  min-height: 81.9vh;
 }
 
-.information
-{
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 80vh;
-  max-width: 70vw;
-}
-
-.information h1
+div h1
 {
   color: var(--just-white);
-  font-size: 5rem;
+  font-size: 3.5rem;
+  border-bottom: 1px solid var(--just-white);
 }
 
 .nav-link {
@@ -34,4 +19,5 @@
 
 .left-navbar {
   background-color: var(--background-darker-color);
+  min-height: 81.9vh;
 }

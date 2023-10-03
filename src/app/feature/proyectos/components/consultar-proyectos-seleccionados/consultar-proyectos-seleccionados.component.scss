@@ -6,9 +6,13 @@
   align-items: center;
 }
 
+.title {
+  margin-top: 15px;
+}
+
 .title h1 {
   color: var(--just-white);
-  font-size: 3rem;
+  font-size: 2.5rem;
   border-bottom: 1px solid var(--grey);
 }
 

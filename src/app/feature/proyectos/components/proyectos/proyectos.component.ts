@@ -12,13 +12,13 @@ export class ProyectosComponent implements OnInit {
 
   public menuItemsSinAsociacion: MenuItem[] = [
     { url: './buscar', nombre: 'Buscar' },
-    { url: './proyectos-seleccionados', nombre: 'Mis Proyectos' },
-    { url: './proyectos-postulados', nombre: 'Proyectos Postulados' }
+    { url: './proyectos-seleccionados', nombre: 'Mis proyectos' },
+    { url: './proyectos-postulados', nombre: 'Proyectos postulados' }
   ];
 
   public menuItemsConAsociacion: MenuItem[] = [
     { url: './buscar', nombre: 'Buscar' },
-    { url: './mis-proyectos', nombre: 'Mis Proyectos' },
+    { url: './mis-proyectos', nombre: 'Mis proyectos' },
   ];
 
   public menuItemsAdministrador: MenuItem[] = [
