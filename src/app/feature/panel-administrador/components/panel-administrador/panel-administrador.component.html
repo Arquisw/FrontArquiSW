@@ -1,23 +1,19 @@
-<header class="header-content">
-    <section class="information">
-      <h1>Panel de Administrador</h1>
-    </section>
-  </header>
-  <main>
-    <section class="nav-container">
-      <div class="container-fluid nav">
-        <div class="row">
-          <div class="left-navbar col-sm-auto sticky-top">
-            <div class="d-flex flex-sm-column">
-              <a *ngFor="let item of menuItems" routerLink="{{item?.url}}" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miCuenta" routerLinkActive="active-link">
-                {{item?.nombre}}
-              </a>
-            </div>
-          </div>
-          <div class="col-sm  vw-100">
-            <router-outlet></router-outlet>
+<main>
+  <section class="nav-container">
+    <div class="container-fluid nav">
+      <div class="row">
+        <div class="left-navbar col-sm-auto sticky-top">
+          <div class="d-flex flex-sm-column">
+            <a *ngFor="let item of menuItems" routerLink="{{item?.url}}" class="nav-link p-3 text-decoration-none" data-bs-placement="right" id="miCuenta" routerLinkActive="active-link">
+              {{item?.nombre}}
+            </a>
           </div>
         </div>
+        <div class="col-sm  vw-100">
+          <h1>Panel de administrador</h1>
+          <router-outlet></router-outlet>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>

@@ -1,27 +1,16 @@
-.header-content
-{
-  background-image: url('../../../../../assets/images/Fondo.png');
-  height: 100vh;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+main {
+  min-height: 81.99vh;
 }
 
-.information
-{
-  padding: 15px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  height: 80vh;
-  max-width: 70vw;
+.information {
+  padding: 5px;
 }
 
 .information h1
 {
   color: var(--just-white);
-  font-size: 5rem;
+  font-size: 3.5rem;
+  border-bottom: 1px solid var(--just-white);
 }
 
 .card-container {

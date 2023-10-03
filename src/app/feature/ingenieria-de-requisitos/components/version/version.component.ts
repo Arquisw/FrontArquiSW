@@ -30,6 +30,7 @@ export class VersionComponent implements OnInit {
   mensajeError = '';
   guardarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
+  p = 1;
 
   constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
 

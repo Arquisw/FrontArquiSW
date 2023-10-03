@@ -6,8 +6,8 @@
         <tr>
           <th class="table-header">Nombre</th>
           <th class="table-header">Descripción</th>
-          <th class="table-header">Tipos de Consultroria</th>
-          <th class="table-header">Estado de la Necesidad</th>
+          <th class="table-header">Tipos de consultoría</th>
+          <th class="table-header">Estado de la necesidad</th>
           <th class="table-header">Acciones</th>
         </tr>
       </thead>
@@ -15,7 +15,7 @@
         <tr *ngFor="let necesidad of necesidadesAprobadas | paginate : { itemsPerPage: 10, currentPage: p }; let i = index">
           <td>{{necesidad?.proyecto.nombre}}</td>
           <td>
-            <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModal(necesidad?.id)">Ver Descripción</button>
+            <button class="btn btn-success" data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModal(necesidad?.id)">Ver descripción</button>
             <app-modal-descripcion
               [modalId]="obtnerIdModal(necesidad?.id)"
               [descripcion]="necesidad?.proyecto.descripcion"
@@ -30,7 +30,7 @@
             <button class="btn btn-watch-project btn-success" (click)="abrirPerfilProyecto(necesidad?.id)">Ver Proyecto</button>
             <button class="btn btn-save-or-update-contract btn-success"data-bs-toggle="modal" [attr.data-bs-target]="'#'+ obtnerIdModalCarga(necesidad?.id)"
             data-bs-dismiss="modal">
-            Guardar ó Actualizar contrato
+            Guardar o actualizar contrato
 
             <div *ngIf="estaCargandoGuardarContrato[i]" class="spinner-border" role="status">
               <span class="visually-hidden">Loading...</span>
@@ -47,6 +47,7 @@
       </tbody>
     </table>
     <pagination-controls
+      *ngIf="hayNecesidadesPorConcretar"
       previousLabel="Anterior"
       nextLabel="Siguiente"
       class="my-pagination"

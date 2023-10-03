@@ -7,7 +7,7 @@
 </header>
 <main>
   <section class="versions">
-    <h1>Gestor de Versiones</h1>
+    <h1>Gestor de versiones</h1>
     <div class="table-responsive" *ngIf="tieneVersiones">
       <table class="table align-middle table-bordered">
         <thead>
@@ -24,10 +24,10 @@
             <td class="table-body align-middle">{{version?.fecha}}</td>
             <td class="table-body align-middle">{{obtenerEstadoDeLaVersion(version?.esFinal)}}</td>
             <td class="table-body align-middle">
-              <button (click)="abrirRequisitos(version?.id)" class="btn btn-watch-requeriments btn-success mt-3">Ver Requisitos</button>
+              <button (click)="abrirRequisitos(version?.id)" class="btn btn-watch-requeriments btn-success mt-3">Ver requisitos</button>
               <button *ngIf="puedeRechazarVersion && !version?.estaRechazada" class="btn btn-success mt-3" data-bs-toggle="modal"
                 [attr.data-bs-target]="'#'+ obtenerIdModalRechazo(version?.id)">
-                Rechazar Versión
+                Rechazar versión
 
                 <div *ngIf="estaCargandoRechazarVersion[i]" class="spinner-border" role="status">
                   <span class="visually-hidden">Loading...</span>
@@ -55,9 +55,9 @@
       </div>
     </div>
     <div class="create-first-version text-center" *ngIf="!tieneVersiones">
-      <p>No hay aun versiones de los requisitos. El o los miembros del equipo con el rol Ingeniería pueden dar inicio a la versión...</p>
+      <p>No hay aún versiones de los requisitos. Él o los miembros del equipo con el rol ingeniería pueden dar inicio a la versión...</p>
       <button *ngIf="puedeIniciarPrimeraVersion" (click)="iniciarPrimeraVersion(etapaResumen?.id)" class="btn btn-success mt-3">
-        Iniciar Primera Versión
+        Iniciar primera versión
 
         <div *ngIf="estaCargandoIniciarPrimeraVersion" class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -76,7 +76,7 @@
   </section>
   <section class="approvals text-center" *ngIf="puedeAprobarEtapa">
     <button *ngIf="puedeAprobarEtapa && tieneVersiones && !etapaResumen?.completada" (click)="aprobarEtapa(etapaResumen?.id)" class="btn btn-success mt-3">
-      Aprobar Etapa
+      Aprobar etapa
 
       <div *ngIf="estaCargandoAprobarEtapa" class="spinner-border" role="status">
         <span class="visually-hidden">Loading...</span>

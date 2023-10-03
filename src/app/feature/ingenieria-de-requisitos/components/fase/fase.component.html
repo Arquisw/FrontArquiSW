@@ -5,7 +5,7 @@
   </div>
   <div class="card-footer">
     <div *ngIf="!esEtapaDefinitiva()">
-      <h4>Etapas de la Fase</h4>
+      <h4>Etapas de la fase</h4>
       <div class="table-responsive">
         <table class="table align-middle table-bordered">
           <thead>
@@ -39,7 +39,7 @@
                 <button
                   (click)="abrirEtapa(etapa?.id)"
                   class="btn btn-watch-project btn-success mt-3">
-                  Ver Etapa
+                  Ver etapa
                 </button>
               </td>
             </tr>
@@ -53,15 +53,15 @@
       <table class="table align-middle table-striped">
         <thead>
           <tr>
-            <th>Nombre del Archivo</th>
+            <th>Nombre del archivo</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td class="table-body align-middle">Requisitos Definitivos</td>
+            <td class="table-body align-middle">Requisitos definitivos</td>
             <td class="table-body align-middle">
-              <button class="btn btn-success" (click)="abrirArchivo()">Ver Documento</button>
+              <button class="btn btn-success" (click)="abrirArchivo()">Ver documento</button>
             </td>
           </tr>
         </tbody>

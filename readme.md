@@ -22,11 +22,13 @@ El Frontend de ArquiSW corresponde a la interfaz grafica de la plataforma con la
 ## Instalación
 
 1. Clonar el Repositorio:
-	`git https://github.com/Arquisw/Arquisw-Front`
+	`git clone https://github.com/Arquisw/Arquisw-Front`
 2. Abrir el proyecto con Visual Studio Code
-3. Ejecutar la aplicación:
+3. Instalar las dependencias del proyecto:
+   `npm install`
+4. Ejecutar la aplicación:
 	`npm start`
-4. Acceder a la Aplicación en la siguiente dirección:
+5. Acceder a la Aplicación en la siguiente dirección:
 	`http://localhost:4200/inicio`
 
 ## Colaboradores

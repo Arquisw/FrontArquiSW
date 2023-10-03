@@ -1,5 +1,5 @@
 <section class="update-form">
-  <h1>Mi Cuenta</h1>
+  <h1>Mi cuenta</h1>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-6">
@@ -18,7 +18,7 @@
             <div class="form-floating mb-3">
               <input type="email" class="form-control" id="correoActualizacion"
                 placeholder="correo@ejemplo.com" formControlName="correoActualizacion" required [value]="personaResumen?.correo">
-              <label for="floatingInput">Correo Electrónico</label>
+              <label for="floatingInput">Correo electrónico</label>
             </div>
             <div class="container-fluid h-100">
               <div class="row w-100 align-items-center">
@@ -45,23 +45,23 @@
             <div class="form-floating mb-3">
               <input type="password" class="form-control" id="claveAntigua" placeholder="Contraseña Anterior"
                  formControlName="claveAntiguaActualizacion" required>
-              <label for="floatingInput">Contraseña Anterior</label>
+              <label for="floatingInput">Contraseña anterior</label>
             </div>
             <div class="form-floating mb-3">
               <input type="password" class="form-control" id="claveNueva" placeholder="Contraseña Nueva"
                  formControlName="claveNuevaActualizacion" required>
-                 <label for="floatingPassword">Contraseña Nueva</label>
+                 <label for="floatingPassword">Contraseña nueva</label>
             </div>
             <div class="form-floating mb-3">
               <input type="password" class="form-control"
                 id="confirmarClaveActualizacion" placeholder="confirmar contraseña" formControlName="confirmarClaveActualizacion" required>
-              <label for="floatingPassword">Confirmar Contraseña</label>
+              <label for="floatingPassword">Confirmar contraseña</label>
             </div>
             <div class="container-fluid h-100">
               <div class="row w-100 align-items-center">
                 <div class="col text-center">
                   <button type="submit" class="btn btn-success mt-3 btn-register" (click)="onClickUpdatePassword()">
-                    Actualizar Contraseña
+                    Actualizar contraseña
 
                     <div *ngIf="estaCargandoActualizacionClave" class="spinner-border" role="status">
                       <span class="visually-hidden">Loading...</span>

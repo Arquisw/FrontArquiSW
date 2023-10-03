@@ -9,7 +9,7 @@
     <div class="container-fluid nav" *ngIf="miPerfil">
       <button type="submit" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#cargarArchivo"
         data-bs-dismiss="modal">
-        Guardar ó Actualizar Hoja de Vida
+        Guardar o actualizar hoja de vida
 
         <div *ngIf="estaCargandoGuardar" class="spinner-border" role="status">
           <span class="visually-hidden">Loading...</span>
@@ -28,7 +28,7 @@
     <table>
       <thead>
         <tr>
-          <th>Hoja de Vida</th>
+          <th>Hoja de vida</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -36,7 +36,7 @@
         <tr *ngFor="let file of files">
           <td>{{file?.nombre}}</td>
           <td>
-            <button class="btn btn-success" (click)="downloadFile()">Ver Documento</button>
+            <button class="btn btn-success" (click)="downloadFile()">Ver documento</button>
           </td>
         </tr>
       </tbody>
