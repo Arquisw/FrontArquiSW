@@ -133,7 +133,7 @@ export class ProyectoComponent implements OnInit {
 
   definirServicios(): void {
     this.necesidadResumen.proyecto.tiposConsultoria.forEach(tipoConsultoria => {
-      if(tipoConsultoria.nombre == 'Ingenieria de Requisitos') {
+      if(tipoConsultoria.nombre == 'Ingeniería de requisitos') {
         this.tieneServicioIngenieriaDeRequisitos = true;
       }
 
