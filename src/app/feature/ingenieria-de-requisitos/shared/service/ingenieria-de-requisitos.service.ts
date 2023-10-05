@@ -9,6 +9,7 @@ import { Requisito } from '../model/requisito.model';
 import { RequisitoResumen } from '../model/requisito-resumen.module';
 import { MotivoRechazoVersion } from '../model/motivo-rechazo-version.module';
 import { Respuesta } from '@shared/model/respuesta/respuesta.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class IngenieriaDeRequisitosService {
@@ -78,8 +79,15 @@ export class IngenieriaDeRequisitosService {
     return this.httpService.doDelete<Respuesta<number>>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}/${id}`);
   }
 
-  public consultarRequisitosPorVersionId(id: number): Observable<RequisitoResumen[]>
+  public consultarRequisitosPorVersionId(id: number, pagina:number, tamano?:number): Observable<any>
   {
-    return this.httpService.doGetById<RequisitoResumen[]>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSION_ENDPOINT}/`, id);
+    if(tamano===undefined){
+      tamano=10
+    }
+    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
+    return this.httpService.doGetParameters<RequisitoResumen[]>(
+      `${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSION_ENDPOINT}/${id}`,
+     params 
+    );
   }
 }

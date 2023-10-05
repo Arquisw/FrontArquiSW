@@ -31,6 +31,7 @@ export class VersionComponent implements OnInit {
   guardarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
   p = 1;
+  totalRequerimeintos = 0;
 
   constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
 
@@ -81,9 +82,15 @@ export class VersionComponent implements OnInit {
   }
 
   consultarRequisitosPorVersionId(id: number): void {
-    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id).subscribe((response) => {
-      this.requisitosResumen = response;
+    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id,this.p-1).subscribe((response) => {
+      this.requisitosResumen = response.content;
+      this.totalRequerimeintos = response.totalElements;
     });
+  }
+
+  onPageChange(event: number): void {
+    this.p = event;
+    this.consultarRequisitosPorVersionId(this.versionId)
   }
 
   inicializarFormulario(): void {
