@@ -41,7 +41,7 @@
     <div class="requeriments-container">
       <div class="container">
         <div class="row">
-          <ng-container *ngFor="let requisito of requisitosResumen | paginate : { itemsPerPage: 20, currentPage: p }; let i = index">
+          <ng-container *ngFor="let requisito of requisitosResumen | paginate : { itemsPerPage: 10, currentPage: p,totalItems: totalRequerimeintos }; let i = index">
             <div class="col-6">
               <app-requisito [requisito]="requisito" [authorities]="authorities"></app-requisito>
             </div>
@@ -51,7 +51,7 @@
           previousLabel="Anterior"
           nextLabel="Siguiente"
           class="my-pagination"
-          (pageChange)="p = $event">
+          (pageChange)="onPageChange($event)">
         </pagination-controls>
       </div>
     </div>
