@@ -16,6 +16,7 @@ export class ContratacionesComponent implements OnInit {
   mensajeError = '';
   contrato;
   p = 1;
+  totalContrataciones=0;
 
   constructor(private router: Router, private admistradorService: AdministradorService) { }
 
@@ -32,15 +33,20 @@ export class ContratacionesComponent implements OnInit {
   }
 
   consultaAprobaciones(): void {
-    this.admistradorService.consultarNecesidadesAprobadas().subscribe((response) => {
-      this.necesidadesAprobadas = response;
-
+    this.admistradorService.consultarNecesidadesAprobadas(this.p-1,5).subscribe((response) => {
+      this.necesidadesAprobadas = response.content;
+      this.totalContrataciones = response.totalElements
       if (this.necesidadesAprobadas.length > 0) {
         this.hayNecesidadesPorConcretar = true;
       }
     }, (error) => {
       this.mensajeError = error.message;
     });
+  }
+
+  onPageChange(event: number): void {
+    this.p = event;
+    this.consultaAprobaciones()
   }
 
   recibirUrlContrato(valor, necesidadId: number, indice: number): void {

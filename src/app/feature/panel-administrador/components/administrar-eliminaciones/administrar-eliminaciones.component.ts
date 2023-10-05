@@ -33,7 +33,9 @@ export class AdministrarEliminacionesComponent implements OnInit {
   p1 = 1;
   p2 = 1;
   p3 = 1;
-
+  totalNecesidades=0;
+  totalAsociaciones=0;
+  totalUsuarios=0;
   constructor(
     private router: Router,
     private usuarioService: UsuarioService,
@@ -61,9 +63,9 @@ export class AdministrarEliminacionesComponent implements OnInit {
   consultaPeticionesUsuarioAEliminar(): void {
     this.usuariosEliminar = [];
     let petecionesEliminar: PeticionEliminacionPersonaResumen[];
-    this.admistradorService.consultarPeticionesUsuariosEliminar().subscribe((response) => {
-      petecionesEliminar = response;
-
+    this.admistradorService.consultarPeticionesUsuariosEliminar(this.p1-1).subscribe((response) => {
+      petecionesEliminar = response.content;
+      this.totalUsuarios = response.totalElements;
       if (petecionesEliminar.length > 0) {
         this.hayUsuariosAEliminar = true;
       }
@@ -78,6 +80,10 @@ export class AdministrarEliminacionesComponent implements OnInit {
     );
   }
 
+  onPageChangeUsuario(event: number): void {
+    this.p1 = event;
+    this.consultaPeticionesUsuarioAEliminar()
+  }
   consultarPersonasAEliminar(id: number): void {
     this.usuarioService.consultarPersonaPorId(id).subscribe((response) => {
       this.usuariosEliminar.push(response);
@@ -112,9 +118,9 @@ export class AdministrarEliminacionesComponent implements OnInit {
   consultaPeticionesAsociacionesAEliminar(): void {
     this.asociacionesEliminar = [];
     let petecionesAsociacionEliminar: PeticionEliminacionAsociacionResumen[];
-    this.admistradorService.consultarPeticionesAsociacionAEliminar().subscribe((response) => {
-      petecionesAsociacionEliminar = response;
-
+    this.admistradorService.consultarPeticionesAsociacionAEliminar(this.p2-1).subscribe((response) => {
+      petecionesAsociacionEliminar = response.content;
+      this.totalAsociaciones = response.totalElements;
       if (petecionesAsociacionEliminar.length > 0) {
         this.hayAsociacionesAEliminar = true;
       } else {
@@ -127,7 +133,10 @@ export class AdministrarEliminacionesComponent implements OnInit {
       this.mensajeError = error.message;
     });
   }
-
+  onPageChangeAsociacion(event: number): void {
+    this.p2 = event;
+    this.consultaPeticionesAsociacionesAEliminar()
+  }
   consultaAsociacionAEliminar(id: number): void {
     this.asociacionService.consultarAsociacionPorId(id).subscribe((response) => {
       this.asociacionesEliminar.push(response);
@@ -163,9 +172,9 @@ export class AdministrarEliminacionesComponent implements OnInit {
   consultaPeticionesNecesidadAEliminar(): void {
     this.necesidadEliminar = [];
     let petecionesNecesidadEliminar: PeticionEliminacionNecesidadResumen[];
-    this.admistradorService.consultarPeticionesNecesidadAEliminar().subscribe((response) => {
-      petecionesNecesidadEliminar = response;
-
+    this.admistradorService.consultarPeticionesNecesidadAEliminar(this.p3-1).subscribe((response) => {
+      petecionesNecesidadEliminar = response.content;
+      this.totalNecesidades = response.totalElements;
       if (petecionesNecesidadEliminar.length > 0) {
         this.hayNecesidadAEliminar = true;
       }
@@ -176,6 +185,11 @@ export class AdministrarEliminacionesComponent implements OnInit {
       this.hayAsociacionesAEliminar = false;
       this.mensajeError = error.message;
     });
+  }
+
+  onPageChangeNecesidad(event: number): void {
+    this.p3 = event;
+    this.consultaPeticionesNecesidadAEliminar()
   }
 
   consultaNecesidadAEliminar(id: number): void {

@@ -15,6 +15,7 @@ import { PeticionEliminacionNecesidadResumen } from '../model/peticion-eliminaci
 import { MotivoRechazoNecesidad } from '../model/motivo-rechazo-necesidad.model';
 import { ContratoResumen } from '@shared/model/proyecto/contrato-resumen-model';
 import { Contrato } from '../model/contrato.model';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 
@@ -35,24 +36,44 @@ export class AdministradorService {
 
   constructor(private http: HttpService) { }
 
-  consultarPeticionesUsuariosEliminar(): Observable<PeticionEliminacionPersonaResumen[]> {
-    return this.http.doGet<PeticionEliminacionPersonaResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`);
+  consultarPeticionesUsuariosEliminar(pagina:number, tamano?:number): Observable<any> {
+    if(tamano===undefined){
+      tamano=10
+    }
+    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
+    return this.http.doGetParameters<PeticionEliminacionPersonaResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`,params);
   }
 
-  consultarPeticionesAsociacionAEliminar(): Observable<PeticionEliminacionAsociacionResumen[]> {
-    return this.http.doGet<PeticionEliminacionAsociacionResumen[]>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`);
+  consultarPeticionesAsociacionAEliminar(pagina:number, tamano?:number): Observable<any> {
+    if(tamano===undefined){
+      tamano=10
+    }
+    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
+    return this.http.doGetParameters<PeticionEliminacionAsociacionResumen[]>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`,params);
   }
 
-  consultarPeticionesNecesidadAEliminar(): Observable<PeticionEliminacionNecesidadResumen[]> {
-    return this.http.doGet<PeticionEliminacionNecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`);
+  consultarPeticionesNecesidadAEliminar(pagina:number, tamano?:number): Observable<any> {
+    if(tamano===undefined){
+      tamano=10
+    }
+    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
+    return this.http.doGetParameters<PeticionEliminacionNecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`,params);
   }
 
-  consultarNecesidadesPendienteAprobacion(): Observable<NecesidadResumen[]> {
-    return this.http.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}`);
+  consultarNecesidadesPendienteAprobacion(pagina:number, tamano?:number): Observable<any> {
+    if(tamano===undefined){
+      tamano=10
+    }
+    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
+    return this.http.doGetParameters<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}`,params);
   }
 
-  consultarNecesidadesAprobadas(): Observable<NecesidadResumen[]> {
-    return this.http.doGet<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}`);
+  consultarNecesidadesAprobadas(pagina:number, tamano?:number): Observable<any> {
+    if(tamano===undefined){
+      tamano=10
+    }
+    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano); 
+    return this.http.doGetParameters<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}`,params);
   }
 
   eliminarAsociacion(id: number): Observable<Respuesta<number>> {

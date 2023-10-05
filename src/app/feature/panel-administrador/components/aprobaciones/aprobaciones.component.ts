@@ -18,6 +18,7 @@ export class AprobacionesComponent implements  OnInit{
   p = 1;
   mensajeAsociacion;
   registroError;
+  totalPendientes = 0;
 
   constructor(private router: Router,private admistradorService: AdministradorService)  { }
 
@@ -34,13 +35,18 @@ export class AprobacionesComponent implements  OnInit{
   }
 
   consultaAprobaciones(): void {
-    this.admistradorService.consultarNecesidadesPendienteAprobacion().subscribe((response) => {
-      this.necesidadesAprobar = response;
-
+    this.admistradorService.consultarNecesidadesPendienteAprobacion(this.p-1).subscribe((response) => {
+      this.necesidadesAprobar = response.content;
+      this.totalPendientes = response.totalElements
       if(this.necesidadesAprobar.length > 0) {
         this.hayProyectosPorAprobar = true;
       }
     });
+  }
+
+  onPageChange(event: number): void {
+    this.p = event;
+    this.consultaAprobaciones()
   }
 
   AprobarNecesidad(id: number, indice: number): void {
