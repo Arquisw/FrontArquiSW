@@ -67,7 +67,8 @@ export class FaseComponent implements OnInit {
   }
 
   consultarRequisitosPorVersionId(id: number): void {
-    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id, 0, Number.MAX_SAFE_INTEGER).subscribe((response) => {
+    const tamano = 900719900;
+    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id, 0, tamano).subscribe((response) => {
       this.requisitosFinales = response.content;
     });
   }
