@@ -4,7 +4,7 @@
     <p class="card-text"><b>Descripción:</b> {{ fase?.descripcion }}</p>
   </div>
   <div class="card-footer">
-    <div *ngIf="!esEtapaDefinitiva()">
+    <div *ngIf="!esFaseDeCierre()">
       <h4>Etapas de la fase</h4>
       <div class="table-responsive">
         <table class="table align-middle table-bordered">
@@ -47,7 +47,7 @@
         </table>
       </div>
     </div>
-    <div *ngIf="esEtapaDefinitiva()">
+    <div *ngIf="esFaseDeCierre()">
       <h2>Documentos</h2>
     <div class="table-responsive">
       <table class="table align-middle table-striped">

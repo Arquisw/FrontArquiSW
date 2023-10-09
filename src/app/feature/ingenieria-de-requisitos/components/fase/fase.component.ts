@@ -26,7 +26,7 @@ export class FaseComponent implements OnInit {
               private pdfMakeService: PdfMakeService) { }
 
   ngOnInit(): void {
-    if(this.fase?.nombre === 'Cierre') {
+    if(this.esFaseDeCierre()) {
       this.consultarProyectoPorId(this.fase?.proyectoID);
     }
   }
@@ -46,7 +46,7 @@ export class FaseComponent implements OnInit {
     this.router.navigate(['/ingenieria-de-requisitos/etapa'], navigationExtras);
   }
 
-  esEtapaDefinitiva(): boolean {
+  esFaseDeCierre(): boolean {
     return this.fase?.nombre === 'Cierre';
   }
 
@@ -67,8 +67,8 @@ export class FaseComponent implements OnInit {
   }
 
   consultarRequisitosPorVersionId(id: number): void {
-    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id,0).subscribe((response) => {
-      this.requisitosFinales = response;
+    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id, 0).subscribe((response) => {
+      this.requisitosFinales = response.content;
     });
   }
 

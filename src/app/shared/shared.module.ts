@@ -13,6 +13,7 @@ import { StorageService } from './service/storage/storage.service';
 import { UsuarioService } from './service/usuario/usuario.service';
 import { ProyectoService } from './service/proyecto/proyecto.service';
 import { RolesService } from './service/roles/roles.service';
+import { PdfMakeService } from './service/pdf-make/pdf-make.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { RolesService } from './service/roles/roles.service';
     StorageService,
     UsuarioService,
     ProyectoService,
-    RolesService
+    RolesService,
+    PdfMakeService
   ]
 })
 export class SharedModule { }

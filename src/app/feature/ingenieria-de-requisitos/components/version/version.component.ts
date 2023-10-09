@@ -90,7 +90,7 @@ export class VersionComponent implements OnInit {
 
   onPageChange(event: number): void {
     this.p = event;
-    this.consultarRequisitosPorVersionId(this.versionId)
+    this.consultarRequisitosPorVersionId(this.versionId);
   }
 
   inicializarFormulario(): void {
