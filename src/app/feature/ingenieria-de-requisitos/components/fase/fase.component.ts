@@ -67,7 +67,7 @@ export class FaseComponent implements OnInit {
   }
 
   consultarRequisitosPorVersionId(id: number): void {
-    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id, 0).subscribe((response) => {
+    this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id, 0, Number.MAX_SAFE_INTEGER).subscribe((response) => {
       this.requisitosFinales = response.content;
     });
   }
