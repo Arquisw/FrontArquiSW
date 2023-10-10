@@ -26,6 +26,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
   estaCargandoEliminacion = false;
   mensajeError= '';
   mensajeActualizacion= '';
+  correoAnterior = '';
   usuarioId = 0;
 
   constructor(private configuracionService: ConfiguracionService, private usuarioService: UsuarioService, private router: Router) {}
@@ -42,6 +43,7 @@ export class UsuarioConfiguracionComponent implements OnInit {
   consultarUsuario(): void {
     this.usuarioService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
       this.personaResumen = response;
+      this.correoAnterior = this.personaResumen.correo;
     },
     (error) => {
       this.mensajeError = error.message;
@@ -67,9 +69,17 @@ export class UsuarioConfiguracionComponent implements OnInit {
     this.actualizacionError= false;
 
     const persona: Persona = new Persona(this.actualizacionForm.get('nombreActualizacion')?.value,this.actualizacionForm.get('apellidosActualizacion')?.value,this.actualizacionForm.get('correoActualizacion')?.value);
-
+    const correoNuevo = persona.correo;
     this.configuracionService.actualizarUsuarioPorId(persona, this.usuarioId).subscribe(() => {
-      window.location.reload();
+
+      if(correoNuevo !== this.correoAnterior) {
+        window.sessionStorage.removeItem('Authorization');
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
+      } else {
+        window.location.reload();
+      }
     },
     (error) => {
       this.estaCargandoActualizacion = false;

@@ -9,6 +9,7 @@ import Modal from 'bootstrap/js/dist/modal';
 import { UsuarioService } from '@shared/service/usuario/usuario.service';
 import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
 import { Asociacion } from '@shared/model/asociacion/asociacion.model';
+import { UsuarioResumen } from '@shared/model/usuario/usuario-resumen.model';
 
 @Component({
   selector: 'app-navbar',
@@ -25,6 +26,7 @@ export class NavbarComponent implements OnInit {
   miPerfilMenu: MenuItem;
   miAsociacionMenu: MenuItem;
   principalItems: MenuItem[];
+  principalItemsNoActivados: MenuItem[];
   standarItems: MenuItem[];
   itemsPreLogin: MenuItem[];
   loginModal: Modal| undefined;
@@ -43,6 +45,7 @@ export class NavbarComponent implements OnInit {
   estaCargandoLogin = false;
   estaCargandoRegistro = false;
   estaCargandoRegistroAsociacion = false;
+  noEstaActivadaLaCuenta = false;
   mensajeError = '';
   id = 0;
   persona: PersonaResumen;
@@ -53,6 +56,7 @@ export class NavbarComponent implements OnInit {
   registroForm: FormGroup;
   registroAsociacionForm: FormGroup;
   wdw = window;
+  correo = '';
 
   constructor(private formBuilder: FormBuilder,
               private coreService: CoreService,
@@ -248,10 +252,26 @@ export class NavbarComponent implements OnInit {
   consultarPersona(): void {
     this.usuarioService.consultarPersonaPorId(this.id).subscribe((response) => {
       this.persona = response;
+      this.correo = this.persona.correo;
+      this.consultarUsuarioConCorreo(this.correo);
     },
     (error) => {
       this.mensajeError = error.message;
       this.inicioSesion = false;
+    });
+  }
+
+  consultarUsuarioConCorreo(correo: string): void {
+    this.usuarioService.consultarUsuarioPorCorreo(correo).subscribe((response: UsuarioResumen) => {
+      if(!response.activado) {
+        this.noEstaActivadaLaCuenta = true;
+
+        this.standarItems = this.standarItems.filter(item => item.nombre !== 'Proyectos');
+      } else {
+        this.noEstaActivadaLaCuenta = false;
+
+        this.standarItems = this.principalItems;
+      }
     });
   }
 

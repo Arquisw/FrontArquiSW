@@ -25,7 +25,7 @@
               <div class="opciones" *ngIf="estaAbierto">
                 <a class="dropdown-item" (click)="abrirPerfil()">{{miPerfilMenu?.nombre}}</a>
                 <a class="dropdown-item" *ngIf="tieneAsociacion" (click)="abrirAsociacion()">{{miAsociacionMenu?.nombre}}</a>
-                <a class="dropdown-item" *ngIf="administrador" [routerLink]="[panelAdministradorMenu.url]" (click)="cerrarMenuDeplegable()">{{panelAdministradorMenu?.nombre}}</a>
+                <a class="dropdown-item" *ngIf="administrador && !noEstaActivadaLaCuenta" [routerLink]="[panelAdministradorMenu.url]" (click)="cerrarMenuDeplegable()">{{panelAdministradorMenu?.nombre}}</a>
                 <a class="dropdown-item" *ngIf="!tieneAsociacion && !administrador && !estaPostulado && !estaSeleccionado" (click)="openModalAsociacion()">{{registrarEmpresaOAsociacionOpcion}}</a>
                 <a class="dropdown-item" [routerLink]="['/configuracion']" (click)="cerrarMenuDeplegable()">{{configuracionMenu?.nombre}}</a>
                 <a class="dropdown-item" (click)="openLogOut()">Cerrar Sesión</a>
