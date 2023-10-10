@@ -63,6 +63,10 @@ export class PerfilUsuarioComponent implements OnInit {
           if (authority === 'ROLE_ADMINISTRADOR') {
             this.miPerfil = false;
           }
+
+          if (authority === 'ROLE_ASOCIACION') {
+            this.miPerfil = false;
+          }
         });
       }
 

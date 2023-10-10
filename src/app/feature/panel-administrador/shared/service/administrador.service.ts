@@ -36,43 +36,47 @@ export class AdministradorService {
 
   constructor(private http: HttpService) { }
 
-  consultarPeticionesUsuariosEliminar(pagina:number, tamano?:number): Observable<any> {
-    if(tamano===undefined){
-      tamano=10
+  consultarPeticionesUsuariosEliminar(pagina?: number, tamano?: number): Observable<any> {
+    if (tamano === undefined){
+      tamano = 10;
     }
+
     const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
-    return this.http.doGetParameters<PeticionEliminacionPersonaResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`,params);
+
+    return this.http.doGetParameters<PeticionEliminacionPersonaResumen[]>(`${environment.endpoint}${this.USUARIOS_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`, params);
   }
 
-  consultarPeticionesAsociacionAEliminar(pagina:number, tamano?:number): Observable<any> {
+  consultarPeticionesAsociacionAEliminar(pagina: number, tamano?: number): Observable<any> {
     if(tamano===undefined){
-      tamano=10
+      tamano=10;
     }
     const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
     return this.http.doGetParameters<PeticionEliminacionAsociacionResumen[]>(`${environment.endpoint}${this.ASOCIACIONES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`,params);
   }
 
-  consultarPeticionesNecesidadAEliminar(pagina:number, tamano?:number): Observable<any> {
-    if(tamano===undefined){
-      tamano=10
+  consultarPeticionesNecesidadAEliminar(pagina: number, tamano?: number): Observable<any> {
+    if(tamano === undefined){
+      tamano = 10;
     }
+
     const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
+
     return this.http.doGetParameters<PeticionEliminacionNecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.ADMINISTRADOR_ENDPOINT}`,params);
   }
 
-  consultarNecesidadesPendienteAprobacion(pagina:number, tamano?:number): Observable<any> {
+  consultarNecesidadesPendienteAprobacion(pagina: number, tamano?: number): Observable<any> {
     if(tamano===undefined){
-      tamano=10
+      tamano=10;
     }
     const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
-    return this.http.doGetParameters<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}`,params);
+    return this.http.doGetParameters<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}`, params);
   }
 
-  consultarNecesidadesAprobadas(pagina:number, tamano?:number): Observable<any> {
+  consultarNecesidadesAprobadas(pagina: number, tamano?: number): Observable<any> {
     if(tamano===undefined){
-      tamano=10
+      tamano=10;
     }
-    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano); 
+    const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
     return this.http.doGetParameters<NecesidadResumen[]>(`${environment.endpoint}${this.NECESIDADES_ENDPOINT}${this.PROYECTOS_ENDPOINT}`,params);
   }
 

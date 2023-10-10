@@ -6,12 +6,12 @@
         <div class="update-asociation card card-container">
           <form [formGroup]="actualizacionForm" class="card-body">
             <div class="form-floating">
-              <input type="text" class="form-control" id="nombre"
+              <input type="text" class="form-control" id="nombreActualizacion"
                 placeholder="nombre" formControlName="nombreActualizacion" required required [value]="asociacionResumen?.nombre">
               <label for="floatingInput">Nombre</label>
             </div>
             <div class="form-floating">
-              <input type="text" class="form-control" id="nit"
+              <input type="text" class="form-control" id="nitActualizacion"
                 placeholder="NIT" formControlName="nitActualizacion" required [value]="asociacionResumen?.nit">
               <label for="floatingInput">NIT</label>
             </div>

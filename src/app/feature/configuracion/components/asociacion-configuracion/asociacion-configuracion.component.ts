@@ -71,7 +71,7 @@ export class AsociacionConfiguracionComponent implements OnInit {
   onClickDelete(): void {
     this.estaCargandoEliminacion = true;
 
-    this.configuracionService.eliminarAsociacionPorId(this.asociacionResumen.id).subscribe(() => {
+    this.configuracionService.eliminarAsociacionPorId(this.usuarioId).subscribe(() => {
       this.eliminacionExitosa= true;
       this.router.navigate(['/configuracion/']);
     },
