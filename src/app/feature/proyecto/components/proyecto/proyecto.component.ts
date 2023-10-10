@@ -270,8 +270,7 @@ export class ProyectoComponent implements OnInit {
   abrirPerfil(id): void {
     const navigationExtras: NavigationExtras = {
       state: {
-        id: id,
-        usuario: null,
+        id: id
       }
     };
     this.router.navigate(['/perfil'], navigationExtras);

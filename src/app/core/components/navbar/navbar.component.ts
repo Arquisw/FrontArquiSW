@@ -154,8 +154,7 @@ export class NavbarComponent implements OnInit {
   abrirPerfil(): void {
     const navigationExtras: NavigationExtras = {
       state: {
-        id: null,
-        usuario: this.persona,
+        id: this.id
       }
     };
 

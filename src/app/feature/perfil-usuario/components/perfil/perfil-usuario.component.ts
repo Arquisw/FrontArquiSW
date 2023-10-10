@@ -12,13 +12,15 @@ import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
 })
 export class PerfilUsuarioComponent implements OnInit {
   usuarioId = 0;
+  usuarioActualId = 0;
+  authorities: string[] = [];
   usuario: PersonaResumen;
   mensajeError= '';
   titulo = 'Guardar o actualizar hoja de vida';
   urlArchivo;
   hojaDeVida;
   urlDescarga;
-  miPerfil = true;
+  miPerfil = false;
   seCargoHojaDevida= false;
   estaCargandoGuardar = false;
   files = [];
@@ -31,19 +33,19 @@ export class PerfilUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.posicionarPaginaAlInicio();
+    this.inicializarParametrosDelToken();
 
-    const params = history.state;
-    this.usuario = params.usuario;
-    this.usuarioId = this.usuario?.id;
+    const params = history?.state;
+    this.usuarioId = params?.id;
+    this.consultaUsuario();
+  }
 
-    if(params.id !== null) {
-      this.usuarioId = params.id;
-      this.consultaUsuario();
-    }
+  inicializarParametrosDelToken(): void {
+    const token = window.sessionStorage.getItem('Authorization');
+    const tokenPayload = JSON.parse(atob(token.split('.')[1]));
 
-    if(this.usuario !== null) {
-      this.obtenerListaArchivos();
-    }
+    this.usuarioActualId = tokenPayload.id;
+    this.authorities = tokenPayload.authorities.split(',');
   }
 
   posicionarPaginaAlInicio(): void {
@@ -51,9 +53,19 @@ export class PerfilUsuarioComponent implements OnInit {
   }
 
   consultaUsuario(): void {
-    this.miPerfil = false;
     this.usuarioService.consultarPersonaPorId(this.usuarioId).subscribe((response) => {
       this.usuario = response;
+
+      if(this.usuario.id === this.usuarioActualId) {
+        this.miPerfil = true;
+
+        this.authorities.forEach(authority => {
+          if (authority === 'ROLE_ADMINISTRADOR') {
+            this.miPerfil = false;
+          }
+        });
+      }
+
       this.obtenerListaArchivos();
     },
     (error) => {
@@ -112,6 +124,7 @@ export class PerfilUsuarioComponent implements OnInit {
   obtenerListaArchivos() {
     this.storageService.listaDeArchivos(this.usuario).subscribe((files) => {
       this.files = files;
+
       if(files.length > 0) {
         this.consultaHojaDeVida();
       }

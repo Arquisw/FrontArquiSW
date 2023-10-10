@@ -28,10 +28,10 @@ export class ModalCargarPdfComponent {
   uploadFile() {
     if (this.archivo) {
       let filePath;
-      if (this.objeto.proyecto === null) {
-        filePath = 'hojaDeVida/' + this.objeto.apellidos + this.objeto.nombre + '/' +'Hoja de vida ' + this.objeto.nombre + '.pdf';
-      } else {
-        filePath = 'necesidad/' + this.objeto.id + '/' + this.objeto.proyecto.nombre + '_Contrato' + '.pdf';
+      if (this.objeto?.apellidos !== null || this.objeto?.apellidos !== undefined) {
+        filePath = 'hojaDeVida/' + this.objeto?.apellidos + this.objeto?.nombre + '/' +'Hoja de vida ' + this.objeto?.nombre + '.pdf';
+      } else if (this.objeto?.proyecto !== null || this.objeto?.proyecto !== undefined) {
+        filePath = 'necesidad/' + this.objeto?.id + '/' + this.objeto?.proyecto?.nombre + '_Contrato' + '.pdf';
       }
       const fileRef = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, this.archivo);
