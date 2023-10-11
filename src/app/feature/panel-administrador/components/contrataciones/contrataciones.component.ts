@@ -3,6 +3,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { AdministradorService } from '../../shared/service/administrador.service';
 import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
 import { Contrato } from '../../shared/model/contrato.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-contrataciones',
@@ -18,9 +19,10 @@ export class ContratacionesComponent implements OnInit {
   p = 1;
   totalContrataciones=0;
 
-  constructor(private router: Router, private admistradorService: AdministradorService) { }
+  constructor(private tokenService: TokenService, private router: Router, private admistradorService: AdministradorService) { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
     this.consultaAprobaciones();
   }
 

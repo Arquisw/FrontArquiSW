@@ -7,6 +7,7 @@ import { RequisitoResumen } from '../../shared/model/requisito-resumen.module';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Requisito } from '../../shared/model/requisito.model';
 import { TipoRequisito } from '../../shared/model/tipo-requisito.module';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-version',
@@ -33,9 +34,11 @@ export class VersionComponent implements OnInit {
   p = 1;
   totalRequerimeintos = 0;
 
-  constructor(private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     this.posicionarPaginaAlInicio();
 
     this.obtenerVersionId();

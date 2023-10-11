@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { AdministradorService } from '../../shared/service/administrador.service';
 import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
 import { MotivoRechazoNecesidad } from '../../shared/model/motivo-rechazo-necesidad.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-aprobaciones',
@@ -20,9 +21,10 @@ export class AprobacionesComponent implements  OnInit{
   registroError;
   totalPendientes = 0;
 
-  constructor(private router: Router,private admistradorService: AdministradorService)  { }
+  constructor(private tokenService: TokenService, private router: Router,private admistradorService: AdministradorService)  { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
     this.consultaAprobaciones();
   }
 

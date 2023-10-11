@@ -7,6 +7,7 @@ import { Persona } from '../../shared/model/persona.model';
 import { Clave } from '../../shared/model/clave.model';
 import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
 import { UsuarioService } from '@shared/service/usuario/usuario.service';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-usuario-configuracion',
@@ -29,9 +30,11 @@ export class UsuarioConfiguracionComponent implements OnInit {
   correoAnterior = '';
   usuarioId = 0;
 
-  constructor(private configuracionService: ConfiguracionService, private usuarioService: UsuarioService, private router: Router) {}
+  constructor(private tokenService: TokenService, private configuracionService: ConfiguracionService, private usuarioService: UsuarioService, private router: Router) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;

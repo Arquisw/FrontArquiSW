@@ -5,6 +5,7 @@ import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-d
 import { EtapaResumen } from '../../shared/model/etapa-resumen.module';
 import { VersionResumen } from '../../shared/model/version-resumen.module';
 import { NavigationExtras, Router } from '@angular/router';
+import { TokenService } from '@shared/service/token/token.service';
 
 
 @Component({
@@ -32,13 +33,15 @@ export class EtapaComponent implements OnInit {
   nombreProyecto = '';
   p = 1;
 
-  constructor(private viewportScroller: ViewportScroller,
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller,
               private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService,
               private router: Router) {
     this.versionesResumen.forEach(() => this.estaCargandoRechazarVersion.push(false));
   }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     this.posicionarPaginaAlInicio();
 
     const params = history.state;

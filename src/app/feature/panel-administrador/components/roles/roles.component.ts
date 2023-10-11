@@ -4,6 +4,7 @@ import Modal from 'bootstrap/js/dist/modal';
 import { AdministradorService } from '../../shared/service/administrador.service';
 import { Rol } from '../../shared/model/rol.model';
 import { RolesService } from '@shared/service/roles/roles.service';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-roles',
@@ -22,10 +23,11 @@ export class RolesComponent implements OnInit {
   mensajeError = false;
   estaCargandoActualizar = false;
 
-  constructor(private administradorService: AdministradorService,
+  constructor(private tokenService: TokenService, private administradorService: AdministradorService,
               private rolesService: RolesService) { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
     this.consultarRoles();
   }
 

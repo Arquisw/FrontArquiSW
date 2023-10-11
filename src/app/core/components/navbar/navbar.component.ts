@@ -10,6 +10,7 @@ import { UsuarioService } from '@shared/service/usuario/usuario.service';
 import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
 import { Asociacion } from '@shared/model/asociacion/asociacion.model';
 import { UsuarioResumen } from '@shared/model/usuario/usuario-resumen.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -58,7 +59,8 @@ export class NavbarComponent implements OnInit {
   wdw = window;
   correo = '';
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(private tokenService: TokenService,
+              private formBuilder: FormBuilder,
               private coreService: CoreService,
               private usuarioService: UsuarioService,
               private router: Router,
@@ -94,6 +96,7 @@ export class NavbarComponent implements OnInit {
     if(this.inicioSesion) {
       this.standarItems = this.principalItems;
 
+      this.tokenService.actualizarToken();
       this.inicializarParametrosDelToken();
       this.filtrarMenu();
       this.consultarPersona();

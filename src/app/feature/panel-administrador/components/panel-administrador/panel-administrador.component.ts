@@ -1,6 +1,7 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '@core/model/menu-item.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-panel-administrador',
@@ -16,9 +17,11 @@ export class PanelAdministradorComponent implements OnInit {
     { url: './postulaciones', nombre: 'Postulaciones' }
   ];
 
-  constructor(private viewportScroller: ViewportScroller) {}
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     this.viewportScroller.scrollToPosition([0, 0]);
   }
 }

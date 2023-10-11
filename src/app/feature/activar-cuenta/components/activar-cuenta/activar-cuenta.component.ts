@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ActivarCuentaService } from '../../shared/service/activar-cuenta.service';
 import { ActivarCuenta } from '../../shared/model/activar-cuenta.model';
 import { Router } from '@angular/router';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-activar-cuenta',
@@ -21,9 +22,10 @@ export class ActivarCuentaComponent implements OnInit {
   activarCuentaForm: FormGroup;
   mensajeCodigoEnviado = '';
 
-  constructor(private activarCuentaService: ActivarCuentaService, private router: Router) {}
+  constructor(private tokenService: TokenService, private activarCuentaService: ActivarCuentaService, private router: Router) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
 

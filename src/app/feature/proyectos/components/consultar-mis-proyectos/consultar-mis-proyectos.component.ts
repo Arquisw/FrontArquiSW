@@ -11,6 +11,7 @@ import { NecesidadResumen } from '../../../../shared/model/proyecto/necesidad-re
 import { NavigationExtras, Router } from '@angular/router';
 import { AsociacionService } from '@shared/service/asociacion/asociacion.service';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-consultar-mis-proyectos',
@@ -45,7 +46,8 @@ export class ConsultarMisProyectosComponent implements OnInit {
   tiposSeleccionados = [];
   dropdownSettings = {};
 
-  constructor(private storage: AngularFireStorage,
+  constructor(private tokenService: TokenService,
+              private storage: AngularFireStorage,
               private proyectosService: ProyectosService,
               private asociacionService: AsociacionService,
               private proyectoService: ProyectoService,
@@ -54,6 +56,8 @@ export class ConsultarMisProyectosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     const usuarioId = tokenPayload.id;

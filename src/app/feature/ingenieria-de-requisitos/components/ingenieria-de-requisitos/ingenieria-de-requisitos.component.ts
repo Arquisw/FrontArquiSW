@@ -4,6 +4,7 @@ import { IngenieriaDeRequisitosService } from '../../shared/service/ingenieria-d
 import { FaseResumen } from '../../shared/model/fase-resumen.module';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-ingenieria-de-requisitos',
@@ -16,9 +17,11 @@ export class IngenieriaDeRequisitosComponent implements OnInit {
   fasesResumen: FaseResumen[] = [];
   inicioElProcesoDeConsultoria = false;
 
-  constructor(private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) { }
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller, private proyectoService: ProyectoService, private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     this.posicionarPaginaAlInicio();
 
     const params = history.state;

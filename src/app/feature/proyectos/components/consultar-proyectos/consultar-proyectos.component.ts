@@ -7,6 +7,7 @@ import { PostulacionResumen } from '../../shared/model/postulacion-resumen.model
 import { Router, NavigationExtras } from '@angular/router';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 import { RolesService } from '@shared/service/roles/roles.service';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-consultar-proyectos',
@@ -34,12 +35,15 @@ export class ConsultarProyectosComponent implements OnInit {
   rolesSeleccionados = [];
   dropdownSettings = {};
 
-  constructor(private proyectosService: ProyectosService,
+  constructor(private tokenService: TokenService,
+              private proyectosService: ProyectosService,
               private proyectoService: ProyectoService,
               private router: Router,
               private rolesService: RolesService) { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;

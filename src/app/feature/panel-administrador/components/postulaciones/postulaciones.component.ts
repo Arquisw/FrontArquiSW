@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { AdministradorService } from 'src/app/feature/panel-administrador/shared/service/administrador.service';
 import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-postulaciones',
@@ -13,9 +14,11 @@ export class PostulacionesComponent implements OnInit {
   hayProyectosNegociados = false;
   p = 1;
 
-  constructor(private administradorService: AdministradorService, private router: Router) { }
+  constructor(private tokenService: TokenService, private administradorService: AdministradorService, private router: Router) { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     this.consultarNecesidades();
   }
 

@@ -5,6 +5,7 @@ import { AsociacionResumen } from '../../../../shared/model/asociacion/asociacio
 import { ConfiguracionService } from '../../shared/service/configuracion.service';
 import { AsociacionService } from '@shared/service/asociacion/asociacion.service';
 import { Asociacion } from '@shared/model/asociacion/asociacion.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-asociacion-configuracion',
@@ -24,9 +25,11 @@ export class AsociacionConfiguracionComponent implements OnInit {
   mensajeActualizacion= '';
   usuarioId = 0;
 
-  constructor(private configuracionService: ConfiguracionService, private asociacionService: AsociacionService, private router: Router) {}
+  constructor(private tokenService: TokenService, private configuracionService: ConfiguracionService, private asociacionService: AsociacionService, private router: Router) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.usuarioId = tokenPayload.id;

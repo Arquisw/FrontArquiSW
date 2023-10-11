@@ -9,6 +9,7 @@ import { ViewportScroller } from '@angular/common';
 import { PropetarioProyecto } from '../../shared/model/propetario-proyecto.model';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 import { RolesService } from '@shared/service/roles/roles.service';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-proyecto',
@@ -45,13 +46,15 @@ export class ProyectoComponent implements OnInit {
   authorities: string[] = [];
   p = 1;
 
-  constructor(private viewportScroller: ViewportScroller,
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller,
               private proyectoEspecificoService: ProyectoEspecificoService,
               private proyectoService: ProyectoService,
               private router: Router, private storageService: StorageService,
               private rolesService: RolesService) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     this.posicionarPaginaAlInicio();
 
     const params = history.state;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewportScroller } from '@angular/common';
 import { AsociacionService } from '@shared/service/asociacion/asociacion.service';
 import { AsociacionResumen } from '@shared/model/asociacion/asociacion-resumen.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-perfil-asociacion',
@@ -14,9 +15,11 @@ export class PerfilAsociacionComponent implements OnInit {
   asociacion: AsociacionResumen;
   esMiAsociacion = true;
 
-  constructor(private viewportScroller: ViewportScroller, private asociacionService: AsociacionService) { }
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller, private asociacionService: AsociacionService) { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+
     const params = history.state;
     this.id = params.id;
     this.esMiAsociacion = params.asociacion;

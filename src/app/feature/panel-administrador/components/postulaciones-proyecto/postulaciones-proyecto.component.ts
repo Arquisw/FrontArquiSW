@@ -7,6 +7,7 @@ import { Seleccion } from '../../shared/model/seleccion.model';
 import { MotivoRechazoPostulacion } from '../../shared/model/motivo-rechazo-postulacion.model';
 import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-postulaciones-proyecto',
@@ -31,7 +32,8 @@ export class PostulacionesProyectoComponent implements OnInit {
   dropdownSettings = {};
   p = 1;
 
-  constructor(private router: Router,
+  constructor(private tokenService: TokenService,
+              private router: Router,
               private administradorService: AdministradorService,
               private proyectoService: ProyectoService) {
     this.postulacionesResumen.forEach(() => this.estaCargandoDeclinar.push(false));
@@ -39,6 +41,8 @@ export class PostulacionesProyectoComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     const params = history.state;
     this.proyectoId = params.id;
 

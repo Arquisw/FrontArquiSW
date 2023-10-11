@@ -14,6 +14,7 @@ import { UsuarioService } from './service/usuario/usuario.service';
 import { ProyectoService } from './service/proyecto/proyecto.service';
 import { RolesService } from './service/roles/roles.service';
 import { PdfMakeService } from './service/pdf-make/pdf-make.service';
+import { TokenService } from './service/token/token.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { PdfMakeService } from './service/pdf-make/pdf-make.service';
     UsuarioService,
     ProyectoService,
     RolesService,
-    PdfMakeService
+    PdfMakeService,
+    TokenService
   ]
 })
 export class SharedModule { }

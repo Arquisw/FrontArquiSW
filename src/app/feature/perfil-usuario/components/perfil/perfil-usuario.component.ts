@@ -4,6 +4,7 @@ import { StorageService } from '@shared/service/storage/storage.service';
 import { ViewportScroller } from '@angular/common';
 import { UsuarioService } from '@shared/service/usuario/usuario.service';
 import { PersonaResumen } from '@shared/model/usuario/persona-resumen.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-perfil-usuario',
@@ -26,12 +27,15 @@ export class PerfilUsuarioComponent implements OnInit {
   files = [];
   detalleDocumento;
 
-  constructor(private viewportScroller: ViewportScroller,
+  constructor(private tokenService: TokenService,
+              private viewportScroller: ViewportScroller,
               private perfilUsuarioService: PerfilUsuarioService,
               private storageService: StorageService,
               private usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+
     this.posicionarPaginaAlInicio();
     this.inicializarParametrosDelToken();
 

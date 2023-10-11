@@ -1,6 +1,7 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '@core/model/menu-item.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-configuracion',
@@ -13,9 +14,10 @@ export class ConfiguracionComponent implements OnInit {
   miCuentaMenu: MenuItem = { url: './usuario', nombre: 'Mi cuenta' };
   miAsociacionMenu: MenuItem = { url: './asociacion', nombre: 'Mi empresa o asociación' };
 
-  constructor(private viewportScroller: ViewportScroller) {}
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
     this.posicionarPaginaAlInicio();
 
     const token = window.sessionStorage.getItem('Authorization');

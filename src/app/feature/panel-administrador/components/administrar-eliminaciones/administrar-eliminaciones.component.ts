@@ -10,6 +10,7 @@ import { NecesidadResumen } from '@shared/model/proyecto/necesidad-resumen.model
 import { PeticionEliminacionPersonaResumen } from '../../shared/model/peticion-eliminacion-persona-resumen.model';
 import { PeticionEliminacionAsociacionResumen } from '../../shared/model/peticion-eliminacion-asociacion-resumen.model';
 import { PeticionEliminacionNecesidadResumen } from '../../shared/model/peticion-eliminacion-necesidad-resumen.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-administrar-eliminaciones',
@@ -37,6 +38,7 @@ export class AdministrarEliminacionesComponent implements OnInit {
   totalAsociaciones=0;
   totalUsuarios=0;
   constructor(
+    private tokenService: TokenService,
     private router: Router,
     private usuarioService: UsuarioService,
     private asociacionService: AsociacionService,
@@ -55,6 +57,7 @@ export class AdministrarEliminacionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
     this.consultaPeticionesUsuarioAEliminar();
     this.consultaPeticionesAsociacionesAEliminar();
     this.consultaPeticionesNecesidadAEliminar();

@@ -1,6 +1,7 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '@core/model/menu-item.model';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-proyectos',
@@ -28,9 +29,11 @@ export class ProyectosComponent implements OnInit {
   tieneAsociacion = false;
   authorities: string[] = [];
 
-  constructor(private viewportScroller: ViewportScroller) {}
+  constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+    
     const token = window.sessionStorage.getItem('Authorization');
     const tokenPayload = JSON.parse(atob(token.split('.')[1]));
     this.authorities = tokenPayload.authorities.split(',');

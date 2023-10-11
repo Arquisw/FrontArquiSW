@@ -6,6 +6,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { ProyectoResumen } from '@shared/model/proyecto/proyecto-resumen.model';
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 import { RolesService } from '@shared/service/roles/roles.service';
+import { TokenService } from '@shared/service/token/token.service';
 
 @Component({
   selector: 'app-consultar-proyectos-seleccionados',
@@ -29,12 +30,15 @@ export class ConsultarProyectosSeleccionadosComponent implements OnInit {
   authorities: string[] = [];
   p = 1;
 
-  constructor(private proyectosService: ProyectosService,
+  constructor(private tokenService: TokenService,
+              private proyectosService: ProyectosService,
               private proyectoService: ProyectoService,
               private router: Router,
               private rolesService: RolesService) {}
 
   ngOnInit(): void {
+    this.tokenService.actualizarToken();
+
     this.obtenerAuthorities();
 
     this.consultarSelecciones();
