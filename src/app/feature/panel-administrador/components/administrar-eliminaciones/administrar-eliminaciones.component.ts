@@ -82,7 +82,7 @@ export class AdministrarEliminacionesComponent implements OnInit {
 
   onPageChangeUsuario(event: number): void {
     this.p1 = event;
-    this.consultaPeticionesUsuarioAEliminar()
+    this.consultaPeticionesUsuarioAEliminar();
   }
   consultarPersonasAEliminar(id: number): void {
     this.usuarioService.consultarPersonaPorId(id).subscribe((response) => {
@@ -135,7 +135,7 @@ export class AdministrarEliminacionesComponent implements OnInit {
   }
   onPageChangeAsociacion(event: number): void {
     this.p2 = event;
-    this.consultaPeticionesAsociacionesAEliminar()
+    this.consultaPeticionesAsociacionesAEliminar();
   }
   consultaAsociacionAEliminar(id: number): void {
     this.asociacionService.consultarAsociacionPorId(id).subscribe((response) => {
@@ -189,7 +189,7 @@ export class AdministrarEliminacionesComponent implements OnInit {
 
   onPageChangeNecesidad(event: number): void {
     this.p3 = event;
-    this.consultaPeticionesNecesidadAEliminar()
+    this.consultaPeticionesNecesidadAEliminar();
   }
 
   consultaNecesidadAEliminar(id: number): void {
@@ -219,7 +219,7 @@ export class AdministrarEliminacionesComponent implements OnInit {
         proyecto: false,
       },
     };
-    
+
     this.router.navigate(['/proyecto'], navigationExtras);
   }
 

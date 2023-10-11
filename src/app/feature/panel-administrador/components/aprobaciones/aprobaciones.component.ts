@@ -37,7 +37,7 @@ export class AprobacionesComponent implements  OnInit{
   consultaAprobaciones(): void {
     this.admistradorService.consultarNecesidadesPendienteAprobacion(this.p-1).subscribe((response) => {
       this.necesidadesAprobar = response.content;
-      this.totalPendientes = response.totalElements
+      this.totalPendientes = response.totalElements;
       if(this.necesidadesAprobar.length > 0) {
         this.hayProyectosPorAprobar = true;
       }
@@ -46,7 +46,7 @@ export class AprobacionesComponent implements  OnInit{
 
   onPageChange(event: number): void {
     this.p = event;
-    this.consultaAprobaciones()
+    this.consultaAprobaciones();
   }
 
   AprobarNecesidad(id: number, indice: number): void {

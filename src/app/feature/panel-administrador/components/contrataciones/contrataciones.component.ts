@@ -35,7 +35,7 @@ export class ContratacionesComponent implements OnInit {
   consultaAprobaciones(): void {
     this.admistradorService.consultarNecesidadesAprobadas(this.p-1,5).subscribe((response) => {
       this.necesidadesAprobadas = response.content;
-      this.totalContrataciones = response.totalElements
+      this.totalContrataciones = response.totalElements;
       if (this.necesidadesAprobadas.length > 0) {
         this.hayNecesidadesPorConcretar = true;
       }
@@ -46,7 +46,7 @@ export class ContratacionesComponent implements OnInit {
 
   onPageChange(event: number): void {
     this.p = event;
-    this.consultaAprobaciones()
+    this.consultaAprobaciones();
   }
 
   recibirUrlContrato(valor, necesidadId: number, indice: number): void {
@@ -55,7 +55,7 @@ export class ContratacionesComponent implements OnInit {
     this.consultaContrato(necesidadId);
 
     const contratoAlmacenar = new Contrato(valor);
-    
+
     if (this.contrato === null) {
       this.guardarContrato(necesidadId, contratoAlmacenar, indice);
     } else {
