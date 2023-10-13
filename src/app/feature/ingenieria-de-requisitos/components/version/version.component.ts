@@ -28,6 +28,7 @@ export class VersionComponent implements OnInit {
   estaCargandoGuardarRequisito = false;
   generarVersionFinalError = false;
   puedeCrearRequisito = false;
+  hayRequisitos = false;
   mensajeError = '';
   guardarRequisitoForm: FormGroup;
   seleccionarMensaje = 'Seleccionar';
@@ -38,7 +39,7 @@ export class VersionComponent implements OnInit {
 
   ngOnInit(): void {
     this.tokenService.actualizarToken();
-    
+
     this.posicionarPaginaAlInicio();
 
     this.obtenerVersionId();
@@ -88,6 +89,10 @@ export class VersionComponent implements OnInit {
     this.ingenieriaDeRequisitosService.consultarRequisitosPorVersionId(id,this.p-1).subscribe((response) => {
       this.requisitosResumen = response.content;
       this.totalRequerimeintos = response.totalElements;
+
+      if(this.requisitosResumen.length > 0) {
+        this.hayRequisitos = true;
+      }
     });
   }
 
