@@ -192,6 +192,13 @@ export class ProyectoComponent implements OnInit {
     this.router.navigate(['/ingenieria-de-requisitos'], navigationExtras);
   }
 
+  abrirSQAYSQC(): void {
+    const token = window.sessionStorage.getItem('Authorization');
+    const proyectoId = this.proyectoId;
+
+    this.router.navigate(['http://localhost:4200/'], { queryParams: { token, proyectoId } });
+  }
+
   obtenerListaArchivos() {
     this.storageService.listaDeArchivosNecesidad(this.necesidadResumen).subscribe((files) => {
       this.files = files;
