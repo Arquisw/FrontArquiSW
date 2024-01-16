@@ -8,8 +8,7 @@
 <main>
   <section class="services-section container text-center">
     <button [disabled]="!usuarioActualPuedeVerElProcesoDeIngenieriaDeRequisitos()" class="btn btn-idr btn-success mt-3" (click)="abrirIngenieriaDeRequisitos()">Ingeniería de Requisitos</button>
-    <button [disabled]="!usuarioActualPuedeVerElProcesoDeSQA()" class="btn btn-sqa btn-success mt-3">SQA</button>
-    <button [disabled]="!usuarioActualPuedeVerElProcesoDeSQC()" class="btn btn-sqc btn-success mt-3">SQC</button>
+    <button [disabled]="!usuarioActualPuedeVerElProcesoDeSQA() && !usuarioActualPuedeVerElProcesoDeSQC()" class="btn btn-sqa btn-success mt-3">SQA/SQC</button>
   </section>
   <section class="team-section container">
     <h2>Miembros del equipo</h2>
