@@ -196,7 +196,7 @@ export class ProyectoComponent implements OnInit {
     const token = window.sessionStorage.getItem('Authorization');
     const proyectoId = this.proyectoId;
 
-    this.router.navigate(['http://localhost:4200/'], { queryParams: { token, proyectoId } });
+    this.router.navigate(['http://localhost:4201/'], { queryParams: { token, proyectoId } });
   }
 
   obtenerListaArchivos() {
