@@ -21,6 +21,7 @@ export class IngenieriaDeRequisitosService {
   private readonly VERSION_ENDPOINT: string = '/version';
   private readonly ETAPA_ENDPOINT: string = '/etapa';
   private readonly RECHAZAR_ENDPOINT: string = '/rechazar';
+  private readonly TERMINO_PRCESO: string = '/termino-proceso';
 
   constructor(private httpService: HttpService) { }
 
@@ -88,5 +89,10 @@ export class IngenieriaDeRequisitosService {
     const params = new HttpParams().set('pagina', pagina).set('tamano', tamano);
 
     return this.httpService.doGetParameters<RequisitoResumen[]>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.VERSION_ENDPOINT}/${id}`, params);
+  }
+
+  public consultarSiPrcesoDeIngenieriaDeRequisitosTermino(id: number): Observable<boolean>
+  {
+    return this.httpService.doGetById<boolean>(`${environment.endpointIDR}${this.REQUISITOS_ENDPOINT}${this.TERMINO_PRCESO}/`, id);
   }
 }

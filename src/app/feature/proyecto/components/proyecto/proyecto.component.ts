@@ -10,6 +10,7 @@ import { PropetarioProyecto } from '../../shared/model/propetario-proyecto.model
 import { ProyectoService } from '@shared/service/proyecto/proyecto.service';
 import { RolesService } from '@shared/service/roles/roles.service';
 import { TokenService } from '@shared/service/token/token.service';
+import { IngenieriaDeRequisitosService } from 'src/app/feature/ingenieria-de-requisitos/shared/service/ingenieria-de-requisitos.service';
 
 @Component({
   selector: 'app-proyecto',
@@ -45,12 +46,14 @@ export class ProyectoComponent implements OnInit {
   puedeVerContrato = false;
   authorities: string[] = [];
   p = 1;
+  procesoDeIngenieriaDeRequisitosTermino = false;
 
   constructor(private tokenService: TokenService, private viewportScroller: ViewportScroller,
               private proyectoEspecificoService: ProyectoEspecificoService,
               private proyectoService: ProyectoService,
               private router: Router, private storageService: StorageService,
-              private rolesService: RolesService) {}
+              private rolesService: RolesService, 
+              private ingenieriaDeRequisitosService: IngenieriaDeRequisitosService) {}
 
   ngOnInit(): void {
     this.tokenService.actualizarToken();
@@ -148,6 +151,18 @@ export class ProyectoComponent implements OnInit {
         this.tieneServicioSQC = true;
       }
     });
+
+    if(this.tieneServicioIngenieriaDeRequisitos && (this.tieneServicioSQA || this.tieneServicioSQC)) {
+      this.consultarSiElProcesoDeIngenieriaDeRequisitosHaTerminado();
+    } else if(!this.tieneServicioIngenieriaDeRequisitos) {
+      this.procesoDeIngenieriaDeRequisitosTermino = true;
+    }
+  }
+
+  consultarSiElProcesoDeIngenieriaDeRequisitosHaTerminado(): void {
+    this.ingenieriaDeRequisitosService.consultarSiPrcesoDeIngenieriaDeRequisitosTermino(this.proyectoId).subscribe((response: boolean) => {
+      this.procesoDeIngenieriaDeRequisitosTermino = response;
+    });
   }
 
   consultarSeleccionesPorId(): void {
@@ -195,8 +210,9 @@ export class ProyectoComponent implements OnInit {
   abrirSQAYSQC(): void {
     const token = window.sessionStorage.getItem('Authorization');
     const proyectoId = this.proyectoId;
+    const urlExterna = 'http://localhost:4201/inicio';
 
-    this.router.navigate(['http://localhost:4201/'], { queryParams: { token, proyectoId } });
+    window.location.href = `${urlExterna}?token=${token}&id=${proyectoId}`;
   }
 
   obtenerListaArchivos() {
