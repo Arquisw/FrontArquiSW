@@ -337,4 +337,21 @@ export class ProyectoComponent implements OnInit {
   usuarioActualPuedeAprobarPorRolDirectorDeProyecto(): boolean {
     return this.necesidadResumen.proyecto.aprobacionProyecto.liderDeEquipo;
   }
+
+  noPuedeEntrarAlProcesoSQASQC(): boolean {
+    return this.noPuedeEntrarAlProcesoSQASQCuandoNoTieneProcesoIngenieriaDeRequisitos() ||
+    this.noPuedeEntrarAlProcesoSQASQCuandoTieneProcesoIngenieriaDeRequisitosYElProcesoTermino();
+  }
+
+  noPuedeEntrarAlProcesoSQASQCuandoNoTieneProcesoIngenieriaDeRequisitos(): boolean {
+    return !this.tieneServicioIngenieriaDeRequisitos && !this.usuarioActualPuedeIngresarAlProcesoDeSQASQC();
+  }
+
+  noPuedeEntrarAlProcesoSQASQCuandoTieneProcesoIngenieriaDeRequisitosYElProcesoTermino(): boolean {
+    return this.tieneServicioIngenieriaDeRequisitos && !this.procesoDeIngenieriaDeRequisitosTermino;
+  }
+
+  usuarioActualPuedeIngresarAlProcesoDeSQASQC(): boolean {
+    return this.necesidadResumen.proyecto.aprobacionProyecto.ingenieria && this.necesidadResumen.proyecto.aprobacionProyecto.liderDeEquipo && this.necesidadResumen.proyecto.aprobacionProyecto.directorDeProyecto;
+  }
 }

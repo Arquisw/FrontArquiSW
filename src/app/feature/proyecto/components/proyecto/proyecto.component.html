@@ -15,7 +15,7 @@
         <div class="col-md-6">
           <button 
             *ngIf="usuarioActualPuedeVerElProcesoDeSQA() || usuarioActualPuedeVerElProcesoDeSQC()" 
-            [disabled]="!procesoDeIngenieriaDeRequisitosTermino" 
+            [disabled]="noPuedeEntrarAlProcesoSQASQC()" 
             class="btn btn-sqa btn-success mt-3" 
             (click)="abrirSQAYSQC()">
             SQA/SQC
